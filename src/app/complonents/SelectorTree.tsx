@@ -1,4 +1,4 @@
-import { RecipeTree } from "@/lib/recipes";
+import { RecipeTree } from "@/lib/models";
 import { RecipesSelector } from "./RecipesSelector";
 import React from "react";
 

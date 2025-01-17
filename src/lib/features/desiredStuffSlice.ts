@@ -3,6 +3,7 @@ import type { RootState } from '../store'
 import { stuffList } from '@/lib/models'
 import { RecipiesByStuff } from '../recipes'
 import { IRecipe, RecipeEntity, RecipeTree } from '../models'
+import { getTargetTriple } from 'next/dist/build/swc/generated-native'
 
 interface DesiredStuffState {
   count: number,
@@ -46,15 +47,47 @@ const createRecipeTree = (targetStuff: string): RecipeTree => {
   };
 }
 
-const getRequiredMap = (target: RecipeTree, count: number): Map<string, number> => {
-  const result = new Map<string, number>();
+const getTimesToProduce = (target: RecipeTree, count: number): number => {
   const recipe = target.selectedRecipe;
   const targetStuff = recipe.produced.find(e => e.stuff === target.stuff);
   if (!targetStuff) {
+    return 0;
+  }
+  return Math.ceil(count / targetStuff.count);
+}
+
+const getRequiredMap = (target: RecipeTree, timesToProduce: number): Map<string, number> => {
+  const result = new Map<string, number>();
+  const recipe = target.selectedRecipe;
+  recipe.required.forEach(e => result.set(e.stuff, e.count * timesToProduce));
+  return result;
+}
+
+const getRequiredMapRecursive = (target: RecipeTree, timesToProduce: number): Map<string, number> => {
+  if (target.required.length === 0) {
+    const result = new Map<string, number>([[target.stuff, timesToProduce]]);
     return result;
   }
-  const timesToProduce = Math.ceil(count / targetStuff.count);
-  recipe.required.forEach(e => result.set(e.stuff, e.count * timesToProduce));
+
+  const currentRecipe = target.selectedRecipe;
+  const result = new Map<string, number>();
+  const requiredMaps = target.required.map(component => {
+    const recipeEntry = currentRecipe.required.find(entry => entry.stuff === component.stuff);
+    if (!recipeEntry) {
+      return new Map<string, number>()
+    }
+
+    return getRequiredMapRecursive(component, getTimesToProduce(component, recipeEntry.count * timesToProduce));
+  });
+
+  requiredMaps.forEach(map => {
+    map.forEach((v, k) => {
+      const oldValue = result.get(k);
+      if (oldValue) {
+        result.set(k, oldValue + v);
+      }
+    });
+  });
   return result;
 }
 
@@ -63,8 +96,12 @@ const recalculateReport = (state: DesiredStuffState) => {
     return;
   }
 
-  const initialMap = getRequiredMap(state.recipeTree, state.count);
-  state.initialComponents = initialMap.entries().map(e => ({ stuff: e[0], count: e[1] })).toArray();
+  const timesToProduce = getTimesToProduce(state.recipeTree, state.count);
+  const initialComponentsMap = getRequiredMap(state.recipeTree, timesToProduce);
+  state.initialComponents = initialComponentsMap.entries().map(e => ({ stuff: e[0], count: e[1] })).toArray();
+  const calculatedComponentsMap = getRequiredMapRecursive(state.recipeTree, timesToProduce);
+  console.log(calculatedComponentsMap)
+  state.calculatedComponents = calculatedComponentsMap.entries().map(e => ({ stuff: e[0], count: e[1] })).toArray();
 }
 
 interface SelectRecipePayload {

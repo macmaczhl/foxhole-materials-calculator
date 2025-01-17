@@ -1,5 +1,5 @@
 import { useAppSelector } from "./hooks"
-import { IRecipe } from "./recipes";
+import { IRecipe } from "./models";
 
 
 export const selectTreeSelectedRecipe = (treePath: string[]): IRecipe | undefined => {
