@@ -20,7 +20,7 @@ export function DesiredOutput() {
                 <tr>
                     <td>
                         <Input type='text' value={desiredCount} onChange={e => dispatch(changeCount(e.target.value))}
-                            className="mt-3 block w-12 rounded-lg border-none bg-white py-1.5 px-3 text-sm/6 text-whit size-8 m-auto"></Input>
+                            className="mt-3 block w-16 rounded-lg border-none bg-white py-1.5 px-3 text-sm/6 text-whit size-8 m-auto"></Input>
                     </td>
                     <td>
                         <Input list='dataList' type='text' onChange={e => dispatch(changeStuff(e.target.value))}

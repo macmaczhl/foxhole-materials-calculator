@@ -1,13 +1,14 @@
 import { selectTreeRecipe } from "@/lib/features/desiredStuffSlice";
 import { useAppDispatch } from "@/lib/hooks";
-import { Recipe } from "@/lib/recipes";
+import { IRecipe } from "@/lib/models";
 import { selectTreeSelectedRecipe } from "@/lib/selectors";
 import { RadioGroup, Field, Radio, Label } from "@headlessui/react";
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
+import { StuffIcon } from "./StuffIcon";
 
 interface RecipesSelectorProps {
     stuff: string
-    recipes: Recipe[];
+    recipes: IRecipe[];
     treePath: string[];
 }
 
@@ -17,7 +18,7 @@ export function RecipesSelector({ stuff, recipes, treePath }: RecipesSelectorPro
     const selectedRecipe = selectTreeSelectedRecipe(treePath);
     const dispatch = useAppDispatch();
 
-    const selectRecipe = (recipe: Recipe) => {
+    const selectRecipe = (recipe: IRecipe) => {
         dispatch(selectTreeRecipe({ recipe, treePath }));
     }
 
@@ -46,7 +47,7 @@ export function RecipesSelector({ stuff, recipes, treePath }: RecipesSelectorPro
                         <div className="inline-block mr-5">
                             {recipe.produced.map(e => (
                                 <span key={e.stuff}>
-                                    {`${e.stuff}(${e.count})`}
+                                    <StuffIcon stuffName={e.stuff} count={e.count} />
                                 </span>
                             ))}
                         </div>
