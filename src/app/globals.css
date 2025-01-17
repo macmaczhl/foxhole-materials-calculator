@@ -19,3 +19,9 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@layer components {
+  .main-page-container {
+    @apply m-6 bg-neutral-400 p-2
+  }
+}
