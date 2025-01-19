@@ -83,9 +83,12 @@ const getRequiredMapRecursive = (target: RecipeTree, timesToProduce: number): Ma
   requiredMaps.forEach(map => {
     map.forEach((v, k) => {
       const oldValue = result.get(k);
+      let newValue = v;
       if (oldValue) {
         result.set(k, oldValue + v);
+        newValue += oldValue;
       }
+      result.set(k, newValue);
     });
   });
   return result;
@@ -100,7 +103,6 @@ const recalculateReport = (state: DesiredStuffState) => {
   const initialComponentsMap = getRequiredMap(state.recipeTree, timesToProduce);
   state.initialComponents = initialComponentsMap.entries().map(e => ({ stuff: e[0], count: e[1] })).toArray();
   const calculatedComponentsMap = getRequiredMapRecursive(state.recipeTree, timesToProduce);
-  console.log(calculatedComponentsMap)
   state.calculatedComponents = calculatedComponentsMap.entries().map(e => ({ stuff: e[0], count: e[1] })).toArray();
 }
 
