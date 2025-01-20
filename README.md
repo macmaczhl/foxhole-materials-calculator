@@ -1,5 +1,7 @@
 This is a foxhole facility calculator. Allows to calculate any count of materials or vehicles.
 
+Inspired by [reddit post](https://www.reddit.com/r/foxholegame/comments/ym64ru/facility_cost_calculator/)
+
 ## Getting Started
 
 ### Install dependencies
