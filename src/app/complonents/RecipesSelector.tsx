@@ -28,27 +28,23 @@ export function RecipesSelector({ stuff, recipes, treePath }: RecipesSelectorPro
         <span>{stuff}</span>
         <RadioGroup value={selectedRecipe} onChange={e => selectRecipe(e)} aria-label="Recipe">
             {recipes.map((recipe) => (
-                <Field key={recipe.id} className="flex items-center gap-2">
+                <Field key={recipe.id} className="flex items-center gap-2 mb-1">
                     <Radio
                         value={recipe}
                         className="group flex size-5 items-center justify-center rounded-full border bg-white data-[checked]:bg-blue-400 data-[disabled]:bg-gray-100"
                     >
                         <span className="invisible size-2 rounded-full bg-white group-data-[checked]:visible" />
                     </Radio>
-                    <Label className="data-[disabled]:opacity-50">
-                        <div className="inline-block mr-5">
+                    <Label className="data-[disabled]:opacity-50 flex flex-row space-x-1 items-center">
+                        <div className="flex flex-row space-x-1">
                             {recipe.required.map(e => (
-                                <span key={e.stuff}>
-                                    {`${e.stuff}(${e.count})`}
-                                </span>
+                                <StuffIcon key={e.stuff} stuffName={e.stuff} count={e.count} />
                             ))}
                         </div>
-                        <ArrowRightIcon className="size-5 inline-block" />
-                        <div className="inline-block mr-5">
+                        <ArrowRightIcon className="size-8" />
+                        <div className="flex flex-row space-x-1">
                             {recipe.produced.map(e => (
-                                <span key={e.stuff}>
-                                    <StuffIcon stuffName={e.stuff} count={e.count} />
-                                </span>
+                                <StuffIcon key={e.stuff} stuffName={e.stuff} count={e.count} />
                             ))}
                         </div>
                     </Label>

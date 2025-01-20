@@ -8,19 +8,23 @@ export function Report() {
     return <div className="p-2 m-6 bg-neutral-400 flex flex-col">
         <div>
             Initial components
-            {initialComponents.map(e => (
-                <div key={e.stuff}>
-                    <StuffIcon stuffName={e.stuff} count={e.count} />
-                </div>
-            ))}
+            <div className="flex flex-row space-x-1">
+                {initialComponents.map(e => (
+                    <div key={e.stuff}>
+                        <StuffIcon stuffName={e.stuff} count={e.count} />
+                    </div>
+                ))}
+            </div>
         </div>
         <div className="mt-3">
             Calculated components
-            {calculatedComponents.map(e => (
-                <div key={e.stuff}>
-                    <StuffIcon stuffName={e.stuff} count={e.count} />
-                </div>
-            ))}
+            <div className="flex flex-row space-x-1">
+                {calculatedComponents.map(e => (
+                    <div key={e.stuff}>
+                        <StuffIcon stuffName={e.stuff} count={e.count} />
+                    </div>
+                ))}
+            </div>
         </div>
     </div>;
 }
