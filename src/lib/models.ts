@@ -31,17 +31,26 @@ export enum Materials {
 export enum Liquids {
     Petrol = 'Petrol',
     HeavyOil = 'Heavy Oil',
+    Water = 'Water',
 }
 
 export enum RawResources {
     Salvage = 'Salvage',
     Components = 'Components',
     Coke = 'Coke',
+    DamagedComponents = 'Damaged Components',
+    Coal = 'Coal',
+    Sulfur = 'Sulfur',
 }
 
 export const availableMaterials: Stuff[] = [
+    { name: RawResources.Components },
+    { name: RawResources.Coke },
     { name: Materials.ConstructionMaterials },
     { name: Materials.ProcessedConstructionMaterials },
+    { name: Materials.BarbedWire },
+    { name: Materials.MetalBeam },
+    { name: Materials.Sandbag },
 ];
 
 export const stuffList: Stuff[] = availableMaterials;

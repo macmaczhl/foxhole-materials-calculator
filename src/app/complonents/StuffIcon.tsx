@@ -19,6 +19,10 @@ const ICONS_MAP = new Map<string, string>([
     [RawResources.Salvage, 'images/3/33/SalvageIcon.png'],
     [RawResources.Components, 'images/thumb/a/ac/ComponentsIcon.png/100px-ComponentsIcon.png'],
     [RawResources.Coke, 'images/d/d8/CokeIcon.png'],
+    [RawResources.DamagedComponents, 'images/thumb/b/bd/ComponentsDamagedIcon.png/100px-ComponentsDamagedIcon.png'],
+    [RawResources.Coal, 'images/8/88/CoalIcon.png'],
+    [Liquids.Water, 'images/9/94/WaterIcon.png'],
+    [RawResources.Sulfur, 'images/thumb/b/be/SulfurIcon.png/100px-SulfurIcon.png'],
 ]);
 
 export function StuffIcon({ stuffName, count }: StuffIcon) {
