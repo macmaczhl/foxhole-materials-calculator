@@ -1,4 +1,5 @@
 import { Liquids, Materials, RawResources } from "@/lib/models";
+import Image from 'next/image'
 
 interface StuffIcon {
     stuffName: string
@@ -24,7 +25,7 @@ export function StuffIcon({ stuffName, count }: StuffIcon) {
     const iconPostfix = ICONS_MAP.get(stuffName);
 
     return <div className="bg-neutral-500 min-w-16 relative">
-        {iconPostfix ? <img
+        {iconPostfix ? <Image
             alt={stuffName}
             src={`https://foxhole.wiki.gg/${iconPostfix}`}
             decoding="async" loading="lazy" width="60" height="60" data-file-width="60" data-file-height="60" /> : `${stuffName}(${count})`}

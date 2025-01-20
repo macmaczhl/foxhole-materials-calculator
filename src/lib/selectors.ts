@@ -2,7 +2,7 @@ import { useAppSelector } from "./hooks"
 import { IRecipe } from "./models";
 
 
-export const selectTreeSelectedRecipe = (treePath: string[]): IRecipe | undefined => {
+export const useTreeSelectedRecipe = (treePath: string[]): IRecipe | undefined => {
     return useAppSelector((state) => {
         let currentTree = state.desiredStuff.recipeTree;
         treePath.slice(1).forEach(e => {

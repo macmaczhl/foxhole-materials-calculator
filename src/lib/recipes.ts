@@ -1,30 +1,5 @@
 import { IRecipe, Liquids, Materials, RawResources, RecipeEntity } from "./models"
 
-class Recipe implements IRecipe {
-    id: number
-    required: RecipeEntity[]
-    produced: RecipeEntity[]
-
-    constructor(id: number, required: RecipeEntity[], produced: RecipeEntity[]) {
-        this.id = id;
-        this.required = required;
-        this.produced = produced;
-    }
-
-    getRequiredMap(producedTargetStuff: string, count: number): Map<string, number> {
-        const result = new Map<string, number>();
-        const targetStuff = this.produced.find(e => e.stuff === producedTargetStuff);
-        if (!targetStuff) {
-            return result;
-        }
-        const timesToProduce = Math.ceil(count / targetStuff.count);
-        this.required.forEach(e => {
-            result.set(e.stuff, e.count);
-        });
-        return result;
-    }
-}
-
 let recipeId = 1;
 function createRecipe(required: RecipeEntity[], produced: RecipeEntity[]): IRecipe {
     return {

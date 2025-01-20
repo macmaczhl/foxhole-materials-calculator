@@ -3,7 +3,6 @@ import type { RootState } from '../store'
 import { stuffList } from '@/lib/models'
 import { RecipiesByStuff } from '../recipes'
 import { IRecipe, RecipeEntity, RecipeTree } from '../models'
-import { getTargetTriple } from 'next/dist/build/swc/generated-native'
 
 interface DesiredStuffState {
   count: number,

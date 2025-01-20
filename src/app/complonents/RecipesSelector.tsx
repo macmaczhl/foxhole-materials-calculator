@@ -1,7 +1,7 @@
 import { selectTreeRecipe } from "@/lib/features/desiredStuffSlice";
 import { useAppDispatch } from "@/lib/hooks";
 import { IRecipe } from "@/lib/models";
-import { selectTreeSelectedRecipe } from "@/lib/selectors";
+import { useTreeSelectedRecipe } from "@/lib/selectors";
 import { RadioGroup, Field, Radio, Label } from "@headlessui/react";
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import { StuffIcon } from "./StuffIcon";
@@ -15,7 +15,7 @@ interface RecipesSelectorProps {
 const marginleftClasses = ['ml-6', 'ml-10', 'ml-16', 'ml-20'];
 
 export function RecipesSelector({ stuff, recipes, treePath }: RecipesSelectorProps) {
-    const selectedRecipe = selectTreeSelectedRecipe(treePath);
+    const selectedRecipe = useTreeSelectedRecipe(treePath);
     const dispatch = useAppDispatch();
 
     const selectRecipe = (recipe: IRecipe) => {
