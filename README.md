@@ -2,7 +2,13 @@ This is a foxhole facility calculator. Allows to calculate any count of material
 
 ## Getting Started
 
-First, run the development server:
+### Install dependencies
+
+```bash
+npm install
+```
+
+### Run the development server
 
 ```bash
 npm run dev
