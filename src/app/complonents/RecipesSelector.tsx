@@ -12,7 +12,7 @@ interface RecipesSelectorProps {
     treePath: string[];
 }
 
-const marginleftClasses = ['ml-6', 'ml-10', 'ml-16', 'ml-20'];
+const marginleftClasses = ['ml-6', 'ml-10', 'ml-16', 'ml-20', 'ml-24', 'ml-28'];
 
 export function RecipesSelector({ stuff, recipes, treePath }: RecipesSelectorProps) {
     const selectedRecipe = useTreeSelectedRecipe(treePath);
