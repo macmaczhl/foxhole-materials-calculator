@@ -42,7 +42,8 @@ function calculateRawAndExcessComponents(recipeTree: RecipeTree, timesToProduce:
   for (const requiredRecipeEntity of recipe.required) {
     for (const requiredTree of recipeTree.required) {
       if (requiredTree.stuff === requiredRecipeEntity.stuff) {
-        const calculatedRequired = calculateRawAndExcessComponents(requiredTree, timesToProduce * requiredRecipeEntity.count);
+        const requiredTimesToProduce = getTimesToProduce(requiredTree, timesToProduce * requiredRecipeEntity.count);
+        const calculatedRequired = calculateRawAndExcessComponents(requiredTree, requiredTimesToProduce);
         raw = mergeMaps(raw, calculatedRequired.raw);
         excess = mergeMaps(excess, calculatedRequired.excess);
       }
