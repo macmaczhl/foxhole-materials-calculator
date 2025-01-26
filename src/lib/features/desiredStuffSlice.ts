@@ -3,19 +3,24 @@ import type { RootState } from '../store'
 import { stuffList } from '@/lib/models'
 import { RecipiesByStuff } from '../recipes'
 import { IRecipe, RecipeEntity, RecipeTree } from '../models'
+import { calculateComponents } from '../services/calculateComponents'
 
 interface DesiredStuffState {
   count: number,
+  stuffName: string,
   recipeTree?: RecipeTree,
   initialComponents: RecipeEntity[],
-  calculatedComponents: RecipeEntity[],
+  rawComponents: RecipeEntity[],
+  excessComponents: RecipeEntity[],
 }
 
 // Define the initial state using that type
 const initialState: DesiredStuffState = {
   count: 0,
+  stuffName: '',
   initialComponents: [],
-  calculatedComponents: [],
+  rawComponents: [],
+  excessComponents: [],
 }
 
 const findRecipes = (stuffName: string): IRecipe[] => {
@@ -46,63 +51,15 @@ const createRecipeTree = (targetStuff: string): RecipeTree => {
   };
 }
 
-const getTimesToProduce = (target: RecipeTree, count: number): number => {
-  const recipe = target.selectedRecipe;
-  const targetStuff = recipe.produced.find(e => e.stuff === target.stuff);
-  if (!targetStuff) {
-    return 0;
-  }
-  return Math.ceil(count / targetStuff.count);
-}
-
-const getRequiredMap = (target: RecipeTree, timesToProduce: number): Map<string, number> => {
-  const result = new Map<string, number>();
-  const recipe = target.selectedRecipe;
-  recipe.required.forEach(e => result.set(e.stuff, e.count * timesToProduce));
-  return result;
-}
-
-const getRequiredMapRecursive = (target: RecipeTree, timesToProduce: number): Map<string, number> => {
-  if (target.required.length === 0) {
-    const result = new Map<string, number>([[target.stuff, timesToProduce]]);
-    return result;
-  }
-
-  const currentRecipe = target.selectedRecipe;
-  const result = new Map<string, number>();
-  const requiredMaps = target.required.map(component => {
-    const recipeEntry = currentRecipe.required.find(entry => entry.stuff === component.stuff);
-    if (!recipeEntry) {
-      return new Map<string, number>()
-    }
-
-    return getRequiredMapRecursive(component, getTimesToProduce(component, recipeEntry.count * timesToProduce));
-  });
-
-  requiredMaps.forEach(map => {
-    map.forEach((v, k) => {
-      const oldValue = result.get(k);
-      let newValue = v;
-      if (oldValue) {
-        result.set(k, oldValue + v);
-        newValue += oldValue;
-      }
-      result.set(k, newValue);
-    });
-  });
-  return result;
-}
-
 const recalculateReport = (state: DesiredStuffState) => {
   if (state.count < 1 || !state.recipeTree) {
     return;
   }
 
-  const timesToProduce = getTimesToProduce(state.recipeTree, state.count);
-  const initialComponentsMap = getRequiredMap(state.recipeTree, timesToProduce);
-  state.initialComponents = initialComponentsMap.entries().map(e => ({ stuff: e[0], count: e[1] })).toArray();
-  const calculatedComponentsMap = getRequiredMapRecursive(state.recipeTree, timesToProduce);
-  state.calculatedComponents = calculatedComponentsMap.entries().map(e => ({ stuff: e[0], count: e[1] })).toArray();
+  const components = calculateComponents(state.recipeTree, state.count);
+  state.initialComponents = components.initial;
+  state.rawComponents = components.raw;
+  state.excessComponents = components.excess;
 }
 
 interface SelectRecipePayload {
@@ -122,12 +79,16 @@ export const desiredStuffSlice = createSlice({
       recalculateReport(state);
     },
     changeStuff: (state, action: PayloadAction<string>) => {
-      stuffList.forEach(e => {
-        if (e.name === action.payload) {
-          state.recipeTree = createRecipeTree(e.name);
+      state.stuffName = action.payload;
+      for (const stuff of stuffList) {
+        if (stuff.name === action.payload) {
+          state.recipeTree = createRecipeTree(stuff.name);
           recalculateReport(state);
+          return;
         }
-      });
+      }
+      state.recipeTree = undefined;
+      recalculateReport(state);
     },
     selectTreeRecipe: (state, action: PayloadAction<SelectRecipePayload>) => {
       let currentTree = state.recipeTree;

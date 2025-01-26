@@ -5,6 +5,7 @@ import { stuffList } from '@/lib/models';
 
 export function DesiredOutput() {
     const desiredCount = useAppSelector((state) => state.desiredStuff.count);
+    const stuffName = useAppSelector((state) => state.desiredStuff.stuffName);
     const dispatch = useAppDispatch();
 
     return (<div className="p-2 m-6 bg-neutral-400">
@@ -19,11 +20,18 @@ export function DesiredOutput() {
             <tbody>
                 <tr>
                     <td>
-                        <Input type='text' value={desiredCount} onChange={e => dispatch(changeCount(e.target.value))}
+                        <Input
+                            type='text'
+                            value={desiredCount}
+                            onChange={e => dispatch(changeCount(e.target.value))}
                             className="mt-3 block w-16 rounded-lg border-none bg-white py-1.5 px-3 text-sm/6 text-whit size-8 m-auto"></Input>
                     </td>
                     <td>
-                        <Input list='dataList' type='text' onChange={e => dispatch(changeStuff(e.target.value))}
+                        <Input
+                            list='dataList'
+                            type='text'
+                            value={stuffName}
+                            onChange={e => dispatch(changeStuff(e.target.value))}
                             className="mt-3 block w-full rounded-lg border-none bg-white py-1.5 px-3 text-sm/6 text-whit size-8"></Input>
 
                         <datalist id='dataList'>
