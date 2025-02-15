@@ -76,7 +76,7 @@ const processedConstructionMaterialsRecipes: IRecipe[] = [
     createRecipe([
         { stuff: Materials.ConstructionMaterials, count: 15 },
         { stuff: Materials.MetalBeam, count: 1 },
-        { stuff: Liquids.HeavyOil, count: 15 },
+        { stuff: Liquids.HeavyOil, count: 10 },
     ], [
         { stuff: Materials.ProcessedConstructionMaterials, count: 1 },
     ]),
