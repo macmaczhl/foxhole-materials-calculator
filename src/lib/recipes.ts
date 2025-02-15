@@ -53,7 +53,7 @@ const constructionMaterialsRecipes: IRecipe[] = [
     ]),
     createRecipe([
         { stuff: RawResources.Salvage, count: 15 },
-        { stuff: RawResources.Coke, count: 15 },
+        { stuff: RawResources.Coke, count: 25 },
     ], [
         { stuff: Materials.ConstructionMaterials, count: 3 },
     ]),
