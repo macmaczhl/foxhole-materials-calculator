@@ -274,6 +274,73 @@ const flameAmmoRecipes: IRecipe[] = [
     ]),
 ];
 
+const petrolRecipes: IRecipe[] = [
+    createRecipe([
+        { stuff: Liquids.Oil, count: 100 },
+    ], [
+        { stuff: Liquids.Petrol, count: 75 },
+    ]),
+    createRecipe([
+        { stuff: Liquids.Oil, count: 150 },
+        { stuff: RawResources.Components, count: 5 },
+    ], [
+        { stuff: Liquids.Petrol, count: 120 },
+    ]),
+];
+
+const heavyOilRecipes: IRecipe[] = [
+    createRecipe([
+        { stuff: RawResources.Coal, count: 300 },
+        { stuff: Liquids.Water, count: 100 },
+    ], [
+        { stuff: RawResources.Coke, count: 260 },
+        { stuff: Liquids.HeavyOil, count: 60 },
+    ]),
+    createRecipe([
+        { stuff: Liquids.Oil, count: 200 },
+        { stuff: RawResources.Coke, count: 50 },
+    ], [
+        { stuff: Liquids.HeavyOil, count: 150 },
+    ]),
+];
+
+const enrichedOilRecipes: IRecipe[] = [
+    createRecipe([
+        { stuff: Liquids.HeavyOil, count: 100 },
+        { stuff: RawResources.Components, count: 10 },
+    ], [
+        { stuff: Liquids.EnrichedOil, count: 75 },
+    ]),
+    createRecipe([
+        { stuff: Liquids.HeavyOil, count: 150 },
+        { stuff: RawResources.Coke, count: 75 },
+        { stuff: RawResources.Sulfur, count: 25 },
+    ], [
+        { stuff: Liquids.EnrichedOil, count: 120 },
+    ]),
+];
+
+const oilRecipes: IRecipe[] = [
+    createRecipe([
+        { stuff: RawResources.Coal, count: 300 },
+        { stuff: Liquids.Water, count: 100 },
+    ], [
+        { stuff: Materials.ConcreteMaterials, count: 1 },
+        { stuff: RawResources.Sulfur, count: 15 },
+        { stuff: Liquids.Oil, count: 100 },
+    ]),
+    createRecipe([
+        { stuff: RawResources.Coal, count: 400 },
+    ], [
+        { stuff: Liquids.Oil, count: 200 },
+        { stuff: RawResources.Sulfur, count: 10 },
+    ]),
+];
+
+const waterRecipes: IRecipe[] = [
+    createEmptyRecipe(Liquids.Water),
+];
+
 
 export const RecipiesByStuff = new Map<string, IRecipe[]>([
     [Materials.ConstructionMaterials, constructionMaterialsRecipes],
@@ -295,6 +362,11 @@ export const RecipiesByStuff = new Map<string, IRecipe[]>([
     [Materials.ThermalShielding, thermalShieldingRecipes],
     [Materials.UnstableSubstances, unstableSubstancesRecipes],
     [Materials.FlameAmmo, flameAmmoRecipes],
+    [Liquids.Petrol, petrolRecipes],
+    [Liquids.HeavyOil, heavyOilRecipes],
+    [Liquids.Water, waterRecipes],
+    [Liquids.EnrichedOil, enrichedOilRecipes],
+    [Liquids.Oil, oilRecipes],
 
     emptyRecipePair(RawResources.Salvage),
     emptyRecipePair(RawResources.DamagedComponents),
@@ -302,8 +374,4 @@ export const RecipiesByStuff = new Map<string, IRecipe[]>([
     emptyRecipePair(RawResources.Sulfur),
     emptyRecipePair(RawResources.RareMetal),
     emptyRecipePair(RawResources.HeavyExplosivePowder),
-    emptyRecipePair(Liquids.Petrol),
-    emptyRecipePair(Liquids.HeavyOil),
-    emptyRecipePair(Liquids.Water),
-    emptyRecipePair(Liquids.Oil),
 ]);
