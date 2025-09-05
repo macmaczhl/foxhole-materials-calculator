@@ -79,6 +79,11 @@ export const availableMaterials: Stuff[] = [
     { name: Materials.ThermalShielding },
     { name: Materials.UnstableSubstances },
     { name: Materials.FlameAmmo },
+    { name: Liquids.Petrol },
+    { name: Liquids.HeavyOil },
+    { name: Liquids.Water },
+    { name: Liquids.EnrichedOil },
+    { name: Liquids.Oil },
 ];
 
 export const stuffList: Stuff[] = availableMaterials;
