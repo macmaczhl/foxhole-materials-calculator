@@ -276,15 +276,15 @@ const flameAmmoRecipes: IRecipe[] = [
 
 const petrolRecipes: IRecipe[] = [
     createRecipe([
-        { stuff: Liquids.Oil, count: 100 },
+        { stuff: Liquids.Oil, count: 50 },
     ], [
-        { stuff: Liquids.Petrol, count: 75 },
+        { stuff: Liquids.Petrol, count: 50 },
     ]),
     createRecipe([
-        { stuff: Liquids.Oil, count: 150 },
-        { stuff: RawResources.Components, count: 5 },
+        { stuff: Liquids.Oil, count: 40 },
+        { stuff: Liquids.Water, count: 10 },
     ], [
-        { stuff: Liquids.Petrol, count: 120 },
+        { stuff: Liquids.Petrol, count: 50 },
     ]),
 ];
 
@@ -297,26 +297,23 @@ const heavyOilRecipes: IRecipe[] = [
         { stuff: Liquids.HeavyOil, count: 60 },
     ]),
     createRecipe([
-        { stuff: Liquids.Oil, count: 200 },
-        { stuff: RawResources.Coke, count: 50 },
+        { stuff: Liquids.Oil, count: 50 },
     ], [
-        { stuff: Liquids.HeavyOil, count: 150 },
+        { stuff: Liquids.HeavyOil, count: 30 },
     ]),
 ];
 
 const enrichedOilRecipes: IRecipe[] = [
     createRecipe([
-        { stuff: Liquids.HeavyOil, count: 100 },
-        { stuff: RawResources.Components, count: 10 },
+        { stuff: RawResources.Coal, count: 100 },
+        { stuff: RawResources.Sulfur, count: 60 },
     ], [
-        { stuff: Liquids.EnrichedOil, count: 75 },
+        { stuff: Liquids.EnrichedOil, count: 1 },
     ]),
     createRecipe([
-        { stuff: Liquids.HeavyOil, count: 150 },
-        { stuff: RawResources.Coke, count: 75 },
-        { stuff: RawResources.Sulfur, count: 25 },
+        { stuff: Liquids.HeavyOil, count: 30 },
     ], [
-        { stuff: Liquids.EnrichedOil, count: 120 },
+        { stuff: Liquids.EnrichedOil, count: 30 },
     ]),
 ];
 
@@ -330,10 +327,17 @@ const oilRecipes: IRecipe[] = [
         { stuff: Liquids.Oil, count: 100 },
     ]),
     createRecipe([
-        { stuff: RawResources.Coal, count: 400 },
+        { stuff: RawResources.Coal, count: 300 },
+        { stuff: Liquids.Water, count: 50 },
     ], [
-        { stuff: Liquids.Oil, count: 200 },
+        { stuff: Materials.ConcreteMaterials, count: 1 },
         { stuff: RawResources.Sulfur, count: 10 },
+        { stuff: Liquids.Oil, count: 50 },
+    ]),
+    createRecipe([
+        { stuff: Liquids.Water, count: 25 },
+    ], [
+        { stuff: Liquids.Oil, count: 100 },
     ]),
 ];
 
