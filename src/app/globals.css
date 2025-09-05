@@ -2,26 +2,108 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Foxhole-inspired dark theme */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #0f1115;
+  --panel: #242a31;
+  --panel-300: #2a3038;
+  --panel-400: #303741;
+  --text: #e5e7eb;
+  --muted-200: #cbd5e1;
+  --muted-300: #aab4c0;
+  --muted-400: #909aa6;
+  --border-600: #3a424d;
+  --accent-500: #7fa2bb;
+  --accent-400: #8fb3c7;
+  --accent-300: #a5c4d6;
+  --danger-500: #ef4444;
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --bg: #0f1115; /* This app is best in dark; keep consistent */
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
+body.app-body {
+  color: var(--text);
+  background: var(--bg);
   font-family: Arial, Helvetica, sans-serif;
 }
 
 @layer components {
-  .main-page-container {
-    @apply m-6 bg-neutral-400 p-2
+  .panel {
+    @apply rounded-xl border shadow-sm p-4;
+    background-color: var(--panel);
+    border-color: var(--border-600);
+  }
+
+  .section-title {
+    @apply font-semibold tracking-wide;
+    color: var(--muted-200);
+  }
+
+  .ui-table thead th {
+    @apply text-xs uppercase tracking-wider font-semibold pb-2;
+    color: var(--muted-300);
+    border-bottom: 1px solid var(--border-600);
+  }
+
+  .ui-table tbody td {
+    @apply py-2 align-middle;
+  }
+
+  .ui-input {
+    @apply rounded-md px-3 py-2 outline-none w-full;
+    background-color: var(--panel-300);
+    border: 1px solid var(--border-600);
+    color: var(--text);
+  }
+  .ui-input:focus {
+    border-color: var(--accent-400);
+    box-shadow: 0 0 0 2px color-mix(in oklab, var(--accent-400) 35%, transparent);
+  }
+
+  .btn-primary {
+    @apply px-3 py-1.5 rounded-md font-medium;
+    background-color: var(--accent-500);
+    color: #0b1116;
+  }
+  .btn-primary:hover { background-color: var(--accent-400); }
+
+  .btn-danger {
+    @apply h-8 w-8 rounded-md;
+    background-color: color-mix(in oklab, var(--danger-500) 25%, transparent);
+    border: 1px solid var(--danger-500);
+    color: var(--danger-500);
+  }
+  .btn-danger:hover { background-color: color-mix(in oklab, var(--danger-500) 40%, transparent); }
+  .btn-disabled { opacity: .5; cursor: not-allowed; }
+
+  .dropdown-panel {
+    @apply mt-1 max-h-72 overflow-y-auto rounded-md border shadow-lg z-50;
+    background-color: var(--panel-400);
+    border-color: var(--border-600);
+  }
+  .dropdown-option {
+    @apply px-3 py-2 text-sm cursor-pointer;
+    color: var(--text);
+  }
+  .dropdown-option[data-focus] {
+    background-color: var(--panel-300);
+  }
+
+  .icon-tile {
+    @apply min-w-16 rounded-md overflow-hidden border;
+    background-color: var(--panel-300);
+    border-color: var(--border-600);
+  }
+
+  .count-badge {
+    @apply absolute bottom-0 right-0 text-xs px-1.5 py-0.5 rounded-tl-md;
+    background-color: var(--panel-400);
+    border-left: 1px solid var(--border-600);
+    border-top: 1px solid var(--border-600);
+    color: var(--accent-300);
   }
 }
