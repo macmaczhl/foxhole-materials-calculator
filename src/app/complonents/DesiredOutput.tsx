@@ -1,46 +1,71 @@
-import { Input } from '@headlessui/react'
+"use client";
+
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
-import { changeCount, changeStuff } from '@/lib/features/desiredStuffSlice';
-import { stuffList } from '@/lib/models';
+import { addRow, changeCount, changeStuff, deleteRow, selectRows } from '@/lib/features/desiredSlice';
+import StuffCombobox from './StuffCombobox';
+import { XMarkIcon, PlusIcon } from '@heroicons/react/24/solid';
 
 export function DesiredOutput() {
-    const desiredCount = useAppSelector((state) => state.desiredStuff.count);
-    const stuffName = useAppSelector((state) => state.desiredStuff.stuffName);
+    const rows = useAppSelector(selectRows);
     const dispatch = useAppDispatch();
 
-    return (<div className="p-2 m-6 bg-neutral-400">
-        <table className="table-auto w-full">
+    const canDelete = rows.length > 1;
+
+    return (
+      <div className="panel m-6">
+        <div className="flex items-center justify-between mb-3">
+          <h2 className="section-title">Desired items</h2>
+          <button
+            className="btn-primary inline-flex items-center"
+            onClick={() => dispatch(addRow())}
+          >
+            <PlusIcon className="size-4 mr-1" /> Add
+          </button>
+        </div>
+
+        <div className="overflow-x-auto">
+          <table className="w-full ui-table">
             <thead>
-                <tr>
-                    <th>Count</th>
-                    <th>Disered stuff</th>
-                    <th>Delete</th>
-                </tr>
+              <tr>
+                <th className="w-28 text-left">Count</th>
+                <th className="text-left">Desired stuff</th>
+                <th className="w-20 text-center">Delete</th>
+              </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>
-                        <Input
-                            type='text'
-                            value={desiredCount}
-                            onChange={e => dispatch(changeCount(e.target.value))}
-                            className="mt-3 block w-16 rounded-lg border-none bg-white py-1.5 px-3 text-sm/6 text-whit size-8 m-auto"></Input>
-                    </td>
-                    <td>
-                        <Input
-                            list='dataList'
-                            type='text'
-                            value={stuffName}
-                            onChange={e => dispatch(changeStuff(e.target.value))}
-                            className="mt-3 block w-full rounded-lg border-none bg-white py-1.5 px-3 text-sm/6 text-whit size-8"></Input>
-
-                        <datalist id='dataList'>
-                            {stuffList.map(e => <option value={e.name} key={e.name} />)}
-                        </datalist>
-                    </td>
-                    <td></td>
+              {rows.map((row) => (
+                <tr key={row.id}>
+                  <td>
+                    <input
+                      type="number"
+                      min={0}
+                      value={row.count}
+                      onChange={(e) => dispatch(changeCount({ rowId: row.id, value: e.target.value }))}
+                      className="ui-input w-24"
+                    />
+                  </td>
+                  <td>
+                    <StuffCombobox
+                      value={row.stuffName}
+                      onChange={(v) => dispatch(changeStuff({ rowId: row.id, value: v }))}
+                      placeholder="Search materials/vehicles"
+                    />
+                  </td>
+                  <td className="text-center">
+                    <button
+                      title={canDelete ? "Delete row" : "Cannot delete the only row"}
+                      className={`btn-danger inline-flex items-center justify-center ${!canDelete ? 'btn-disabled' : ''}`}
+                      onClick={() => canDelete && dispatch(deleteRow(row.id))}
+                      disabled={!canDelete}
+                    >
+                      <XMarkIcon className="size-5" />
+                    </button>
+                  </td>
                 </tr>
+              ))}
             </tbody>
-        </table>
-    </div>);
+          </table>
+        </div>
+      </div>
+    );
 }

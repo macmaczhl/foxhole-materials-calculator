@@ -1,33 +1,27 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction, nanoid } from '@reduxjs/toolkit'
 import type { RootState } from '../store'
 import { stuffList } from '@/lib/models'
 import { RecipiesByStuff } from '../recipes'
 import { IRecipe, RecipeEntity, RecipeTree } from '../models'
 import { calculateComponents } from '../services/calculateComponents'
 
-interface DesiredStuffState {
-  count: number,
-  stuffName: string,
-  recipeTree?: RecipeTree,
-  initialComponents: RecipeEntity[],
-  rawComponents: RecipeEntity[],
-  excessComponents: RecipeEntity[],
+export interface DesiredRow {
+  id: string
+  count: number
+  stuffName: string
+  recipeTree?: RecipeTree
 }
 
-// Define the initial state using that type
-const initialState: DesiredStuffState = {
-  count: 0,
-  stuffName: '',
-  initialComponents: [],
-  rawComponents: [],
-  excessComponents: [],
+interface DesiredState {
+  rows: DesiredRow[]
+  initialComponents: RecipeEntity[]
+  rawComponents: RecipeEntity[]
+  excessComponents: RecipeEntity[]
 }
 
 const findRecipes = (stuffName: string): IRecipe[] => {
   const stuffRecipes = RecipiesByStuff.get(stuffName);
-  if (stuffRecipes === undefined) {
-    return [];
-  }
+  if (stuffRecipes === undefined) return [];
   return stuffRecipes;
 }
 
@@ -45,69 +39,113 @@ const createRecipeTree = (targetStuff: string): RecipeTree => {
   const requiredComponents = requiredByRecipe(selectedRecipe);
   return {
     stuff: targetStuff,
-    recipes: recipes,
+    recipes,
     selectedRecipe,
     required: requiredComponents,
   };
 }
 
-const recalculateReport = (state: DesiredStuffState) => {
-  if (state.count < 1 || !state.recipeTree) {
-    return;
+const initialState: DesiredState = {
+  rows: [
+    { id: nanoid(), count: 0, stuffName: '' }
+  ],
+  initialComponents: [],
+  rawComponents: [],
+  excessComponents: [],
+};
+
+const addToMap = (map: Map<string, number>, key: string, value: number) => {
+  const old = map.get(key) ?? 0;
+  map.set(key, old + value);
+};
+
+const mapToEntities = (map: Map<string, number>): RecipeEntity[] =>
+  Array.from(map.entries()).map(([stuff, count]) => ({ stuff, count }));
+
+const recalcAll = (state: DesiredState) => {
+  const initial = new Map<string, number>();
+  const raw = new Map<string, number>();
+  const excess = new Map<string, number>();
+
+  for (const row of state.rows) {
+    if (!row.recipeTree || row.count < 1) continue;
+    const comp = calculateComponents(row.recipeTree, row.count);
+    for (const e of comp.initial) addToMap(initial, e.stuff, e.count);
+    for (const e of comp.raw) addToMap(raw, e.stuff, e.count);
+    for (const e of comp.excess) addToMap(excess, e.stuff, e.count);
   }
 
-  const components = calculateComponents(state.recipeTree, state.count);
-  state.initialComponents = components.initial;
-  state.rawComponents = components.raw;
-  state.excessComponents = components.excess;
+  state.initialComponents = mapToEntities(initial);
+  state.rawComponents = mapToEntities(raw);
+  state.excessComponents = mapToEntities(excess);
 }
 
-interface SelectRecipePayload {
-  treePath: string[]
-  recipe: IRecipe
-}
+interface ChangeCountPayload { rowId: string; value: string }
+interface ChangeStuffPayload { rowId: string; value: string }
+interface SelectRecipePayload { rowId: string; treePath: string[]; recipe: IRecipe }
 
-export const desiredStuffSlice = createSlice({
-  name: 'desiredStuff',
-  // `createSlice` will infer the state type from the `initialState` argument
+export const desiredSlice = createSlice({
+  name: 'desired',
   initialState,
   reducers: {
-    // Use the PayloadAction type to declare the contents of `action.payload`
-    changeCount: (state, action: PayloadAction<string>) => {
-      const countNumber = +action.payload;
-      state.count = countNumber > 0 ? countNumber : 0;
-      recalculateReport(state);
+    addRow: (state) => {
+      state.rows.push({ id: nanoid(), count: 0, stuffName: '' });
+      recalcAll(state);
     },
-    changeStuff: (state, action: PayloadAction<string>) => {
-      state.stuffName = action.payload;
-      for (const stuff of stuffList) {
-        if (stuff.name === action.payload) {
-          state.recipeTree = createRecipeTree(stuff.name);
-          recalculateReport(state);
-          return;
-        }
+    deleteRow: (state, action: PayloadAction<string>) => {
+      if (state.rows.length <= 1) return;
+      state.rows = state.rows.filter(r => r.id !== action.payload);
+      recalcAll(state);
+    },
+    changeCount: (state, action: PayloadAction<ChangeCountPayload>) => {
+      const row = state.rows.find(r => r.id === action.payload.rowId);
+      if (!row) return;
+      const n = +action.payload.value;
+      row.count = Number.isFinite(n) && n > 0 ? Math.floor(n) : 0;
+      recalcAll(state);
+    },
+    changeStuff: (state, action: PayloadAction<ChangeStuffPayload>) => {
+      const row = state.rows.find(r => r.id === action.payload.rowId);
+      if (!row) return;
+      row.stuffName = action.payload.value;
+      const found = stuffList.find(s => s.name === action.payload.value);
+      if (found) {
+        row.recipeTree = createRecipeTree(found.name);
+      } else {
+        row.recipeTree = undefined;
       }
-      state.recipeTree = undefined;
-      recalculateReport(state);
+      recalcAll(state);
     },
     selectTreeRecipe: (state, action: PayloadAction<SelectRecipePayload>) => {
-      let currentTree = state.recipeTree;
-      if (!currentTree) {
-        return;
-      }
+      const row = state.rows.find(r => r.id === action.payload.rowId);
+      if (!row || !row.recipeTree) return;
+
+      let currentTree: RecipeTree | undefined = row.recipeTree;
       action.payload.treePath.slice(1).forEach(e => {
         currentTree = currentTree?.required.find(sub => sub.stuff === e);
       });
+      if (!currentTree) return;
+
       currentTree.selectedRecipe = action.payload.recipe;
       updateRequiredComponents(currentTree);
-      recalculateReport(state);
+      recalcAll(state);
     },
-  },
+  }
 })
 
-export const { changeCount, changeStuff, selectTreeRecipe } = desiredStuffSlice.actions
+export const {
+  addRow,
+  deleteRow,
+  changeCount,
+  changeStuff,
+  selectTreeRecipe
+} = desiredSlice.actions;
 
-// Other code such as selectors can use the imported `RootState` type
-export const selectCount = (state: RootState) => state.desiredStuff.count;
+export const selectRows = (state: RootState) => state.desired.rows;
+export const selectReport = (state: RootState) => ({
+  initial: state.desired.initialComponents,
+  raw: state.desired.rawComponents,
+  excess: state.desired.excessComponents,
+});
 
-export default desiredStuffSlice.reducer
+export default desiredSlice.reducer;
