@@ -306,12 +306,12 @@ const heavyOilRecipes: IRecipe[] = [
 const enrichedOilRecipes: IRecipe[] = [
     createRecipe([
         { stuff: RawResources.Coal, count: 100 },
-        { stuff: RawResources.Sulfur, count: 60 },
     ], [
         { stuff: Liquids.EnrichedOil, count: 1 },
     ]),
     createRecipe([
         { stuff: Liquids.HeavyOil, count: 30 },
+        { stuff: RawResources.Sulfur, count: 60 },
     ], [
         { stuff: Liquids.EnrichedOil, count: 30 },
     ]),
