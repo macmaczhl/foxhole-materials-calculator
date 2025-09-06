@@ -46,7 +46,8 @@ After making changes, **ALWAYS** validate the core application works:
 
 ### Key Directories
 - `src/app/` - Next.js app directory with main page and components
-  - `src/app/complonents/` - ⚠️ Note typo in directory name (should be "components")
+  - `src/app/components/` - Contains React components used in the main app  
+
   - `src/app/page.tsx` - Main application page with Redux provider
   - `src/app/layout.tsx` - Layout with Google Fonts configuration
 - `src/lib/` - Core application logic and state management
@@ -83,7 +84,7 @@ The application supports these material categories (from `src/lib/models.ts`):
 - Always test calculations with the validation scenario after changes
 
 ### UI Components
-- Main components are in `src/app/complonents/` (note spelling)
+- Main components are in `src/app/components/`
 - `StuffIcon.tsx` handles material icons from foxhole.wiki.gg
 - `RecipesSelector.tsx` and `RecipesSelectors.tsx` handle recipe selection UI
 - Components use Tailwind classes and are responsive
