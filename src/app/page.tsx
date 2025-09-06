@@ -1,10 +1,10 @@
 "use client"
 
-import { DesiredOutput } from "./complonents/DesiredOutput";
+import { DesiredOutput } from "./components/DesiredOutput";
 import { Provider } from "react-redux";
 import store from '@/lib/store'
-import { RecipesSelectors } from "./complonents/RecipesSelectors";
-import { Report } from "./complonents/Report";
+import { RecipesSelectors } from "./components/RecipesSelectors";
+import { Report } from "./components/Report";
 
 export default function Home() {
   return (
