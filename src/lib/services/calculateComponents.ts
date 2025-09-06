@@ -24,7 +24,7 @@ function mergeMaps(one: Map<string, number>, two: Map<string, number>): Map<stri
 }
 
 function mapToEntities(map: Map<string, number>): RecipeEntity[] {
-  return map.entries().map(e => ({ stuff: e[0], count: e[1] })).toArray();
+  return Array.from(map.entries()).map(e => ({ stuff: e[0], count: e[1] }));
 }
 
 function calculateRawAndExcessComponents(recipeTree: RecipeTree, timesToProduce: number): { raw: Map<string, number>, excess: Map<string, number> } {
