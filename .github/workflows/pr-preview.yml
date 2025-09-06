@@ -110,7 +110,7 @@ jobs:
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       
-      - name: Update next.config.ts for PR preview
+      - name: Create PR preview config
         run: |
           # Create a modified next.config.ts with basePath for PR preview
           cat > next.config.preview.ts << 'EOF'
@@ -137,13 +137,15 @@ jobs:
 
           export default nextConfig;
           EOF
-          
-          # Use the preview config for building
-          mv next.config.ts next.config.original.ts
-          mv next.config.preview.ts next.config.ts
       
       - name: Build with Next.js
-        run: ${{ steps.detect-package-manager.outputs.runner }} next build
+        run: |
+          # Use the preview config for building  
+          mv next.config.ts next.config.original.ts
+          mv next.config.preview.ts next.config.ts
+          ${{ steps.detect-package-manager.outputs.runner }} next build
+          # Restore original config to avoid git issues
+          mv next.config.original.ts next.config.ts
       
       - name: Setup and deploy to gh-pages
         run: |
@@ -151,15 +153,21 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           
+          # Store build output path
+          BUILD_OUTPUT_PATH="/tmp/pr-${{ github.event.number }}-build"
+          mkdir -p "$BUILD_OUTPUT_PATH"
+          cp -r out/* "$BUILD_OUTPUT_PATH/"
+          
           # Check if gh-pages branch exists
           if git ls-remote --heads origin | grep -q "refs/heads/gh-pages"; then
             echo "gh-pages branch exists, checking out"
             git fetch origin gh-pages
-            git checkout gh-pages
+            # Force checkout to avoid conflicts with modified files
+            git checkout -f gh-pages
           else
             echo "Creating new gh-pages branch"
             git checkout --orphan gh-pages
-            git rm -rf .
+            git rm -rf . 2>/dev/null || true
             echo "# GitHub Pages for PR Previews" > README.md
             git add README.md
             git commit -m "Initialize gh-pages branch for PR previews"
@@ -171,7 +179,7 @@ jobs:
           
           # Copy built files to PR directory
           mkdir -p "pr-${{ github.event.number }}"
-          cp -r out/* "pr-${{ github.event.number }}/"
+          cp -r "$BUILD_OUTPUT_PATH"/* "pr-${{ github.event.number }}/"
           
           # Commit and push changes
           git add .
