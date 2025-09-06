@@ -41,7 +41,8 @@ jobs:
               git config --local user.email "action@github.com"
               git config --local user.name "GitHub Action"
               rm -rf "pr-${{ github.event.number }}"
-              git add .
+              # Only add the changes related to the removed directory
+              git add -A
               git commit -m "Remove preview for PR #${{ github.event.number }}" || exit 0
               git push
               echo "Preview directory removed for PR #${{ github.event.number }}"
@@ -158,6 +159,9 @@ jobs:
           mkdir -p "$BUILD_OUTPUT_PATH"
           cp -r out/* "$BUILD_OUTPUT_PATH/"
           
+          # Clean up working directory to avoid committing node_modules and build artifacts
+          rm -rf node_modules out .next
+          
           # Check if gh-pages branch exists
           if git ls-remote --heads origin | grep -q "refs/heads/gh-pages"; then
             echo "gh-pages branch exists, checking out"
@@ -181,8 +185,14 @@ jobs:
           mkdir -p "pr-${{ github.event.number }}"
           cp -r "$BUILD_OUTPUT_PATH"/* "pr-${{ github.event.number }}/"
           
-          # Commit and push changes
-          git add .
+          # Create .gitignore to prevent accidentally committing build artifacts
+          echo "node_modules/" > .gitignore
+          echo "out/" >> .gitignore
+          echo ".next/" >> .gitignore
+          echo "*.log" >> .gitignore
+          
+          # Only add the PR directory and .gitignore, not everything
+          git add "pr-${{ github.event.number }}" .gitignore
           git commit -m "Deploy preview for PR #${{ github.event.number }}" || exit 0
           git push
       
@@ -281,7 +291,7 @@ jobs:
           
           # Commit changes if any directories were removed
           if [ -n "$(git status --porcelain)" ]; then
-            git add .
+            git add -A
             git commit -m "Clean up old PR preview deployments"
             git push
             echo "Old preview deployments cleaned up"
