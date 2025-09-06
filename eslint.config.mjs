@@ -11,6 +11,12 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
+  {
+    rules: {
+      // Enforce consistent linebreak style
+      "linebreak-style": ["error", "unix"],
+    },
+  },
 ];
 
 export default eslintConfig;
