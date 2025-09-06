@@ -23,7 +23,7 @@ const mockRecipeTree: RecipeTree = {
 describe('calculateComponents', () => {
   test('calculates initial components for simple recipe', () => {
     const result = calculateComponents(mockRecipeTree, 1);
-    
+
     expect(result.initial).toEqual([
       { stuff: 'Raw Material A', count: 2 },
       { stuff: 'Raw Material B', count: 3 }
@@ -32,7 +32,7 @@ describe('calculateComponents', () => {
 
   test('scales components correctly for multiple items', () => {
     const result = calculateComponents(mockRecipeTree, 3);
-    
+
     expect(result.initial).toEqual([
       { stuff: 'Raw Material A', count: 6 },
       { stuff: 'Raw Material B', count: 9 }
@@ -41,7 +41,7 @@ describe('calculateComponents', () => {
 
   test('returns raw components for basic recipe', () => {
     const result = calculateComponents(mockRecipeTree, 1);
-    
+
     // For a recipe with no nested requirements, raw components should be the stuff itself
     expect(result.raw).toEqual([{ stuff: Materials.ConstructionMaterials, count: 1 }]);
     expect(result.excess).toEqual([]);

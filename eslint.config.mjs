@@ -17,6 +17,8 @@ const eslintConfig = [{
     "linebreak-style": ["error", "unix"],
     // Require newline at end of file
     "eol-last": ["error", "always"],
+    // Disallow trailing whitespace at the end of lines
+    'no-trailing-spaces': 'error',
   },
 }];
 
