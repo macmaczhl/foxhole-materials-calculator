@@ -11,6 +11,9 @@ Always reference these instructions first and fallback to search or bash command
 - Lint code: `npm run lint` -- takes 5 seconds, runs ESLint with Next.js rules
 - Build for production: `npm run build` -- takes 30 seconds. Set timeout to 120+ seconds.
 
+### Finish process
+Make Pull request ready for review when it's finished and ready for review
+
 
 ## Validation Scenarios
 
