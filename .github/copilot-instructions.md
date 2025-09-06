@@ -9,27 +9,8 @@ Always reference these instructions first and fallback to search or bash command
 - Install dependencies: `npm install` -- takes 30 seconds. Set timeout to 60+ seconds.
 - Start development server: `npm run dev` -- ready in 2 seconds, runs on http://localhost:3000
 - Lint code: `npm run lint` -- takes 5 seconds, runs ESLint with Next.js rules
-- Build for production: `npm run build` -- **FAILS due to Google Fonts network restrictions**
-  - **WORKAROUND**: Temporarily modify `src/app/layout.tsx` to use system fonts instead of Google Fonts imports
-  - **NEVER CANCEL**: Build takes 30 seconds when working. Set timeout to 120+ seconds.
+- Build for production: `npm run build` -- takes 30 seconds. Set timeout to 120+ seconds.
 
-### Build Workaround for Restricted Networks
-The build fails because Next.js tries to fetch Google Fonts from `fonts.gstatic.com`. To build successfully:
-
-1. Backup layout: `cp src/app/layout.tsx src/app/layout.tsx.backup`
-2. Replace Google Fonts imports in `src/app/layout.tsx`:
-   ```typescript
-   // Replace this:
-   import { Geist, Geist_Mono } from "next/font/google";
-   const geistSans = Geist({...});
-   const geistMono = Geist_Mono({...});
-   
-   // With this:
-   const geistSans = { variable: "--font-geist-sans" };
-   const geistMono = { variable: "--font-geist-mono" };
-   ```
-3. Run build: `npm run build` -- takes 30 seconds when fonts are disabled
-4. Restore original: `cp src/app/layout.tsx.backup src/app/layout.tsx && rm src/app/layout.tsx.backup`
 
 ## Validation Scenarios
 
@@ -57,7 +38,7 @@ After making changes, **ALWAYS** validate the core application works:
 | `npm install` | 30 seconds | 60+ seconds | Downloads ~400 packages |
 | `npm run dev` | 2 seconds | 30 seconds | Starts Turbopack dev server |
 | `npm run lint` | 5 seconds | 30 seconds | ESLint validation, usually no errors |
-| `npm run build` | 30 seconds* | 120+ seconds | *Fails without font workaround |
+| `npm run build` | 30 seconds | 120+ seconds | Production build with static generation |
 
 **NEVER CANCEL** any build or install commands. Wait for completion even if it takes the full timeout period.
 
@@ -121,7 +102,7 @@ The application supports these material categories (from `src/lib/models.ts`):
 - **Icon integration**: Material icons come from foxhole.wiki.gg - verify they load correctly
 
 ## Troubleshooting
-- **Build fails**: Use font workaround described above
+- **Build fails**: Check TypeScript errors and ensure dependencies are installed with `npm install`
 - **Dev server issues**: Stop with Ctrl+C and restart with `npm run dev`
 - **TypeScript errors**: Check imports and type definitions in `src/lib/models.ts`
 - **State not updating**: Verify Redux actions are dispatched in components
