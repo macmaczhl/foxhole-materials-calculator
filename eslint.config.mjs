@@ -9,17 +9,29 @@ const compat = new FlatCompat({
   baseDirectory: __dirname,
 });
 
-const eslintConfig = [{
-  ignores: ["node_modules/**", ".next/**", "out/**", "build/**", "next-env.d.ts"]
-}, ...compat.extends("next/core-web-vitals", "next/typescript"), {
-  rules: {
-    // Enforce consistent linebreak style
-    "linebreak-style": ["error", "unix"],
-    // Require newline at end of file
-    "eol-last": ["error", "always"],
-    // Disallow trailing whitespace at the end of lines
-    'no-trailing-spaces': 'error',
+const eslintConfig = [
+  {
+    ignores: [
+      "node_modules/**",
+      ".next/**",
+      "out/**",
+      "build/**",
+      "next-env.d.ts",
+    ],
   },
-}];
+  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  {
+    rules: {
+      // Enforce consistent linebreak style
+      "linebreak-style": ["error", "unix"],
+      // Require newline at end of file
+      "eol-last": ["error", "always"],
+      // Disallow trailing whitespace at the end of lines
+      "no-trailing-spaces": "error",
+      // Enforce 2-space indentation
+      indent: ["error", 2],
+    },
+  },
+];
 
 export default eslintConfig;
