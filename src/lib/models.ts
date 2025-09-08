@@ -48,6 +48,10 @@ export enum Liquids {
     Oil = 'Oil',
 }
 
+export enum Vehicles {
+    Xiphos = 'T3 "Xiphos"',
+}
+
 export enum RawResources {
     Salvage = 'Salvage',
     Components = 'Components',
@@ -84,6 +88,7 @@ export const availableMaterials: Stuff[] = [
   { name: Liquids.Water },
   { name: Liquids.EnrichedOil },
   { name: Liquids.Oil },
+  { name: Vehicles.Xiphos },
 ];
 
 export const stuffList: Stuff[] = availableMaterials;

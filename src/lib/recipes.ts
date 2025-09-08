@@ -1,4 +1,4 @@
-import { IRecipe, Liquids, Materials, RawResources, RecipeEntity } from "./models"
+import { IRecipe, Liquids, Materials, RawResources, RecipeEntity, Vehicles } from "./models"
 
 let recipeId = 1;
 function createRecipe(required: RecipeEntity[], produced: RecipeEntity[]): IRecipe {
@@ -345,6 +345,36 @@ const waterRecipes: IRecipe[] = [
   createEmptyRecipe(Liquids.Water),
 ];
 
+// T3 "Xiphos" vehicle recipes
+const xiphosRecipes: IRecipe[] = [
+  // Regular production at Garage
+  createRecipe([
+    { stuff: Materials.ProcessedConstructionMaterials, count: 15 },
+    { stuff: Materials.AssemblyMaterialsIII, count: 8 },
+    { stuff: Materials.AssemblyMaterialsIV, count: 5 },
+    { stuff: Materials.RareAlloys, count: 3 },
+    { stuff: Liquids.Petrol, count: 25 },
+  ], [
+    { stuff: Vehicles.Xiphos, count: 1 },
+  ]),
+  // Mass production at Mass Production Factory (more efficient)
+  createRecipe([
+    { stuff: Materials.ProcessedConstructionMaterials, count: 40 },
+    { stuff: Materials.AssemblyMaterialsIII, count: 20 },
+    { stuff: Materials.AssemblyMaterialsIV, count: 12 },
+    { stuff: Materials.RareAlloys, count: 7 },
+    { stuff: Liquids.Petrol, count: 60 },
+  ], [
+    { stuff: Vehicles.Xiphos, count: 3 },
+  ]),
+  // Crate production (3 vehicles per crate)
+  createRecipe([
+    { stuff: Vehicles.Xiphos, count: 3 },
+  ], [
+    { stuff: Vehicles.Xiphos, count: 3 }, // This represents the crate containing 3 vehicles
+  ]),
+];
+
 
 export const RecipiesByStuff = new Map<string, IRecipe[]>([
   [Materials.ConstructionMaterials, constructionMaterialsRecipes],
@@ -371,6 +401,8 @@ export const RecipiesByStuff = new Map<string, IRecipe[]>([
   [Liquids.Water, waterRecipes],
   [Liquids.EnrichedOil, enrichedOilRecipes],
   [Liquids.Oil, oilRecipes],
+
+  [Vehicles.Xiphos, xiphosRecipes],
 
   emptyRecipePair(RawResources.Salvage),
   emptyRecipePair(RawResources.DamagedComponents),
