@@ -3,7 +3,6 @@ import { useAppDispatch } from "@/lib/hooks";
 import { IRecipe } from "@/lib/models";
 import { useTreeSelectedRecipe } from "@/lib/selectors";
 import { RadioGroup, Field, Radio, Label } from "@headlessui/react";
-import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import { RecipeDisplay } from "./RecipeDisplay";
 
 interface RecipesSelectorProps {
