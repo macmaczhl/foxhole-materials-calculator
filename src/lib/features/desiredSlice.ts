@@ -17,6 +17,7 @@ interface DesiredState {
   initialComponents: RecipeEntity[]
   rawComponents: RecipeEntity[]
   excessComponents: RecipeEntity[]
+  excessResult: RecipeEntity[]
 }
 
 // Helper function for validation as suggested in review
@@ -55,6 +56,7 @@ const initialState: DesiredState = {
   initialComponents: [],
   rawComponents: [],
   excessComponents: [],
+  excessResult: [],
 };
 
 const addToMap = (map: Map<string, number>, key: string, value: number) => {
@@ -69,6 +71,7 @@ const recalcAll = (state: DesiredState) => {
   const initial = new Map<string, number>();
   const raw = new Map<string, number>();
   const excess = new Map<string, number>();
+  const excessResult = new Map<string, number>();
 
   for (const row of state.rows) {
     if (!row.recipeTree || row.count < 1) continue;
@@ -76,11 +79,13 @@ const recalcAll = (state: DesiredState) => {
     for (const e of comp.initial) addToMap(initial, e.stuff, e.count);
     for (const e of comp.raw) addToMap(raw, e.stuff, e.count);
     for (const e of comp.excess) addToMap(excess, e.stuff, e.count);
+    for (const e of comp.excessResult) addToMap(excessResult, e.stuff, e.count);
   }
 
   state.initialComponents = mapToEntities(initial);
   state.rawComponents = mapToEntities(raw);
   state.excessComponents = mapToEntities(excess);
+  state.excessResult = mapToEntities(excessResult);
 }
 
 interface ChangeCountPayload { rowId: string; value: string }
@@ -149,6 +154,7 @@ export const selectReport = (state: RootState) => ({
   initial: state.desired.initialComponents,
   raw: state.desired.rawComponents,
   excess: state.desired.excessComponents,
+  excessResult: state.desired.excessResult,
 });
 
 export default desiredSlice.reducer;

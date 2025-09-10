@@ -63,7 +63,7 @@ function calculateInitialComponents(recipeTree: RecipeTree, timesToProduce: numb
   return recipe.required.map(e => ({ stuff: e.stuff, count: e.count * timesToProduce }));
 }
 
-export function calculateComponents(recipeTree: RecipeTree, stuffCount: number): { initial: RecipeEntity[], raw: RecipeEntity[], excess: RecipeEntity[] } {
+export function calculateComponents(recipeTree: RecipeTree, stuffCount: number): { initial: RecipeEntity[], raw: RecipeEntity[], excess: RecipeEntity[], excessResult: RecipeEntity[] } {
   const timesToProduce = getTimesToProduce(recipeTree, stuffCount);
 
   const initial = calculateInitialComponents(recipeTree, timesToProduce);
@@ -71,5 +71,12 @@ export function calculateComponents(recipeTree: RecipeTree, stuffCount: number):
   const raw = mapToEntities(components.raw);
   const excess = mapToEntities(components.excess);
 
-  return { initial, raw, excess };
+  // Calculate excess result (when we produce more of the target item than requested)
+  const recipe = recipeTree.selectedRecipe;
+  const targetStuff = recipe.produced.find(e => e.stuff === recipeTree.stuff);
+  const actualProduced = targetStuff ? targetStuff.count * timesToProduce : 0;
+  const excessResultCount = actualProduced - stuffCount;
+  const excessResult = excessResultCount > 0 ? [{ stuff: recipeTree.stuff, count: excessResultCount }] : [];
+
+  return { initial, raw, excess, excessResult };
 }
