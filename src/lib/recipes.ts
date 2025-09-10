@@ -349,7 +349,7 @@ const waterRecipes: IRecipe[] = [
 const refinedMaterialsRecipes: IRecipe[] = [
   createRecipe([
     { stuff: Materials.ProcessedConstructionMaterials, count: 3 },
-    { stuff: RawResources.Components, count: 25 },
+    { stuff: RawResources.Components, count: 20 },
   ], [
     { stuff: Materials.RefinedMaterials, count: 1 },
   ]),
