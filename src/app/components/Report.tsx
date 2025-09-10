@@ -1,17 +1,15 @@
 import { useAppSelector } from "@/lib/hooks";
+import { selectAdjustedReport } from "@/lib/selectors";
 import { StuffIcon } from "./StuffIcon";
 
 export function Report() {
-  const initialComponents = useAppSelector(state => state.desired.initialComponents);
-  const rawComponents = useAppSelector(state => state.desired.rawComponents);
-  const excessComponents = useAppSelector(state => state.desired.excessComponents);
-  const excessResult = useAppSelector(state => state.desired.excessResult);
+  const { initial, raw, excess, excessResult } = useAppSelector(selectAdjustedReport);
 
   return <div className="panel m-6 flex flex-col">
     <div className="mb-3">
       <div className="section-title">Initial components</div>
       <div className="flex flex-row flex-wrap gap-2 mt-2">
-        {initialComponents.map(e => (
+        {initial.map(e => (
           <div key={e.stuff}>
             <StuffIcon stuffName={e.stuff} count={e.count} />
           </div>
@@ -21,7 +19,7 @@ export function Report() {
     <div className="mb-3">
       <div className="section-title">Calculated components</div>
       <div className="flex flex-row flex-wrap gap-2 mt-2">
-        {rawComponents.map(e => (
+        {raw.map(e => (
           <div key={e.stuff}>
             <StuffIcon stuffName={e.stuff} count={e.count} />
           </div>
@@ -31,7 +29,7 @@ export function Report() {
     <div className="mb-3">
       <div className="section-title">Excess components</div>
       <div className="flex flex-row flex-wrap gap-2 mt-2">
-        {excessComponents.map(e => (
+        {excess.map(e => (
           <div key={e.stuff}>
             <StuffIcon stuffName={e.stuff} count={e.count} />
           </div>
