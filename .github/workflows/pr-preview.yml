@@ -2,118 +2,55 @@ name: Deploy PR Preview
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
+    types: [opened, synchronize, reopened, closed]
     branches: ["main"]
 
 permissions:
   contents: write
   pull-requests: write
-  pages: write
-  id-token: write
 
 concurrency:
   group: pr-preview-${{ github.event.number }}
   cancel-in-progress: true
 
 jobs:
-  build-and-deploy:
+  deploy-preview:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Detect package manager
-        id: detect-package-manager
-        run: |
-          if [ -f "${{ github.workspace }}/yarn.lock" ]; then
-            echo "manager=yarn" >> $GITHUB_OUTPUT
-            echo "command=install" >> $GITHUB_OUTPUT
-            echo "runner=yarn" >> $GITHUB_OUTPUT
-            exit 0
-          elif [ -f "${{ github.workspace }}/package.json" ]; then
-            echo "manager=npm" >> $GITHUB_OUTPUT
-            echo "command=ci" >> $GITHUB_OUTPUT
-            echo "runner=npx --no-install" >> $GITHUB_OUTPUT
-            exit 0
-          else
-            echo "Unable to determine package manager"
-            exit 1
-          fi
-
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "22"
-          cache: ${{ steps.detect-package-manager.outputs.manager }}
-
-      - name: Restore cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            .next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
-          restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
+          cache: 'npm'
 
       - name: Install dependencies
-        run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
+        run: npm ci
 
-      - name: Build with Next.js
-        run: ${{ steps.detect-package-manager.outputs.runner }} next build
+      - name: Build Next.js app
+        run: npm run build
         env:
-          NEXT_PUBLIC_BASE_PATH: /foxhole-materials-calculator/pr-${{ github.event.number }}
+          NEXT_PUBLIC_BASE_PATH: /foxhole-materials-calculator/pr-previews/pr-${{ github.event.number }}
 
-      - name: Add .nojekyll file
-        run: touch ./out/.nojekyll
-
-      - name: Deploy to gh-pages branch
-        run: |
-          # Clone the gh-pages branch or create it
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          
-          # Check if gh-pages branch exists
-          if git ls-remote --heads origin gh-pages | grep gh-pages > /dev/null; then
-            git clone --single-branch --branch gh-pages https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git gh-pages-repo
-          else
-            # Create new gh-pages branch
-            mkdir gh-pages-repo
-            cd gh-pages-repo
-            git init
-            git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-            git checkout -b gh-pages
-            # Create initial .nojekyll file
-            touch .nojekyll
-            git add .nojekyll
-            git commit -m "Initial gh-pages commit"
-            git push origin gh-pages
-            cd ..
-            rm -rf gh-pages-repo
-            git clone --single-branch --branch gh-pages https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git gh-pages-repo
-          fi
-          
-          cd gh-pages-repo
-          
-          # Create or update the PR directory
-          rm -rf pr-${{ github.event.number }}
-          mkdir -p pr-${{ github.event.number }}
-          cp -r ../out/* pr-${{ github.event.number }}/
-          
-          # Ensure .nojekyll exists in root
-          touch .nojekyll
-          
-          git add .
-          git commit -m "Deploy PR #${{ github.event.number }} preview" || echo "No changes to commit"
-          git push origin gh-pages
+      - name: Deploy preview
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: ./out
+          preview-branch: gh-pages
+          umbrella-dir: pr-previews
+          action: auto
 
       - name: Comment PR
+        if: github.event.action != 'closed'
         uses: actions/github-script@v7
         with:
           script: |
             const prNumber = context.issue.number;
             const repoName = context.repo.repo;
             const owner = context.repo.owner;
-            const previewUrl = `https://${owner}.github.io/${repoName}/pr-${prNumber}`;
+            const previewUrl = `https://${owner}.github.io/${repoName}/pr-previews/pr-${prNumber}`;
             
             // Find existing comment
             const comments = await github.rest.issues.listComments({
