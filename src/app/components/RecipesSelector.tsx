@@ -13,7 +13,7 @@ interface RecipesSelectorProps {
     treePath: string[];
 }
 
-const marginleftClasses = ['ml-6', 'ml-10', 'ml-16', 'ml-20', 'ml-24', 'ml-28'];
+const marginleftClasses = ['ml-2', 'ml-4', 'ml-6', 'ml-8', 'ml-10', 'ml-12'];
 
 export function RecipesSelector({ rowId, stuff, recipes, treePath }: RecipesSelectorProps) {
   const selectedRecipe = useTreeSelectedRecipe(rowId, treePath);
@@ -25,11 +25,11 @@ export function RecipesSelector({ rowId, stuff, recipes, treePath }: RecipesSele
 
   const marginleftClass = marginleftClasses[Math.min(treePath.length - 1, marginleftClasses.length - 1)];
 
-  return <div className={`panel mb-2 ${marginleftClass}`}>
+  return <div className={`panel-compact mb-1 ${marginleftClass}`}>
     <span className="font-medium text-sm tracking-wide text-muted-300">{stuff}</span>
-    <RadioGroup value={selectedRecipe} onChange={e => selectRecipe(e)} aria-label={`Recipe for ${stuff}`} className="mt-2">
+    <RadioGroup value={selectedRecipe} onChange={e => selectRecipe(e)} aria-label={`Recipe for ${stuff}`} className="mt-1">
       {recipes.map((recipe) => (
-        <Field key={recipe.id} className="flex items-center gap-2 mb-1">
+        <Field key={recipe.id} className="flex items-center gap-2 mb-0.5">
           <Radio
             value={recipe}
             className="group flex size-5 items-center justify-center rounded-full border border-border-600 bg-panel-300 data-[checked]:bg-accent-500 data-[disabled]:bg-gray-800"
