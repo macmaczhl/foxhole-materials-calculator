@@ -23,6 +23,7 @@ export interface RecipeTree {
 export enum Materials {
     ConstructionMaterials = 'Construction Materials',
     ProcessedConstructionMaterials = 'Processed Construction Materials',
+    RefinedMaterials = 'Refined Materials',
     BarbedWire = 'Barbed Wire',
     MetalBeam = 'Metal Beam Wire',
     Sandbag = 'Sandbag',
@@ -48,6 +49,10 @@ export enum Liquids {
     Oil = 'Oil',
 }
 
+export enum Vehicles {
+    Xiphos = 'T3 "Xiphos"',
+}
+
 export enum RawResources {
     Salvage = 'Salvage',
     Components = 'Components',
@@ -64,6 +69,7 @@ export const availableMaterials: Stuff[] = [
   { name: RawResources.Coke },
   { name: Materials.ConstructionMaterials },
   { name: Materials.ProcessedConstructionMaterials },
+  { name: Materials.RefinedMaterials },
   { name: Materials.BarbedWire },
   { name: Materials.MetalBeam },
   { name: Materials.Sandbag },
@@ -84,6 +90,7 @@ export const availableMaterials: Stuff[] = [
   { name: Liquids.Water },
   { name: Liquids.EnrichedOil },
   { name: Liquids.Oil },
+  { name: Vehicles.Xiphos },
 ];
 
 export const stuffList: Stuff[] = availableMaterials;

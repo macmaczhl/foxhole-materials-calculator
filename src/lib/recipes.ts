@@ -1,4 +1,4 @@
-import { IRecipe, Liquids, Materials, RawResources, RecipeEntity } from "./models"
+import { IRecipe, Liquids, Materials, RawResources, RecipeEntity, Vehicles } from "./models"
 
 let recipeId = 1;
 function createRecipe(required: RecipeEntity[], produced: RecipeEntity[]): IRecipe {
@@ -345,10 +345,49 @@ const waterRecipes: IRecipe[] = [
   createEmptyRecipe(Liquids.Water),
 ];
 
+// Refined Materials recipes
+const refinedMaterialsRecipes: IRecipe[] = [
+  createRecipe([
+    { stuff: Materials.ProcessedConstructionMaterials, count: 3 },
+    { stuff: RawResources.Components, count: 20 },
+  ], [
+    { stuff: Materials.RefinedMaterials, count: 1 },
+  ]),
+];
+
+// T3 "Xiphos" vehicle recipes
+const xiphosRecipes: IRecipe[] = [
+  // Garage production: 25 x Refined Materials → 1 x T3 "Xiphos"
+  createRecipe([
+    { stuff: Materials.RefinedMaterials, count: 25 },
+  ], [
+    { stuff: Vehicles.Xiphos, count: 1 },
+  ]),
+  // Mass Production Factory: 179 x Refined Materials → 3 crates of 3 x T3 "Xiphos" (9 total)
+  createRecipe([
+    { stuff: Materials.RefinedMaterials, count: 179 },
+  ], [
+    { stuff: Vehicles.Xiphos, count: 9 },
+  ]),
+  // Mass Production Factory: 224 x Refined Materials → 4 crates of 3 x T3 "Xiphos" (12 total)
+  createRecipe([
+    { stuff: Materials.RefinedMaterials, count: 224 },
+  ], [
+    { stuff: Vehicles.Xiphos, count: 12 },
+  ]),
+  // Mass Production Factory: 261 x Refined Materials → 5 crates of 3 x T3 "Xiphos" (15 total)
+  createRecipe([
+    { stuff: Materials.RefinedMaterials, count: 261 },
+  ], [
+    { stuff: Vehicles.Xiphos, count: 15 },
+  ]),
+];
+
 
 export const RecipiesByStuff = new Map<string, IRecipe[]>([
   [Materials.ConstructionMaterials, constructionMaterialsRecipes],
   [Materials.ProcessedConstructionMaterials, processedConstructionMaterialsRecipes],
+  [Materials.RefinedMaterials, refinedMaterialsRecipes],
   [Materials.BarbedWire, bardedWireRecipes],
   [Materials.MetalBeam, metalBeamsRecipes],
   [Materials.Sandbag, sandbagRecipes],
@@ -371,6 +410,8 @@ export const RecipiesByStuff = new Map<string, IRecipe[]>([
   [Liquids.Water, waterRecipes],
   [Liquids.EnrichedOil, enrichedOilRecipes],
   [Liquids.Oil, oilRecipes],
+
+  [Vehicles.Xiphos, xiphosRecipes],
 
   emptyRecipePair(RawResources.Salvage),
   emptyRecipePair(RawResources.DamagedComponents),
