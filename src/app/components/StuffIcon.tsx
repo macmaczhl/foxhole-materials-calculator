@@ -1,7 +1,7 @@
 import { Liquids, Materials, RawResources, Vehicles } from "@/lib/models";
 import Image from 'next/image'
 
-interface StuffIcon {
+interface StuffIconProps {
     stuffName: string
     count: number
 }
@@ -44,14 +44,24 @@ const ICONS_MAP = new Map<string, string>([
   [Vehicles.Xiphos, 'images/f/f3/ArmoredCarVehicleIcon.png'],
 ]);
 
-export function StuffIcon({ stuffName, count }: StuffIcon) {
+export function StuffIcon({ stuffName, count }: StuffIconProps) {
   const iconPostfix = ICONS_MAP.get(stuffName);
 
-  return <div className="bg-neutral-500 min-w-16 relative">
-    {iconPostfix ? <Image
-      alt={stuffName}
-      src={`https://foxhole.wiki.gg/${iconPostfix}`}
-      decoding="async" loading="lazy" width="60" height="60" data-file-width="60" data-file-height="60" /> : `${stuffName}(${count})`}
-    <span className="absolute bottom-0 right-0 bg-cyan-50 px-1 text-sm">{count}</span>
-  </div>;
+  return (
+    <div className="icon-tile relative">
+      {iconPostfix ? (
+        <Image
+          alt={stuffName}
+          src={`https://foxhole.wiki.gg/${iconPostfix}`}
+          decoding="async"
+          loading="lazy"
+          width={60}
+          height={60}
+        />
+      ) : (
+        <span className="text-xs">{`${stuffName}(${count})`}</span>
+      )}
+      <span className="count-badge">{count}</span>
+    </div>
+  );
 }
