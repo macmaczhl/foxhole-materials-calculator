@@ -1,4 +1,4 @@
-import { Liquids, Materials, RawResources } from "@/lib/models";
+import { Liquids, Materials, RawResources, Vehicles } from "@/lib/models";
 import Image from 'next/image'
 
 interface StuffIcon {
@@ -9,6 +9,7 @@ interface StuffIcon {
 const ICONS_MAP = new Map<string, string>([
   [Materials.ConstructionMaterials, 'images/f/f0/ConstructionMaterialsIcon.png'],
   [Materials.ProcessedConstructionMaterials, 'images/f/fa/ProcessedConstructionMaterialsIcon.png'],
+  [Materials.RefinedMaterials, 'images/f/f8/RefinedMaterialsIcon.png'],
   [Materials.BarbedWire, 'images/9/9b/BarbedWireMaterialItemIcon.png'],
   [Materials.MetalBeam, 'images/1/15/MetalBeamMaterialItemIcon.png'],
   [Materials.Sandbag, 'images/f/fe/SandbagMaterialItemIcon.png'],
@@ -39,6 +40,8 @@ const ICONS_MAP = new Map<string, string>([
   [RawResources.Sulfur, 'images/thumb/b/be/SulfurIcon.png/100px-SulfurIcon.png'],
   [RawResources.RareMetal, 'images/e/ed/RareMaterialsIcon.png'],
   [RawResources.HeavyExplosivePowder, 'images/thumb/2/21/HeavyExplosiveMaterialsIcon.png/100px-HeavyExplosiveMaterialsIcon.png'],
+
+  [Vehicles.Xiphos, 'images/5/5f/XiphosIcon.png'],
 ]);
 
 export function StuffIcon({ stuffName, count }: StuffIcon) {
