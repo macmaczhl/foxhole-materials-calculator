@@ -16,6 +16,7 @@ concurrency:
 jobs:
   deploy-preview:
     runs-on: ubuntu-latest
+    environment: Preview
     steps:
       - name: Checkout
         uses: actions/checkout@v4
