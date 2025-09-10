@@ -8,6 +8,8 @@ on:
 permissions:
   contents: write
   pull-requests: write
+  pages: write
+  id-token: write
 
 concurrency:
   group: pr-preview-${{ github.event.number }}
@@ -59,16 +61,50 @@ jobs:
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
         env:
-          NEXT_PUBLIC_BASE_PATH: /pr-${{ github.event.number }}
+          NEXT_PUBLIC_BASE_PATH: /foxhole-materials-calculator/pr-${{ github.event.number }}
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./out
-          destination_dir: pr-${{ github.event.number }}
-          keep_files: true
-          publish_branch: gh-pages
+      - name: Add .nojekyll file
+        run: touch ./out/.nojekyll
+
+      - name: Deploy to gh-pages branch
+        run: |
+          # Clone the gh-pages branch or create it
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          
+          # Check if gh-pages branch exists
+          if git ls-remote --heads origin gh-pages | grep gh-pages > /dev/null; then
+            git clone --single-branch --branch gh-pages https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git gh-pages-repo
+          else
+            # Create new gh-pages branch
+            mkdir gh-pages-repo
+            cd gh-pages-repo
+            git init
+            git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+            git checkout -b gh-pages
+            # Create initial .nojekyll file
+            touch .nojekyll
+            git add .nojekyll
+            git commit -m "Initial gh-pages commit"
+            git push origin gh-pages
+            cd ..
+            rm -rf gh-pages-repo
+            git clone --single-branch --branch gh-pages https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git gh-pages-repo
+          fi
+          
+          cd gh-pages-repo
+          
+          # Create or update the PR directory
+          rm -rf pr-${{ github.event.number }}
+          mkdir -p pr-${{ github.event.number }}
+          cp -r ../out/* pr-${{ github.event.number }}/
+          
+          # Ensure .nojekyll exists in root
+          touch .nojekyll
+          
+          git add .
+          git commit -m "Deploy PR #${{ github.event.number }} preview" || echo "No changes to commit"
+          git push origin gh-pages
 
       - name: Comment PR
         uses: actions/github-script@v7
