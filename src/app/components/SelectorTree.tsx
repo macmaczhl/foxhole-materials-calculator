@@ -6,13 +6,26 @@ interface SelectorTreeProps {
     rowId: string;
     recipesTree: RecipeTree;
     treePath: string[];
+    isLast?: boolean;
 }
 
-export function SelectorTree({ rowId, recipesTree, treePath }: SelectorTreeProps) {
+export function SelectorTree({ rowId, recipesTree, treePath, isLast = false }: SelectorTreeProps) {
   return <>
-    <RecipesSelector rowId={rowId} stuff={recipesTree.stuff} recipes={recipesTree.recipes} treePath={treePath} />
-    {recipesTree.required.map(e => (
-      <SelectorTree key={e.stuff} rowId={rowId} recipesTree={e} treePath={[...treePath, e.stuff]} />
+    <RecipesSelector
+      rowId={rowId}
+      stuff={recipesTree.stuff}
+      recipes={recipesTree.recipes}
+      treePath={treePath}
+      isLast={isLast}
+    />
+    {recipesTree.required.map((e, index) => (
+      <SelectorTree
+        key={e.stuff}
+        rowId={rowId}
+        recipesTree={e}
+        treePath={[...treePath, e.stuff]}
+        isLast={index === recipesTree.required.length - 1}
+      />
     ))}
   </>;
 }

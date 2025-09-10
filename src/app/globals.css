@@ -106,4 +106,26 @@ body.app-body {
     border-top: 1px solid var(--border-600);
     color: var(--accent-300);
   }
+
+  /* Tree visualization styles */
+  .tree-connector {
+    @apply absolute text-xs font-mono leading-none select-none;
+    color: var(--border-600);
+  }
+  
+  .tree-line {
+    @apply absolute;
+    background-color: var(--border-600);
+    opacity: 0.4;
+  }
+  
+  .tree-line-vertical {
+    @apply tree-line;
+    width: 1px;
+  }
+  
+  .tree-line-horizontal {
+    @apply tree-line;
+    height: 1px;
+  }
 }
