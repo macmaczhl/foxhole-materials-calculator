@@ -12,6 +12,7 @@ interface DesiredStuffState {
   initialComponents: RecipeEntity[],
   rawComponents: RecipeEntity[],
   excessComponents: RecipeEntity[],
+  excessResult: RecipeEntity[],
 }
 
 // Define the initial state using that type
@@ -21,6 +22,7 @@ const initialState: DesiredStuffState = {
   initialComponents: [],
   rawComponents: [],
   excessComponents: [],
+  excessResult: [],
 }
 
 const findRecipes = (stuffName: string): IRecipe[] => {
@@ -60,6 +62,7 @@ const recalculateReport = (state: DesiredStuffState) => {
   state.initialComponents = components.initial;
   state.rawComponents = components.raw;
   state.excessComponents = components.excess;
+  state.excessResult = components.excessResult;
 }
 
 interface SelectRecipePayload {
