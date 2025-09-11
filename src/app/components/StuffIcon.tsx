@@ -1,6 +1,11 @@
 import { Liquids, Materials, RawResources, Vehicles } from "@/lib/models";
 import Image from 'next/image'
 
+// Helper function to check if a material is a liquid
+const isLiquid = (stuffName: string): boolean => {
+  return Object.values(Liquids).includes(stuffName as Liquids);
+};
+
 interface StuffIconProps {
     stuffName: string
     count: number
@@ -46,6 +51,7 @@ const ICONS_MAP = new Map<string, string>([
 
 export function StuffIcon({ stuffName, count }: StuffIconProps) {
   const iconPostfix = ICONS_MAP.get(stuffName);
+  const displayCount = isLiquid(stuffName) ? `${count}L` : count;
 
   return (
     <div className="icon-tile relative">
@@ -59,9 +65,9 @@ export function StuffIcon({ stuffName, count }: StuffIconProps) {
           height={60}
         />
       ) : (
-        <span className="text-xs">{`${stuffName}(${count})`}</span>
+        <span className="text-xs">{`${stuffName}(${displayCount})`}</span>
       )}
-      <span className="count-badge">{count}</span>
+      <span className="count-badge">{displayCount}</span>
     </div>
   );
 }

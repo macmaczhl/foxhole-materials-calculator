@@ -38,6 +38,12 @@ body.app-body {
     border-color: var(--border-600);
   }
 
+  .panel-compact {
+    @apply rounded-xl border shadow-sm p-2;
+    background-color: var(--panel);
+    border-color: var(--border-600);
+  }
+
   .section-title {
     @apply font-semibold tracking-wide;
     color: var(--muted-200);
