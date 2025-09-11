@@ -3,7 +3,7 @@
 import { Fragment, useMemo, useState } from "react";
 import { Combobox, ComboboxButton, ComboboxInput, ComboboxOption, ComboboxOptions, Transition } from "@headlessui/react";
 import { ChevronUpDownIcon, CheckIcon } from "@heroicons/react/20/solid";
-import { stuffList } from "@/lib/models";
+import { groupedStuffList } from "@/lib/models";
 
 interface Props {
   value: string;
@@ -14,11 +14,22 @@ interface Props {
 export default function StuffCombobox({ value, onChange, placeholder }: Props) {
   const [query, setQuery] = useState("");
 
-  const options = useMemo(() => {
-    if (!query) return stuffList.map(s => s.name);
+  const filteredGroups = useMemo(() => {
+    if (!query) return groupedStuffList;
+
     const q = query.toLowerCase();
-    return stuffList.map(s => s.name).filter(n => n.toLowerCase().includes(q));
+    return groupedStuffList
+      .map(group => ({
+        ...group,
+        items: group.items.filter(item => item.name.toLowerCase().includes(q))
+      }))
+      .filter(group => group.items.length > 0);
   }, [query]);
+
+  // Flatten for compatibility with existing onChange logic
+  const allFilteredItems = useMemo(() => {
+    return filteredGroups.flatMap(group => group.items.map(item => item.name));
+  }, [filteredGroups]);
 
   return (
     <Combobox value={value} onChange={onChange} immediate>
@@ -41,23 +52,33 @@ export default function StuffCombobox({ value, onChange, placeholder }: Props) {
         leaveTo="opacity-0"
       >
         <ComboboxOptions anchor="bottom start" className="dropdown-panel">
-          {options.length === 0 && (
+          {allFilteredItems.length === 0 && (
             <div className="px-3 py-2 text-sm text-muted-400">No results</div>
           )}
 
-          {options.map((name) => (
-            <ComboboxOption key={name} value={name} className="dropdown-option">
-              {({ selected }) => (
-                <div className="flex items-center">
-                  {selected ? (
-                    <CheckIcon className="mr-2 size-4 text-accent-300" />
-                  ) : (
-                    <span className="mr-2 size-4" />
+          {filteredGroups.map((group) => (
+            <div key={group.group}>
+              {/* Group header */}
+              <div className="px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-muted-300 bg-panel-400 border-b border-border-600">
+                {group.group}
+              </div>
+
+              {/* Group items */}
+              {group.items.map((item) => (
+                <ComboboxOption key={item.name} value={item.name} className="dropdown-option">
+                  {({ selected }) => (
+                    <div className="flex items-center">
+                      {selected ? (
+                        <CheckIcon className="mr-2 size-4 text-accent-300" />
+                      ) : (
+                        <span className="mr-2 size-4" />
+                      )}
+                      <span>{item.name}</span>
+                    </div>
                   )}
-                  <span>{name}</span>
-                </div>
-              )}
-            </ComboboxOption>
+                </ComboboxOption>
+              ))}
+            </div>
           ))}
         </ComboboxOptions>
       </Transition>
