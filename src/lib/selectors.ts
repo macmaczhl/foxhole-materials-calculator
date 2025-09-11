@@ -34,41 +34,6 @@ const subtractFromMap = (map: Map<string, number>, key: string, value: number) =
 const mapToEntities = (map: Map<string, number>): RecipeEntity[] =>
   Array.from(map.entries()).map(([stuff, count]) => ({ stuff, count }));
 
-// Calculate what raw materials are saved by having a certain amount of an intermediate material
-// const calculateSavedMaterials = (materialName: string, quantity: number, recipes: Record<string, IRecipe[]>): Map<string, number> => {
-//   const saved = new Map<string, number>();
-//
-//   // Find recipes that produce this material
-//   const materialRecipes = recipes[materialName];
-//   if (!materialRecipes || materialRecipes.length === 0) {
-//     // This is a raw material, so having it saves exactly that amount
-//     addToMap(saved, materialName, quantity);
-//     return saved;
-//   }
-
-//   // Use the first (default) recipe for this material
-//   const recipe = materialRecipes[0];
-//
-//   // Find how much this recipe produces of the target material
-//   const produced = recipe.produced.find(p => p.stuff === materialName);
-//   if (!produced) return saved;
-
-//   // Calculate how many times we can use this existing material instead of crafting
-//   const timesUsed = Math.min(quantity, Math.floor(quantity / produced.count) * produced.count);
-//   const recipesUsed = Math.floor(timesUsed / produced.count);
-
-//   // For each recipe we don't need to execute, calculate what raw materials we save
-//   for (const required of recipe.required) {
-//     const savedAmount = required.count * recipesUsed;
-//     const nestedSaved = calculateSavedMaterials(required.stuff, savedAmount, recipes);
-//     for (const [stuff, count] of nestedSaved) {
-//       addToMap(saved, stuff, count);
-//     }
-//   }
-
-//   return saved;
-// };
-
 export const selectAdjustedReport = (state: RootState) => {
   const rows = selectRows(state);
   const existingItems = selectExistingItems(state);
