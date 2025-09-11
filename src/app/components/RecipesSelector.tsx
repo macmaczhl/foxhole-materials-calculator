@@ -15,6 +15,7 @@ interface RecipesSelectorProps {
 }
 
 const marginleftClasses = ['ml-6', 'ml-10', 'ml-16', 'ml-20', 'ml-24', 'ml-28'];
+const marginPixels = [24, 40, 64, 80, 96, 112]; // Corresponding pixel values
 
 export function RecipesSelector({ rowId, stuff, recipes, treePath, isLast = false }: RecipesSelectorProps) {
   const selectedRecipe = useTreeSelectedRecipe(rowId, treePath);
@@ -27,16 +28,20 @@ export function RecipesSelector({ rowId, stuff, recipes, treePath, isLast = fals
   const marginleftClass = marginleftClasses[Math.min(treePath.length - 1, marginleftClasses.length - 1)];
   const isNested = treePath.length > 1;
   const treeDepth = treePath.length - 1;
+  
+  // Position connectors within the left margin space
+  // Each level gets positioned further left within its margin
+  const connectorLeftPosition = treeDepth > 0 ? (treeDepth - 1) * 20 + 4 : 0;
 
   return <div className={`relative mb-2 ${marginleftClass}`}>
     {/* Tree connector lines */}
     {isNested && (
       <>
-        {/* Vertical line - full height for non-last items, half height for last items */}
+        {/* Main vertical line - spans full height for non-last items, half height for last items */}
         <div
           className="absolute tree-line"
           style={{
-            left: `${-16 - (treeDepth - 1) * 16}px`,
+            left: `${connectorLeftPosition}px`,
             top: '0px',
             width: '2px',
             height: isLast ? '50%' : '100%',
@@ -44,33 +49,19 @@ export function RecipesSelector({ rowId, stuff, recipes, treePath, isLast = fals
             opacity: '0.6'
           }}
         ></div>
-        {/* Horizontal connector line */}
+        {/* Horizontal connector line from parent to current item */}
         <div
           className="absolute tree-line"
           style={{
-            left: `${-16 - (treeDepth - 1) * 16}px`,
+            left: `${connectorLeftPosition}px`,
             top: '50%',
-            width: '20px',
+            width: '18px',
             height: '2px',
             backgroundColor: 'var(--border-600)',
             opacity: '0.8',
             transform: 'translateY(-1px)'
           }}
         ></div>
-        {/* Vertical continuation line for non-last items - extends beyond current panel */}
-        {!isLast && (
-          <div
-            className="absolute tree-line"
-            style={{
-              left: `${-16 - (treeDepth - 1) * 16}px`,
-              top: '50%',
-              width: '2px',
-              height: 'calc(50% + 8px)',
-              backgroundColor: 'var(--border-600)',
-              opacity: '0.6'
-            }}
-          ></div>
-        )}
       </>
     )}
     <div className="panel">
