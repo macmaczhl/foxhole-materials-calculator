@@ -5,45 +5,32 @@ Always reference these instructions first and fallback to search or bash command
 
 ## Working Effectively
 
-### Bootstrap and Development
-- Install dependencies: `npm install` -- takes 30 seconds. Set timeout to 60+ seconds.
-- Start development server: `npm run dev` -- ready in 2 seconds, runs on http://localhost:3000
-- Lint code: `npm run lint` -- takes 5 seconds, runs ESLint with Next.js rules
-- Build for production: `npm run build` -- takes 30 seconds. Set timeout to 120+ seconds.
-
-### Finish process
-Make Pull request ready for review when it's finished and ready for review
+### Development Commands
+- Install dependencies: `npm install` (takes ~30 seconds, timeout 60+ seconds)
+- Start development server: `npm run dev` (ready in ~2 seconds)
+- Run tests: `npm test` (executes Jest test suite)
+- Lint code: `npm run lint` (ESLint with Next.js rules)
+- Build for production: `npm run build` (takes ~30 seconds, timeout 120+ seconds)
 
 
-## Validation Scenarios
+## Testing Requirements
 
-### Always Test Calculator Functionality
-After making changes, **ALWAYS** validate the core application works:
-1. Start dev server: `npm run dev`
-2. Navigate to http://localhost:3000
-3. Enter count: `5` in the Count field
-4. Select material: `Construction Materials` from dropdown
-5. Verify initial components show: `50 Salvage`
-6. Verify calculated components appear
-7. Verify recipe tree shows different crafting options with radio buttons
-8. Take screenshot to confirm UI displays correctly
+### Unit Test Coverage
+All new and changed code **MUST** be covered by unit tests:
+- **REQUIRED**: Write unit tests for any new functions, components, or logic
+- **REQUIRED**: Update existing tests when modifying existing code
+- **REQUIRED**: Achieve 100% test coverage for new/changed code
+- Run `npm test` to execute all tests
+- Use `npm run test:watch` for continuous testing during development
 
-### Manual Validation Steps
-- **REQUIRED**: After any code changes, run the calculator validation scenario above
-- Test with different materials from the available list (see Repository Structure below)
-- Verify Redux state updates work by changing count and material selections
-- Ensure recipe trees display with visual icons and proper component counts
+### Test Structure
+- Place test files in `src/__tests__/` directory
+- Use `.test.ts` or `.test.tsx` extensions
+- Follow existing test patterns (see `calculateComponents.test.ts`)
+- Mock external dependencies and API calls
+- Test both success and error scenarios
 
-## Command Timing and Expectations
-
-| Command | Expected Time | Timeout Setting | Notes |
-|---------|---------------|-----------------|--------|
-| `npm install` | 30 seconds | 60+ seconds | Downloads ~400 packages |
-| `npm run dev` | 2 seconds | 30 seconds | Starts Turbopack dev server |
-| `npm run lint` | 5 seconds | 30 seconds | ESLint validation, usually no errors |
-| `npm run build` | 30 seconds | 120+ seconds | Production build with static generation |
-
-**NEVER CANCEL** any build or install commands. Wait for completion even if it takes the full timeout period.
+**Important**: Never cancel build or install commands. Wait for completion even if it takes the full timeout period.
 
 ## Repository Structure
 
@@ -80,11 +67,12 @@ The application supports these material categories (from `src/lib/models.ts`):
 2. Add to `availableMaterials` array in same file
 3. Create recipes in `src/lib/recipes.ts`
 4. Update `RecipiesByStuff` map to include new material
+5. **REQUIRED**: Add unit tests for new material and recipes
 
 ### Modifying Calculations
 - Core calculation logic is in `src/lib/services/calculateComponents.ts`
 - Recipe tree building logic is in `src/lib/features/desiredStuffSlice.ts`
-- Always test calculations with the validation scenario after changes
+- **REQUIRED**: Add unit tests for any calculation changes
 
 ### UI Components
 - Main components are in `src/app/components/`
@@ -100,8 +88,9 @@ The application supports these material categories (from `src/lib/models.ts`):
 
 ## Development Guidelines
 - **Always run linting**: `npm run lint` before committing changes
+- **Always run tests**: `npm test` to ensure all tests pass
+- **Unit test coverage**: Write tests for all new/changed code
 - **Maintain TypeScript**: Keep strict type checking enabled
-- **Test calculator**: Always validate core functionality after changes using the validation scenario
 - **Responsive design**: Ensure UI works on different screen sizes
 - **Icon integration**: Material icons come from foxhole.wiki.gg - verify they load correctly
 
