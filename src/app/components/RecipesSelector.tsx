@@ -34,34 +34,40 @@ export function RecipesSelector({ rowId, stuff, recipes, treePath, isLast = fals
       <>
         {/* Vertical line - full height for non-last items, half height for last items */}
         <div
-          className="absolute bg-border-600/40"
+          className="absolute tree-line"
           style={{
             left: `${-16 - (treeDepth - 1) * 16}px`,
             top: '0px',
             width: '2px',
-            height: isLast ? '50%' : '100%'
+            height: isLast ? '50%' : '100%',
+            backgroundColor: 'var(--border-600)',
+            opacity: '0.6'
           }}
         ></div>
         {/* Horizontal connector line */}
         <div
-          className="absolute bg-border-600/60"
+          className="absolute tree-line"
           style={{
             left: `${-16 - (treeDepth - 1) * 16}px`,
             top: '50%',
             width: '20px',
             height: '2px',
+            backgroundColor: 'var(--border-600)',
+            opacity: '0.8',
             transform: 'translateY(-1px)'
           }}
         ></div>
         {/* Vertical continuation line for non-last items - extends beyond current panel */}
         {!isLast && (
           <div
-            className="absolute bg-border-600/40"
+            className="absolute tree-line"
             style={{
               left: `${-16 - (treeDepth - 1) * 16}px`,
               top: '50%',
               width: '2px',
-              height: 'calc(50% + 8px)'
+              height: 'calc(50% + 8px)',
+              backgroundColor: 'var(--border-600)',
+              opacity: '0.6'
             }}
           ></div>
         )}
