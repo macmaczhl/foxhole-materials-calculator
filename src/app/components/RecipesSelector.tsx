@@ -27,8 +27,8 @@ export function RecipesSelector({ rowId, stuff, recipes, treePath, isLast = fals
   const marginleftClass = marginleftClasses[Math.min(treePath.length - 1, marginleftClasses.length - 1)];
   const isNested = treePath.length > 1;
   const treeDepth = treePath.length - 1;
-  
-  // Enhanced positioning for clearer tree visualization  
+
+  // Enhanced positioning for clearer tree visualization
   const connectorLeftPosition = treeDepth > 0 ? 2 + (treeDepth - 1) * 8 : 0;
 
   return <div className={`relative panel-compact mb-1 ${marginleftClass}`}>
