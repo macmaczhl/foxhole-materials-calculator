@@ -25,7 +25,7 @@ const ICONS_MAP = new Map<string, string>([
   [Materials.AssemblyMaterialsV, 'icons/AssemblyMaterials5Icon.svg'],
   [Materials.SteelConstructionMaterials, 'icons/SteelConstructionMaterialsIcon.svg'],
   [Materials.ConcreteMaterials, 'icons/ConcreteBagIcon.svg'],
-  [Materials.Pipe, 'icons/EngineRoomPipeIcon.svg'],
+  [Materials.Pipe, 'icons/PipeIcon.svg'],
   [Materials.RareAlloys, 'icons/RareAlloyIcon.svg'],
   [Materials.ThermalShielding, 'icons/ThermalShieldingIcon.svg'],
   [Materials.UnstableSubstances, 'icons/UnstableSubstancesIcon.svg'],
@@ -34,7 +34,7 @@ const ICONS_MAP = new Map<string, string>([
   [Liquids.Petrol, 'icons/RefinedFuelIcon.svg'],
   [Liquids.HeavyOil, 'icons/HeavyOilIcon.svg'],
   [Liquids.Water, 'icons/WaterIcon.svg'],
-  [Liquids.EnrichedOil, 'icons/FacilityOil2Icon.svg'],
+  [Liquids.EnrichedOil, 'icons/EnrichedOilIcon.svg'],
   [Liquids.Oil, 'icons/OilIcon.svg'],
 
   [RawResources.Salvage, 'icons/SalvageIcon.svg'],
