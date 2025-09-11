@@ -3,7 +3,14 @@ Foxhole Materials Calculator is a Next.js TypeScript web application that calcul
 
 Always reference these instructions first and fallback to search or bash commands only when you encounter unexpected information that does not match the info here.
 
+When making changes be ensure that there are no conflicts with target branch.
+
+Before task is finished:
+1. There shouldn't be conflicts with target branch.
+2. PR is marked as ready for review, not drraft
+
 Always update the branch and fix conflicts when you apply new changes and conflicts exist. There should be no git conflicts before task finished.
+- 
 
 ## Working Effectively
 
