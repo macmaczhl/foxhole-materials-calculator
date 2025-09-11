@@ -32,17 +32,17 @@ export function RecipesSelector({ rowId, stuff, recipes, treePath, isLast = fals
     {/* Tree connector lines */}
     {isNested && (
       <>
-        {/* Main vertical line spanning the full height of the panel */}
+        {/* Vertical line - full height for non-last items, half height for last items */}
         <div
           className="absolute bg-border-600/40"
           style={{
             left: `${-16 - (treeDepth - 1) * 16}px`,
             top: '0px',
             width: '2px',
-            height: '100%'
+            height: isLast ? '50%' : '100%'
           }}
         ></div>
-        {/* Horizontal connector line - thicker and longer */}
+        {/* Horizontal connector line */}
         <div
           className="absolute bg-border-600/60"
           style={{
@@ -53,17 +53,6 @@ export function RecipesSelector({ rowId, stuff, recipes, treePath, isLast = fals
             transform: 'translateY(-1px)'
           }}
         ></div>
-        {/* Elbow connector character - larger and more prominent */}
-        <div
-          className="absolute text-muted-400/90 text-base font-mono leading-none select-none font-bold"
-          style={{
-            left: `${-20 - (treeDepth - 1) * 16}px`,
-            top: '50%',
-            transform: 'translateY(-50%)'
-          }}
-        >
-          {isLast ? '└' : '├'}
-        </div>
         {/* Vertical continuation line for non-last items - extends beyond current panel */}
         {!isLast && (
           <div
@@ -72,7 +61,7 @@ export function RecipesSelector({ rowId, stuff, recipes, treePath, isLast = fals
               left: `${-16 - (treeDepth - 1) * 16}px`,
               top: '50%',
               width: '2px',
-              height: 'calc(100% + 8px)'
+              height: 'calc(50% + 8px)'
             }}
           ></div>
         )}
