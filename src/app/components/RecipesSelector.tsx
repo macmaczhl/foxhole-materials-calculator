@@ -31,6 +31,9 @@ export function RecipesSelector({ rowId, stuff, recipes, treePath, isLast = fals
   // Enhanced positioning for clearer tree visualization
   const connectorLeftPosition = treeDepth > 0 ? 2 + (treeDepth - 1) * 8 : 0;
 
+  // Calculate content padding to avoid overlap with connectors
+  const contentLeftPadding = isNested ? connectorLeftPosition + 16 : 0; // 16px = connector width + horizontal line + some margin
+
   return <div className={`relative panel-compact mb-1 ${marginleftClass}`}>
     {/* Tree connector lines */}
     {isNested && (
@@ -62,7 +65,12 @@ export function RecipesSelector({ rowId, stuff, recipes, treePath, isLast = fals
         ></div>
       </>
     )}
-    <div className="relative z-10">
+    <div
+      className="relative z-10"
+      style={{
+        paddingLeft: contentLeftPadding > 0 ? `${contentLeftPadding}px` : undefined
+      }}
+    >
       <span className="font-medium text-sm tracking-wide text-muted-300">{stuff}</span>
       <RadioGroup value={selectedRecipe} onChange={e => selectRecipe(e)} aria-label={`Recipe for ${stuff}`} className="mt-1">
         {recipes.map((recipe) => (
