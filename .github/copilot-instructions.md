@@ -3,6 +3,8 @@ Foxhole Materials Calculator is a Next.js TypeScript web application that calcul
 
 Always reference these instructions first and fallback to search or bash commands only when you encounter unexpected information that does not match the info here.
 
+Always update the branch and fix conflicts when you apply new changes and conflicts exist. There should be no git conflicts before task finished.
+
 ## Working Effectively
 
 ### Development Commands
@@ -29,8 +31,6 @@ All new and changed code **MUST** be covered by unit tests:
 - Follow existing test patterns (see `calculateComponents.test.ts`)
 - Mock external dependencies and API calls
 - Test both success and error scenarios
-
-**Important**: Never cancel build or install commands. Wait for completion even if it takes the full timeout period.
 
 ## Repository Structure
 
@@ -85,54 +85,6 @@ The application supports these material categories (from `src/lib/models.ts`):
 - **Live site**: https://macmaczhl.github.io/foxhole-materials-calculator/
 - **Workflow**: `.github/workflows/nextjs.yml` handles build and deployment
 - Uses static site generation with `next build` and exports to `./out/`
-
-## Git Workflow & Conflict Resolution
-
-### Updating Branch with Target Branch Changes
-When working on a feature branch that needs to be updated with the latest changes from the target branch (usually `main`):
-
-1. **Fetch latest changes**: `git fetch origin`
-2. **Switch to main branch**: `git checkout main`
-3. **Pull latest changes**: `git pull origin main`
-4. **Switch back to your branch**: `git checkout your-branch-name`
-5. **Merge or rebase with main**: 
-   - For merge: `git merge main`
-   - For rebase: `git rebase main` (preferred for cleaner history)
-
-### Resolving Merge Conflicts
-When conflicts occur during merge or rebase:
-
-1. **Identify conflicted files**: `git status` will show files with conflicts
-2. **Open each conflicted file** and look for conflict markers:
-   ```
-   <<<<<<< HEAD
-   Your branch changes
-   =======
-   Target branch changes
-   >>>>>>> main
-   ```
-3. **Resolve conflicts** by:
-   - Keeping your changes, target branch changes, or combining both
-   - Removing all conflict markers (`<<<<<<<`, `=======`, `>>>>>>>`)
-   - Ensuring the code still works correctly
-4. **Mark conflicts as resolved**: `git add resolved-file.ts`
-5. **Continue the process**:
-   - For merge: `git commit` (after all conflicts resolved)
-   - For rebase: `git rebase --continue` (after each conflict resolved)
-6. **Test your changes**: Run `npm test` and `npm run lint` to ensure nothing is broken
-7. **Push your updated branch**: `git push origin your-branch-name`
-
-### Conflict Prevention Best Practices
-- **Pull frequently**: Regularly update your branch with target branch changes
-- **Small commits**: Make smaller, focused commits to reduce conflict surface area
-- **Coordinate with team**: Communicate when working on similar areas of code
-- **Review before merging**: Always review the final merged code
-
-### Emergency Conflict Resolution
-If you get stuck in a complex merge/rebase state:
-- **Abort current operation**: `git merge --abort` or `git rebase --abort`
-- **Start fresh**: Return to a clean state and try a different approach
-- **Seek help**: Ask team members for assistance with complex conflicts
 
 ## Development Guidelines
 - **Always run linting**: `npm run lint` before committing changes
