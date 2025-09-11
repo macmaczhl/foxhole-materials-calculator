@@ -14,8 +14,7 @@ interface RecipesSelectorProps {
     isLast?: boolean;
 }
 
-const marginleftClasses = ['ml-6', 'ml-10', 'ml-16', 'ml-20', 'ml-24', 'ml-28'];
-const marginPixels = [24, 40, 64, 80, 96, 112]; // Corresponding pixel values
+const marginleftClasses = ['ml-2', 'ml-4', 'ml-6', 'ml-8', 'ml-10', 'ml-12'];
 
 export function RecipesSelector({ rowId, stuff, recipes, treePath, isLast = false }: RecipesSelectorProps) {
   const selectedRecipe = useTreeSelectedRecipe(rowId, treePath);
@@ -30,9 +29,9 @@ export function RecipesSelector({ rowId, stuff, recipes, treePath, isLast = fals
   const treeDepth = treePath.length - 1;
   
   // Enhanced positioning for clearer tree visualization  
-  const connectorLeftPosition = treeDepth > 0 ? 4 + (treeDepth - 1) * 20 : 0;
+  const connectorLeftPosition = treeDepth > 0 ? 2 + (treeDepth - 1) * 8 : 0;
 
-  return <div className={`relative mb-2 ${marginleftClass}`}>
+  return <div className={`relative panel-compact mb-1 ${marginleftClass}`}>
     {/* Tree connector lines */}
     {isNested && (
       <>
@@ -54,7 +53,7 @@ export function RecipesSelector({ rowId, stuff, recipes, treePath, isLast = fals
           style={{
             left: `${connectorLeftPosition}px`,
             top: '50%',
-            width: '20px',
+            width: '12px',
             height: '2px',
             backgroundColor: 'var(--border-600)',
             opacity: '0.8',
@@ -63,11 +62,11 @@ export function RecipesSelector({ rowId, stuff, recipes, treePath, isLast = fals
         ></div>
       </>
     )}
-    <div className="panel">
+    <div className="relative z-10">
       <span className="font-medium text-sm tracking-wide text-muted-300">{stuff}</span>
-      <RadioGroup value={selectedRecipe} onChange={e => selectRecipe(e)} aria-label={`Recipe for ${stuff}`} className="mt-2">
+      <RadioGroup value={selectedRecipe} onChange={e => selectRecipe(e)} aria-label={`Recipe for ${stuff}`} className="mt-1">
         {recipes.map((recipe) => (
-          <Field key={recipe.id} className="flex items-center gap-2 mb-1">
+          <Field key={recipe.id} className="flex items-center gap-2 mb-0.5">
             <Radio
               value={recipe}
               className="group flex size-5 items-center justify-center rounded-full border border-border-600 bg-panel-300 data-[checked]:bg-accent-500 data-[disabled]:bg-gray-800"
