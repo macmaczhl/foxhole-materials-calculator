@@ -29,15 +29,14 @@ export function RecipesSelector({ rowId, stuff, recipes, treePath, isLast = fals
   const isNested = treePath.length > 1;
   const treeDepth = treePath.length - 1;
   
-  // Position connectors within the left margin space
-  // Each level gets positioned further left within its margin
-  const connectorLeftPosition = treeDepth > 0 ? (treeDepth - 1) * 20 + 4 : 0;
+  // Enhanced positioning for clearer tree visualization  
+  const connectorLeftPosition = treeDepth > 0 ? 4 + (treeDepth - 1) * 20 : 0;
 
   return <div className={`relative mb-2 ${marginleftClass}`}>
     {/* Tree connector lines */}
     {isNested && (
       <>
-        {/* Main vertical line - spans full height for non-last items, half height for last items */}
+        {/* Vertical line for this level */}
         <div
           className="absolute tree-line"
           style={{
@@ -49,13 +48,13 @@ export function RecipesSelector({ rowId, stuff, recipes, treePath, isLast = fals
             opacity: '0.6'
           }}
         ></div>
-        {/* Horizontal connector line from parent to current item */}
+        {/* Horizontal connector from parent to current item */}
         <div
           className="absolute tree-line"
           style={{
             left: `${connectorLeftPosition}px`,
             top: '50%',
-            width: '18px',
+            width: '20px',
             height: '2px',
             backgroundColor: 'var(--border-600)',
             opacity: '0.8',
