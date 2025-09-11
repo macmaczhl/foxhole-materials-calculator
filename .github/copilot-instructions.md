@@ -3,6 +3,8 @@ Foxhole Materials Calculator is a Next.js TypeScript web application that calcul
 
 Always reference these instructions first and fallback to search or bash commands only when you encounter unexpected information that does not match the info here.
 
+Always update the branch and fix conflicts when you apply new changes and conflicts exist. There should be no git conflicts before task finished.
+
 ## Working Effectively
 
 ### Development Commands
@@ -29,8 +31,6 @@ All new and changed code **MUST** be covered by unit tests:
 - Follow existing test patterns (see `calculateComponents.test.ts`)
 - Mock external dependencies and API calls
 - Test both success and error scenarios
-
-**Important**: Never cancel build or install commands. Wait for completion even if it takes the full timeout period.
 
 ## Repository Structure
 
