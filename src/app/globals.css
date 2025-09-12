@@ -67,7 +67,8 @@ body.app-body {
   }
   .ui-input:focus {
     border-color: var(--accent-400);
-    box-shadow: 0 0 0 2px color-mix(in oklab, var(--accent-400) 35%, transparent);
+    box-shadow: 0 0 0 2px
+      color-mix(in oklab, var(--accent-400) 35%, transparent);
   }
 
   .btn-primary {
@@ -75,7 +76,9 @@ body.app-body {
     background-color: var(--accent-500);
     color: #0b1116;
   }
-  .btn-primary:hover { background-color: var(--accent-400); }
+  .btn-primary:hover {
+    background-color: var(--accent-400);
+  }
 
   .btn-danger {
     @apply h-8 w-8 rounded-md;
@@ -83,8 +86,13 @@ body.app-body {
     border: 1px solid var(--danger-500);
     color: var(--danger-500);
   }
-  .btn-danger:hover { background-color: color-mix(in oklab, var(--danger-500) 40%, transparent); }
-  .btn-disabled { opacity: .5; cursor: not-allowed; }
+  .btn-danger:hover {
+    background-color: color-mix(in oklab, var(--danger-500) 40%, transparent);
+  }
+  .btn-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 
   .dropdown-panel {
     @apply mt-1 max-h-72 overflow-y-auto rounded-md border shadow-lg z-50;

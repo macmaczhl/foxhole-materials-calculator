@@ -1,41 +1,42 @@
-import { createSlice, PayloadAction, nanoid } from '@reduxjs/toolkit'
-import type { RootState } from '../store'
-import { stuffList } from '@/lib/models'
-import { RecipiesByStuff } from '../recipes'
-import { IRecipe, RecipeEntity, RecipeTree } from '../models'
-import { calculateComponents } from '../services/calculateComponents'
+import { createSlice, PayloadAction, nanoid } from "@reduxjs/toolkit";
+import type { RootState } from "../store";
+import { stuffList } from "@/lib/models";
+import { RecipiesByStuff } from "../recipes";
+import { IRecipe, RecipeEntity, RecipeTree } from "../models";
+import { calculateComponents } from "../services/calculateComponents";
 
 export interface DesiredRow {
-  id: string
-  count: number
-  stuffName: string
-  recipeTree?: RecipeTree
+  id: string;
+  count: number;
+  stuffName: string;
+  recipeTree?: RecipeTree;
 }
 
 interface DesiredState {
-  rows: DesiredRow[]
-  initialComponents: RecipeEntity[]
-  rawComponents: RecipeEntity[]
-  excessComponents: RecipeEntity[]
-  excessResult: RecipeEntity[]
+  rows: DesiredRow[];
+  initialComponents: RecipeEntity[];
+  rawComponents: RecipeEntity[];
+  excessComponents: RecipeEntity[];
+  excessResult: RecipeEntity[];
 }
 
 // Helper function for validation as suggested in review
-const isValidPositiveNumber = (n: number): boolean => Number.isFinite(n) && n > 0;
+const isValidPositiveNumber = (n: number): boolean =>
+  Number.isFinite(n) && n > 0;
 
 const findRecipes = (stuffName: string): IRecipe[] => {
   const stuffRecipes = RecipiesByStuff.get(stuffName);
   // Apply nullish coalescing operator as suggested in review
   return stuffRecipes ?? [];
-}
+};
 
 const requiredByRecipe = (recipe: IRecipe): RecipeTree[] => {
-  return recipe.required.map(e => createRecipeTree(e.stuff));
-}
+  return recipe.required.map((e) => createRecipeTree(e.stuff));
+};
 
 const updateRequiredComponents = (tree: RecipeTree) => {
   tree.required = requiredByRecipe(tree.selectedRecipe);
-}
+};
 
 const createRecipeTree = (targetStuff: string): RecipeTree => {
   const recipes = findRecipes(targetStuff);
@@ -47,12 +48,10 @@ const createRecipeTree = (targetStuff: string): RecipeTree => {
     selectedRecipe,
     required: requiredComponents,
   };
-}
+};
 
 const initialState: DesiredState = {
-  rows: [
-    { id: nanoid(), count: 0, stuffName: '' }
-  ],
+  rows: [{ id: nanoid(), count: 0, stuffName: "" }],
   initialComponents: [],
   rawComponents: [],
   excessComponents: [],
@@ -86,37 +85,47 @@ const recalcAll = (state: DesiredState) => {
   state.rawComponents = mapToEntities(raw);
   state.excessComponents = mapToEntities(excess);
   state.excessResult = mapToEntities(excessResult);
+};
+
+interface ChangeCountPayload {
+  rowId: string;
+  value: string;
+}
+interface ChangeStuffPayload {
+  rowId: string;
+  value: string;
+}
+interface SelectRecipePayload {
+  rowId: string;
+  treePath: string[];
+  recipe: IRecipe;
 }
 
-interface ChangeCountPayload { rowId: string; value: string }
-interface ChangeStuffPayload { rowId: string; value: string }
-interface SelectRecipePayload { rowId: string; treePath: string[]; recipe: IRecipe }
-
 export const desiredSlice = createSlice({
-  name: 'desired',
+  name: "desired",
   initialState,
   reducers: {
     addRow: (state) => {
-      state.rows.push({ id: nanoid(), count: 0, stuffName: '' });
+      state.rows.push({ id: nanoid(), count: 0, stuffName: "" });
       recalcAll(state);
     },
     deleteRow: (state, action: PayloadAction<string>) => {
       if (state.rows.length <= 1) return;
-      state.rows = state.rows.filter(r => r.id !== action.payload);
+      state.rows = state.rows.filter((r) => r.id !== action.payload);
       recalcAll(state);
     },
     changeCount: (state, action: PayloadAction<ChangeCountPayload>) => {
-      const row = state.rows.find(r => r.id === action.payload.rowId);
+      const row = state.rows.find((r) => r.id === action.payload.rowId);
       if (!row) return;
       const n = +action.payload.value;
       row.count = isValidPositiveNumber(n) ? Math.floor(n) : 0;
       recalcAll(state);
     },
     changeStuff: (state, action: PayloadAction<ChangeStuffPayload>) => {
-      const row = state.rows.find(r => r.id === action.payload.rowId);
+      const row = state.rows.find((r) => r.id === action.payload.rowId);
       if (!row) return;
       row.stuffName = action.payload.value;
-      const found = stuffList.find(s => s.name === action.payload.value);
+      const found = stuffList.find((s) => s.name === action.payload.value);
       if (found) {
         row.recipeTree = createRecipeTree(found.name);
       } else {
@@ -125,12 +134,12 @@ export const desiredSlice = createSlice({
       recalcAll(state);
     },
     selectTreeRecipe: (state, action: PayloadAction<SelectRecipePayload>) => {
-      const row = state.rows.find(r => r.id === action.payload.rowId);
+      const row = state.rows.find((r) => r.id === action.payload.rowId);
       if (!row || !row.recipeTree) return;
 
       let currentTree: RecipeTree | undefined = row.recipeTree;
-      action.payload.treePath.slice(1).forEach(e => {
-        currentTree = currentTree?.required.find(sub => sub.stuff === e);
+      action.payload.treePath.slice(1).forEach((e) => {
+        currentTree = currentTree?.required.find((sub) => sub.stuff === e);
       });
       if (!currentTree) return;
 
@@ -138,16 +147,11 @@ export const desiredSlice = createSlice({
       updateRequiredComponents(currentTree);
       recalcAll(state);
     },
-  }
-})
+  },
+});
 
-export const {
-  addRow,
-  deleteRow,
-  changeCount,
-  changeStuff,
-  selectTreeRecipe
-} = desiredSlice.actions;
+export const { addRow, deleteRow, changeCount, changeStuff, selectTreeRecipe } =
+  desiredSlice.actions;
 
 export const selectRows = (state: RootState) => state.desired.rows;
 export const selectReport = (state: RootState) => ({
