@@ -80,6 +80,17 @@ body.app-body {
     background-color: var(--accent-400);
   }
 
+  .btn-secondary {
+    @apply px-3 py-1.5 rounded-md font-medium border;
+    background-color: transparent;
+    border-color: var(--border-600);
+    color: var(--muted-300);
+  }
+  .btn-secondary:hover { 
+    background-color: var(--panel-300);
+    color: var(--text);
+  }
+
   .btn-danger {
     @apply h-8 w-8 rounded-md;
     background-color: color-mix(in oklab, var(--danger-500) 25%, transparent);
