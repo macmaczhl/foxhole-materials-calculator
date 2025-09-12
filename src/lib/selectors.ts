@@ -17,7 +17,6 @@ export const useTreeSelectedRecipe = (
     });
     return currentTree?.selectedRecipe;
   });
-  });
 };
 
 const addToMap = (map: Map<string, number>, key: string, value: number) => {
