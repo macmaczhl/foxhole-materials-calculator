@@ -154,13 +154,7 @@ The application supports these material categories (from `src/lib/models.ts`):
 
 ## Troubleshooting
 
-<<<<<<< HEAD
-### Known Issues and Solutions
-- **Linting stack overflow**: If `npm run lint` fails with "Maximum call stack size exceeded", the ESLint indent rule has been disabled in eslint.config.mjs to prevent this issue
-- **Build fails**: Check TypeScript errors and ensure dependencies are installed with `npm install` (timeout 120+ seconds)
-=======
 - **Build fails**: Check TypeScript errors and ensure dependencies are installed with `npm install`
->>>>>>> b64186e0acb8eec3ed0a7bf851dd7ccd5a4847da
 - **Dev server issues**: Stop with Ctrl+C and restart with `npm run dev`
 - **TypeScript errors**: Check imports and type definitions in `src/lib/models.ts`
 - **State not updating**: Verify Redux actions are dispatched in components
