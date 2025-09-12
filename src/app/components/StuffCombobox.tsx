@@ -5,39 +5,12 @@ import {
   Combobox,
   ComboboxButton,
   ComboboxInput,
-  ComboboxOption,
   ComboboxOptions,
   Transition,
 } from "@headlessui/react";
-import {
-  ChevronUpDownIcon,
-  CheckIcon,
-  XMarkIcon,
-} from "@heroicons/react/20/solid";
-import { stuffList } from "@/lib/models";
-import { ICONS_MAP } from "@/lib/constants";
-import Image from 'next/image';
-
-// Mini icon component for dropdown items
-function MiniIcon({ stuffName }: { stuffName: string }) {
-  const iconPath = ICONS_MAP.get(stuffName);
-
-  if (!iconPath) {
-    return <div className="w-4 h-4 mr-2 flex-shrink-0" />; // Placeholder for items without icons
-  }
-
-  return (
-    <Image
-      alt={stuffName}
-      src={`/${iconPath}`}
-      width={16}
-      height={16}
-      className="w-4 h-4 mr-2 flex-shrink-0"
-      decoding="async"
-      loading="lazy"
-    />
-  );
-}
+import { ChevronUpDownIcon, XMarkIcon } from "@heroicons/react/20/solid";
+import { groupedStuffList } from "@/lib/models";
+import GroupedComboboxOptions from "./GroupedComboboxOptions";
 
 interface Props {
   value: string;
@@ -48,13 +21,26 @@ interface Props {
 export default function StuffCombobox({ value, onChange, placeholder }: Props) {
   const [query, setQuery] = useState("");
 
-  const options = useMemo(() => {
-    if (!query) return stuffList.map((s) => s.name);
+  const filteredGroups = useMemo(() => {
+    if (!query) return groupedStuffList;
+
     const q = query.toLowerCase();
-    return stuffList
-      .map((s) => s.name)
-      .filter((n) => n.toLowerCase().includes(q));
+    return groupedStuffList
+      .map((group) => ({
+        ...group,
+        items: group.items.filter((item) =>
+          item.name.toLowerCase().includes(q)
+        ),
+      }))
+      .filter((group) => group.items.length > 0);
   }, [query]);
+
+  // Flatten for compatibility with existing onChange logic
+  const allFilteredItems = useMemo(() => {
+    return filteredGroups.flatMap((group) =>
+      group.items.map((item) => item.name)
+    );
+  }, [filteredGroups]);
 
   const handleClear = () => {
     setQuery("");
@@ -101,23 +87,11 @@ export default function StuffCombobox({ value, onChange, placeholder }: Props) {
         leaveTo="opacity-0"
       >
         <ComboboxOptions anchor="bottom start" className="dropdown-panel">
-          {options.length === 0 && (
+          {allFilteredItems.length === 0 && (
             <div className="px-3 py-2 text-sm text-muted-400">No results</div>
           )}
 
-          {options.map((name) => (
-            <ComboboxOption key={name} value={name} className="dropdown-option">
-              {({ selected }) => (
-                <div className="flex items-center">
-                  <MiniIcon stuffName={name} />
-                  <span className="flex-1">{name}</span>
-                  {selected && (
-                    <CheckIcon className="ml-2 size-4 text-accent-300 flex-shrink-0" />
-                  )}
-                </div>
-              )}
-            </ComboboxOption>
-          ))}
+          <GroupedComboboxOptions filteredGroups={filteredGroups} />
         </ComboboxOptions>
       </Transition>
     </Combobox>
