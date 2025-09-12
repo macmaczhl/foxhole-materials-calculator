@@ -1,4 +1,5 @@
 # Foxhole Materials Calculator
+
 Foxhole Materials Calculator is a Next.js TypeScript web application that calculates required materials and crafting recipes for the Foxhole game. It uses React with Redux Toolkit for state management, Tailwind CSS for styling, and is deployed to GitHub Pages.
 
 Always reference these instructions first and fallback to search or bash commands only when you encounter unexpected information that does not match the info here.
@@ -6,15 +7,16 @@ Always reference these instructions first and fallback to search or bash command
 When making changes be ensure that there are no conflicts with target branch.
 
 Before task is finished:
+
 1. There shouldn't be conflicts with target branch.
-2. PR is marked as ready for review, not drraft
+2. Tests and linter should pass
 
 Always update the branch and fix conflicts when you apply new changes and conflicts exist. There should be no git conflicts before task finished.
-- 
 
 ## Working Effectively
 
 ### Development Commands
+
 - Install dependencies: `npm install` (takes ~30 seconds, timeout 120+ seconds)
 - Start development server: `npm run dev` (ready in ~1 second)
 - Run tests: `npm test` (executes Jest test suite, takes ~4 seconds)
@@ -22,11 +24,12 @@ Always update the branch and fix conflicts when you apply new changes and confli
 - Build for production: `npm run build` (takes ~30 seconds, timeout 180+ seconds - NEVER CANCEL)
 - Continuous testing: `npm run test:watch` (Jest watch mode for development)
 
-
 ## Validation and Manual Testing
 
 ### Required Validation Steps
+
 Always run these validation steps after making changes:
+
 1. **NEVER CANCEL long-running commands** - builds may take up to 30+ seconds
 2. **Build validation**: `npm run build` - must complete successfully (timeout 180+ seconds)
 3. **Test validation**: `npm test` - all tests must pass (~4 seconds)
@@ -34,7 +37,9 @@ Always run these validation steps after making changes:
 5. **Manual functionality testing**: Start dev server and verify core workflows
 
 ### Manual Testing Scenarios
+
 After making changes, ALWAYS test these complete user scenarios:
+
 1. **Basic material calculation**: 
    - Select "Construction Materials" 
    - Set quantity to 5
@@ -56,13 +61,16 @@ After making changes, ALWAYS test these complete user scenarios:
 - **npm install**: Takes ~30 seconds, set timeout to 120+ seconds minimum
 - **npm test**: Takes ~4 seconds, all 12 tests across 2 suites must pass
 ### Unit Test Coverage
+
 All new and changed code **MUST** be covered by unit tests:
+
 - **REQUIRED**: Write unit tests for any new functions, components, or logic
 - **REQUIRED**: Achieve 100% test coverage for new/changed code
 - Run `npm test` to execute all tests
 - Use `npm run test:watch` for continuous testing during development
 
 ### Test Structure
+
 - Place test files in `src/__tests__/` directory
 - Use `.test.ts` or `.test.tsx` extensions
 - Follow existing test patterns (see `calculateComponents.test.ts`)
@@ -72,11 +80,13 @@ All new and changed code **MUST** be covered by unit tests:
 ## Repository Structure
 
 ### Key Directories
+
 - `src/app/` - Next.js app directory with main page and components
-  - `src/app/components/` - Contains React components used in the main app  
+  - `src/app/components/` - Contains React components used in the main app
 
   - `src/app/page.tsx` - Main application page with Redux provider
   - `src/app/layout.tsx` - Layout with Google Fonts configuration
+
 - `src/lib/` - Core application logic and state management
   - `src/lib/store.ts` - Redux store configuration
   - `src/lib/models.ts` - Material definitions, enums, and types
@@ -85,13 +95,16 @@ All new and changed code **MUST** be covered by unit tests:
   - `src/lib/services/calculateComponents.ts` - Core calculation algorithms
 
 ### Available Materials
+
 The application supports these material categories (from `src/lib/models.ts`):
+
 - **Raw Resources**: Salvage, Components, Coal, Sulfur, Rare Metal, etc.
 - **Materials**: Construction Materials, Processed Construction Materials, Metal Beam, Sandbag, etc.
 - **Liquids**: Petrol, Heavy Oil, Water, Enriched Oil, Oil
 - **Assembly Materials**: Assembly Materials I through V
 
 ### Component Architecture
+
 - React with Redux Toolkit for state management
 - Headless UI for accessible components
 - Tailwind CSS for styling with responsive design
@@ -100,6 +113,7 @@ The application supports these material categories (from `src/lib/models.ts`):
 ## Common Development Tasks
 
 ### Adding New Materials
+
 1. Add to appropriate enum in `src/lib/models.ts`
 2. Add to `availableMaterials` array in same file
 3. Create recipes in `src/lib/recipes.ts`
@@ -107,17 +121,20 @@ The application supports these material categories (from `src/lib/models.ts`):
 5. **REQUIRED**: Add unit tests for new material and recipes
 
 ### Modifying Calculations
+
 - Core calculation logic is in `src/lib/services/calculateComponents.ts`
 - Recipe tree building logic is in `src/lib/features/desiredStuffSlice.ts`
 - **REQUIRED**: Add unit tests for any calculation changes
 
 ### UI Components
+
 - Main components are in `src/app/components/`
 - `StuffIcon.tsx` handles material icons from foxhole.wiki.gg
 - `RecipesSelector.tsx` and `RecipesSelectors.tsx` handle recipe selection UI
 - Components use Tailwind classes and are responsive
 
 ## Deployment
+
 - **Automatic deployment**: GitHub Actions deploys to GitHub Pages on main branch pushes
 - **Live site**: https://macmaczhl.github.io/foxhole-materials-calculator/
 - **Workflows**: 
@@ -127,6 +144,7 @@ The application supports these material categories (from `src/lib/models.ts`):
 - **Build time**: ~30 seconds (set 180+ second timeout, NEVER CANCEL)
 
 ## Development Guidelines
+
 - **Always run linting**: `npm run lint` before committing changes
 - **Always run tests**: `npm test` to ensure all tests pass
 - **Unit test coverage**: Write tests for all new/changed code
@@ -136,9 +154,13 @@ The application supports these material categories (from `src/lib/models.ts`):
 
 ## Troubleshooting
 
+<<<<<<< HEAD
 ### Known Issues and Solutions
 - **Linting stack overflow**: If `npm run lint` fails with "Maximum call stack size exceeded", the ESLint indent rule has been disabled in eslint.config.mjs to prevent this issue
 - **Build fails**: Check TypeScript errors and ensure dependencies are installed with `npm install` (timeout 120+ seconds)
+=======
+- **Build fails**: Check TypeScript errors and ensure dependencies are installed with `npm install`
+>>>>>>> b64186e0acb8eec3ed0a7bf851dd7ccd5a4847da
 - **Dev server issues**: Stop with Ctrl+C and restart with `npm run dev`
 - **TypeScript errors**: Check imports and type definitions in `src/lib/models.ts`
 - **State not updating**: Verify Redux actions are dispatched in components

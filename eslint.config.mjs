@@ -19,7 +19,7 @@ const eslintConfig = [
       "next-env.d.ts",
     ],
   },
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  ...compat.extends("next/core-web-vitals", "next/typescript", "prettier"),
   {
     rules: {
       // Enforce consistent linebreak style
@@ -31,6 +31,10 @@ const eslintConfig = [
       // Disable problematic indent rule that causes stack overflow
       // Using @typescript-eslint/indent instead via next/typescript config
       "indent": "off",
+      // Disable formatting rules that conflict with Prettier
+      "quotes": "off",
+      "semi": "off",
+      "comma-dangle": "off",
     },
   },
 ];
