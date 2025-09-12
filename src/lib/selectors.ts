@@ -1,8 +1,8 @@
 import { useAppSelector } from "./hooks";
-import type { RootState } from './store'
-import { selectRows } from './features/desiredSlice'
-import { selectExistingItems } from './features/existingSlice'
-import { calculateComponents } from './services/calculateComponents'
+import type { RootState } from "./store";
+import { selectRows } from "./features/desiredSlice";
+import { selectExistingItems } from "./features/existingSlice";
+import { calculateComponents } from "./services/calculateComponents";
 import { IRecipe, RecipeEntity } from "./models";
 
 export const useTreeSelectedRecipe = (
@@ -24,7 +24,11 @@ const addToMap = (map: Map<string, number>, key: string, value: number) => {
   map.set(key, old + value);
 };
 
-const subtractFromMap = (map: Map<string, number>, key: string, value: number) => {
+const subtractFromMap = (
+  map: Map<string, number>,
+  key: string,
+  value: number
+) => {
   const old = map.get(key) ?? 0;
   const newValue = Math.max(0, old - value);
   if (newValue > 0) {
@@ -90,28 +94,27 @@ export const selectAdjustedReport = (state: RootState) => {
 
     // This is an intermediate material - we need to figure out what raw materials it saves
     // For now, let's implement a basic case for Construction Materials -> Salvage
-    if (stuffName === 'Construction Materials') {
+    if (stuffName === "Construction Materials") {
       // 1 Construction Materials = 10 Salvage (basic recipe)
       const salvagedSaved = count * 10;
-      subtractFromMap(raw, 'Salvage', salvagedSaved);
+      subtractFromMap(raw, "Salvage", salvagedSaved);
     }
     // Add more intermediate material mappings as needed
-    else if (stuffName === 'Processed Construction Materials') {
+    else if (stuffName === "Processed Construction Materials") {
       // 1 Processed Construction Materials = 3 Construction Materials + 20 Components
       // 3 Construction Materials = 30 Salvage
       const salvagedSaved = count * 30;
       const componentsSaved = count * 20;
-      subtractFromMap(raw, 'Salvage', salvagedSaved);
-      subtractFromMap(raw, 'Components', componentsSaved);
-    }
-    else if (stuffName === 'Refined Materials') {
+      subtractFromMap(raw, "Salvage", salvagedSaved);
+      subtractFromMap(raw, "Components", componentsSaved);
+    } else if (stuffName === "Refined Materials") {
       // 1 Refined Materials = 3 Processed Construction Materials + 20 Components
       // 3 Processed Construction Materials = 9 Construction Materials + 60 Components
       // 9 Construction Materials = 90 Salvage
       const salvagedSaved = count * 90;
       const componentsSaved = count * 80; // 20 + 60
-      subtractFromMap(raw, 'Salvage', salvagedSaved);
-      subtractFromMap(raw, 'Components', componentsSaved);
+      subtractFromMap(raw, "Salvage", salvagedSaved);
+      subtractFromMap(raw, "Components", componentsSaved);
     }
   }
 

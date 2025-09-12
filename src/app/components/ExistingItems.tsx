@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from 'react';
-import { PlusIcon } from '@heroicons/react/24/solid';
-import { AddItemForm } from './AddItemForm';
-import { ExistingItemsList } from './ExistingItemsList';
+import { useState } from "react";
+import { PlusIcon } from "@heroicons/react/24/solid";
+import { AddItemForm } from "./AddItemForm";
+import { ExistingItemsList } from "./ExistingItemsList";
 
 export function ExistingItems() {
   const [showAddForm, setShowAddForm] = useState(false);
@@ -22,9 +22,7 @@ export function ExistingItems() {
         )}
       </div>
 
-      {showAddForm && (
-        <AddItemForm onClose={() => setShowAddForm(false)} />
-      )}
+      {showAddForm && <AddItemForm onClose={() => setShowAddForm(false)} />}
 
       <ExistingItemsList />
     </div>
