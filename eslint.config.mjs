@@ -28,8 +28,9 @@ const eslintConfig = [
       "eol-last": ["error", "always"],
       // Disallow trailing whitespace at the end of lines
       "no-trailing-spaces": "error",
-      // Enforce 2-space indentation
-      indent: ["error", 2],
+      // Disable problematic indent rule that causes stack overflow
+      // Using @typescript-eslint/indent instead via next/typescript config
+      "indent": "off",
     },
   },
 ];
