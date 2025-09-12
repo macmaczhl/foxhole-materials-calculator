@@ -30,10 +30,10 @@ const eslintConfig = [
       "no-trailing-spaces": "error",
       // Disable problematic indent rule that causes stack overflow
       // Using @typescript-eslint/indent instead via next/typescript config
-      "indent": "off",
+      indent: "off",
       // Disable formatting rules that conflict with Prettier
-      "quotes": "off",
-      "semi": "off",
+      quotes: "off",
+      semi: "off",
       "comma-dangle": "off",
     },
   },

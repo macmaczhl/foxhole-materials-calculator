@@ -40,15 +40,15 @@ Always run these validation steps after making changes:
 
 After making changes, ALWAYS test these complete user scenarios:
 
-1. **Basic material calculation**: 
-   - Select "Construction Materials" 
+1. **Basic material calculation**:
+   - Select "Construction Materials"
    - Set quantity to 5
    - Verify result shows 50 Salvage in both Initial and Calculated components
 2. **Complex recipe calculation**:
    - Select "T3 Xiphos" vehicle
-   - Set quantity to 5  
+   - Set quantity to 5
    - Verify shows 125 Refined Materials → 11,250 Salvage + 10,000 Components
-3. **Recipe selection**: 
+3. **Recipe selection**:
    - Verify multiple recipe options appear in right panel
    - Test switching between different recipe options
 4. **UI responsiveness**: Verify layout works and icons load from foxhole.wiki.gg
@@ -56,10 +56,12 @@ After making changes, ALWAYS test these complete user scenarios:
 ## Testing Requirements
 
 ### Critical Build Information
+
 - **NEVER CANCEL** any build or test commands - they must complete fully
-- **npm run build**: Takes ~30 seconds, set timeout to 180+ seconds minimum  
+- **npm run build**: Takes ~30 seconds, set timeout to 180+ seconds minimum
 - **npm install**: Takes ~30 seconds, set timeout to 120+ seconds minimum
 - **npm test**: Takes ~4 seconds, all 12 tests across 2 suites must pass
+
 ### Unit Test Coverage
 
 All new and changed code **MUST** be covered by unit tests:
@@ -137,7 +139,7 @@ The application supports these material categories (from `src/lib/models.ts`):
 
 - **Automatic deployment**: GitHub Actions deploys to GitHub Pages on main branch pushes
 - **Live site**: https://macmaczhl.github.io/foxhole-materials-calculator/
-- **Workflows**: 
+- **Workflows**:
   - `.github/workflows/lint-and-test.yml` - Runs on all PRs and main branch pushes
   - `.github/workflows/deployment.yml` - Deploys to GitHub Pages after successful lint/test
 - Uses static site generation with `next build` and exports to `./out/`
@@ -161,7 +163,9 @@ The application supports these material categories (from `src/lib/models.ts`):
 - **Icons not loading**: Check network connectivity to foxhole.wiki.gg
 
 ### Emergency Recovery
+
 If builds consistently fail:
+
 1. Delete `node_modules` and `package-lock.json`
 2. Run `npm install` (wait full 120+ seconds, NEVER CANCEL)
 3. Run `npm run build` (wait full 180+ seconds, NEVER CANCEL)
@@ -170,24 +174,27 @@ If builds consistently fail:
 ## Quick Reference for Agents
 
 ### Most Frequently Used Commands
+
 ```bash
 # Standard development workflow (run in order):
 npm install        # 30s - install dependencies
-npm run lint       # 2s - check code style  
+npm run lint       # 2s - check code style
 npm test          # 4s - run test suite
 npm run build     # 30s - production build (NEVER CANCEL)
 npm run dev       # 1s - start dev server
 ```
 
 ### Critical Files to Know
+
 - `src/lib/models.ts` - Material definitions and types
-- `src/lib/recipes.ts` - All crafting recipes  
+- `src/lib/recipes.ts` - All crafting recipes
 - `src/lib/services/calculateComponents.ts` - Core calculation logic
 - `src/lib/features/desiredStuffSlice.ts` - Redux state management
 - `src/app/components/` - React UI components
 - `eslint.config.mjs` - Linting configuration (indent rule disabled)
 
 ### Expected Application Behavior
+
 - Material dropdown shows 26 items (raw resources, materials, liquids, vehicles)
 - Calculation is real-time as you type quantities
 - Recipe tree builds automatically based on selected recipes
