@@ -19,7 +19,7 @@ const eslintConfig = [
       "next-env.d.ts",
     ],
   },
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  ...compat.extends("next/core-web-vitals", "next/typescript", "prettier"),
   {
     rules: {
       // Enforce consistent linebreak style
@@ -28,8 +28,11 @@ const eslintConfig = [
       "eol-last": ["error", "always"],
       // Disallow trailing whitespace at the end of lines
       "no-trailing-spaces": "error",
-      // Enforce 2-space indentation
-      indent: ["error", 2],
+      // Disable formatting rules that conflict with Prettier
+      indent: "off",
+      quotes: "off",
+      semi: "off",
+      "comma-dangle": "off",
     },
   },
 ];

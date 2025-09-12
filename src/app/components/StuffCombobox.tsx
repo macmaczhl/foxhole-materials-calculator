@@ -1,8 +1,19 @@
 "use client";
 
 import { Fragment, useMemo, useState } from "react";
-import { Combobox, ComboboxButton, ComboboxInput, ComboboxOption, ComboboxOptions, Transition } from "@headlessui/react";
-import { ChevronUpDownIcon, CheckIcon } from "@heroicons/react/20/solid";
+import {
+  Combobox,
+  ComboboxButton,
+  ComboboxInput,
+  ComboboxOption,
+  ComboboxOptions,
+  Transition,
+} from "@headlessui/react";
+import {
+  ChevronUpDownIcon,
+  CheckIcon,
+  XMarkIcon,
+} from "@heroicons/react/20/solid";
 import { groupedStuffList } from "@/lib/models";
 
 interface Props {
@@ -31,15 +42,39 @@ export default function StuffCombobox({ value, onChange, placeholder }: Props) {
     return filteredGroups.flatMap(group => group.items.map(item => item.name));
   }, [filteredGroups]);
 
+  const handleClear = () => {
+    setQuery("");
+    onChange("");
+  };
+
+  const showClearButton = query.length > 0 || value.length > 0;
+
   return (
     <Combobox value={value} onChange={onChange} immediate>
       <div className="relative">
         <ComboboxInput
-          className="ui-input pr-9 w-full"
+          className={`ui-input w-full ${showClearButton ? "pr-16" : "pr-9"}`}
           placeholder={placeholder ?? "Select material or vehicle"}
           displayValue={(v: string) => v}
           onChange={(e) => setQuery(e.target.value)}
         />
+        {showClearButton && (
+          <button
+            type="button"
+            className="absolute inset-y-0 right-9 flex items-center pr-1 text-muted-400 hover:text-muted-200 focus:outline-none focus:text-muted-200"
+            onClick={handleClear}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                handleClear();
+              }
+            }}
+            aria-label="Clear search"
+            tabIndex={0}
+          >
+            <XMarkIcon className="size-4" />
+          </button>
+        )}
         <ComboboxButton className="absolute inset-y-0 right-0 flex items-center pr-2 text-accent-300 hover:text-accent-200">
           <ChevronUpDownIcon className="size-5" />
         </ComboboxButton>

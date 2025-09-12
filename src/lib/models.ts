@@ -1,67 +1,67 @@
 export interface Stuff {
-    name: string
+  name: string;
 }
 
 export interface RecipeEntity {
-    stuff: string
-    count: number
+  stuff: string;
+  count: number;
 }
 
 export interface IRecipe {
-    id: number
-    required: RecipeEntity[]
-    produced: RecipeEntity[]
+  id: number;
+  required: RecipeEntity[];
+  produced: RecipeEntity[];
 }
 
 export interface RecipeTree {
-    stuff: string
-    selectedRecipe: IRecipe
-    recipes: IRecipe[]
-    required: RecipeTree[]
+  stuff: string;
+  selectedRecipe: IRecipe;
+  recipes: IRecipe[];
+  required: RecipeTree[];
 }
 
 export enum Materials {
-    ConstructionMaterials = 'Construction Materials',
-    ProcessedConstructionMaterials = 'Processed Construction Materials',
-    RefinedMaterials = 'Refined Materials',
-    BarbedWire = 'Barbed Wire',
-    MetalBeam = 'Metal Beam Wire',
-    Sandbag = 'Sandbag',
-    SteelConstructionMaterials = 'Steel Construction Materials',
-    ConcreteMaterials = 'Concrete Materials',
-    Pipe = 'Pipe',
-    RareAlloys = 'Rare Alloys',
-    ThermalShielding = 'Thermal Shielding',
-    UnstableSubstances = 'Unstable Substances',
-    FlameAmmo = 'Flame Ammo',
-    AssemblyMaterialsI = 'Assembly Materials I',
-    AssemblyMaterialsII = 'Assembly Materials II',
-    AssemblyMaterialsIII = 'Assembly Materials III',
-    AssemblyMaterialsIV = 'Assembly Materials IV',
-    AssemblyMaterialsV = 'Assembly Materials V',
+  ConstructionMaterials = "Construction Materials",
+  ProcessedConstructionMaterials = "Processed Construction Materials",
+  RefinedMaterials = "Refined Materials",
+  BarbedWire = "Barbed Wire",
+  MetalBeam = "Metal Beam Wire",
+  Sandbag = "Sandbag",
+  SteelConstructionMaterials = "Steel Construction Materials",
+  ConcreteMaterials = "Concrete Materials",
+  Pipe = "Pipe",
+  RareAlloys = "Rare Alloys",
+  ThermalShielding = "Thermal Shielding",
+  UnstableSubstances = "Unstable Substances",
+  FlameAmmo = "Flame Ammo",
+  AssemblyMaterialsI = "Assembly Materials I",
+  AssemblyMaterialsII = "Assembly Materials II",
+  AssemblyMaterialsIII = "Assembly Materials III",
+  AssemblyMaterialsIV = "Assembly Materials IV",
+  AssemblyMaterialsV = "Assembly Materials V",
 }
 
 export enum Liquids {
-    Petrol = 'Petrol',
-    HeavyOil = 'Heavy Oil',
-    Water = 'Water',
-    EnrichedOil = 'Enriched Oil',
-    Oil = 'Oil',
+  Petrol = "Petrol",
+  HeavyOil = "Heavy Oil",
+  Water = "Water",
+  EnrichedOil = "Enriched Oil",
+  Oil = "Oil",
 }
 
 export enum Vehicles {
-    Xiphos = 'T3 "Xiphos"',
+  Xiphos = 'T3 "Xiphos"',
 }
 
 export enum RawResources {
-    Salvage = 'Salvage',
-    Components = 'Components',
-    Coke = 'Coke',
-    DamagedComponents = 'Damaged Components',
-    Coal = 'Coal',
-    Sulfur = 'Sulfur',
-    RareMetal = 'Rare Metal',
-    HeavyExplosivePowder = 'Heavy Explosive Powder',
+  Salvage = "Salvage",
+  Components = "Components",
+  Coke = "Coke",
+  DamagedComponents = "Damaged Components",
+  Coal = "Coal",
+  Sulfur = "Sulfur",
+  RareMetal = "Rare Metal",
+  HeavyExplosivePowder = "Heavy Explosive Powder",
 }
 
 export const availableMaterials: Stuff[] = [

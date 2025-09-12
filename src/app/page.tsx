@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
 import { DesiredOutput } from "./components/DesiredOutput";
 import { Provider } from "react-redux";
-import store from '@/lib/store'
+import store from "@/lib/store";
 import { RecipesSelectors } from "./components/RecipesSelectors";
 import { Report } from "./components/Report";
 
