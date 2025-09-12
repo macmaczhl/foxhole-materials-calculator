@@ -1,6 +1,6 @@
 "use client";
 
-import { DesiredOutput } from "./components/DesiredOutput";
+import { ItemsManager } from "./components/ItemsManager";
 import { Provider } from "react-redux";
 import store from "@/lib/store";
 import { RecipesSelectors } from "./components/RecipesSelectors";
@@ -12,7 +12,7 @@ export default function Home() {
       <div className="flex flex-row">
         <div className="basis-1/2">
           <div className="flex flex-col">
-            <DesiredOutput />
+            <ItemsManager />
             <Report />
           </div>
         </div>
