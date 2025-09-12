@@ -80,6 +80,17 @@ body.app-body {
     background-color: var(--accent-400);
   }
 
+  .btn-secondary {
+    @apply px-3 py-1.5 rounded-md font-medium border;
+    background-color: transparent;
+    border-color: var(--border-600);
+    color: var(--muted-300);
+  }
+  .btn-secondary:hover {
+    background-color: var(--panel-300);
+    color: var(--text);
+  }
+
   .btn-danger {
     @apply h-8 w-8 rounded-md;
     background-color: color-mix(in oklab, var(--danger-500) 25%, transparent);
@@ -119,5 +130,27 @@ body.app-body {
     border-left: 1px solid var(--border-600);
     border-top: 1px solid var(--border-600);
     color: var(--accent-300);
+  }
+
+  /* Tree visualization styles */
+  .tree-connector {
+    @apply absolute text-xs font-mono leading-none select-none;
+    color: var(--border-600);
+  }
+
+  .tree-line {
+    @apply absolute;
+    background-color: var(--border-600);
+    opacity: 0.4;
+  }
+
+  .tree-line-vertical {
+    @apply tree-line;
+    width: 1px;
+  }
+
+  .tree-line-horizontal {
+    @apply tree-line;
+    height: 1px;
   }
 }
