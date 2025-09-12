@@ -20,7 +20,11 @@ export default function GroupedComboboxOptions({ filteredGroups }: Props) {
 
           {/* Group items */}
           {group.items.map((item) => (
-            <ComboboxOption key={item.name} value={item.name} className="dropdown-option">
+            <ComboboxOption
+              key={item.name}
+              value={item.name}
+              className="dropdown-option"
+            >
               {({ selected }) => (
                 <div className="flex items-center">
                   {selected ? (

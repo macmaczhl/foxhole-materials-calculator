@@ -8,10 +8,7 @@ import {
   ComboboxOptions,
   Transition,
 } from "@headlessui/react";
-import {
-  ChevronUpDownIcon,
-  XMarkIcon,
-} from "@heroicons/react/20/solid";
+import { ChevronUpDownIcon, XMarkIcon } from "@heroicons/react/20/solid";
 import { groupedStuffList } from "@/lib/models";
 import GroupedComboboxOptions from "./GroupedComboboxOptions";
 
@@ -29,16 +26,20 @@ export default function StuffCombobox({ value, onChange, placeholder }: Props) {
 
     const q = query.toLowerCase();
     return groupedStuffList
-      .map(group => ({
+      .map((group) => ({
         ...group,
-        items: group.items.filter(item => item.name.toLowerCase().includes(q))
+        items: group.items.filter((item) =>
+          item.name.toLowerCase().includes(q)
+        ),
       }))
-      .filter(group => group.items.length > 0);
+      .filter((group) => group.items.length > 0);
   }, [query]);
 
   // Flatten for compatibility with existing onChange logic
   const allFilteredItems = useMemo(() => {
-    return filteredGroups.flatMap(group => group.items.map(item => item.name));
+    return filteredGroups.flatMap((group) =>
+      group.items.map((item) => item.name)
+    );
   }, [filteredGroups]);
 
   const handleClear = () => {

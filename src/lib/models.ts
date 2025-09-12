@@ -98,9 +98,9 @@ export const stuffList: Stuff[] = availableMaterials;
 
 // Item grouping for search panel
 export enum ItemGroup {
-  Vehicle = 'Vehicle',
-  Components = 'Components',
-  RawResources = 'Raw Resources'
+  Vehicle = "Vehicle",
+  Components = "Components",
+  RawResources = "Raw Resources",
 }
 
 export interface GroupedStuff {
@@ -134,7 +134,7 @@ export function createGroupedStuffList(): GroupedStuff[] {
   groups.set(ItemGroup.RawResources, []);
 
   // Categorize all items
-  availableMaterials.forEach(item => {
+  availableMaterials.forEach((item) => {
     const group = getItemGroup(item.name);
     groups.get(group)!.push(item);
   });
@@ -143,7 +143,10 @@ export function createGroupedStuffList(): GroupedStuff[] {
   return [
     { group: ItemGroup.Vehicle, items: groups.get(ItemGroup.Vehicle)! },
     { group: ItemGroup.Components, items: groups.get(ItemGroup.Components)! },
-    { group: ItemGroup.RawResources, items: groups.get(ItemGroup.RawResources)! }
+    {
+      group: ItemGroup.RawResources,
+      items: groups.get(ItemGroup.RawResources)!,
+    },
   ];
 }
 
