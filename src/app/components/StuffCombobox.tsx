@@ -5,16 +5,15 @@ import {
   Combobox,
   ComboboxButton,
   ComboboxInput,
-  ComboboxOption,
   ComboboxOptions,
   Transition,
 } from "@headlessui/react";
 import {
   ChevronUpDownIcon,
-  CheckIcon,
   XMarkIcon,
 } from "@heroicons/react/20/solid";
 import { groupedStuffList } from "@/lib/models";
+import GroupedComboboxOptions from "./GroupedComboboxOptions";
 
 interface Props {
   value: string;
@@ -91,30 +90,7 @@ export default function StuffCombobox({ value, onChange, placeholder }: Props) {
             <div className="px-3 py-2 text-sm text-muted-400">No results</div>
           )}
 
-          {filteredGroups.map((group) => (
-            <div key={group.group}>
-              {/* Group header */}
-              <div className="px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-muted-300 bg-panel-400 border-b border-border-600">
-                {group.group}
-              </div>
-
-              {/* Group items */}
-              {group.items.map((item) => (
-                <ComboboxOption key={item.name} value={item.name} className="dropdown-option">
-                  {({ selected }) => (
-                    <div className="flex items-center">
-                      {selected ? (
-                        <CheckIcon className="mr-2 size-4 text-accent-300" />
-                      ) : (
-                        <span className="mr-2 size-4" />
-                      )}
-                      <span>{item.name}</span>
-                    </div>
-                  )}
-                </ComboboxOption>
-              ))}
-            </div>
-          ))}
+          <GroupedComboboxOptions filteredGroups={filteredGroups} />
         </ComboboxOptions>
       </Transition>
     </Combobox>
