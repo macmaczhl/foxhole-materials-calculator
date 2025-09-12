@@ -70,8 +70,8 @@ describe('Item Grouping', () => {
       const grouped = createGroupedStuffList();
       const totalItems = grouped.reduce((sum, group) => sum + group.items.length, 0);
 
-      // Should equal the number of items in availableMaterials (currently 26 items)
-      expect(totalItems).toBe(26);
+      // Should equal the number of items in availableMaterials (currently 27 items)
+      expect(totalItems).toBe(27);
     });
   });
 });
