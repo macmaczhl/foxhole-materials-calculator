@@ -65,6 +65,7 @@ export enum RawResources {
 }
 
 export const availableMaterials: Stuff[] = [
+  { name: RawResources.Salvage },
   { name: RawResources.Components },
   { name: RawResources.Coke },
   { name: Materials.ConstructionMaterials },
