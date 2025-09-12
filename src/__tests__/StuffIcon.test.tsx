@@ -5,8 +5,8 @@ import { Liquids, Materials, RawResources } from "../lib/models";
 // Mock Next.js Image component
 jest.mock("next/image", () => ({
   __esModule: true,
-  // eslint-disable-next-line @next/next/no-img-element
   default: ({ alt, ...props }: { alt: string; [key: string]: unknown }) => (
+    // eslint-disable-next-line @next/next/no-img-element
     <img alt={alt} {...props} />
   ),
 }));
