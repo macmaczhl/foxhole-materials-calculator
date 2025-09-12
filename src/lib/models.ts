@@ -95,3 +95,59 @@ export const availableMaterials: Stuff[] = [
 ];
 
 export const stuffList: Stuff[] = availableMaterials;
+
+// Item grouping for search panel
+export enum ItemGroup {
+  Vehicle = "Vehicle",
+  Components = "Components",
+  RawResources = "Raw Resources",
+}
+
+export interface GroupedStuff {
+  group: ItemGroup;
+  items: Stuff[];
+}
+
+// Categorize an item into its appropriate group
+export function getItemGroup(itemName: string): ItemGroup {
+  // Check if it's a vehicle
+  if (Object.values(Vehicles).includes(itemName as Vehicles)) {
+    return ItemGroup.Vehicle;
+  }
+
+  // Check if it's a basic raw resource that can be crafted (Components, Coke)
+  if (itemName === RawResources.Components || itemName === RawResources.Coke) {
+    return ItemGroup.RawResources;
+  }
+
+  // Everything else (Materials.*, Liquids.*) is considered Components (processed/manufactured materials)
+  return ItemGroup.Components;
+}
+
+// Create grouped and ordered list of items
+export function createGroupedStuffList(): GroupedStuff[] {
+  const groups = new Map<ItemGroup, Stuff[]>();
+
+  // Initialize groups
+  groups.set(ItemGroup.Vehicle, []);
+  groups.set(ItemGroup.Components, []);
+  groups.set(ItemGroup.RawResources, []);
+
+  // Categorize all items
+  availableMaterials.forEach((item) => {
+    const group = getItemGroup(item.name);
+    groups.get(group)!.push(item);
+  });
+
+  // Return in the specified order: Vehicle, Components, Raw Resources
+  return [
+    { group: ItemGroup.Vehicle, items: groups.get(ItemGroup.Vehicle)! },
+    { group: ItemGroup.Components, items: groups.get(ItemGroup.Components)! },
+    {
+      group: ItemGroup.RawResources,
+      items: groups.get(ItemGroup.RawResources)!,
+    },
+  ];
+}
+
+export const groupedStuffList: GroupedStuff[] = createGroupedStuffList();
