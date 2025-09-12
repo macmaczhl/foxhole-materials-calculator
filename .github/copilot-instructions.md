@@ -150,3 +150,30 @@ If builds consistently fail:
 2. Run `npm install` (wait full 120+ seconds, NEVER CANCEL)
 3. Run `npm run build` (wait full 180+ seconds, NEVER CANCEL)
 4. Manually test application functionality as described above
+
+## Quick Reference for Agents
+
+### Most Frequently Used Commands
+```bash
+# Standard development workflow (run in order):
+npm install        # 30s - install dependencies
+npm run lint       # 2s - check code style  
+npm test          # 4s - run test suite
+npm run build     # 30s - production build (NEVER CANCEL)
+npm run dev       # 1s - start dev server
+```
+
+### Critical Files to Know
+- `src/lib/models.ts` - Material definitions and types
+- `src/lib/recipes.ts` - All crafting recipes  
+- `src/lib/services/calculateComponents.ts` - Core calculation logic
+- `src/lib/features/desiredStuffSlice.ts` - Redux state management
+- `src/app/components/` - React UI components
+- `eslint.config.mjs` - Linting configuration (indent rule disabled)
+
+### Expected Application Behavior
+- Material dropdown shows 26 items (raw resources, materials, liquids, vehicles)
+- Calculation is real-time as you type quantities
+- Recipe tree builds automatically based on selected recipes
+- Icons load from foxhole.wiki.gg external API
+- Results show both "Initial components" and "Calculated components"
