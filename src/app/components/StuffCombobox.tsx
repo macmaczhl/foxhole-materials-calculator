@@ -50,7 +50,11 @@ export default function StuffCombobox({ value, onChange, placeholder }: Props) {
   const showClearButton = query.length > 0 || value.length > 0;
 
   return (
-    <Combobox value={value} onChange={onChange} immediate>
+    <Combobox
+      value={value}
+      onChange={(val) => onChange(val || "")}
+      immediate
+    >
       <div className="relative">
         <ComboboxInput
           className={`ui-input w-full ${showClearButton ? "pr-16" : "pr-9"}`}
