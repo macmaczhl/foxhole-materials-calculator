@@ -2,7 +2,7 @@ import { Liquids, Materials, RawResources, Vehicles } from "./models";
 
 /**
  * Shared mapping of material/vehicle names to their icon file paths.
- * Used across the application for consistent icon display.
+ * Icons are served locally for reliable loading and consistent performance.
  */
 export const ICONS_MAP = new Map<string, string>([
   // Materials

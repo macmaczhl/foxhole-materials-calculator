@@ -13,15 +13,15 @@ interface StuffIconProps {
 }
 
 export function StuffIcon({ stuffName, count }: StuffIconProps) {
-  const iconPostfix = ICONS_MAP.get(stuffName);
+  const iconPath = ICONS_MAP.get(stuffName);
   const displayCount = isLiquid(stuffName) ? `${count}L` : count;
 
   return (
     <div className="icon-tile relative">
-      {iconPostfix ? (
+      {iconPath ? (
         <Image
           alt={stuffName}
-          src={`/${iconPostfix}`}
+          src={`/${iconPath}`}
           decoding="async"
           loading="lazy"
           width={60}
