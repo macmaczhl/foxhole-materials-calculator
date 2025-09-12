@@ -1,5 +1,5 @@
 import { Liquids, Materials, RawResources, Vehicles } from "@/lib/models";
-import Image from 'next/image'
+import Image from "next/image";
 
 // Helper function to check if a material is a liquid
 const isLiquid = (stuffName: string): boolean => {
@@ -7,46 +7,52 @@ const isLiquid = (stuffName: string): boolean => {
 };
 
 interface StuffIconProps {
-    stuffName: string
-    count: number
+  stuffName: string;
+  count: number;
 }
 
 const ICONS_MAP = new Map<string, string>([
-  [Materials.ConstructionMaterials, 'images/f/f0/ConstructionMaterialsIcon.png'],
-  [Materials.ProcessedConstructionMaterials, 'images/f/fa/ProcessedConstructionMaterialsIcon.png'],
-  [Materials.RefinedMaterials, 'images/0/0b/RefinedMaterialsIcon.png'],
-  [Materials.BarbedWire, 'images/9/9b/BarbedWireMaterialItemIcon.png'],
-  [Materials.MetalBeam, 'images/1/15/MetalBeamMaterialItemIcon.png'],
-  [Materials.Sandbag, 'images/f/fe/SandbagMaterialItemIcon.png'],
-  [Materials.AssemblyMaterialsI, 'images/2/28/AssemblyMaterials1Icon.png'],
-  [Materials.AssemblyMaterialsII, 'images/f/f1/AssemblyMaterials2Icon.png'],
-  [Materials.AssemblyMaterialsIII, 'images/1/16/AssemblyMaterials3Icon.png'],
-  [Materials.AssemblyMaterialsIV, 'images/3/37/AssemblyMaterials4Icon.png'],
-  [Materials.AssemblyMaterialsV, 'images/9/96/AssemblyMaterials5Icon.png'],
-  [Materials.SteelConstructionMaterials, 'images/d/db/SteelConstructionMaterialsIcon.png'],
-  [Materials.ConcreteMaterials, 'images/b/bd/ConcreteBagIcon.png'],
-  [Materials.Pipe, 'images/thumb/2/2a/EngineRoomPipeIcon.png/100px-EngineRoomPipeIcon.png'],
-  [Materials.RareAlloys, 'images/3/35/FacilityMaterials09Icon.png'],
-  [Materials.ThermalShielding, 'images/a/a6/FacilityMaterials11Icon.png'],
-  [Materials.UnstableSubstances, 'images/a/a2/FacilityMaterials10Icon.png'],
-  [Materials.FlameAmmo, 'images/d/d1/FlameAmmoIcon.png'],
+  [Materials.ConstructionMaterials, "icons/ConstructionMaterialsIcon.svg"],
+  [
+    Materials.ProcessedConstructionMaterials,
+    "icons/ProcessedConstructionMaterialsIcon.svg",
+  ],
+  [Materials.RefinedMaterials, "icons/RefinedMaterialsIcon.svg"],
+  [Materials.BarbedWire, "icons/BarbedWireMaterialItemIcon.svg"],
+  [Materials.MetalBeam, "icons/MetalBeamMaterialItemIcon.svg"],
+  [Materials.Sandbag, "icons/SandbagMaterialItemIcon.svg"],
+  [Materials.AssemblyMaterialsI, "icons/AssemblyMaterials1Icon.svg"],
+  [Materials.AssemblyMaterialsII, "icons/AssemblyMaterials2Icon.svg"],
+  [Materials.AssemblyMaterialsIII, "icons/AssemblyMaterials3Icon.svg"],
+  [Materials.AssemblyMaterialsIV, "icons/AssemblyMaterials4Icon.svg"],
+  [Materials.AssemblyMaterialsV, "icons/AssemblyMaterials5Icon.svg"],
+  [
+    Materials.SteelConstructionMaterials,
+    "icons/SteelConstructionMaterialsIcon.svg",
+  ],
+  [Materials.ConcreteMaterials, "icons/ConcreteBagIcon.svg"],
+  [Materials.Pipe, "icons/PipeIcon.svg"],
+  [Materials.RareAlloys, "icons/RareAlloyIcon.svg"],
+  [Materials.ThermalShielding, "icons/ThermalShieldingIcon.svg"],
+  [Materials.UnstableSubstances, "icons/UnstableSubstancesIcon.svg"],
+  [Materials.FlameAmmo, "icons/FlameAmmoIcon.svg"],
 
-  [Liquids.Petrol, 'images/thumb/f/f1/RefinedFuelIcon.png/100px-RefinedFuelIcon.png'],
-  [Liquids.HeavyOil, 'images/f/f3/FacilityOil1Icon.png'],
-  [Liquids.Water, 'images/9/94/WaterIcon.png'],
-  [Liquids.EnrichedOil, 'images/1/1d/FacilityOil2Icon.png'],
-  [Liquids.Oil, 'images/b/b0/OilIcon.png'],
+  [Liquids.Petrol, "icons/RefinedFuelIcon.svg"],
+  [Liquids.HeavyOil, "icons/HeavyOilIcon.svg"],
+  [Liquids.Water, "icons/WaterIcon.svg"],
+  [Liquids.EnrichedOil, "icons/EnrichedOilIcon.svg"],
+  [Liquids.Oil, "icons/OilIcon.svg"],
 
-  [RawResources.Salvage, 'images/3/33/SalvageIcon.png'],
-  [RawResources.Components, 'images/thumb/a/ac/ComponentsIcon.png/100px-ComponentsIcon.png'],
-  [RawResources.Coke, 'images/d/d8/CokeIcon.png'],
-  [RawResources.DamagedComponents, 'images/thumb/b/bd/ComponentsDamagedIcon.png/100px-ComponentsDamagedIcon.png'],
-  [RawResources.Coal, 'images/8/88/CoalIcon.png'],
-  [RawResources.Sulfur, 'images/thumb/b/be/SulfurIcon.png/100px-SulfurIcon.png'],
-  [RawResources.RareMetal, 'images/e/ed/RareMaterialsIcon.png'],
-  [RawResources.HeavyExplosivePowder, 'images/thumb/2/21/HeavyExplosiveMaterialsIcon.png/100px-HeavyExplosiveMaterialsIcon.png'],
+  [RawResources.Salvage, "icons/SalvageIcon.svg"],
+  [RawResources.Components, "icons/ComponentsIcon.svg"],
+  [RawResources.Coke, "icons/CokeIcon.svg"],
+  [RawResources.DamagedComponents, "icons/ComponentsDamagedIcon.svg"],
+  [RawResources.Coal, "icons/CoalIcon.svg"],
+  [RawResources.Sulfur, "icons/SulfurIcon.svg"],
+  [RawResources.RareMetal, "icons/RareMaterialsIcon.svg"],
+  [RawResources.HeavyExplosivePowder, "icons/HeavyExplosiveMaterialsIcon.svg"],
 
-  [Vehicles.Xiphos, 'images/f/f3/ArmoredCarVehicleIcon.png'],
+  [Vehicles.Xiphos, "icons/ArmoredCarVehicleIcon.svg"],
 ]);
 
 export function StuffIcon({ stuffName, count }: StuffIconProps) {
@@ -58,7 +64,7 @@ export function StuffIcon({ stuffName, count }: StuffIconProps) {
       {iconPostfix ? (
         <Image
           alt={stuffName}
-          src={`https://foxhole.wiki.gg/${iconPostfix}`}
+          src={`/${iconPostfix}`}
           decoding="async"
           loading="lazy"
           width={60}

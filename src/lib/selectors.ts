@@ -1,20 +1,24 @@
-import { useAppSelector } from "./hooks"
+import { useAppSelector } from "./hooks";
 import type { RootState } from './store'
 import { selectRows } from './features/desiredSlice'
 import { selectExistingItems } from './features/existingSlice'
 import { calculateComponents } from './services/calculateComponents'
 import { IRecipe, RecipeEntity } from "./models";
 
-export const useTreeSelectedRecipe = (rowId: string, treePath: string[]): IRecipe | undefined => {
+export const useTreeSelectedRecipe = (
+  rowId: string,
+  treePath: string[]
+): IRecipe | undefined => {
   return useAppSelector((state) => {
-    const row = state.desired.rows.find(r => r.id === rowId);
+    const row = state.desired.rows.find((r) => r.id === rowId);
     let currentTree = row?.recipeTree;
-    treePath.slice(1).forEach(e => {
-      currentTree = currentTree?.required.find(sub => sub.stuff === e);
+    treePath.slice(1).forEach((e) => {
+      currentTree = currentTree?.required.find((sub) => sub.stuff === e);
     });
     return currentTree?.selectedRecipe;
   });
-}
+  });
+};
 
 const addToMap = (map: Map<string, number>, key: string, value: number) => {
   const old = map.get(key) ?? 0;
