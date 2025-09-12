@@ -5,10 +5,16 @@ const nextConfig: NextConfig = {
   // Vercel will handle this automatically for PR previews
   output: process.env.VERCEL ? undefined : "export",
   trailingSlash: true,
-  basePath: process.env.VERCEL ? "" : process.env.NEXT_PUBLIC_BASE_PATH || "",
-  assetPrefix: process.env.VERCEL
-    ? ""
-    : process.env.NEXT_PUBLIC_BASE_PATH || "",
+  // GitHub Pages base path configuration
+  // The configure-pages action should inject this, but we'll set it explicitly
+  basePath:
+    process.env.NODE_ENV === "production" && process.env.GITHUB_ACTIONS
+      ? "/foxhole-materials-calculator"
+      : "",
+  assetPrefix:
+    process.env.NODE_ENV === "production" && process.env.GITHUB_ACTIONS
+      ? "/foxhole-materials-calculator/"
+      : "",
   images: {
     unoptimized: process.env.VERCEL ? false : true,
     remotePatterns: [
