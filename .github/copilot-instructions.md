@@ -20,7 +20,7 @@ Always update the branch and fix conflicts when you apply new changes and confli
 - Install dependencies: `npm install` (takes ~30 seconds, timeout 120+ seconds)
 - Start development server: `npm run dev` (ready in ~1 second)
 - Run tests: `npm test` (executes Jest test suite, takes ~4 seconds)
-- Lint code: `npm run lint` (ESLint with Next.js rules, takes ~2 seconds)
+- Lint code: `npm run lint` and `npm run format:check` (ESLint with Next.js rules, takes ~2 seconds)
 - Build for production: `npm run build` (takes ~30 seconds, timeout 180+ seconds - NEVER CANCEL)
 - Continuous testing: `npm run test:watch` (Jest watch mode for development)
 
