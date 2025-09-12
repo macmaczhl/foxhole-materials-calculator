@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from 'react';
-import { useAppDispatch } from '@/lib/hooks';
-import { addExistingItem } from '@/lib/features/existingSlice';
-import StuffCombobox from './StuffCombobox';
+import { useState } from "react";
+import { useAppDispatch } from "@/lib/hooks";
+import { addExistingItem } from "@/lib/features/existingSlice";
+import StuffCombobox from "./StuffCombobox";
 
 interface AddItemFormProps {
   onClose?: () => void;
@@ -11,28 +11,30 @@ interface AddItemFormProps {
 
 export function AddItemForm({ onClose }: AddItemFormProps) {
   const dispatch = useAppDispatch();
-  const [newItemStuff, setNewItemStuff] = useState('');
-  const [newItemCount, setNewItemCount] = useState('');
+  const [newItemStuff, setNewItemStuff] = useState("");
+  const [newItemCount, setNewItemCount] = useState("");
 
   const handleAddItem = () => {
     const count = parseInt(newItemCount);
     if (newItemStuff && count > 0) {
       dispatch(addExistingItem({ stuffName: newItemStuff, count }));
-      setNewItemStuff('');
-      setNewItemCount('');
+      setNewItemStuff("");
+      setNewItemCount("");
       onClose?.();
     }
   };
 
   const handleCancel = () => {
-    setNewItemStuff('');
-    setNewItemCount('');
+    setNewItemStuff("");
+    setNewItemCount("");
     onClose?.();
   };
 
   return (
     <div className="mb-4 p-4 border border-neutral-700 rounded-lg bg-neutral-800">
-      <h3 className="text-sm font-medium text-neutral-300 mb-3">Add existing item</h3>
+      <h3 className="text-sm font-medium text-neutral-300 mb-3">
+        Add existing item
+      </h3>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
         <div className="md:col-span-2">
           <StuffCombobox
@@ -53,16 +55,15 @@ export function AddItemForm({ onClose }: AddItemFormProps) {
         </div>
       </div>
       <div className="flex justify-end gap-2 mt-3">
-        <button
-          className="btn-secondary"
-          onClick={handleCancel}
-        >
+        <button className="btn-secondary" onClick={handleCancel}>
           Cancel
         </button>
         <button
           className="btn-primary"
           onClick={handleAddItem}
-          disabled={!newItemStuff || !newItemCount || parseInt(newItemCount) <= 0}
+          disabled={
+            !newItemStuff || !newItemCount || parseInt(newItemCount) <= 0
+          }
         >
           Add Item
         </button>
