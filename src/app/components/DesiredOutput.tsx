@@ -1,9 +1,15 @@
 "use client";
 
-import { useAppDispatch, useAppSelector } from '@/lib/hooks';
-import { addRow, changeCount, changeStuff, deleteRow, selectRows } from '@/lib/features/desiredSlice';
-import StuffCombobox from './StuffCombobox';
-import { XMarkIcon, PlusIcon } from '@heroicons/react/24/solid';
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import {
+  addRow,
+  changeCount,
+  changeStuff,
+  deleteRow,
+  selectRows,
+} from "@/lib/features/desiredSlice";
+import StuffCombobox from "./StuffCombobox";
+import { XMarkIcon, PlusIcon } from "@heroicons/react/24/solid";
 
 export function DesiredOutput() {
   const rows = useAppSelector(selectRows);
@@ -40,21 +46,29 @@ export function DesiredOutput() {
                     type="number"
                     min={0}
                     value={row.count}
-                    onChange={(e) => dispatch(changeCount({ rowId: row.id, value: e.target.value }))}
+                    onChange={(e) =>
+                      dispatch(
+                        changeCount({ rowId: row.id, value: e.target.value })
+                      )
+                    }
                     className="ui-input w-24"
                   />
                 </td>
                 <td>
                   <StuffCombobox
                     value={row.stuffName}
-                    onChange={(v) => dispatch(changeStuff({ rowId: row.id, value: v }))}
+                    onChange={(v) =>
+                      dispatch(changeStuff({ rowId: row.id, value: v }))
+                    }
                     placeholder="Search materials/vehicles"
                   />
                 </td>
                 <td className="text-center">
                   <button
-                    title={canDelete ? "Delete row" : "Cannot delete the only row"}
-                    className={`btn-danger inline-flex items-center justify-center ${!canDelete ? 'btn-disabled' : ''}`}
+                    title={
+                      canDelete ? "Delete row" : "Cannot delete the only row"
+                    }
+                    className={`btn-danger inline-flex items-center justify-center ${!canDelete ? "btn-disabled" : ""}`}
                     onClick={() => canDelete && dispatch(deleteRow(row.id))}
                     disabled={!canDelete}
                   >

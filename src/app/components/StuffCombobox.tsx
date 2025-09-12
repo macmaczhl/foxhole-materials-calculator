@@ -1,8 +1,19 @@
 "use client";
 
 import { Fragment, useMemo, useState } from "react";
-import { Combobox, ComboboxButton, ComboboxInput, ComboboxOption, ComboboxOptions, Transition } from "@headlessui/react";
-import { ChevronUpDownIcon, CheckIcon, XMarkIcon } from "@heroicons/react/20/solid";
+import {
+  Combobox,
+  ComboboxButton,
+  ComboboxInput,
+  ComboboxOption,
+  ComboboxOptions,
+  Transition,
+} from "@headlessui/react";
+import {
+  ChevronUpDownIcon,
+  CheckIcon,
+  XMarkIcon,
+} from "@heroicons/react/20/solid";
 import { stuffList } from "@/lib/models";
 
 interface Props {
@@ -15,9 +26,11 @@ export default function StuffCombobox({ value, onChange, placeholder }: Props) {
   const [query, setQuery] = useState("");
 
   const options = useMemo(() => {
-    if (!query) return stuffList.map(s => s.name);
+    if (!query) return stuffList.map((s) => s.name);
     const q = query.toLowerCase();
-    return stuffList.map(s => s.name).filter(n => n.toLowerCase().includes(q));
+    return stuffList
+      .map((s) => s.name)
+      .filter((n) => n.toLowerCase().includes(q));
   }, [query]);
 
   const handleClear = () => {
@@ -31,7 +44,7 @@ export default function StuffCombobox({ value, onChange, placeholder }: Props) {
     <Combobox value={value} onChange={onChange} immediate>
       <div className="relative">
         <ComboboxInput
-          className={`ui-input w-full ${showClearButton ? 'pr-16' : 'pr-9'}`}
+          className={`ui-input w-full ${showClearButton ? "pr-16" : "pr-9"}`}
           placeholder={placeholder ?? "Select material or vehicle"}
           displayValue={(v: string) => v}
           onChange={(e) => setQuery(e.target.value)}
@@ -42,7 +55,7 @@ export default function StuffCombobox({ value, onChange, placeholder }: Props) {
             className="absolute inset-y-0 right-9 flex items-center pr-1 text-muted-400 hover:text-muted-200 focus:outline-none focus:text-muted-200"
             onClick={handleClear}
             onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
+              if (e.key === "Enter" || e.key === " ") {
                 e.preventDefault();
                 handleClear();
               }
