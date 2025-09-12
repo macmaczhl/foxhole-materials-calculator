@@ -28,8 +28,10 @@ const eslintConfig = [
       "eol-last": ["error", "always"],
       // Disallow trailing whitespace at the end of lines
       "no-trailing-spaces": "error",
-      // Disable formatting rules that conflict with Prettier
+      // Disable problematic indent rule that causes stack overflow
+      // Using @typescript-eslint/indent instead via next/typescript config
       indent: "off",
+      // Disable formatting rules that conflict with Prettier
       quotes: "off",
       semi: "off",
       "comma-dangle": "off",
