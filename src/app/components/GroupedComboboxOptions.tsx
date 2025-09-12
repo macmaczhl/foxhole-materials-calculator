@@ -4,6 +4,7 @@ import { ComboboxOption } from "@headlessui/react";
 import { CheckIcon } from "@heroicons/react/20/solid";
 import { GroupedStuff } from "@/lib/models";
 import { ICONS_MAP } from "@/lib/constants";
+import { getBasePath } from "@/lib/utils";
 import Image from "next/image";
 
 // Mini icon component for dropdown items
@@ -14,10 +15,13 @@ function MiniIcon({ stuffName }: { stuffName: string }) {
     return <div className="w-4 h-4 mr-2 flex-shrink-0" />; // Placeholder for items without icons
   }
 
+  const basePath = getBasePath();
+  const fullIconPath = `${basePath}/${iconPath}`;
+
   return (
     <Image
       alt={stuffName}
-      src={`/${iconPath}`}
+      src={fullIconPath}
       width={16}
       height={16}
       className="w-4 h-4 mr-2 flex-shrink-0"
