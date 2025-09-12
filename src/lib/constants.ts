@@ -7,7 +7,10 @@ import { Liquids, Materials, RawResources, Vehicles } from "./models";
 export const ICONS_MAP = new Map<string, string>([
   // Materials
   [Materials.ConstructionMaterials, "icons/ConstructionMaterialsIcon.svg"],
-  [Materials.ProcessedConstructionMaterials, "icons/ProcessedConstructionMaterialsIcon.svg"],
+  [
+    Materials.ProcessedConstructionMaterials,
+    "icons/ProcessedConstructionMaterialsIcon.svg",
+  ],
   [Materials.RefinedMaterials, "icons/RefinedMaterialsIcon.svg"],
   [Materials.BarbedWire, "icons/BarbedWireMaterialItemIcon.svg"],
   [Materials.MetalBeam, "icons/MetalBeamMaterialItemIcon.svg"],
@@ -17,7 +20,10 @@ export const ICONS_MAP = new Map<string, string>([
   [Materials.AssemblyMaterialsIII, "icons/AssemblyMaterials3Icon.svg"],
   [Materials.AssemblyMaterialsIV, "icons/AssemblyMaterials4Icon.svg"],
   [Materials.AssemblyMaterialsV, "icons/AssemblyMaterials5Icon.svg"],
-  [Materials.SteelConstructionMaterials, "icons/SteelConstructionMaterialsIcon.svg"],
+  [
+    Materials.SteelConstructionMaterials,
+    "icons/SteelConstructionMaterialsIcon.svg",
+  ],
   [Materials.ConcreteMaterials, "icons/ConcreteBagIcon.svg"],
   [Materials.Pipe, "icons/PipeIcon.svg"],
   [Materials.RareAlloys, "icons/RareAlloyIcon.svg"],

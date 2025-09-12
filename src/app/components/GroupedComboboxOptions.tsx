@@ -4,7 +4,7 @@ import { ComboboxOption } from "@headlessui/react";
 import { CheckIcon } from "@heroicons/react/20/solid";
 import { GroupedStuff } from "@/lib/models";
 import { ICONS_MAP } from "@/lib/constants";
-import Image from 'next/image';
+import Image from "next/image";
 
 // Mini icon component for dropdown items
 function MiniIcon({ stuffName }: { stuffName: string }) {
