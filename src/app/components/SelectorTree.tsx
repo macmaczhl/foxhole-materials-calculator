@@ -23,6 +23,7 @@ export function SelectorTree({
         recipes={recipesTree.recipes}
         treePath={treePath}
         isLast={isLast}
+        hasChildren={recipesTree.required.length > 0}
       />
       {recipesTree.required.map((e, index) => (
         <SelectorTree
