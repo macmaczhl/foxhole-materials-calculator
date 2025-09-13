@@ -31,52 +31,65 @@ export function RecipesSelector({
   const isNested = treePath.length > 1;
   const treeDepth = treePath.length - 1;
 
-  // Enhanced positioning for clearer tree visualization
-  const connectorSpacing = 24; // Increased spacing between tree levels
-  const connectorLeftPosition = treeDepth > 0 ? 8 + (treeDepth - 1) * connectorSpacing : 0;
+  // Tree structure constants matching user's example
+  const baseIndent = 20; // Base indentation for first level
+  const levelSpacing = 24; // Spacing between tree levels
+  const connectorWidth = 16; // Width of horizontal connector lines
 
-  // Calculate content padding to avoid overlap with connectors
-  const contentLeftPadding = isNested ? connectorLeftPosition + 20 : 0; // 20px = connector width + horizontal line + margin
+  // Calculate indentation for this specific level
+  const thisLevelIndent = baseIndent + treeDepth * levelSpacing;
+  const contentPadding = isNested ? thisLevelIndent + connectorWidth + 8 : 0;
 
   return (
-    <div className={`relative panel-compact mb-1`}>
-      {/* Tree connector lines */}
+    <div className="relative panel-compact mb-1">
+      {/* Tree connector lines for hierarchical structure */}
       {isNested && (
         <>
-          {/* Vertical line for this level */}
+          {/* Vertical lines for all parent levels */}
+          {Array.from({ length: treeDepth }, (_, level) => {
+            const lineLeft = baseIndent + level * levelSpacing;
+            // For the current level, show partial line if it's the last item
+            const height = level === treeDepth - 1 && isLast ? "50%" : "100%";
+
+            return (
+              <div
+                key={`vertical-${level}`}
+                className="absolute tree-vertical"
+                style={{
+                  left: `${lineLeft}px`,
+                  top: "0px",
+                  width: "2px",
+                  height: height,
+                  backgroundColor: "var(--border-600)",
+                  opacity: "0.7",
+                  borderRadius: "1px",
+                }}
+              />
+            );
+          })}
+
+          {/* Horizontal T-connector for current item */}
           <div
-            className="absolute tree-line-vertical"
+            className="absolute tree-horizontal"
             style={{
-              left: `${connectorLeftPosition}px`,
-              top: "0px",
-              width: "3px",
-              height: isLast ? "50%" : "100%",
+              left: `${baseIndent + (treeDepth - 1) * levelSpacing}px`,
+              top: "50%",
+              width: `${connectorWidth}px`,
+              height: "2px",
               backgroundColor: "var(--border-600)",
               opacity: "0.8",
+              transform: "translateY(-1px)",
               borderRadius: "1px",
             }}
-          ></div>
-          {/* Horizontal connector from parent to current item */}
-          <div
-            className="absolute tree-line-horizontal"
-            style={{
-              left: `${connectorLeftPosition}px`,
-              top: "50%",
-              width: "16px",
-              height: "3px",
-              backgroundColor: "var(--border-600)",
-              opacity: "0.9",
-              transform: "translateY(-1.5px)",
-              borderRadius: "1px",
-            }}
-          ></div>
+          />
         </>
       )}
+
+      {/* Content with proper indentation */}
       <div
         className="relative z-10"
         style={{
-          paddingLeft:
-            contentLeftPadding > 0 ? `${contentLeftPadding}px` : undefined,
+          paddingLeft: contentPadding > 0 ? `${contentPadding}px` : undefined,
         }}
       >
         <span className="font-medium text-sm tracking-wide text-muted-300">
