@@ -141,16 +141,20 @@ body.app-body {
   .tree-line {
     @apply absolute;
     background-color: var(--border-600);
-    opacity: 0.4;
+    opacity: 0.7;
   }
 
   .tree-line-vertical {
     @apply tree-line;
-    width: 1px;
+    width: 3px;
+    opacity: 0.8;
+    border-radius: 1px;
   }
 
   .tree-line-horizontal {
     @apply tree-line;
-    height: 1px;
+    height: 3px;
+    opacity: 0.9;
+    border-radius: 1px;
   }
 }
