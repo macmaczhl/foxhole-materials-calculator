@@ -9,8 +9,8 @@ Inspired by [reddit post](https://www.reddit.com/r/foxholegame/comments/ym64ru/f
 ## Features
 
 ### 🏭 Comprehensive Material Support
-- **26 different materials** across multiple categories:
-  - **Vehicles**: T3 "Xiphos" armored car with multiple production recipes
+- **different materials** across multiple categories:
+  - **Vehicles**
   - **Components**: Construction Materials, Refined Materials, Assembly Materials I-V, and more
   - **Liquids**: Petrol, Heavy Oil, Water, Enriched Oil, Oil
   - **Raw Resources**: Salvage, Components, Coal, Sulfur, Rare Metal, etc.
@@ -99,33 +99,6 @@ npm start
 - **Testing**: Jest with React Testing Library
 - **Deployment**: GitHub Pages with static export
 
-## Project Structure
-
-```
-src/
-├── app/                          # Next.js app directory
-│   ├── components/              # React components
-│   │   ├── ItemsManager.tsx     # Material selection interface
-│   │   ├── RecipesSelectors.tsx # Recipe tree display
-│   │   ├── Report.tsx           # Calculation results
-│   │   └── StuffCombobox.tsx    # Material search dropdown
-│   ├── page.tsx                 # Main application page
-│   └── layout.tsx               # App layout and fonts
-├── lib/                         # Core application logic
-│   ├── features/               # Redux slices
-│   │   ├── desiredSlice.ts     # Main calculator state
-│   │   └── existingSlice.ts    # Existing materials tracking
-│   ├── services/               # Business logic
-│   │   └── calculateComponents.ts # Recipe calculation engine
-│   ├── models.ts               # Type definitions and enums
-│   ├── recipes.ts              # All crafting recipes
-│   └── store.ts                # Redux store configuration
-└── __tests__/                  # Unit tests
-    ├── calculateComponents.test.ts
-    ├── grouping.test.ts
-    └── StuffCombobox.test.tsx
-```
-
 ## Contributing
 
 We welcome contributions to improve the Foxhole Materials Calculator! Whether you're fixing bugs, adding new vehicles, updating recipes, or improving documentation, your help is appreciated.
@@ -176,12 +149,6 @@ npm run build         # Production build must succeed
 3. Add to `RecipiesByStuff` map
 4. Add icon mapping in `src/lib/constants.ts`
 5. **Required**: Write tests for all recipes and calculations
-
-#### Modifying Calculations
-- Core logic is in `src/lib/services/calculateComponents.ts`
-- Recipe tree building in `src/lib/features/desiredSlice.ts`
-- **Required**: Add tests for any calculation changes
-- **Test edge cases**: Crate production, excess calculations, scaling
 
 ### Submitting Changes
 
