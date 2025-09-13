@@ -12,6 +12,7 @@ interface RecipesSelectorProps {
   recipes: IRecipe[];
   treePath: string[];
   isLast?: boolean;
+  hasChildren?: boolean;
 }
 
 export function RecipesSelector({
@@ -20,6 +21,7 @@ export function RecipesSelector({
   recipes,
   treePath,
   isLast = false,
+  hasChildren = false,
 }: RecipesSelectorProps) {
   const selectedRecipe = useTreeSelectedRecipe(rowId, treePath);
   const dispatch = useAppDispatch();
@@ -31,50 +33,27 @@ export function RecipesSelector({
   const isNested = treePath.length > 1;
   const treeDepth = treePath.length - 1;
 
-  // Tree structure constants matching user's example
-  const baseIndent = 20; // Base indentation for first level
-  const levelSpacing = 24; // Spacing between tree levels
-  const connectorWidth = 16; // Width of horizontal connector lines
+  // Tree structure constants for T-shaped connectors
+  const levelSpacing = 24; // Horizontal spacing between tree levels
+  const connectorLength = 16; // Length of horizontal connector lines
 
   // Calculate indentation for this specific level
-  const thisLevelIndent = baseIndent + treeDepth * levelSpacing;
-  const contentPadding = isNested ? thisLevelIndent + connectorWidth + 8 : 0;
+  const contentPadding = isNested
+    ? treeDepth * levelSpacing + connectorLength + 8
+    : 0;
 
   return (
     <div className="relative panel-compact mb-1">
-      {/* Tree connector lines for hierarchical structure */}
+      {/* Improved T-shaped tree connectors matching user's exact specification */}
       {isNested && (
         <>
-          {/* Vertical lines for all parent levels */}
-          {Array.from({ length: treeDepth }, (_, level) => {
-            const lineLeft = baseIndent + level * levelSpacing;
-            // For the current level, show partial line if it's the last item
-            const height = level === treeDepth - 1 && isLast ? "50%" : "100%";
-
-            return (
-              <div
-                key={`vertical-${level}`}
-                className="absolute tree-vertical"
-                style={{
-                  left: `${lineLeft}px`,
-                  top: "0px",
-                  width: "2px",
-                  height: height,
-                  backgroundColor: "var(--border-600)",
-                  opacity: "0.7",
-                  borderRadius: "1px",
-                }}
-              />
-            );
-          })}
-
-          {/* Horizontal T-connector for current item */}
+          {/* Horizontal line connecting from parent's vertical line to this item */}
           <div
-            className="absolute tree-horizontal"
+            className="absolute"
             style={{
-              left: `${baseIndent + (treeDepth - 1) * levelSpacing}px`,
+              left: `${(treeDepth - 1) * levelSpacing}px`,
               top: "50%",
-              width: `${connectorWidth}px`,
+              width: `${connectorLength}px`,
               height: "2px",
               backgroundColor: "var(--border-600)",
               opacity: "0.8",
@@ -82,7 +61,53 @@ export function RecipesSelector({
               borderRadius: "1px",
             }}
           />
+
+          {/* Vertical line from top to middle (connecting to previous sibling) */}
+          <div
+            className="absolute"
+            style={{
+              left: `${(treeDepth - 1) * levelSpacing}px`,
+              top: "0px",
+              width: "2px",
+              height: "50%",
+              backgroundColor: "var(--border-600)",
+              opacity: "0.7",
+              borderRadius: "1px",
+            }}
+          />
+
+          {/* Vertical line from middle to bottom (connecting to next sibling) - only if not last */}
+          {!isLast && (
+            <div
+              className="absolute"
+              style={{
+                left: `${(treeDepth - 1) * levelSpacing}px`,
+                top: "50%",
+                width: "2px",
+                height: "50%",
+                backgroundColor: "var(--border-600)",
+                opacity: "0.7",
+                borderRadius: "1px",
+              }}
+            />
+          )}
         </>
+      )}
+
+      {/* Vertical line for child connections - only if this item has children */}
+      {hasChildren && (
+        <div
+          className="absolute"
+          style={{
+            left: `${treeDepth * levelSpacing}px`,
+            top: "50%",
+            width: "2px",
+            height: "50%",
+            backgroundColor: "var(--border-600)",
+            opacity: "0.7",
+            borderRadius: "1px",
+          }}
+        />
       )}
 
       {/* Content with proper indentation */}
