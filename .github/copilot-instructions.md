@@ -9,7 +9,7 @@ When making changes be ensure that there are no conflicts with target branch.
 Before task is finished:
 
 1. There shouldn't be conflicts with target branch.
-2. Tests, linter and format commands always should pass!
+2. Tests, linter and format check commands (as in workflows) always should pass!
 
 Always update the branch and fix conflicts when you apply new changes and conflicts exist. There should be no git conflicts before task finished.
 
