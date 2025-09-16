@@ -422,6 +422,104 @@ const xiphosRecipes: IRecipe[] = [
   ),
 ];
 
+// T12 "Actaeon" Tankette vehicle recipes
+const actaeonTanketteRecipes: IRecipe[] = [
+  // Based on external data: armored car with tank armor, costs basic materials
+  createRecipe(
+    [{ stuff: Materials.ConstructionMaterials, count: 150 }],
+    [{ stuff: Vehicles.ActaeonTankette, count: 1 }]
+  ),
+  // Mass Production Factory variant
+  createRecipe(
+    [{ stuff: Materials.ConstructionMaterials, count: 450 }],
+    [{ stuff: Vehicles.ActaeonTankette, count: 3 }]
+  ),
+];
+
+// T5 "Percutio" vehicle recipes
+const percutioRecipes: IRecipe[] = [
+  // Anti-tank variant, costs refined materials
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 120 }],
+    [{ stuff: Vehicles.Percutio, count: 1 }]
+  ),
+  // Mass Production Factory variant
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 360 }],
+    [{ stuff: Vehicles.Percutio, count: 3 }]
+  ),
+];
+
+// T8 "Gemini" vehicle recipes
+const geminiRecipes: IRecipe[] = [
+  // RPG launcher variant, costs refined materials
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 135 }],
+    [{ stuff: Vehicles.Gemini, count: 1 }]
+  ),
+  // Mass Production Factory variant
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 405 }],
+    [{ stuff: Vehicles.Gemini, count: 3 }]
+  ),
+];
+
+// O'Brien v.113 Gravekeeper vehicle recipes
+const oBrienGravekeeperRecipes: IRecipe[] = [
+  // Anti-tank variant with Bonesaw launcher
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 135 }],
+    [{ stuff: Vehicles.OBrienGravekeeper, count: 1 }]
+  ),
+  // Mass Production Factory variant
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 405 }],
+    [{ stuff: Vehicles.OBrienGravekeeper, count: 3 }]
+  ),
+];
+
+// O'Brien v.121 Highlander vehicle recipes
+const oBrienHighlanderRecipes: IRecipe[] = [
+  // All-terrain mobility variant
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 120 }],
+    [{ stuff: Vehicles.OBrienHighlander, count: 1 }]
+  ),
+  // Mass Production Factory variant
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 360 }],
+    [{ stuff: Vehicles.OBrienHighlander, count: 3 }]
+  ),
+];
+
+// O'Brien v.101 Freeman vehicle recipes
+const oBrienFreemanRecipes: IRecipe[] = [
+  // Ballistics cannon variant, higher cost
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 180 }],
+    [{ stuff: Vehicles.OBrienFreeman, count: 1 }]
+  ),
+  // Mass Production Factory variant
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 540 }],
+    [{ stuff: Vehicles.OBrienFreeman, count: 3 }]
+  ),
+];
+
+// O'Brien v.110 vehicle recipes
+const oBrienV110Recipes: IRecipe[] = [
+  // Standard warden armored car
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 105 }],
+    [{ stuff: Vehicles.OBrienV110, count: 1 }]
+  ),
+  // Mass Production Factory variant
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 315 }],
+    [{ stuff: Vehicles.OBrienV110, count: 3 }]
+  ),
+];
+
 export const RecipiesByStuff = new Map<string, IRecipe[]>([
   [Materials.ConstructionMaterials, constructionMaterialsRecipes],
   [
@@ -453,6 +551,13 @@ export const RecipiesByStuff = new Map<string, IRecipe[]>([
   [Liquids.Oil, oilRecipes],
 
   [Vehicles.Xiphos, xiphosRecipes],
+  [Vehicles.ActaeonTankette, actaeonTanketteRecipes],
+  [Vehicles.Percutio, percutioRecipes],
+  [Vehicles.Gemini, geminiRecipes],
+  [Vehicles.OBrienGravekeeper, oBrienGravekeeperRecipes],
+  [Vehicles.OBrienHighlander, oBrienHighlanderRecipes],
+  [Vehicles.OBrienFreeman, oBrienFreemanRecipes],
+  [Vehicles.OBrienV110, oBrienV110Recipes],
 
   emptyRecipePair(RawResources.Salvage),
   emptyRecipePair(RawResources.DamagedComponents),

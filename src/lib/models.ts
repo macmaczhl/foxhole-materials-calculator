@@ -51,6 +51,13 @@ export enum Liquids {
 
 export enum Vehicles {
   Xiphos = 'T3 "Xiphos"',
+  ActaeonTankette = 'T12 "Actaeon" Tankette',
+  Percutio = 'T5 "Percutio"',
+  Gemini = 'T8 "Gemini"',
+  OBrienGravekeeper = 'O\'Brien v.113 Gravekeeper',
+  OBrienHighlander = 'O\'Brien v.121 Highlander',
+  OBrienFreeman = 'O\'Brien v.101 Freeman',
+  OBrienV110 = 'O\'Brien v.110',
 }
 
 export enum RawResources {
@@ -92,6 +99,13 @@ export const availableMaterials: Stuff[] = [
   { name: Liquids.EnrichedOil },
   { name: Liquids.Oil },
   { name: Vehicles.Xiphos },
+  { name: Vehicles.ActaeonTankette },
+  { name: Vehicles.Percutio },
+  { name: Vehicles.Gemini },
+  { name: Vehicles.OBrienGravekeeper },
+  { name: Vehicles.OBrienHighlander },
+  { name: Vehicles.OBrienFreeman },
+  { name: Vehicles.OBrienV110 },
 ];
 
 export const stuffList: Stuff[] = availableMaterials;
