@@ -2,6 +2,7 @@ import { Liquids, calculateCanCount } from "@/lib/models";
 import { ICONS_MAP } from "@/lib/constants";
 import { getBasePath } from "@/lib/utils";
 import Image from "next/image";
+import { useState } from "react";
 
 // Helper function to check if a material is a liquid
 const isLiquid = (stuffName: string): boolean => {
@@ -14,6 +15,7 @@ interface StuffIconProps {
 }
 
 export function StuffIcon({ stuffName, count }: StuffIconProps) {
+  const [showTooltip, setShowTooltip] = useState(false);
   const iconPath = ICONS_MAP.get(stuffName);
   const displayCount = isLiquid(stuffName) ? `${count}L` : count;
 
@@ -31,7 +33,11 @@ export function StuffIcon({ stuffName, count }: StuffIconProps) {
   const fullIconPath = `${basePath}/${iconPath}`;
 
   return (
-    <div className="icon-tile relative">
+    <div
+      className="icon-tile relative"
+      onMouseEnter={() => setShowTooltip(true)}
+      onMouseLeave={() => setShowTooltip(false)}
+    >
       {iconPath ? (
         <Image
           alt={stuffName}
@@ -45,7 +51,7 @@ export function StuffIcon({ stuffName, count }: StuffIconProps) {
         <span className="text-xs">{`${stuffName}(${displayCount})`}</span>
       )}
       <span className="count-badge">{displayCount}</span>
-      <div className="instant-tooltip">{tooltipText}</div>
+      {showTooltip && <div className="instant-tooltip">{tooltipText}</div>}
     </div>
   );
 }
