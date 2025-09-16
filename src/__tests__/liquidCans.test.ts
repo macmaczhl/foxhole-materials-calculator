@@ -1,4 +1,8 @@
-import { Liquids, calculateCanCount, LIQUID_CAN_CAPACITIES } from "../lib/models";
+import {
+  Liquids,
+  calculateCanCount,
+  LIQUID_CAN_CAPACITIES,
+} from "../lib/models";
 
 describe("Liquid Can Calculations", () => {
   describe("LIQUID_CAN_CAPACITIES", () => {

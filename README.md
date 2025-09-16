@@ -9,6 +9,7 @@ Inspired by [reddit post](https://www.reddit.com/r/foxholegame/comments/ym64ru/f
 ## Features
 
 ### 🏭 Comprehensive Material Support
+
 - **different materials** across multiple categories:
   - **Vehicles**
   - **Components**: Construction Materials, Refined Materials, Assembly Materials I-V, and more
@@ -16,18 +17,21 @@ Inspired by [reddit post](https://www.reddit.com/r/foxholegame/comments/ym64ru/f
   - **Raw Resources**: Salvage, Components, Coal, Sulfur, Rare Metal, etc.
 
 ### 🔧 Advanced Recipe Tree System
+
 - **Smart recipe selection**: Choose between garage production vs mass production factory recipes
 - **Deep dependency tracking**: Automatically calculates all required sub-materials
 - **Multiple recipe options**: Different production methods with varying efficiency
 - **Real-time calculations**: Instant updates as you modify quantities
 
 ### 📊 Intelligent Calculations
+
 - **Initial Components**: Direct material requirements for selected recipes
 - **Calculated Components**: Raw materials needed after breaking down all dependencies
 - **Excess tracking**: Shows surplus materials when using crate-based production
 - **Scalable quantities**: Calculate for any number of items with precise scaling
 
 ### 🎯 User-Friendly Interface
+
 - **Categorized material selection**: Organized by Vehicle, Components, and Raw Resources
 - **Visual recipe display**: Icons and quantities for easy understanding
 - **Recipe tree visualization**: See the complete production chain
@@ -36,6 +40,7 @@ Inspired by [reddit post](https://www.reddit.com/r/foxholegame/comments/ym64ru/f
 ## Quick Start
 
 ### Prerequisites
+
 - Node.js 20.x or later
 - npm (comes with Node.js)
 
@@ -72,11 +77,13 @@ npm start
 ## Usage Examples
 
 ### Basic Material Calculation
+
 1. Select "Construction Materials" from the dropdown
 2. Set quantity to 5
 3. View results: 50 Salvage required
 
 ### Vehicle Production Planning
+
 1. Select "T3 Xiphos" vehicle
 2. Set quantity to 5
 3. Choose between production methods:
@@ -85,6 +92,7 @@ npm start
 4. View complete material breakdown: 11,250 Salvage + 10,000 Components
 
 ### Recipe Tree Optimization
+
 - Explore different recipe options in the right panel
 - Compare efficiency between production methods
 - Optimize for available materials vs production speed
@@ -114,12 +122,14 @@ We welcome contributions to improve the Foxhole Materials Calculator! Whether yo
 ### Development Guidelines
 
 #### Code Quality Requirements
+
 - **Linting**: All code must pass `npm run lint`
 - **Formatting**: Use `npm run format` to maintain consistent style
 - **Testing**: Maintain 100% test coverage for new/changed code
 - **TypeScript**: Keep strict type checking enabled
 
 #### Required Validation Steps
+
 Always run these commands before submitting changes:
 
 ```bash
@@ -130,6 +140,7 @@ npm run build         # Production build must succeed
 ```
 
 #### Testing Requirements
+
 - **Unit tests**: Write tests for all new functions and components
 - **Place tests** in `src/__tests__/` with `.test.ts` or `.test.tsx` extensions
 - **Follow patterns**: Use existing test structure as examples
@@ -137,6 +148,7 @@ npm run build         # Production build must succeed
 - **Mock dependencies**: Mock external APIs and complex dependencies
 
 #### Adding New Materials
+
 1. Add to appropriate enum in `src/lib/models.ts`
 2. Add to `availableMaterials` array
 3. Create recipes in `src/lib/recipes.ts`
@@ -144,6 +156,7 @@ npm run build         # Production build must succeed
 5. **Required**: Add comprehensive unit tests
 
 #### Adding New Vehicles
+
 1. Add to `Vehicles` enum in `src/lib/models.ts`
 2. Create multiple recipes (garage vs mass production) in `src/lib/recipes.ts`
 3. Add to `RecipiesByStuff` map
@@ -153,6 +166,7 @@ npm run build         # Production build must succeed
 ### Submitting Changes
 
 #### Pull Request Process
+
 1. **Create a branch** from main: `git checkout -b feature/your-feature-name`
 2. **Make focused changes**: Keep PRs small and focused on one feature/fix
 3. **Test thoroughly**: Run all validation commands
@@ -161,6 +175,7 @@ npm run build         # Production build must succeed
 6. **Submit PR**: Include description of changes and testing performed
 
 #### PR Requirements
+
 - [ ] All tests pass (`npm test`)
 - [ ] Linting passes (`npm run lint`)
 - [ ] Build succeeds (`npm run build`)
@@ -171,6 +186,7 @@ npm run build         # Production build must succeed
 ### Common Development Tasks
 
 #### Manual Testing Scenarios
+
 Always test these workflows after changes:
 
 1. **Basic calculation**: Select "Construction Materials", set quantity 5, verify 50 Salvage
@@ -179,6 +195,7 @@ Always test these workflows after changes:
 4. **UI responsiveness**: Verify layout works on different screen sizes
 
 #### Debugging Tips
+
 - Use `npm run dev` for hot-reload development
 - Check browser console for React warnings
 - Use Redux DevTools for state debugging
@@ -187,16 +204,19 @@ Always test these workflows after changes:
 ### Architecture Notes
 
 #### State Management
+
 - **Redux Toolkit** for complex calculator state
 - **Immutable updates** using Immer (built into Redux Toolkit)
 - **Typed selectors** for type-safe state access
 
 #### Recipe System
+
 - **Tree structure**: Recipes can depend on other recipes
 - **Multiple options**: Each material can have various production methods
 - **Calculation engine**: Handles scaling, excess tracking, and optimization
 
 #### Component Architecture
+
 - **Separation of concerns**: Components focus on UI, logic in services
 - **Reusable components**: StuffIcon, StuffCombobox used throughout
 - **Accessible design**: Proper ARIA labels and keyboard navigation
@@ -210,6 +230,7 @@ The application automatically deploys to GitHub Pages when changes are merged to
 3. **Deployment** updates live site at https://macmaczhl.github.io/foxhole-materials-calculator/
 
 #### Local Production Testing
+
 ```bash
 npm run build    # Create production build
 npm start        # Serve production build locally
@@ -224,6 +245,7 @@ npm start        # Serve production build locally
 ### Recipe Data Sources
 
 Recipe data is based on current Foxhole game mechanics. When updating:
+
 - Verify recipes against current game version
 - Include source/validation in PR description
 - Test calculations with known examples

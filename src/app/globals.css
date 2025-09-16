@@ -132,6 +132,23 @@ body.app-body {
     color: var(--accent-300);
   }
 
+  /* Custom instant tooltip styles */
+  .instant-tooltip {
+    @apply absolute z-50 px-2 py-1 text-xs rounded-md pointer-events-none opacity-0 transition-opacity duration-100;
+    background-color: var(--panel-400);
+    border: 1px solid var(--border-600);
+    color: var(--text);
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 4px;
+    white-space: nowrap;
+  }
+
+  .icon-tile:hover .instant-tooltip {
+    @apply opacity-100;
+  }
+
   /* Tree visualization styles */
   .tree-connector {
     @apply absolute text-xs font-mono leading-none select-none;
