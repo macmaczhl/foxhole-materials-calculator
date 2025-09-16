@@ -422,6 +422,64 @@ const xiphosRecipes: IRecipe[] = [
   ),
 ];
 
+// Warden Armored Car recipes
+const oBrienV101FreemanRecipes: IRecipe[] = [
+  // Small Assembly Station: 20 x Refined Materials → 1 x O'Brien V.101 Freeman
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 20 }],
+    [{ stuff: Vehicles.O_Brien_V_101_Freeman, count: 1 }]
+  ),
+];
+
+const oBrienV121HighlanderRecipes: IRecipe[] = [
+  // Small Assembly Station: 18 x Refined Materials → 1 x O'Brien V.121 Highlander
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 18 }],
+    [{ stuff: Vehicles.O_Brien_V_121_Highlander, count: 1 }]
+  ),
+];
+
+const oBrienV130WildJackRecipes: IRecipe[] = [
+  // Small Assembly Station: 18 x Refined Materials → 1 x O'Brien V.130 Wild Jack
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 18 }],
+    [{ stuff: Vehicles.O_Brien_V_130_Wild_Jack, count: 1 }]
+  ),
+];
+
+const oBrienV110Recipes: IRecipe[] = [
+  // Small Assembly Station: 15 x Refined Materials → 1 x O'Brien V.110
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 15 }],
+    [{ stuff: Vehicles.O_Brien_V_110, count: 1 }]
+  ),
+];
+
+const oBrienV113GravekeeperRecipes: IRecipe[] = [
+  // Small Assembly Station: 22 x Refined Materials → 1 x O'Brien V.113 Gravekeeper
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 22 }],
+    [{ stuff: Vehicles.O_Brien_V_113_Gravekeeper, count: 1 }]
+  ),
+];
+
+// Colonial Armored Car recipes
+const t5PercutioRecipes: IRecipe[] = [
+  // Motor Pool: 20 x Refined Materials → 1 x T5 "Percutio"
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 20 }],
+    [{ stuff: Vehicles.T5_Percutio, count: 1 }]
+  ),
+];
+
+const t8GeminiRecipes: IRecipe[] = [
+  // Motor Pool: 18 x Refined Materials → 1 x T8 "Gemini"
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 18 }],
+    [{ stuff: Vehicles.T8_Gemini, count: 1 }]
+  ),
+];
+
 export const RecipiesByStuff = new Map<string, IRecipe[]>([
   [Materials.ConstructionMaterials, constructionMaterialsRecipes],
   [
@@ -453,6 +511,13 @@ export const RecipiesByStuff = new Map<string, IRecipe[]>([
   [Liquids.Oil, oilRecipes],
 
   [Vehicles.Xiphos, xiphosRecipes],
+  [Vehicles.O_Brien_V_101_Freeman, oBrienV101FreemanRecipes],
+  [Vehicles.O_Brien_V_121_Highlander, oBrienV121HighlanderRecipes],
+  [Vehicles.O_Brien_V_130_Wild_Jack, oBrienV130WildJackRecipes],
+  [Vehicles.O_Brien_V_110, oBrienV110Recipes],
+  [Vehicles.O_Brien_V_113_Gravekeeper, oBrienV113GravekeeperRecipes],
+  [Vehicles.T5_Percutio, t5PercutioRecipes],
+  [Vehicles.T8_Gemini, t8GeminiRecipes],
 
   emptyRecipePair(RawResources.Salvage),
   emptyRecipePair(RawResources.DamagedComponents),

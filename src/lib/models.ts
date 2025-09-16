@@ -51,6 +51,15 @@ export enum Liquids {
 
 export enum Vehicles {
   Xiphos = 'T3 "Xiphos"',
+  // Warden Armored Cars
+  O_Brien_V_101_Freeman = 'O\'Brien V.101 Freeman',
+  O_Brien_V_121_Highlander = 'O\'Brien V.121 Highlander',
+  O_Brien_V_130_Wild_Jack = 'O\'Brien V.130 Wild Jack',
+  O_Brien_V_110 = 'O\'Brien V.110',
+  O_Brien_V_113_Gravekeeper = 'O\'Brien V.113 Gravekeeper',
+  // Colonial Armored Cars
+  T5_Percutio = 'T5 "Percutio"',
+  T8_Gemini = 'T8 "Gemini"',
 }
 
 export enum RawResources {
@@ -92,6 +101,13 @@ export const availableMaterials: Stuff[] = [
   { name: Liquids.EnrichedOil },
   { name: Liquids.Oil },
   { name: Vehicles.Xiphos },
+  { name: Vehicles.O_Brien_V_101_Freeman },
+  { name: Vehicles.O_Brien_V_121_Highlander },
+  { name: Vehicles.O_Brien_V_130_Wild_Jack },
+  { name: Vehicles.O_Brien_V_110 },
+  { name: Vehicles.O_Brien_V_113_Gravekeeper },
+  { name: Vehicles.T5_Percutio },
+  { name: Vehicles.T8_Gemini },
 ];
 
 export const stuffList: Stuff[] = availableMaterials;
