@@ -68,4 +68,38 @@ describe("StuffIcon", () => {
     // Should show without L suffix since it's not in the Liquids enum
     expect(screen.getByText("Custom Liquid(15)")).toBeTruthy();
   });
+
+  test("displays tooltip with can information for liquids", () => {
+    // Test Petrol (50L capacity)
+    const { container } = render(<StuffIcon stuffName={Liquids.Petrol} count={75} />);
+    const iconTile = container.querySelector('.icon-tile');
+    expect(iconTile?.getAttribute('title')).toBe('Petrol: 75L (2 cans)');
+  });
+
+  test("displays tooltip with singular can for single can amounts", () => {
+    // Test with exactly one can worth
+    const { container } = render(<StuffIcon stuffName={Liquids.HeavyOil} count={30} />);
+    const iconTile = container.querySelector('.icon-tile');
+    expect(iconTile?.getAttribute('title')).toBe('Heavy Oil: 30L (1 can)');
+  });
+
+  test("displays tooltip with multiple cans for larger amounts", () => {
+    // Test Water (50L capacity) with 150L
+    const { container } = render(<StuffIcon stuffName={Liquids.Water} count={150} />);
+    const iconTile = container.querySelector('.icon-tile');
+    expect(iconTile?.getAttribute('title')).toBe('Water: 150L (3 cans)');
+  });
+
+  test("displays basic tooltip for non-liquid materials", () => {
+    const { container } = render(<StuffIcon stuffName={Materials.ConstructionMaterials} count={10} />);
+    const iconTile = container.querySelector('.icon-tile');
+    expect(iconTile?.getAttribute('title')).toBe('Construction Materials');
+  });
+
+  test("handles fractional can requirements correctly", () => {
+    // Test Enriched Oil (30L capacity) with 45L -> should be 2 cans
+    const { container } = render(<StuffIcon stuffName={Liquids.EnrichedOil} count={45} />);
+    const iconTile = container.querySelector('.icon-tile');
+    expect(iconTile?.getAttribute('title')).toBe('Enriched Oil: 45L (2 cans)');
+  });
 });
