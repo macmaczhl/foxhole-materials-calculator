@@ -58,6 +58,9 @@ export enum Vehicles {
   OBrienHighlander = 'O\'Brien v.121 Highlander',
   OBrienFreeman = 'O\'Brien v.101 Freeman',
   OBrienV110 = 'O\'Brien v.110',
+  OBrienWildJack = 'O\'Brien V.130 Wild Jack',
+  OBrienKnave = 'O\'Brien V.190 Knave',
+  OBrienSquire = 'O\'Brien V.200 Squire',
 }
 
 export enum RawResources {
@@ -106,6 +109,9 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.OBrienHighlander },
   { name: Vehicles.OBrienFreeman },
   { name: Vehicles.OBrienV110 },
+  { name: Vehicles.OBrienWildJack },
+  { name: Vehicles.OBrienKnave },
+  { name: Vehicles.OBrienSquire },
 ];
 
 export const stuffList: Stuff[] = availableMaterials;

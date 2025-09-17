@@ -12,6 +12,9 @@ describe("New Armored Car Vehicles", () => {
     expect(RecipiesByStuff.has(Vehicles.OBrienHighlander)).toBe(true);
     expect(RecipiesByStuff.has(Vehicles.OBrienFreeman)).toBe(true);
     expect(RecipiesByStuff.has(Vehicles.OBrienV110)).toBe(true);
+    expect(RecipiesByStuff.has(Vehicles.OBrienWildJack)).toBe(true);
+    expect(RecipiesByStuff.has(Vehicles.OBrienKnave)).toBe(true);
+    expect(RecipiesByStuff.has(Vehicles.OBrienSquire)).toBe(true);
   });
 
   test("T12 Actaeon Tankette recipes are valid", () => {
@@ -19,11 +22,11 @@ describe("New Armored Car Vehicles", () => {
     expect(recipes).toBeDefined();
     expect(recipes!.length).toBeGreaterThan(0);
 
-    // Check basic recipe structure
+    // Check basic recipe structure - now uses Refined Materials
     const basicRecipe = recipes!.find(r => r.produced[0].count === 1);
     expect(basicRecipe).toBeDefined();
-    expect(basicRecipe!.required[0].stuff).toBe(Materials.ConstructionMaterials);
-    expect(basicRecipe!.required[0].count).toBe(150);
+    expect(basicRecipe!.required[0].stuff).toBe(Materials.RefinedMaterials);
+    expect(basicRecipe!.required[0].count).toBe(35);
   });
 
   test("T5 Percutio recipes are valid", () => {
@@ -33,8 +36,10 @@ describe("New Armored Car Vehicles", () => {
 
     const basicRecipe = recipes!.find(r => r.produced[0].count === 1);
     expect(basicRecipe).toBeDefined();
-    expect(basicRecipe!.required[0].stuff).toBe(Materials.RefinedMaterials);
-    expect(basicRecipe!.required[0].count).toBe(120);
+    expect(basicRecipe!.required[0].stuff).toBe(Materials.ConstructionMaterials);
+    expect(basicRecipe!.required[0].count).toBe(10);
+    expect(basicRecipe!.required[1].stuff).toBe(Materials.AssemblyMaterialsI);
+    expect(basicRecipe!.required[1].count).toBe(10);
   });
 
   test("T8 Gemini recipes are valid", () => {
@@ -44,8 +49,10 @@ describe("New Armored Car Vehicles", () => {
 
     const basicRecipe = recipes!.find(r => r.produced[0].count === 1);
     expect(basicRecipe).toBeDefined();
-    expect(basicRecipe!.required[0].stuff).toBe(Materials.RefinedMaterials);
-    expect(basicRecipe!.required[0].count).toBe(135);
+    expect(basicRecipe!.required[0].stuff).toBe(Materials.ConstructionMaterials);
+    expect(basicRecipe!.required[0].count).toBe(10);
+    expect(basicRecipe!.required[1].stuff).toBe(Materials.AssemblyMaterialsI);
+    expect(basicRecipe!.required[1].count).toBe(10);
   });
 
   test("O'Brien v.113 Gravekeeper recipes are valid", () => {
@@ -55,8 +62,10 @@ describe("New Armored Car Vehicles", () => {
 
     const basicRecipe = recipes!.find(r => r.produced[0].count === 1);
     expect(basicRecipe).toBeDefined();
-    expect(basicRecipe!.required[0].stuff).toBe(Materials.RefinedMaterials);
-    expect(basicRecipe!.required[0].count).toBe(135);
+    expect(basicRecipe!.required[0].stuff).toBe(Materials.ConstructionMaterials);
+    expect(basicRecipe!.required[0].count).toBe(5);
+    expect(basicRecipe!.required[1].stuff).toBe(Materials.AssemblyMaterialsI);
+    expect(basicRecipe!.required[1].count).toBe(5);
   });
 
   test("O'Brien v.121 Highlander recipes are valid", () => {
@@ -66,8 +75,10 @@ describe("New Armored Car Vehicles", () => {
 
     const basicRecipe = recipes!.find(r => r.produced[0].count === 1);
     expect(basicRecipe).toBeDefined();
-    expect(basicRecipe!.required[0].stuff).toBe(Materials.RefinedMaterials);
-    expect(basicRecipe!.required[0].count).toBe(120);
+    expect(basicRecipe!.required[0].stuff).toBe(Materials.ConstructionMaterials);
+    expect(basicRecipe!.required[0].count).toBe(15);
+    expect(basicRecipe!.required[1].stuff).toBe(Materials.AssemblyMaterialsI);
+    expect(basicRecipe!.required[1].count).toBe(15);
   });
 
   test("O'Brien v.101 Freeman recipes are valid", () => {
@@ -88,8 +99,10 @@ describe("New Armored Car Vehicles", () => {
 
     const basicRecipe = recipes!.find(r => r.produced[0].count === 1);
     expect(basicRecipe).toBeDefined();
-    expect(basicRecipe!.required[0].stuff).toBe(Materials.RefinedMaterials);
-    expect(basicRecipe!.required[0].count).toBe(105);
+    expect(basicRecipe!.required[0].stuff).toBe(Materials.ProcessedConstructionMaterials);
+    expect(basicRecipe!.required[0].count).toBe(10);
+    expect(basicRecipe!.required[1].stuff).toBe(Materials.AssemblyMaterialsI);
+    expect(basicRecipe!.required[1].count).toBe(10);
   });
 
   // Test calculations work for new vehicles
@@ -106,7 +119,8 @@ describe("New Armored Car Vehicles", () => {
 
     const result = calculateComponents(recipeTree, 1);
     expect(result.initial).toEqual([
-      { stuff: Materials.RefinedMaterials, count: 120 },
+      { stuff: Materials.ConstructionMaterials, count: 10 },
+      { stuff: Materials.AssemblyMaterialsI, count: 10 },
     ]);
   });
 
@@ -127,24 +141,72 @@ describe("New Armored Car Vehicles", () => {
     ]);
   });
 
-  // Test mass production recipes exist and work
-  test("mass production recipes exist for all vehicles", () => {
-    const vehicles = [
+  // Add tests for the three new vehicles
+  test("O'Brien V.130 Wild Jack recipes are valid", () => {
+    const recipes = RecipiesByStuff.get(Vehicles.OBrienWildJack);
+    expect(recipes).toBeDefined();
+    expect(recipes!.length).toBeGreaterThan(0);
+
+    const basicRecipe = recipes!.find(r => r.produced[0].count === 1);
+    expect(basicRecipe).toBeDefined();
+    expect(basicRecipe!.required[0].stuff).toBe(Materials.ConstructionMaterials);
+    expect(basicRecipe!.required[0].count).toBe(10);
+  });
+
+  test("O'Brien V.190 Knave recipes are valid", () => {
+    const recipes = RecipiesByStuff.get(Vehicles.OBrienKnave);
+    expect(recipes).toBeDefined();
+    expect(recipes!.length).toBeGreaterThan(0);
+
+    const basicRecipe = recipes!.find(r => r.produced[0].count === 1);
+    expect(basicRecipe).toBeDefined();
+    expect(basicRecipe!.required[0].stuff).toBe(Materials.RefinedMaterials);
+    expect(basicRecipe!.required[0].count).toBe(40);
+  });
+
+  test("O'Brien V.200 Squire recipes are valid", () => {
+    const recipes = RecipiesByStuff.get(Vehicles.OBrienSquire);
+    expect(recipes).toBeDefined();
+    expect(recipes!.length).toBeGreaterThan(0);
+
+    const basicRecipe = recipes!.find(r => r.produced[0].count === 1);
+    expect(basicRecipe).toBeDefined();
+    expect(basicRecipe!.required[0].stuff).toBe(Materials.ProcessedConstructionMaterials);
+    expect(basicRecipe!.required[0].count).toBe(35);
+    expect(basicRecipe!.required[3].stuff).toBe(Vehicles.OBrienKnave);
+    expect(basicRecipe!.required[3].count).toBe(1);
+  });
+
+  // Test mass production recipes exist for vehicles that have them
+  test("mass production recipes exist for applicable vehicles", () => {
+    // Only Actaeon Tankette and O'Brien Knave have mass production recipes now
+    const vehiclesWithMassProduction = [
       Vehicles.ActaeonTankette,
+      Vehicles.OBrienKnave,
+    ];
+
+    vehiclesWithMassProduction.forEach(vehicle => {
+      const recipes = RecipiesByStuff.get(vehicle)!;
+      const massProductionRecipes = recipes.filter(r => r.produced[0].count > 1);
+      expect(massProductionRecipes.length).toBeGreaterThan(0);
+    });
+
+    // Test single-recipe vehicles have only one recipe
+    const singleRecipeVehicles = [
       Vehicles.Percutio,
       Vehicles.Gemini,
       Vehicles.OBrienGravekeeper,
       Vehicles.OBrienHighlander,
       Vehicles.OBrienFreeman,
       Vehicles.OBrienV110,
+      Vehicles.OBrienWildJack,
+      Vehicles.OBrienSquire,
     ];
 
-    vehicles.forEach(vehicle => {
+    singleRecipeVehicles.forEach(vehicle => {
       const recipes = RecipiesByStuff.get(vehicle)!;
-      const massProductionRecipe = recipes.find(r => r.produced[0].count === 3);
-      expect(massProductionRecipe).toBeDefined();
-      expect(massProductionRecipe!.produced[0].stuff).toBe(vehicle);
-      expect(massProductionRecipe!.produced[0].count).toBe(3);
+      expect(recipes.length).toBe(1);
+      expect(recipes[0].produced[0].count).toBe(1);
     });
   });
 });

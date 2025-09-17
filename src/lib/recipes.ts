@@ -400,123 +400,156 @@ const refinedMaterialsRecipes: IRecipe[] = [
 
 // T3 "Xiphos" vehicle recipes
 const xiphosRecipes: IRecipe[] = [
-  // Garage production: 25 x Refined Materials → 1 x T3 "Xiphos"
+  // Only one recipe per feedback: 10 x Construction Materials + 10 x Assembly Materials I → 1 x T3 "Xiphos"
   createRecipe(
-    [{ stuff: Materials.RefinedMaterials, count: 25 }],
+    [
+      { stuff: Materials.ConstructionMaterials, count: 10 },
+      { stuff: Materials.AssemblyMaterialsI, count: 10 }
+    ],
     [{ stuff: Vehicles.Xiphos, count: 1 }]
-  ),
-  // Mass Production Factory: 179 x Refined Materials → 3 crates of 3 x T3 "Xiphos" (9 total)
-  createRecipe(
-    [{ stuff: Materials.RefinedMaterials, count: 179 }],
-    [{ stuff: Vehicles.Xiphos, count: 9 }]
-  ),
-  // Mass Production Factory: 224 x Refined Materials → 4 crates of 3 x T3 "Xiphos" (12 total)
-  createRecipe(
-    [{ stuff: Materials.RefinedMaterials, count: 224 }],
-    [{ stuff: Vehicles.Xiphos, count: 12 }]
-  ),
-  // Mass Production Factory: 261 x Refined Materials → 5 crates of 3 x T3 "Xiphos" (15 total)
-  createRecipe(
-    [{ stuff: Materials.RefinedMaterials, count: 261 }],
-    [{ stuff: Vehicles.Xiphos, count: 15 }]
   ),
 ];
 
 // T12 "Actaeon" Tankette vehicle recipes
 const actaeonTanketteRecipes: IRecipe[] = [
-  // Based on external data: armored car with tank armor, costs basic materials
+  // Garage: 35 x Refined Materials → 1 x T12 "Actaeon" Tankette
   createRecipe(
-    [{ stuff: Materials.ConstructionMaterials, count: 150 }],
+    [{ stuff: Materials.RefinedMaterials, count: 35 }],
     [{ stuff: Vehicles.ActaeonTankette, count: 1 }]
   ),
-  // Mass Production Factory variant
+  // Mass Production Factory: 251 x Refined Materials → 9 x T12 "Actaeon" Tankette
   createRecipe(
-    [{ stuff: Materials.ConstructionMaterials, count: 450 }],
-    [{ stuff: Vehicles.ActaeonTankette, count: 3 }]
+    [{ stuff: Materials.RefinedMaterials, count: 251 }],
+    [{ stuff: Vehicles.ActaeonTankette, count: 9 }]
+  ),
+  // Mass Production Factory: 314 x Refined Materials → 12 x T12 "Actaeon" Tankette
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 314 }],
+    [{ stuff: Vehicles.ActaeonTankette, count: 12 }]
+  ),
+  // Mass Production Factory: 366 x Refined Materials → 15 x T12 "Actaeon" Tankette
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 366 }],
+    [{ stuff: Vehicles.ActaeonTankette, count: 15 }]
   ),
 ];
 
 // T5 "Percutio" vehicle recipes
 const percutioRecipes: IRecipe[] = [
-  // Anti-tank variant, costs refined materials
+  // Only one recipe per feedback: 10 x Construction Materials + 10 x Assembly Materials I → 1 x T5 "Percutio"
   createRecipe(
-    [{ stuff: Materials.RefinedMaterials, count: 120 }],
+    [
+      { stuff: Materials.ConstructionMaterials, count: 10 },
+      { stuff: Materials.AssemblyMaterialsI, count: 10 }
+    ],
     [{ stuff: Vehicles.Percutio, count: 1 }]
-  ),
-  // Mass Production Factory variant
-  createRecipe(
-    [{ stuff: Materials.RefinedMaterials, count: 360 }],
-    [{ stuff: Vehicles.Percutio, count: 3 }]
   ),
 ];
 
 // T8 "Gemini" vehicle recipes
 const geminiRecipes: IRecipe[] = [
-  // RPG launcher variant, costs refined materials
+  // Only one recipe per feedback: 10 x Construction Materials + 10 x Assembly Materials I → 1 x T8 "Gemini"
   createRecipe(
-    [{ stuff: Materials.RefinedMaterials, count: 135 }],
+    [
+      { stuff: Materials.ConstructionMaterials, count: 10 },
+      { stuff: Materials.AssemblyMaterialsI, count: 10 }
+    ],
     [{ stuff: Vehicles.Gemini, count: 1 }]
-  ),
-  // Mass Production Factory variant
-  createRecipe(
-    [{ stuff: Materials.RefinedMaterials, count: 405 }],
-    [{ stuff: Vehicles.Gemini, count: 3 }]
   ),
 ];
 
 // O'Brien v.113 Gravekeeper vehicle recipes
 const oBrienGravekeeperRecipes: IRecipe[] = [
-  // Anti-tank variant with Bonesaw launcher
+  // Only one recipe per feedback: 5 x Construction Materials + 5 x Assembly Materials I → 1 x O'Brien v.113 Gravekeeper
   createRecipe(
-    [{ stuff: Materials.RefinedMaterials, count: 135 }],
+    [
+      { stuff: Materials.ConstructionMaterials, count: 5 },
+      { stuff: Materials.AssemblyMaterialsI, count: 5 }
+    ],
     [{ stuff: Vehicles.OBrienGravekeeper, count: 1 }]
-  ),
-  // Mass Production Factory variant
-  createRecipe(
-    [{ stuff: Materials.RefinedMaterials, count: 405 }],
-    [{ stuff: Vehicles.OBrienGravekeeper, count: 3 }]
   ),
 ];
 
 // O'Brien v.121 Highlander vehicle recipes
 const oBrienHighlanderRecipes: IRecipe[] = [
-  // All-terrain mobility variant
+  // Only one recipe per feedback: 15 x Construction Materials + 15 x Assembly Materials I → 1 x O'Brien v.121 Highlander
   createRecipe(
-    [{ stuff: Materials.RefinedMaterials, count: 120 }],
+    [
+      { stuff: Materials.ConstructionMaterials, count: 15 },
+      { stuff: Materials.AssemblyMaterialsI, count: 15 }
+    ],
     [{ stuff: Vehicles.OBrienHighlander, count: 1 }]
-  ),
-  // Mass Production Factory variant
-  createRecipe(
-    [{ stuff: Materials.RefinedMaterials, count: 360 }],
-    [{ stuff: Vehicles.OBrienHighlander, count: 3 }]
   ),
 ];
 
 // O'Brien v.101 Freeman vehicle recipes
 const oBrienFreemanRecipes: IRecipe[] = [
-  // Ballistics cannon variant, higher cost
+  // Keep as is - no specific feedback to change this one
   createRecipe(
     [{ stuff: Materials.RefinedMaterials, count: 180 }],
     [{ stuff: Vehicles.OBrienFreeman, count: 1 }]
-  ),
-  // Mass Production Factory variant
-  createRecipe(
-    [{ stuff: Materials.RefinedMaterials, count: 540 }],
-    [{ stuff: Vehicles.OBrienFreeman, count: 3 }]
   ),
 ];
 
 // O'Brien v.110 vehicle recipes
 const oBrienV110Recipes: IRecipe[] = [
-  // Standard warden armored car
+  // Only one recipe per feedback: 10 x Processed Construction Materials + 10 x Assembly Materials I → 1 x O'Brien v.110
   createRecipe(
-    [{ stuff: Materials.RefinedMaterials, count: 105 }],
+    [
+      { stuff: Materials.ProcessedConstructionMaterials, count: 10 },
+      { stuff: Materials.AssemblyMaterialsI, count: 10 }
+    ],
     [{ stuff: Vehicles.OBrienV110, count: 1 }]
   ),
-  // Mass Production Factory variant
+];
+
+// O'Brien V.130 Wild Jack vehicle recipes
+const oBrienWildJackRecipes: IRecipe[] = [
+  // Placeholder recipe - no specific feedback provided yet
   createRecipe(
-    [{ stuff: Materials.RefinedMaterials, count: 315 }],
-    [{ stuff: Vehicles.OBrienV110, count: 3 }]
+    [
+      { stuff: Materials.ConstructionMaterials, count: 10 },
+      { stuff: Materials.AssemblyMaterialsI, count: 10 }
+    ],
+    [{ stuff: Vehicles.OBrienWildJack, count: 1 }]
+  ),
+];
+
+// O'Brien V.190 Knave vehicle recipes
+const oBrienKnaveRecipes: IRecipe[] = [
+  // Recipe 1: 40 x Refined Materials → 1 x O'Brien V.190 Knave
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 40 }],
+    [{ stuff: Vehicles.OBrienKnave, count: 1 }]
+  ),
+  // Recipe 2: 288 x Refined Materials → 9 x O'Brien V.190 Knave
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 288 }],
+    [{ stuff: Vehicles.OBrienKnave, count: 9 }]
+  ),
+  // Recipe 3: 360 x Refined Materials → 12 x O'Brien V.190 Knave
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 360 }],
+    [{ stuff: Vehicles.OBrienKnave, count: 12 }]
+  ),
+  // Recipe 4: 420 x Refined Materials → 15 x O'Brien V.190 Knave
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 420 }],
+    [{ stuff: Vehicles.OBrienKnave, count: 15 }]
+  ),
+];
+
+// O'Brien V.200 Squire vehicle recipes
+const oBrienSquireRecipes: IRecipe[] = [
+  // Complex recipe per feedback: 35 x Processed Construction Materials + 10 x Assembly Materials I + 8 x Assembly Materials III + 1 x O'Brien V.190 Knave → 1 x O'Brien V.200 Squire
+  createRecipe(
+    [
+      { stuff: Materials.ProcessedConstructionMaterials, count: 35 },
+      { stuff: Materials.AssemblyMaterialsI, count: 10 },
+      { stuff: Materials.AssemblyMaterialsIII, count: 8 },
+      { stuff: Vehicles.OBrienKnave, count: 1 }
+    ],
+    [{ stuff: Vehicles.OBrienSquire, count: 1 }]
   ),
 ];
 
@@ -558,6 +591,9 @@ export const RecipiesByStuff = new Map<string, IRecipe[]>([
   [Vehicles.OBrienHighlander, oBrienHighlanderRecipes],
   [Vehicles.OBrienFreeman, oBrienFreemanRecipes],
   [Vehicles.OBrienV110, oBrienV110Recipes],
+  [Vehicles.OBrienWildJack, oBrienWildJackRecipes],
+  [Vehicles.OBrienKnave, oBrienKnaveRecipes],
+  [Vehicles.OBrienSquire, oBrienSquireRecipes],
 
   emptyRecipePair(RawResources.Salvage),
   emptyRecipePair(RawResources.DamagedComponents),
