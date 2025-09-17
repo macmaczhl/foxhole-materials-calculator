@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import store from "@/lib/store";
 import { RecipesSelectors } from "./components/RecipesSelectors";
 import { Report } from "./components/Report";
+import { TreeVisualizationTest } from "./components/TreeVisualizationTest";
 
 export default function Home() {
   return (
@@ -18,6 +19,9 @@ export default function Home() {
         </div>
         <div className="basis-1/2">
           <RecipesSelectors />
+          <div className="mt-6">
+            <TreeVisualizationTest />
+          </div>
         </div>
       </div>
     </Provider>

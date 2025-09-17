@@ -132,7 +132,7 @@ body.app-body {
     color: var(--accent-300);
   }
 
-  /* Tree visualization styles */
+  /* Tree visualization styles - inner directories tree style */
   .tree-connector {
     @apply absolute text-xs font-mono leading-none select-none;
     color: var(--border-600);
@@ -141,16 +141,62 @@ body.app-body {
   .tree-line {
     @apply absolute;
     background-color: var(--border-600);
-    opacity: 0.4;
+    opacity: 0.6;
   }
 
   .tree-line-vertical {
     @apply tree-line;
-    width: 1px;
+    width: 2px;
+    border-radius: 1px;
   }
 
   .tree-line-horizontal {
     @apply tree-line;
-    height: 1px;
+    height: 2px;
+    border-radius: 1px;
+  }
+
+  /* Enhanced tree structure styling */
+  .tree-node {
+    position: relative;
+  }
+
+  .tree-node::before {
+    content: '';
+    position: absolute;
+    left: -8px;
+    top: 50%;
+    width: 8px;
+    height: 2px;
+    background-color: var(--border-600);
+    opacity: 0.6;
+    transform: translateY(-1px);
+  }
+
+  .tree-node:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: -8px;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background-color: var(--border-600);
+    opacity: 0.4;
+  }
+
+  /* Tree connector SVG styling */
+  .tree-connector svg {
+    z-index: 1;
+  }
+
+  .tree-connector line {
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* Ensure tree content is above connectors */
+  .tree-content {
+    position: relative;
+    z-index: 2;
   }
 }

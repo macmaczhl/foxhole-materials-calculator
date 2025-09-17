@@ -5,6 +5,7 @@ import { useTreeSelectedRecipe } from "@/lib/selectors";
 import { RadioGroup, Field, Radio, Label } from "@headlessui/react";
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import { StuffIcon } from "./StuffIcon";
+import { TreeConnector } from "./TreeConnector";
 
 interface RecipesSelectorProps {
   rowId: string;
@@ -12,9 +13,9 @@ interface RecipesSelectorProps {
   recipes: IRecipe[];
   treePath: string[];
   isLast?: boolean;
+  isFirst?: boolean;
+  hasSiblings?: boolean;
 }
-
-const marginleftClasses = ["ml-4", "ml-8", "ml-12", "ml-16", "ml-20", "ml-24"];
 
 export function RecipesSelector({
   rowId,
@@ -22,6 +23,8 @@ export function RecipesSelector({
   recipes,
   treePath,
   isLast = false,
+  isFirst = false,
+  hasSiblings = false,
 }: RecipesSelectorProps) {
   const selectedRecipe = useTreeSelectedRecipe(rowId, treePath);
   const dispatch = useAppDispatch();
@@ -30,56 +33,24 @@ export function RecipesSelector({
     dispatch(selectTreeRecipe({ rowId, recipe, treePath }));
   };
 
-  const marginleftClass =
-    marginleftClasses[
-      Math.min(treePath.length - 1, marginleftClasses.length - 1)
-    ];
   const isNested = treePath.length > 1;
   const treeDepth = treePath.length - 1;
 
-  // Enhanced positioning for clearer tree visualization
-  const connectorLeftPosition = treeDepth > 0 ? 2 + (treeDepth - 1) * 8 : 0;
-
-  // Calculate content padding to avoid overlap with connectors
-  const contentLeftPadding = isNested ? connectorLeftPosition + 16 : 0; // 16px = connector width + horizontal line + some margin
-
   return (
-    <div className={`relative panel-compact mb-1 ${marginleftClass}`}>
-      {/* Tree connector lines */}
-      {isNested && (
-        <>
-          {/* Vertical line for this level */}
-          <div
-            className="absolute tree-line"
-            style={{
-              left: `${connectorLeftPosition}px`,
-              top: "0px",
-              width: "2px",
-              height: isLast ? "50%" : "100%",
-              backgroundColor: "var(--border-600)",
-              opacity: "0.6",
-            }}
-          ></div>
-          {/* Horizontal connector from parent to current item */}
-          <div
-            className="absolute tree-line"
-            style={{
-              left: `${connectorLeftPosition}px`,
-              top: "50%",
-              width: "12px",
-              height: "2px",
-              backgroundColor: "var(--border-600)",
-              opacity: "0.8",
-              transform: "translateY(-1px)",
-            }}
-          ></div>
-        </>
-      )}
+    <div className="relative tree-node">
+      {/* Tree connector lines - inner directories style */}
+      <TreeConnector
+        depth={treeDepth}
+        isLast={isLast}
+        hasSiblings={hasSiblings}
+        isFirst={isFirst}
+      />
+
+      {/* Content with proper indentation */}
       <div
-        className="relative z-10"
+        className="panel-compact mb-1 tree-content"
         style={{
-          paddingLeft:
-            contentLeftPadding > 0 ? `${contentLeftPadding}px` : undefined,
+          marginLeft: isNested ? `${treeDepth * 16}px` : "0px",
         }}
       >
         <span className="font-medium text-sm tracking-wide text-muted-300">
