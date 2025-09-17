@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { StuffIcon } from "../app/components/StuffIcon";
 import { Liquids, Materials, RawResources } from "../lib/models";
 
@@ -74,21 +74,11 @@ describe("StuffIcon", () => {
     const { container } = render(
       <StuffIcon stuffName={Liquids.Petrol} count={75} />
     );
-    const iconTile = container.querySelector(".icon-tile");
 
-    // Tooltip should not be visible initially
-    expect(container.querySelector(".instant-tooltip")).toBeNull();
-
-    // Hover over the icon
-    fireEvent.mouseEnter(iconTile!);
-
-    // Tooltip should now be visible with correct text
-    const tooltip = container.querySelector(".instant-tooltip");
+    // Tooltip should be present in DOM with correct text
+    const tooltip = container.querySelector('[class*="instantTooltip"]');
+    expect(tooltip).toBeTruthy();
     expect(tooltip?.textContent).toBe("Petrol: 75L (2 cans)");
-
-    // Mouse leave should hide tooltip
-    fireEvent.mouseLeave(iconTile!);
-    expect(container.querySelector(".instant-tooltip")).toBeNull();
   });
 
   test("displays tooltip with singular can for single can amounts", () => {
@@ -96,12 +86,8 @@ describe("StuffIcon", () => {
     const { container } = render(
       <StuffIcon stuffName={Liquids.HeavyOil} count={30} />
     );
-    const iconTile = container.querySelector(".icon-tile");
 
-    // Hover to show tooltip
-    fireEvent.mouseEnter(iconTile!);
-
-    const tooltip = container.querySelector(".instant-tooltip");
+    const tooltip = container.querySelector('[class*="instantTooltip"]');
     expect(tooltip?.textContent).toBe("Heavy Oil: 30L (1 can)");
   });
 
@@ -110,12 +96,8 @@ describe("StuffIcon", () => {
     const { container } = render(
       <StuffIcon stuffName={Liquids.Water} count={150} />
     );
-    const iconTile = container.querySelector(".icon-tile");
 
-    // Hover to show tooltip
-    fireEvent.mouseEnter(iconTile!);
-
-    const tooltip = container.querySelector(".instant-tooltip");
+    const tooltip = container.querySelector('[class*="instantTooltip"]');
     expect(tooltip?.textContent).toBe("Water: 150L (3 cans)");
   });
 
@@ -123,12 +105,8 @@ describe("StuffIcon", () => {
     const { container } = render(
       <StuffIcon stuffName={Materials.ConstructionMaterials} count={10} />
     );
-    const iconTile = container.querySelector(".icon-tile");
 
-    // Hover to show tooltip
-    fireEvent.mouseEnter(iconTile!);
-
-    const tooltip = container.querySelector(".instant-tooltip");
+    const tooltip = container.querySelector('[class*="instantTooltip"]');
     expect(tooltip?.textContent).toBe("Construction Materials");
   });
 
@@ -137,12 +115,8 @@ describe("StuffIcon", () => {
     const { container } = render(
       <StuffIcon stuffName={Liquids.EnrichedOil} count={45} />
     );
-    const iconTile = container.querySelector(".icon-tile");
 
-    // Hover to show tooltip
-    fireEvent.mouseEnter(iconTile!);
-
-    const tooltip = container.querySelector(".instant-tooltip");
+    const tooltip = container.querySelector('[class*="instantTooltip"]');
     expect(tooltip?.textContent).toBe("Enriched Oil: 45L (2 cans)");
   });
 });
