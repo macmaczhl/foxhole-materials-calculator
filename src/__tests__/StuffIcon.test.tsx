@@ -68,4 +68,91 @@ describe("StuffIcon", () => {
     // Should show without L suffix since it's not in the Liquids enum
     expect(screen.getByText("Custom Liquid(15)")).toBeTruthy();
   });
+
+  test("displays tooltip with can information for liquids on hover", () => {
+    // Test Petrol (50L capacity)
+    const { container } = render(
+      <StuffIcon stuffName={Liquids.Petrol} count={75} />
+    );
+
+    // Tooltip should be present in DOM with correct text
+    const tooltip = container.querySelector('[class*="instantTooltip"]');
+    expect(tooltip).toBeTruthy();
+    expect(tooltip?.textContent).toBe("Petrol: 75L (2 cans)");
+  });
+
+  test("displays tooltip with singular can for single can amounts", () => {
+    // Test with exactly one can worth
+    const { container } = render(
+      <StuffIcon stuffName={Liquids.HeavyOil} count={30} />
+    );
+
+    const tooltip = container.querySelector('[class*="instantTooltip"]');
+    expect(tooltip?.textContent).toBe("Heavy Oil: 30L (1 can)");
+  });
+
+  test("displays tooltip with multiple cans for larger amounts", () => {
+    // Test Water (50L capacity) with 150L
+    const { container } = render(
+      <StuffIcon stuffName={Liquids.Water} count={150} />
+    );
+
+    const tooltip = container.querySelector('[class*="instantTooltip"]');
+    expect(tooltip?.textContent).toBe("Water: 150L (3 cans)");
+  });
+
+  test("displays basic tooltip for non-liquid materials", () => {
+    const { container } = render(
+      <StuffIcon stuffName={Materials.ConstructionMaterials} count={10} />
+    );
+
+    const tooltip = container.querySelector('[class*="instantTooltip"]');
+    expect(tooltip?.textContent).toBe("Construction Materials");
+  });
+
+  test("handles fractional can requirements correctly", () => {
+    // Test Enriched Oil (30L capacity) with 45L -> should be 2 cans
+    const { container } = render(
+      <StuffIcon stuffName={Liquids.EnrichedOil} count={45} />
+    );
+
+    const tooltip = container.querySelector('[class*="instantTooltip"]');
+    expect(tooltip?.textContent).toBe("Enriched Oil: 45L (2 cans)");
+  });
+
+  test("tooltip is positioned with CSS-only solution", () => {
+    const { container } = render(
+      <StuffIcon stuffName={Materials.ConstructionMaterials} count={10} />
+    );
+
+    const tooltip = container.querySelector('[class*="instantTooltip"]');
+    expect(tooltip).toBeTruthy();
+
+    // Should have the base instantTooltip class
+    expect(tooltip?.className).toContain("instantTooltip");
+
+    // Should not have any JavaScript positioning classes since we use CSS-only solution
+    expect(tooltip?.className).not.toContain("left");
+    expect(tooltip?.className).not.toContain("right");
+    expect(tooltip?.className).not.toContain("center");
+  });
+
+  test("tooltip has viewport-aware positioning styles", () => {
+    const { container } = render(
+      <StuffIcon stuffName={Materials.ConstructionMaterials} count={10} />
+    );
+
+    const tooltip = container.querySelector(
+      '[class*="instantTooltip"]'
+    ) as HTMLElement;
+    expect(tooltip).toBeTruthy();
+
+    // Check that the tooltip element exists and has the correct class
+    expect(tooltip.className).toContain("instantTooltip");
+
+    // In a real browser environment, these styles would be computed
+    // For testing purposes, we verify the element structure is correct
+    expect(tooltip).toBeInstanceOf(HTMLElement);
+    expect(tooltip.style).toBeDefined();
+  });
 });

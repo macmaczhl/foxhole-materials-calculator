@@ -1,7 +1,8 @@
-import { Liquids } from "@/lib/models";
+import { Liquids, calculateCanCount } from "@/lib/models";
 import { ICONS_MAP } from "@/lib/constants";
 import { getBasePath } from "@/lib/utils";
 import Image from "next/image";
+import styles from "./StuffIcon.module.css";
 
 // Helper function to check if a material is a liquid
 const isLiquid = (stuffName: string): boolean => {
@@ -17,12 +18,21 @@ export function StuffIcon({ stuffName, count }: StuffIconProps) {
   const iconPath = ICONS_MAP.get(stuffName);
   const displayCount = isLiquid(stuffName) ? `${count}L` : count;
 
+  // Calculate can information for liquids
+  const canCount = isLiquid(stuffName)
+    ? calculateCanCount(stuffName, count)
+    : 0;
+  const tooltipText =
+    isLiquid(stuffName) && canCount > 0
+      ? `${stuffName}: ${count}L (${canCount} can${canCount !== 1 ? "s" : ""})`
+      : stuffName;
+
   // Get the base path from environment variable
   const basePath = getBasePath();
   const fullIconPath = `${basePath}/${iconPath}`;
 
   return (
-    <div className="icon-tile relative">
+    <div className={styles.iconTile}>
       {iconPath ? (
         <Image
           alt={stuffName}
@@ -35,7 +45,8 @@ export function StuffIcon({ stuffName, count }: StuffIconProps) {
       ) : (
         <span className="text-xs">{`${stuffName}(${displayCount})`}</span>
       )}
-      <span className="count-badge">{displayCount}</span>
+      <span className={styles.countBadge}>{displayCount}</span>
+      <div className={styles.instantTooltip}>{tooltipText}</div>
     </div>
   );
 }
