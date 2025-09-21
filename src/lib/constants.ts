@@ -50,4 +50,8 @@ export const ICONS_MAP = new Map<string, string>([
 
   // Vehicles
   [Vehicles.Xiphos, "icons/ArmoredCarVehicleIcon.svg"],
+  [Vehicles.Actaeon, "icons/ArmoredCarVehicleIcon.svg"],
+  [Vehicles.Vesta, "icons/ArmoredCarVehicleIcon.svg"],
+  [Vehicles.Ixion, "icons/ArmoredCarVehicleIcon.svg"],
+  [Vehicles.Deioneus, "icons/ArmoredCarVehicleIcon.svg"],
 ]);

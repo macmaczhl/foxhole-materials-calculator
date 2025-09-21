@@ -50,8 +50,14 @@ describe("Item Grouping", () => {
       const vehicleGroup = grouped.find((g) => g.group === ItemGroup.Vehicle);
 
       expect(vehicleGroup).toBeDefined();
-      expect(vehicleGroup!.items).toHaveLength(1);
-      expect(vehicleGroup!.items[0].name).toBe(Vehicles.Xiphos);
+      expect(vehicleGroup!.items).toHaveLength(5);
+      // Check that all vehicles are present
+      const vehicleNames = vehicleGroup!.items.map(item => item.name);
+      expect(vehicleNames).toContain(Vehicles.Xiphos);
+      expect(vehicleNames).toContain(Vehicles.Actaeon);
+      expect(vehicleNames).toContain(Vehicles.Vesta);
+      expect(vehicleNames).toContain(Vehicles.Ixion);
+      expect(vehicleNames).toContain(Vehicles.Deioneus);
     });
 
     test("raw resources group contains only raw materials", () => {
@@ -91,8 +97,8 @@ describe("Item Grouping", () => {
         0
       );
 
-      // Should equal the number of items in availableMaterials (currently 27 items)
-      expect(totalItems).toBe(27);
+      // Should equal the number of items in availableMaterials (currently 31 items)
+      expect(totalItems).toBe(31);
     });
   });
 });

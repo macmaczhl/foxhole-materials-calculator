@@ -422,6 +422,102 @@ const xiphosRecipes: IRecipe[] = [
   ),
 ];
 
+// T12 "Actaeon" Tankette recipes
+const actaeonRecipes: IRecipe[] = [
+  // Garage production: 15 x Refined Materials → 1 x T12 "Actaeon" Tankette
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 15 }],
+    [{ stuff: Vehicles.Actaeon, count: 1 }]
+  ),
+  // Mass Production Factory: 135 x Refined Materials → 3 crates of 3 x T12 "Actaeon" Tankette (9 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 135 }],
+    [{ stuff: Vehicles.Actaeon, count: 9 }]
+  ),
+  // Mass Production Factory: 168 x Refined Materials → 4 crates of 3 x T12 "Actaeon" Tankette (12 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 168 }],
+    [{ stuff: Vehicles.Actaeon, count: 12 }]
+  ),
+  // Mass Production Factory: 195 x Refined Materials → 5 crates of 3 x T12 "Actaeon" Tankette (15 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 195 }],
+    [{ stuff: Vehicles.Actaeon, count: 15 }]
+  ),
+];
+
+// T14 "Vesta" Tankette recipes
+const vestaRecipes: IRecipe[] = [
+  // Garage production: 18 x Refined Materials → 1 x T14 "Vesta" Tankette
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 18 }],
+    [{ stuff: Vehicles.Vesta, count: 1 }]
+  ),
+  // Mass Production Factory: 162 x Refined Materials → 3 crates of 3 x T14 "Vesta" Tankette (9 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 162 }],
+    [{ stuff: Vehicles.Vesta, count: 9 }]
+  ),
+  // Mass Production Factory: 202 x Refined Materials → 4 crates of 3 x T14 "Vesta" Tankette (12 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 202 }],
+    [{ stuff: Vehicles.Vesta, count: 12 }]
+  ),
+  // Mass Production Factory: 234 x Refined Materials → 5 crates of 3 x T14 "Vesta" Tankette (15 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 234 }],
+    [{ stuff: Vehicles.Vesta, count: 15 }]
+  ),
+];
+
+// T20 "Ixion" Tankette recipes
+const ixionRecipes: IRecipe[] = [
+  // Garage production: 20 x Refined Materials → 1 x T20 "Ixion" Tankette
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 20 }],
+    [{ stuff: Vehicles.Ixion, count: 1 }]
+  ),
+  // Mass Production Factory: 180 x Refined Materials → 3 crates of 3 x T20 "Ixion" Tankette (9 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 180 }],
+    [{ stuff: Vehicles.Ixion, count: 9 }]
+  ),
+  // Mass Production Factory: 224 x Refined Materials → 4 crates of 3 x T20 "Ixion" Tankette (12 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 224 }],
+    [{ stuff: Vehicles.Ixion, count: 12 }]
+  ),
+  // Mass Production Factory: 260 x Refined Materials → 5 crates of 3 x T20 "Ixion" Tankette (15 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 260 }],
+    [{ stuff: Vehicles.Ixion, count: 15 }]
+  ),
+];
+
+// T13 "Deioneus" Rocket Battery recipes
+const deioneusRecipes: IRecipe[] = [
+  // Garage production: 22 x Refined Materials → 1 x T13 "Deioneus" Rocket Battery
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 22 }],
+    [{ stuff: Vehicles.Deioneus, count: 1 }]
+  ),
+  // Mass Production Factory: 198 x Refined Materials → 3 crates of 3 x T13 "Deioneus" Rocket Battery (9 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 198 }],
+    [{ stuff: Vehicles.Deioneus, count: 9 }]
+  ),
+  // Mass Production Factory: 247 x Refined Materials → 4 crates of 3 x T13 "Deioneus" Rocket Battery (12 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 247 }],
+    [{ stuff: Vehicles.Deioneus, count: 12 }]
+  ),
+  // Mass Production Factory: 286 x Refined Materials → 5 crates of 3 x T13 "Deioneus" Rocket Battery (15 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 286 }],
+    [{ stuff: Vehicles.Deioneus, count: 15 }]
+  ),
+];
+
 export const RecipiesByStuff = new Map<string, IRecipe[]>([
   [Materials.ConstructionMaterials, constructionMaterialsRecipes],
   [
@@ -453,6 +549,10 @@ export const RecipiesByStuff = new Map<string, IRecipe[]>([
   [Liquids.Oil, oilRecipes],
 
   [Vehicles.Xiphos, xiphosRecipes],
+  [Vehicles.Actaeon, actaeonRecipes],
+  [Vehicles.Vesta, vestaRecipes],
+  [Vehicles.Ixion, ixionRecipes],
+  [Vehicles.Deioneus, deioneusRecipes],
 
   emptyRecipePair(RawResources.Salvage),
   emptyRecipePair(RawResources.DamagedComponents),
