@@ -117,40 +117,4 @@ body.app-body {
   .dropdown-option[data-focus] {
     background-color: var(--panel-300);
   }
-
-  .icon-tile {
-    @apply min-w-16 rounded-md overflow-hidden border;
-    background-color: var(--panel-300);
-    border-color: var(--border-600);
-  }
-
-  .count-badge {
-    @apply absolute bottom-0 right-0 text-xs px-1.5 py-0.5 rounded-tl-md;
-    background-color: var(--panel-400);
-    border-left: 1px solid var(--border-600);
-    border-top: 1px solid var(--border-600);
-    color: var(--accent-300);
-  }
-
-  /* Tree visualization styles */
-  .tree-connector {
-    @apply absolute text-xs font-mono leading-none select-none;
-    color: var(--border-600);
-  }
-
-  .tree-line {
-    @apply absolute;
-    background-color: var(--border-600);
-    opacity: 0.4;
-  }
-
-  .tree-line-vertical {
-    @apply tree-line;
-    width: 1px;
-  }
-
-  .tree-line-horizontal {
-    @apply tree-line;
-    height: 1px;
-  }
 }

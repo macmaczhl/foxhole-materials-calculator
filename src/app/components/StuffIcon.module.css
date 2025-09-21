@@ -1,0 +1,39 @@
+/* StuffIcon component styles */
+.iconTile {
+  @apply min-w-16 rounded-md border relative;
+  background-color: var(--panel-300);
+  border-color: var(--border-600);
+}
+
+.countBadge {
+  @apply absolute bottom-0 right-0 text-xs px-1.5 py-0.5 rounded-tl-md;
+  background-color: var(--panel-400);
+  border-left: 1px solid var(--border-600);
+  border-top: 1px solid var(--border-600);
+  color: var(--accent-300);
+}
+
+/* Custom instant tooltip styles */
+.instantTooltip {
+  @apply absolute px-2 py-1 text-xs rounded-md pointer-events-none;
+  background-color: #1f2937; /* Much darker for better contrast */
+  border: 1px solid #6b7280; /* Lighter border for visibility */
+  color: #f9fafb; /* Brighter white text */
+  bottom: 100%;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3); /* Add shadow for depth */
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.2s ease-in-out,
+    visibility 0.2s ease-in-out;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Show tooltip on hover */
+.iconTile:hover .instantTooltip {
+  opacity: 1;
+  visibility: visible;
+}

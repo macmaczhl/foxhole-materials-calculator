@@ -49,6 +49,24 @@ export enum Liquids {
   Oil = "Oil",
 }
 
+// Liquid can capacities in liters
+export const LIQUID_CAN_CAPACITIES: Record<string, number> = {
+  [Liquids.Petrol]: 50,
+  [Liquids.HeavyOil]: 30,
+  [Liquids.Water]: 50,
+  [Liquids.EnrichedOil]: 30,
+  [Liquids.Oil]: 50,
+};
+
+// Helper function to calculate number of cans needed for a liquid
+export function calculateCanCount(liquidName: string, liters: number): number {
+  const capacity = LIQUID_CAN_CAPACITIES[liquidName];
+  if (!capacity) {
+    return 0; // Not a recognized liquid with can capacity
+  }
+  return Math.ceil(liters / capacity);
+}
+
 export enum Vehicles {
   Xiphos = 'T3 "Xiphos"',
   ActaeonTankette = 'T12 "Actaeon" Tankette',
