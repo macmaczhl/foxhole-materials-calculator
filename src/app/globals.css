@@ -117,5 +117,4 @@ body.app-body {
   .dropdown-option[data-focus] {
     background-color: var(--panel-300);
   }
-
 }
