@@ -27,7 +27,7 @@ export function RecipesSelector({
   };
 
   return (
-    <div className="relative z-10 panel-compact mb-1">
+    <div className="relative z-10 panel-compact">
       <div className="relative z-10">
         <span className="font-medium text-sm tracking-wide text-muted-300">
           {stuff}
