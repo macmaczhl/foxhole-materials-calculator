@@ -422,6 +422,46 @@ const xiphosRecipes: IRecipe[] = [
   ),
 ];
 
+// Duncan's Coin 20mm Field AT Rifle recipes
+const duncansCoin20mmRecipes: IRecipe[] = [
+  // Prototype Lab: 5 x Refined Materials + 1 x Assembly Materials III → 1 x Duncan's Coin 20mm
+  createRecipe(
+    [
+      { stuff: Materials.RefinedMaterials, count: 5 },
+      { stuff: Materials.AssemblyMaterialsIII, count: 1 },
+    ],
+    [{ stuff: Vehicles.DuncansCoin20mm, count: 1 }]
+  ),
+  // Mass Production Factory: 35 x Refined Materials + 5 x Assembly Materials III → 3 crates of 2 x Duncan's Coin 20mm (6 total)
+  createRecipe(
+    [
+      { stuff: Materials.RefinedMaterials, count: 35 },
+      { stuff: Materials.AssemblyMaterialsIII, count: 5 },
+    ],
+    [{ stuff: Vehicles.DuncansCoin20mm, count: 6 }]
+  ),
+];
+
+// GA6 "Cestus" Field AT Rifle recipes
+const ga6CestusRecipes: IRecipe[] = [
+  // Prototype Lab: 6 x Refined Materials + 1 x Assembly Materials IV → 1 x GA6 "Cestus"
+  createRecipe(
+    [
+      { stuff: Materials.RefinedMaterials, count: 6 },
+      { stuff: Materials.AssemblyMaterialsIV, count: 1 },
+    ],
+    [{ stuff: Vehicles.GA6Cestus, count: 1 }]
+  ),
+  // Mass Production Factory: 42 x Refined Materials + 6 x Assembly Materials IV → 3 crates of 2 x GA6 "Cestus" (6 total)
+  createRecipe(
+    [
+      { stuff: Materials.RefinedMaterials, count: 42 },
+      { stuff: Materials.AssemblyMaterialsIV, count: 6 },
+    ],
+    [{ stuff: Vehicles.GA6Cestus, count: 6 }]
+  ),
+];
+
 export const RecipiesByStuff = new Map<string, IRecipe[]>([
   [Materials.ConstructionMaterials, constructionMaterialsRecipes],
   [
@@ -453,6 +493,8 @@ export const RecipiesByStuff = new Map<string, IRecipe[]>([
   [Liquids.Oil, oilRecipes],
 
   [Vehicles.Xiphos, xiphosRecipes],
+  [Vehicles.DuncansCoin20mm, duncansCoin20mmRecipes],
+  [Vehicles.GA6Cestus, ga6CestusRecipes],
 
   emptyRecipePair(RawResources.Salvage),
   emptyRecipePair(RawResources.DamagedComponents),

@@ -82,4 +82,82 @@ describe("calculateComponents", () => {
     // When requesting 10 Xiphos, need 2 crates (18 total), so 8 excess
     expect(result.excessResult).toEqual([{ stuff: Vehicles.Xiphos, count: 8 }]);
   });
+
+  // Test for Duncan's Coin 20mm Field AT Rifle
+  const duncansCoinRecipe: IRecipe = {
+    id: 3,
+    required: [
+      { stuff: Materials.RefinedMaterials, count: 5 },
+      { stuff: Materials.AssemblyMaterialsIII, count: 1 },
+    ],
+    produced: [{ stuff: Vehicles.DuncansCoin20mm, count: 1 }],
+  };
+
+  const duncansCoinRecipeTree: RecipeTree = {
+    stuff: Vehicles.DuncansCoin20mm,
+    selectedRecipe: duncansCoinRecipe,
+    recipes: [duncansCoinRecipe],
+    required: [],
+  };
+
+  test("calculates components for Duncan's Coin 20mm Field AT Rifle", () => {
+    const result = calculateComponents(duncansCoinRecipeTree, 1);
+
+    expect(result.initial).toEqual([
+      { stuff: Materials.RefinedMaterials, count: 5 },
+      { stuff: Materials.AssemblyMaterialsIII, count: 1 },
+    ]);
+    expect(result.excessResult).toEqual([]);
+  });
+
+  // Test for GA6 "Cestus" Field AT Rifle
+  const ga6CestusRecipe: IRecipe = {
+    id: 4,
+    required: [
+      { stuff: Materials.RefinedMaterials, count: 6 },
+      { stuff: Materials.AssemblyMaterialsIV, count: 1 },
+    ],
+    produced: [{ stuff: Vehicles.GA6Cestus, count: 1 }],
+  };
+
+  const ga6CestusRecipeTree: RecipeTree = {
+    stuff: Vehicles.GA6Cestus,
+    selectedRecipe: ga6CestusRecipe,
+    recipes: [ga6CestusRecipe],
+    required: [],
+  };
+
+  test("calculates components for GA6 Cestus Field AT Rifle", () => {
+    const result = calculateComponents(ga6CestusRecipeTree, 1);
+
+    expect(result.initial).toEqual([
+      { stuff: Materials.RefinedMaterials, count: 6 },
+      { stuff: Materials.AssemblyMaterialsIV, count: 1 },
+    ]);
+    expect(result.excessResult).toEqual([]);
+  });
+
+  // Test crate production for Duncan's Coin with excess
+  const duncansCoinCrateRecipe: IRecipe = {
+    id: 5,
+    required: [
+      { stuff: Materials.RefinedMaterials, count: 35 },
+      { stuff: Materials.AssemblyMaterialsIII, count: 5 },
+    ],
+    produced: [{ stuff: Vehicles.DuncansCoin20mm, count: 6 }],
+  };
+
+  const duncansCoinCrateRecipeTree: RecipeTree = {
+    stuff: Vehicles.DuncansCoin20mm,
+    selectedRecipe: duncansCoinCrateRecipe,
+    recipes: [duncansCoinCrateRecipe],
+    required: [],
+  };
+
+  test("calculates excess for Duncan's Coin 20mm crate production", () => {
+    const result = calculateComponents(duncansCoinCrateRecipeTree, 1);
+
+    // When requesting 1 Duncan's Coin but crate recipe produces 6, should show 5 excess
+    expect(result.excessResult).toEqual([{ stuff: Vehicles.DuncansCoin20mm, count: 5 }]);
+  });
 });
