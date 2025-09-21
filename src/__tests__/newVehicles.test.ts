@@ -40,6 +40,8 @@ describe("New Armored Car Vehicles", () => {
     expect(basicRecipe!.required[0].count).toBe(10);
     expect(basicRecipe!.required[1].stuff).toBe(Materials.AssemblyMaterialsI);
     expect(basicRecipe!.required[1].count).toBe(10);
+    expect(basicRecipe!.required[2].stuff).toBe(Vehicles.Xiphos);
+    expect(basicRecipe!.required[2].count).toBe(1);
   });
 
   test("T8 Gemini recipes are valid", () => {
@@ -53,6 +55,8 @@ describe("New Armored Car Vehicles", () => {
     expect(basicRecipe!.required[0].count).toBe(10);
     expect(basicRecipe!.required[1].stuff).toBe(Materials.AssemblyMaterialsI);
     expect(basicRecipe!.required[1].count).toBe(10);
+    expect(basicRecipe!.required[2].stuff).toBe(Vehicles.Xiphos);
+    expect(basicRecipe!.required[2].count).toBe(1);
   });
 
   test("O'Brien v.113 Gravekeeper recipes are valid", () => {
@@ -66,6 +70,8 @@ describe("New Armored Car Vehicles", () => {
     expect(basicRecipe!.required[0].count).toBe(5);
     expect(basicRecipe!.required[1].stuff).toBe(Materials.AssemblyMaterialsI);
     expect(basicRecipe!.required[1].count).toBe(5);
+    expect(basicRecipe!.required[2].stuff).toBe(Vehicles.OBrienV110);
+    expect(basicRecipe!.required[2].count).toBe(1);
   });
 
   test("O'Brien v.121 Highlander recipes are valid", () => {
@@ -79,6 +85,8 @@ describe("New Armored Car Vehicles", () => {
     expect(basicRecipe!.required[0].count).toBe(15);
     expect(basicRecipe!.required[1].stuff).toBe(Materials.AssemblyMaterialsI);
     expect(basicRecipe!.required[1].count).toBe(15);
+    expect(basicRecipe!.required[2].stuff).toBe(Vehicles.OBrienKnave);
+    expect(basicRecipe!.required[2].count).toBe(1);
   });
 
   test("O'Brien v.101 Freeman recipes are valid", () => {
@@ -88,8 +96,12 @@ describe("New Armored Car Vehicles", () => {
 
     const basicRecipe = recipes!.find(r => r.produced[0].count === 1);
     expect(basicRecipe).toBeDefined();
-    expect(basicRecipe!.required[0].stuff).toBe(Materials.RefinedMaterials);
-    expect(basicRecipe!.required[0].count).toBe(180);
+    expect(basicRecipe!.required[0].stuff).toBe(Materials.ConstructionMaterials);
+    expect(basicRecipe!.required[0].count).toBe(15);
+    expect(basicRecipe!.required[1].stuff).toBe(Materials.AssemblyMaterialsI);
+    expect(basicRecipe!.required[1].count).toBe(15);
+    expect(basicRecipe!.required[2].stuff).toBe(Vehicles.OBrienKnave);
+    expect(basicRecipe!.required[2].count).toBe(1);
   });
 
   test("O'Brien v.110 recipes are valid", () => {
@@ -99,10 +111,8 @@ describe("New Armored Car Vehicles", () => {
 
     const basicRecipe = recipes!.find(r => r.produced[0].count === 1);
     expect(basicRecipe).toBeDefined();
-    expect(basicRecipe!.required[0].stuff).toBe(Materials.ProcessedConstructionMaterials);
-    expect(basicRecipe!.required[0].count).toBe(10);
-    expect(basicRecipe!.required[1].stuff).toBe(Materials.AssemblyMaterialsI);
-    expect(basicRecipe!.required[1].count).toBe(10);
+    expect(basicRecipe!.required[0].stuff).toBe(Materials.RefinedMaterials);
+    expect(basicRecipe!.required[0].count).toBe(25);
   });
 
   // Test calculations work for new vehicles
@@ -121,6 +131,7 @@ describe("New Armored Car Vehicles", () => {
     expect(result.initial).toEqual([
       { stuff: Materials.ConstructionMaterials, count: 10 },
       { stuff: Materials.AssemblyMaterialsI, count: 10 },
+      { stuff: Vehicles.Xiphos, count: 1 },
     ]);
   });
 
@@ -137,7 +148,9 @@ describe("New Armored Car Vehicles", () => {
 
     const result = calculateComponents(recipeTree, 1);
     expect(result.initial).toEqual([
-      { stuff: Materials.RefinedMaterials, count: 180 },
+      { stuff: Materials.ConstructionMaterials, count: 15 },
+      { stuff: Materials.AssemblyMaterialsI, count: 15 },
+      { stuff: Vehicles.OBrienKnave, count: 1 },
     ]);
   });
 
@@ -179,9 +192,11 @@ describe("New Armored Car Vehicles", () => {
 
   // Test mass production recipes exist for vehicles that have them
   test("mass production recipes exist for applicable vehicles", () => {
-    // Only Actaeon Tankette and O'Brien Knave have mass production recipes now
+    // Vehicles with mass production recipes
     const vehiclesWithMassProduction = [
+      Vehicles.Xiphos,
       Vehicles.ActaeonTankette,
+      Vehicles.OBrienV110,
       Vehicles.OBrienKnave,
     ];
 
@@ -191,14 +206,13 @@ describe("New Armored Car Vehicles", () => {
       expect(massProductionRecipes.length).toBeGreaterThan(0);
     });
 
-    // Test single-recipe vehicles have only one recipe
+    // Test single-recipe vehicles have only one recipe (upgrade vehicles)
     const singleRecipeVehicles = [
       Vehicles.Percutio,
       Vehicles.Gemini,
       Vehicles.OBrienGravekeeper,
       Vehicles.OBrienHighlander,
       Vehicles.OBrienFreeman,
-      Vehicles.OBrienV110,
       Vehicles.OBrienWildJack,
       Vehicles.OBrienSquire,
     ];

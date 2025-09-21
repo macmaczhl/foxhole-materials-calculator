@@ -400,13 +400,25 @@ const refinedMaterialsRecipes: IRecipe[] = [
 
 // T3 "Xiphos" vehicle recipes
 const xiphosRecipes: IRecipe[] = [
-  // Only one recipe per feedback: 10 x Construction Materials + 10 x Assembly Materials I → 1 x T3 "Xiphos"
+  // Garage production: 25 x Refined Materials → 1 x T3 "Xiphos"
   createRecipe(
-    [
-      { stuff: Materials.ConstructionMaterials, count: 10 },
-      { stuff: Materials.AssemblyMaterialsI, count: 10 }
-    ],
+    [{ stuff: Materials.RefinedMaterials, count: 25 }],
     [{ stuff: Vehicles.Xiphos, count: 1 }]
+  ),
+  // Mass Production Factory: 179 x Refined Materials → 3 crates of 3 x T3 "Xiphos" (9 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 179 }],
+    [{ stuff: Vehicles.Xiphos, count: 9 }]
+  ),
+  // Mass Production Factory: 224 x Refined Materials → 4 crates of 3 x T3 "Xiphos" (12 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 224 }],
+    [{ stuff: Vehicles.Xiphos, count: 12 }]
+  ),
+  // Mass Production Factory: 261 x Refined Materials → 5 crates of 3 x T3 "Xiphos" (15 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 261 }],
+    [{ stuff: Vehicles.Xiphos, count: 15 }]
   ),
 ];
 
@@ -436,11 +448,12 @@ const actaeonTanketteRecipes: IRecipe[] = [
 
 // T5 "Percutio" vehicle recipes
 const percutioRecipes: IRecipe[] = [
-  // Only one recipe per feedback: 10 x Construction Materials + 10 x Assembly Materials I → 1 x T5 "Percutio"
+  // Upgrade recipe: 10 x Construction Materials + 10 x Assembly Materials I + 1 x T3 "Xiphos" → 1 x T5 "Percutio"
   createRecipe(
     [
       { stuff: Materials.ConstructionMaterials, count: 10 },
-      { stuff: Materials.AssemblyMaterialsI, count: 10 }
+      { stuff: Materials.AssemblyMaterialsI, count: 10 },
+      { stuff: Vehicles.Xiphos, count: 1 }
     ],
     [{ stuff: Vehicles.Percutio, count: 1 }]
   ),
@@ -448,11 +461,12 @@ const percutioRecipes: IRecipe[] = [
 
 // T8 "Gemini" vehicle recipes
 const geminiRecipes: IRecipe[] = [
-  // Only one recipe per feedback: 10 x Construction Materials + 10 x Assembly Materials I → 1 x T8 "Gemini"
+  // Upgrade recipe: 10 x Construction Materials + 10 x Assembly Materials I + 1 x T3 "Xiphos" → 1 x T8 "Gemini"
   createRecipe(
     [
       { stuff: Materials.ConstructionMaterials, count: 10 },
-      { stuff: Materials.AssemblyMaterialsI, count: 10 }
+      { stuff: Materials.AssemblyMaterialsI, count: 10 },
+      { stuff: Vehicles.Xiphos, count: 1 }
     ],
     [{ stuff: Vehicles.Gemini, count: 1 }]
   ),
@@ -460,11 +474,12 @@ const geminiRecipes: IRecipe[] = [
 
 // O'Brien v.113 Gravekeeper vehicle recipes
 const oBrienGravekeeperRecipes: IRecipe[] = [
-  // Only one recipe per feedback: 5 x Construction Materials + 5 x Assembly Materials I → 1 x O'Brien v.113 Gravekeeper
+  // Upgrade recipe: 5 x Construction Materials + 5 x Assembly Materials I + 1 x O'Brien V.110 → 1 x O'Brien v.113 Gravekeeper
   createRecipe(
     [
       { stuff: Materials.ConstructionMaterials, count: 5 },
-      { stuff: Materials.AssemblyMaterialsI, count: 5 }
+      { stuff: Materials.AssemblyMaterialsI, count: 5 },
+      { stuff: Vehicles.OBrienV110, count: 1 }
     ],
     [{ stuff: Vehicles.OBrienGravekeeper, count: 1 }]
   ),
@@ -472,11 +487,12 @@ const oBrienGravekeeperRecipes: IRecipe[] = [
 
 // O'Brien v.121 Highlander vehicle recipes
 const oBrienHighlanderRecipes: IRecipe[] = [
-  // Only one recipe per feedback: 15 x Construction Materials + 15 x Assembly Materials I → 1 x O'Brien v.121 Highlander
+  // Upgrade recipe: 15 x Construction Materials + 15 x Assembly Materials I + 1 x O'Brien V.190 Knave → 1 x O'Brien v.121 Highlander
   createRecipe(
     [
       { stuff: Materials.ConstructionMaterials, count: 15 },
-      { stuff: Materials.AssemblyMaterialsI, count: 15 }
+      { stuff: Materials.AssemblyMaterialsI, count: 15 },
+      { stuff: Vehicles.OBrienKnave, count: 1 }
     ],
     [{ stuff: Vehicles.OBrienHighlander, count: 1 }]
   ),
@@ -484,22 +500,38 @@ const oBrienHighlanderRecipes: IRecipe[] = [
 
 // O'Brien v.101 Freeman vehicle recipes
 const oBrienFreemanRecipes: IRecipe[] = [
-  // Keep as is - no specific feedback to change this one
+  // Upgrade recipe: 15 x Construction Materials + 15 x Assembly Materials I + 1 x O'Brien V.190 Knave → 1 x O'Brien v.101 Freeman
   createRecipe(
-    [{ stuff: Materials.RefinedMaterials, count: 180 }],
+    [
+      { stuff: Materials.ConstructionMaterials, count: 15 },
+      { stuff: Materials.AssemblyMaterialsI, count: 15 },
+      { stuff: Vehicles.OBrienKnave, count: 1 }
+    ],
     [{ stuff: Vehicles.OBrienFreeman, count: 1 }]
   ),
 ];
 
 // O'Brien v.110 vehicle recipes
 const oBrienV110Recipes: IRecipe[] = [
-  // Only one recipe per feedback: 10 x Processed Construction Materials + 10 x Assembly Materials I → 1 x O'Brien v.110
+  // Recipe 1: 25 x Refined Materials → 1 x O'Brien v.110
   createRecipe(
-    [
-      { stuff: Materials.ProcessedConstructionMaterials, count: 10 },
-      { stuff: Materials.AssemblyMaterialsI, count: 10 }
-    ],
+    [{ stuff: Materials.RefinedMaterials, count: 25 }],
     [{ stuff: Vehicles.OBrienV110, count: 1 }]
+  ),
+  // Recipe 2: 179 x Refined Materials → 9 x O'Brien v.110
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 179 }],
+    [{ stuff: Vehicles.OBrienV110, count: 9 }]
+  ),
+  // Recipe 3: 224 x Refined Materials → 12 x O'Brien v.110
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 224 }],
+    [{ stuff: Vehicles.OBrienV110, count: 12 }]
+  ),
+  // Recipe 4: 261 x Refined Materials → 15 x O'Brien v.110
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 261 }],
+    [{ stuff: Vehicles.OBrienV110, count: 15 }]
   ),
 ];
 
