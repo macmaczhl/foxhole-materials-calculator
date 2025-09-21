@@ -422,6 +422,30 @@ const xiphosRecipes: IRecipe[] = [
   ),
 ];
 
+// 40-250 "Alekto" Heavy Cannon vehicle recipes
+const alektoRecipes: IRecipe[] = [
+  // Garage production: 35 x Refined Materials → 1 x 40-250 "Alekto" Heavy Cannon
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 35 }],
+    [{ stuff: Vehicles.Alekto, count: 1 }]
+  ),
+  // Mass Production Factory: 252 x Refined Materials → 3 crates of 2 x 40-250 "Alekto" Heavy Cannon (6 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 252 }],
+    [{ stuff: Vehicles.Alekto, count: 6 }]
+  ),
+  // Mass Production Factory: 315 x Refined Materials → 4 crates of 2 x 40-250 "Alekto" Heavy Cannon (8 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 315 }],
+    [{ stuff: Vehicles.Alekto, count: 8 }]
+  ),
+  // Mass Production Factory: 378 x Refined Materials → 5 crates of 2 x 40-250 "Alekto" Heavy Cannon (10 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 378 }],
+    [{ stuff: Vehicles.Alekto, count: 10 }]
+  ),
+];
+
 export const RecipiesByStuff = new Map<string, IRecipe[]>([
   [Materials.ConstructionMaterials, constructionMaterialsRecipes],
   [
@@ -453,6 +477,7 @@ export const RecipiesByStuff = new Map<string, IRecipe[]>([
   [Liquids.Oil, oilRecipes],
 
   [Vehicles.Xiphos, xiphosRecipes],
+  [Vehicles.Alekto, alektoRecipes],
 
   emptyRecipePair(RawResources.Salvage),
   emptyRecipePair(RawResources.DamagedComponents),

@@ -32,6 +32,20 @@ const xiphosRecipeTree: RecipeTree = {
   required: [],
 };
 
+// Mock Alekto crate recipe for testing
+const alektoCrateRecipe: IRecipe = {
+  id: 3,
+  required: [{ stuff: Materials.RefinedMaterials, count: 252 }],
+  produced: [{ stuff: Vehicles.Alekto, count: 6 }],
+};
+
+const alektoRecipeTree: RecipeTree = {
+  stuff: Vehicles.Alekto,
+  selectedRecipe: alektoCrateRecipe,
+  recipes: [alektoCrateRecipe],
+  required: [],
+};
+
 describe("calculateComponents", () => {
   test("calculates initial components for simple recipe", () => {
     const result = calculateComponents(mockRecipeTree, 1);
@@ -81,5 +95,26 @@ describe("calculateComponents", () => {
 
     // When requesting 10 Xiphos, need 2 crates (18 total), so 8 excess
     expect(result.excessResult).toEqual([{ stuff: Vehicles.Xiphos, count: 8 }]);
+  });
+
+  test("calculates excess result for Alekto when requesting single unit", () => {
+    const result = calculateComponents(alektoRecipeTree, 1);
+
+    // When requesting 1 Alekto but crate recipe produces 6, should show 5 excess
+    expect(result.excessResult).toEqual([{ stuff: Vehicles.Alekto, count: 5 }]);
+  });
+
+  test("no excess result for Alekto when requesting exact crate amount", () => {
+    const result = calculateComponents(alektoRecipeTree, 6);
+
+    // When requesting exactly 6 Alekto, no excess should be shown
+    expect(result.excessResult).toEqual([]);
+  });
+
+  test("calculates excess result for Alekto with multiple crates", () => {
+    const result = calculateComponents(alektoRecipeTree, 7);
+
+    // When requesting 7 Alekto, need 2 crates (12 total), so 5 excess
+    expect(result.excessResult).toEqual([{ stuff: Vehicles.Alekto, count: 5 }]);
   });
 });
