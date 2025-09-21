@@ -422,6 +422,78 @@ const xiphosRecipes: IRecipe[] = [
   ),
 ];
 
+// AB-8 "Acheron" Landing APC recipes
+const acheronRecipes: IRecipe[] = [
+  // Garage production: 35 x Refined Materials → 1 x AB-8 "Acheron"
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 35 }],
+    [{ stuff: Vehicles.Acheron, count: 1 }]
+  ),
+  // Mass Production Factory: 245 x Refined Materials → 3 crates of 2 x AB-8 "Acheron" (6 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 245 }],
+    [{ stuff: Vehicles.Acheron, count: 6 }]
+  ),
+  // Mass Production Factory: 315 x Refined Materials → 4 crates of 2 x AB-8 "Acheron" (8 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 315 }],
+    [{ stuff: Vehicles.Acheron, count: 8 }]
+  ),
+  // Mass Production Factory: 385 x Refined Materials → 5 crates of 2 x AB-8 "Acheron" (10 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 385 }],
+    [{ stuff: Vehicles.Acheron, count: 10 }]
+  ),
+];
+
+// AB-11 "Doru" Landing APC recipes
+const doruRecipes: IRecipe[] = [
+  // Garage production: 30 x Refined Materials → 1 x AB-11 "Doru"
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 30 }],
+    [{ stuff: Vehicles.Doru, count: 1 }]
+  ),
+  // Mass Production Factory: 215 x Refined Materials → 3 crates of 2 x AB-11 "Doru" (6 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 215 }],
+    [{ stuff: Vehicles.Doru, count: 6 }]
+  ),
+  // Mass Production Factory: 275 x Refined Materials → 4 crates of 2 x AB-11 "Doru" (8 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 275 }],
+    [{ stuff: Vehicles.Doru, count: 8 }]
+  ),
+  // Mass Production Factory: 335 x Refined Materials → 5 crates of 2 x AB-11 "Doru" (10 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 335 }],
+    [{ stuff: Vehicles.Doru, count: 10 }]
+  ),
+];
+
+// Mulloy LPC Landing APC recipes
+const mulloyLPCRecipes: IRecipe[] = [
+  // Garage production: 40 x Refined Materials → 1 x Mulloy LPC
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 40 }],
+    [{ stuff: Vehicles.MulloyLPC, count: 1 }]
+  ),
+  // Mass Production Factory: 275 x Refined Materials → 3 crates of 2 x Mulloy LPC (6 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 275 }],
+    [{ stuff: Vehicles.MulloyLPC, count: 6 }]
+  ),
+  // Mass Production Factory: 355 x Refined Materials → 4 crates of 2 x Mulloy LPC (8 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 355 }],
+    [{ stuff: Vehicles.MulloyLPC, count: 8 }]
+  ),
+  // Mass Production Factory: 435 x Refined Materials → 5 crates of 2 x Mulloy LPC (10 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 435 }],
+    [{ stuff: Vehicles.MulloyLPC, count: 10 }]
+  ),
+];
+
 export const RecipiesByStuff = new Map<string, IRecipe[]>([
   [Materials.ConstructionMaterials, constructionMaterialsRecipes],
   [
@@ -453,6 +525,9 @@ export const RecipiesByStuff = new Map<string, IRecipe[]>([
   [Liquids.Oil, oilRecipes],
 
   [Vehicles.Xiphos, xiphosRecipes],
+  [Vehicles.Acheron, acheronRecipes],
+  [Vehicles.Doru, doruRecipes],
+  [Vehicles.MulloyLPC, mulloyLPCRecipes],
 
   emptyRecipePair(RawResources.Salvage),
   emptyRecipePair(RawResources.DamagedComponents),
