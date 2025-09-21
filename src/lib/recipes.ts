@@ -537,10 +537,10 @@ const oBrienV110Recipes: IRecipe[] = [
 
 // O'Brien V.130 Wild Jack vehicle recipes
 const oBrienWildJackRecipes: IRecipe[] = [
-  // Placeholder recipe - no specific feedback provided yet
+  // Recipe: 10 x Processed Construction Materials + 10 x Assembly Materials I → 1 x O'Brien V.130 Wild Jack
   createRecipe(
     [
-      { stuff: Materials.ConstructionMaterials, count: 10 },
+      { stuff: Materials.ProcessedConstructionMaterials, count: 10 },
       { stuff: Materials.AssemblyMaterialsI, count: 10 }
     ],
     [{ stuff: Vehicles.OBrienWildJack, count: 1 }]

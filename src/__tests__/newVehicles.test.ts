@@ -162,8 +162,10 @@ describe("New Armored Car Vehicles", () => {
 
     const basicRecipe = recipes!.find(r => r.produced[0].count === 1);
     expect(basicRecipe).toBeDefined();
-    expect(basicRecipe!.required[0].stuff).toBe(Materials.ConstructionMaterials);
+    expect(basicRecipe!.required[0].stuff).toBe(Materials.ProcessedConstructionMaterials);
     expect(basicRecipe!.required[0].count).toBe(10);
+    expect(basicRecipe!.required[1].stuff).toBe(Materials.AssemblyMaterialsI);
+    expect(basicRecipe!.required[1].count).toBe(10);
   });
 
   test("O'Brien V.190 Knave recipes are valid", () => {
