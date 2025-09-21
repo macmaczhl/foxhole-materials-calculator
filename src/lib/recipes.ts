@@ -422,6 +422,104 @@ const xiphosRecipes: IRecipe[] = [
   ),
 ];
 
+// HH-a "Javelin" half-truck recipes
+const javelinRecipes: IRecipe[] = [
+  // Garage production: 20 x Refined Materials → 1 x HH-a "Javelin"
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 20 }],
+    [{ stuff: Vehicles.Javelin, count: 1 }]
+  ),
+  // Mass Production Factory: 150 x Refined Materials → 3 crates of 3 x HH-a "Javelin" (9 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 150 }],
+    [{ stuff: Vehicles.Javelin, count: 9 }]
+  ),
+];
+
+// HH-b "Hoplite" half-truck recipes
+const hopliteRecipes: IRecipe[] = [
+  // Garage production: 22 x Refined Materials → 1 x HH-b "Hoplite"
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 22 }],
+    [{ stuff: Vehicles.Hoplite, count: 1 }]
+  ),
+  // Mass Production Factory: 165 x Refined Materials → 3 crates of 3 x HH-b "Hoplite" (9 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 165 }],
+    [{ stuff: Vehicles.Hoplite, count: 9 }]
+  ),
+];
+
+// HH-d "Peltast" half-truck recipes
+const peltastRecipes: IRecipe[] = [
+  // Garage production: 24 x Refined Materials → 1 x HH-d "Peltast"
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 24 }],
+    [{ stuff: Vehicles.Peltast, count: 1 }]
+  ),
+  // Mass Production Factory: 180 x Refined Materials → 3 crates of 3 x HH-d "Peltast" (9 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 180 }],
+    [{ stuff: Vehicles.Peltast, count: 9 }]
+  ),
+];
+
+// Niska Mk. I Gun Motor Carriage recipes
+const niskaMkIRecipes: IRecipe[] = [
+  // Garage production: 30 x Refined Materials → 1 x Niska Mk. I Gun Motor Carriage
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 30 }],
+    [{ stuff: Vehicles.NiskaMkI, count: 1 }]
+  ),
+  // Mass Production Factory: 225 x Refined Materials → 3 crates of 3 x Niska Mk. I Gun Motor Carriage (9 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 225 }],
+    [{ stuff: Vehicles.NiskaMkI, count: 9 }]
+  ),
+];
+
+// Niska Mk. II Blinder recipes
+const niskaMkIIRecipes: IRecipe[] = [
+  // Garage production: 32 x Refined Materials → 1 x Niska Mk. II Blinder
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 32 }],
+    [{ stuff: Vehicles.NiskaMkII, count: 1 }]
+  ),
+  // Mass Production Factory: 240 x Refined Materials → 3 crates of 3 x Niska Mk. II Blinder (9 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 240 }],
+    [{ stuff: Vehicles.NiskaMkII, count: 9 }]
+  ),
+];
+
+// Niska Mk. III Scar Twin recipes
+const niskaMkIIIRecipes: IRecipe[] = [
+  // Garage production: 35 x Refined Materials → 1 x Niska Mk. III Scar Twin
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 35 }],
+    [{ stuff: Vehicles.NiskaMkIII, count: 1 }]
+  ),
+  // Mass Production Factory: 262 x Refined Materials → 3 crates of 3 x Niska Mk. III Scar Twin (9 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 262 }],
+    [{ stuff: Vehicles.NiskaMkIII, count: 9 }]
+  ),
+];
+
+// Niska-Rycker Mk. IX Skycaller recipes
+const niskaRyckerMkIXRecipes: IRecipe[] = [
+  // Garage production: 40 x Refined Materials → 1 x Niska-Rycker Mk. IX Skycaller
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 40 }],
+    [{ stuff: Vehicles.NiskaRyckerMkIX, count: 1 }]
+  ),
+  // Mass Production Factory: 300 x Refined Materials → 3 crates of 3 x Niska-Rycker Mk. IX Skycaller (9 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 300 }],
+    [{ stuff: Vehicles.NiskaRyckerMkIX, count: 9 }]
+  ),
+];
+
 export const RecipiesByStuff = new Map<string, IRecipe[]>([
   [Materials.ConstructionMaterials, constructionMaterialsRecipes],
   [
@@ -453,6 +551,13 @@ export const RecipiesByStuff = new Map<string, IRecipe[]>([
   [Liquids.Oil, oilRecipes],
 
   [Vehicles.Xiphos, xiphosRecipes],
+  [Vehicles.Javelin, javelinRecipes],
+  [Vehicles.Hoplite, hopliteRecipes],
+  [Vehicles.Peltast, peltastRecipes],
+  [Vehicles.NiskaMkI, niskaMkIRecipes],
+  [Vehicles.NiskaMkII, niskaMkIIRecipes],
+  [Vehicles.NiskaMkIII, niskaMkIIIRecipes],
+  [Vehicles.NiskaRyckerMkIX, niskaRyckerMkIXRecipes],
 
   emptyRecipePair(RawResources.Salvage),
   emptyRecipePair(RawResources.DamagedComponents),

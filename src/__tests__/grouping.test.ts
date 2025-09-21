@@ -12,6 +12,13 @@ describe("Item Grouping", () => {
   describe("getItemGroup", () => {
     test("categorizes vehicles correctly", () => {
       expect(getItemGroup(Vehicles.Xiphos)).toBe(ItemGroup.Vehicle);
+      expect(getItemGroup(Vehicles.Javelin)).toBe(ItemGroup.Vehicle);
+      expect(getItemGroup(Vehicles.Hoplite)).toBe(ItemGroup.Vehicle);
+      expect(getItemGroup(Vehicles.Peltast)).toBe(ItemGroup.Vehicle);
+      expect(getItemGroup(Vehicles.NiskaMkI)).toBe(ItemGroup.Vehicle);
+      expect(getItemGroup(Vehicles.NiskaMkII)).toBe(ItemGroup.Vehicle);
+      expect(getItemGroup(Vehicles.NiskaMkIII)).toBe(ItemGroup.Vehicle);
+      expect(getItemGroup(Vehicles.NiskaRyckerMkIX)).toBe(ItemGroup.Vehicle);
     });
 
     test("categorizes raw resources correctly", () => {
@@ -50,8 +57,13 @@ describe("Item Grouping", () => {
       const vehicleGroup = grouped.find((g) => g.group === ItemGroup.Vehicle);
 
       expect(vehicleGroup).toBeDefined();
-      expect(vehicleGroup!.items).toHaveLength(1);
-      expect(vehicleGroup!.items[0].name).toBe(Vehicles.Xiphos);
+      expect(vehicleGroup!.items).toHaveLength(8); // Now includes all half-trucks
+
+      // Check that all items are vehicles
+      const vehicleNames = Object.values(Vehicles);
+      vehicleGroup!.items.forEach((item) => {
+        expect(vehicleNames).toContain(item.name as Vehicles);
+      });
     });
 
     test("raw resources group contains only raw materials", () => {
@@ -91,8 +103,8 @@ describe("Item Grouping", () => {
         0
       );
 
-      // Should equal the number of items in availableMaterials (currently 27 items)
-      expect(totalItems).toBe(27);
+      // Should equal the number of items in availableMaterials (now 34 items: 26 original + 7 new half-trucks)
+      expect(totalItems).toBe(34);
     });
   });
 });
