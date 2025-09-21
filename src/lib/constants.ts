@@ -50,4 +50,15 @@ export const ICONS_MAP = new Map<string, string>([
 
   // Vehicles
   [Vehicles.Xiphos, "icons/ArmoredCarVehicleIcon.svg"],
+  [Vehicles.WaspNest, "icons/FieldCastellumIcon.svg"],
+  [Vehicles.Koronides, "icons/FieldGunIcon.svg"],
+  [Vehicles.Wolfhound, "icons/ATLauncherIcon.svg"],
+  [Vehicles.CollinsCannon, "icons/ATFieldGunIcon.svg"],
+  [Vehicles.BatteringRam, "icons/ConcreteMixerIcon.svg"],
+  [Vehicles.Falconer, "icons/HeavyFieldCannonIcon.svg"],
+  [Vehicles.Tisiphone, "icons/FieldCannonIcon.svg"],
+  [Vehicles.Rampart, "icons/ATFieldGunIcon.svg"],
+  [Vehicles.Smelter, "icons/HeavyFieldGunIcon.svg"],
+  [Vehicles.Stockade, "icons/FlameVehicleIcon.svg"],
+  [Vehicles.StygianBolt, "icons/RPGIcon.svg"],
 ]);

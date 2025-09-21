@@ -422,6 +422,110 @@ const xiphosRecipes: IRecipe[] = [
   ),
 ];
 
+// Rycker 4/3-F Wasp Nest recipes (Bunker-building vehicle)
+const waspNestRecipes: IRecipe[] = [
+  // Garage production: 15 x Refined Materials → 1 x Wasp Nest
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 15 }],
+    [{ stuff: Vehicles.WaspNest, count: 1 }]
+  ),
+  // Mass Production Factory: 134 x Refined Materials → 3 crates of 3 x Wasp Nest (9 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 134 }],
+    [{ stuff: Vehicles.WaspNest, count: 9 }]
+  ),
+];
+
+// 120-68 "Koronides" Field Gun recipes (Heavy Artillery)
+const koronidesRecipes: IRecipe[] = [
+  // Garage production: 185 x Refined Materials → 1 x Koronides Field Gun
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 185 }],
+    [{ stuff: Vehicles.Koronides, count: 1 }]
+  ),
+];
+
+// Balfour Wolfhound 40mm recipes (Anti-Tank)
+const wolfhoundRecipes: IRecipe[] = [
+  // Garage production: 165 x Refined Materials → 1 x Wolfhound 40mm
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 165 }],
+    [{ stuff: Vehicles.Wolfhound, count: 1 }]
+  ),
+];
+
+// Collins Cannon 68mm recipes (Anti-Tank Field Gun)
+const collinsCannonRecipes: IRecipe[] = [
+  // Garage production: 145 x Refined Materials → 1 x Collins Cannon 68mm
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 145 }],
+    [{ stuff: Vehicles.CollinsCannon, count: 1 }]
+  ),
+];
+
+// AA-2 Battering Ram recipes (Siege Vehicle)
+const batteringRamRecipes: IRecipe[] = [
+  // Garage production: 125 x Refined Materials → 1 x AA-2 Battering Ram
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 125 }],
+    [{ stuff: Vehicles.BatteringRam, count: 1 }]
+  ),
+];
+
+// Balfour Falconer 250mm recipes (Heavy Artillery)
+const falconerRecipes: IRecipe[] = [
+  // Garage production: 200 x Refined Materials → 1 x Falconer 250mm
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 200 }],
+    [{ stuff: Vehicles.Falconer, count: 1 }]
+  ),
+];
+
+// 30-250 "Tisiphone" Field Cannon recipes (Field Artillery)
+const tisiphoneRecipes: IRecipe[] = [
+  // Garage production: 155 x Refined Materials → 1 x Tisiphone Field Cannon
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 155 }],
+    [{ stuff: Vehicles.Tisiphone, count: 1 }]
+  ),
+];
+
+// Balfour Rampart 68mm recipes (Anti-Tank)
+const rampartRecipes: IRecipe[] = [
+  // Garage production: 135 x Refined Materials → 1 x Rampart 68mm
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 135 }],
+    [{ stuff: Vehicles.Rampart, count: 1 }]
+  ),
+];
+
+// 40-45 "Smelter" Heavy Field Gun recipes (Heavy Artillery)
+const smelterRecipes: IRecipe[] = [
+  // Garage production: 175 x Refined Materials → 1 x Smelter Heavy Field Gun
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 175 }],
+    [{ stuff: Vehicles.Smelter, count: 1 }]
+  ),
+];
+
+// Balfour Stockade 75mm recipes (Field Gun)
+const stockadeRecipes: IRecipe[] = [
+  // Garage production: 115 x Refined Materials → 1 x Stockade 75mm
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 115 }],
+    [{ stuff: Vehicles.Stockade, count: 1 }]
+  ),
+];
+
+// 945g "Stygian Bolt" recipes (Heavy Weapon/Launcher)
+const stygianBoltRecipes: IRecipe[] = [
+  // Garage production: 95 x Refined Materials → 1 x Stygian Bolt
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 95 }],
+    [{ stuff: Vehicles.StygianBolt, count: 1 }]
+  ),
+];
+
 export const RecipiesByStuff = new Map<string, IRecipe[]>([
   [Materials.ConstructionMaterials, constructionMaterialsRecipes],
   [
@@ -453,6 +557,17 @@ export const RecipiesByStuff = new Map<string, IRecipe[]>([
   [Liquids.Oil, oilRecipes],
 
   [Vehicles.Xiphos, xiphosRecipes],
+  [Vehicles.WaspNest, waspNestRecipes],
+  [Vehicles.Koronides, koronidesRecipes],
+  [Vehicles.Wolfhound, wolfhoundRecipes],
+  [Vehicles.CollinsCannon, collinsCannonRecipes],
+  [Vehicles.BatteringRam, batteringRamRecipes],
+  [Vehicles.Falconer, falconerRecipes],
+  [Vehicles.Tisiphone, tisiphoneRecipes],
+  [Vehicles.Rampart, rampartRecipes],
+  [Vehicles.Smelter, smelterRecipes],
+  [Vehicles.Stockade, stockadeRecipes],
+  [Vehicles.StygianBolt, stygianBoltRecipes],
 
   emptyRecipePair(RawResources.Salvage),
   emptyRecipePair(RawResources.DamagedComponents),

@@ -50,8 +50,22 @@ describe("Item Grouping", () => {
       const vehicleGroup = grouped.find((g) => g.group === ItemGroup.Vehicle);
 
       expect(vehicleGroup).toBeDefined();
-      expect(vehicleGroup!.items).toHaveLength(1);
-      expect(vehicleGroup!.items[0].name).toBe(Vehicles.Xiphos);
+      expect(vehicleGroup!.items).toHaveLength(12); // Updated to include all 12 vehicles
+
+      // Verify all vehicles are present
+      const vehicleNames = vehicleGroup!.items.map(item => item.name);
+      expect(vehicleNames).toContain(Vehicles.Xiphos);
+      expect(vehicleNames).toContain(Vehicles.WaspNest);
+      expect(vehicleNames).toContain(Vehicles.Koronides);
+      expect(vehicleNames).toContain(Vehicles.Wolfhound);
+      expect(vehicleNames).toContain(Vehicles.CollinsCannon);
+      expect(vehicleNames).toContain(Vehicles.BatteringRam);
+      expect(vehicleNames).toContain(Vehicles.Falconer);
+      expect(vehicleNames).toContain(Vehicles.Tisiphone);
+      expect(vehicleNames).toContain(Vehicles.Rampart);
+      expect(vehicleNames).toContain(Vehicles.Smelter);
+      expect(vehicleNames).toContain(Vehicles.Stockade);
+      expect(vehicleNames).toContain(Vehicles.StygianBolt);
     });
 
     test("raw resources group contains only raw materials", () => {
@@ -91,8 +105,8 @@ describe("Item Grouping", () => {
         0
       );
 
-      // Should equal the number of items in availableMaterials (currently 27 items)
-      expect(totalItems).toBe(27);
+      // Should equal the number of items in availableMaterials (updated to 38 items: 27 original + 11 new vehicles)
+      expect(totalItems).toBe(38);
     });
   });
 });
