@@ -12,6 +12,9 @@ describe("Item Grouping", () => {
   describe("getItemGroup", () => {
     test("categorizes vehicles correctly", () => {
       expect(getItemGroup(Vehicles.Xiphos)).toBe(ItemGroup.Vehicle);
+      expect(getItemGroup(Vehicles.Acheron)).toBe(ItemGroup.Vehicle);
+      expect(getItemGroup(Vehicles.Doru)).toBe(ItemGroup.Vehicle);
+      expect(getItemGroup(Vehicles.MulloyLPC)).toBe(ItemGroup.Vehicle);
     });
 
     test("categorizes raw resources correctly", () => {
@@ -50,11 +53,13 @@ describe("Item Grouping", () => {
       const vehicleGroup = grouped.find((g) => g.group === ItemGroup.Vehicle);
 
       expect(vehicleGroup).toBeDefined();
-      expect(vehicleGroup!.items).toHaveLength(12); // Updated to include all 12 vehicles
+      expect(vehicleGroup!.items).toHaveLength(19); // 1 (Xiphos) + 11 (new vehicles) + 7 (tankettes) = 19 total
 
       // Verify all vehicles are present
       const vehicleNames = vehicleGroup!.items.map(item => item.name);
+      // Original vehicle
       expect(vehicleNames).toContain(Vehicles.Xiphos);
+      // New vehicles added in my PR
       expect(vehicleNames).toContain(Vehicles.WaspNest);
       expect(vehicleNames).toContain(Vehicles.Koronides);
       expect(vehicleNames).toContain(Vehicles.Wolfhound);
@@ -66,6 +71,14 @@ describe("Item Grouping", () => {
       expect(vehicleNames).toContain(Vehicles.Smelter);
       expect(vehicleNames).toContain(Vehicles.Stockade);
       expect(vehicleNames).toContain(Vehicles.StygianBolt);
+      // Tankettes from main branch
+      expect(vehicleNames).toContain(Vehicles.Acheron);
+      expect(vehicleNames).toContain(Vehicles.Doru);
+      expect(vehicleNames).toContain(Vehicles.MulloyLPC);
+      expect(vehicleNames).toContain(Vehicles.Actaeon);
+      expect(vehicleNames).toContain(Vehicles.Vesta);
+      expect(vehicleNames).toContain(Vehicles.Ixion);
+      expect(vehicleNames).toContain(Vehicles.Deioneus);
     });
 
     test("raw resources group contains only raw materials", () => {
@@ -105,8 +118,8 @@ describe("Item Grouping", () => {
         0
       );
 
-      // Should equal the number of items in availableMaterials (updated to 38 items: 27 original + 11 new vehicles)
-      expect(totalItems).toBe(38);
+      // Should equal the number of items in availableMaterials (27 base + 19 vehicles = 46 total)
+      expect(totalItems).toBe(46);
     });
   });
 });
