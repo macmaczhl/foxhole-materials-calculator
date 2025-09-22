@@ -12,6 +12,9 @@ describe("Item Grouping", () => {
   describe("getItemGroup", () => {
     test("categorizes vehicles correctly", () => {
       expect(getItemGroup(Vehicles.Xiphos)).toBe(ItemGroup.Vehicle);
+      expect(getItemGroup(Vehicles.Acheron)).toBe(ItemGroup.Vehicle);
+      expect(getItemGroup(Vehicles.Doru)).toBe(ItemGroup.Vehicle);
+      expect(getItemGroup(Vehicles.MulloyLPC)).toBe(ItemGroup.Vehicle);
     });
 
     test("categorizes raw resources correctly", () => {
@@ -50,10 +53,14 @@ describe("Item Grouping", () => {
       const vehicleGroup = grouped.find((g) => g.group === ItemGroup.Vehicle);
 
       expect(vehicleGroup).toBeDefined();
-      expect(vehicleGroup!.items).toHaveLength(5);
+      expect(vehicleGroup!.items).toHaveLength(8);
+
       // Check that all vehicles are present
       const vehicleNames = vehicleGroup!.items.map(item => item.name);
       expect(vehicleNames).toContain(Vehicles.Xiphos);
+      expect(vehicleNames).toContain(Vehicles.Acheron);
+      expect(vehicleNames).toContain(Vehicles.Doru);
+      expect(vehicleNames).toContain(Vehicles.MulloyLPC);
       expect(vehicleNames).toContain(Vehicles.Actaeon);
       expect(vehicleNames).toContain(Vehicles.Vesta);
       expect(vehicleNames).toContain(Vehicles.Ixion);
@@ -97,8 +104,8 @@ describe("Item Grouping", () => {
         0
       );
 
-      // Should equal the number of items in availableMaterials (currently 31 items)
-      expect(totalItems).toBe(31);
+      // Should equal the number of items in availableMaterials (currently 34 items: 27 base + 7 vehicles)
+      expect(totalItems).toBe(34);
     });
   });
 });
