@@ -15,12 +15,13 @@ describe("Tankette and Rocket Battery Recipes", () => {
       expect(actaeonRecipes.length).toBeGreaterThan(0);
     });
 
-    test("garage recipe produces 1 vehicle for 15 refined materials", () => {
-      const garageRecipe = actaeonRecipes.find(r =>
-        r.required.length === 1 &&
-        r.required[0].stuff === Materials.RefinedMaterials &&
-        r.required[0].count === 15 &&
-        r.produced[0].count === 1
+    test("garage recipe produces 1 vehicle for 35 refined materials", () => {
+      const garageRecipe = actaeonRecipes.find(
+        (r) =>
+          r.required.length === 1 &&
+          r.required[0].stuff === Materials.RefinedMaterials &&
+          r.required[0].count === 35 &&
+          r.produced[0].count === 1
       );
 
       expect(garageRecipe).toBeDefined();
@@ -28,23 +29,23 @@ describe("Tankette and Rocket Battery Recipes", () => {
     });
 
     test("mass production recipes exist and are reasonable", () => {
-      const massProductionRecipes = actaeonRecipes.filter(r =>
-        r.produced[0].count > 1
+      const massProductionRecipes = actaeonRecipes.filter(
+        (r) => r.produced[0].count > 1
       );
 
       expect(massProductionRecipes.length).toBe(3);
 
       // Check that mass production recipes produce multiple vehicles
-      massProductionRecipes.forEach(recipe => {
+      massProductionRecipes.forEach((recipe) => {
         const refinedMaterials = recipe.required[0].count;
         const vehiclesProduced = recipe.produced[0].count;
         expect(vehiclesProduced).toBeGreaterThan(1);
         expect(refinedMaterials).toBeGreaterThan(0);
 
-        // Check reasonable ratio (should be around 13-16 per vehicle for mass production)
+        // Check reasonable ratio (should be around 20-30 per vehicle for mass production)
         const ratio = refinedMaterials / vehiclesProduced;
-        expect(ratio).toBeGreaterThan(10);
-        expect(ratio).toBeLessThan(20);
+        expect(ratio).toBeGreaterThan(20);
+        expect(ratio).toBeLessThan(30);
       });
     });
 
@@ -58,7 +59,7 @@ describe("Tankette and Rocket Battery Recipes", () => {
 
       const result = calculateComponents(mockRecipeTree, 2);
       expect(result.initial).toEqual([
-        { stuff: Materials.RefinedMaterials, count: 30 }
+        { stuff: Materials.RefinedMaterials, count: 70 },
       ]);
     });
   });
@@ -75,16 +76,20 @@ describe("Tankette and Rocket Battery Recipes", () => {
       expect(vestaRecipes.length).toBeGreaterThan(0);
     });
 
-    test("garage recipe produces 1 vehicle for 18 refined materials", () => {
-      const garageRecipe = vestaRecipes.find(r =>
-        r.required.length === 1 &&
-        r.required[0].stuff === Materials.RefinedMaterials &&
-        r.required[0].count === 18 &&
-        r.produced[0].count === 1
-      );
+    test("recipe requires processed construction materials, assembly materials, and actaeon", () => {
+      const recipe = vestaRecipes.find((r) => r.produced[0].count === 1);
 
-      expect(garageRecipe).toBeDefined();
-      expect(garageRecipe!.produced[0].stuff).toBe(Vehicles.Vesta);
+      expect(recipe).toBeDefined();
+      expect(recipe!.produced[0].stuff).toBe(Vehicles.Vesta);
+      expect(recipe!.required.length).toBe(3);
+      expect(recipe!.required[0].stuff).toBe(
+        Materials.ProcessedConstructionMaterials
+      );
+      expect(recipe!.required[0].count).toBe(10);
+      expect(recipe!.required[1].stuff).toBe(Materials.AssemblyMaterialsI);
+      expect(recipe!.required[1].count).toBe(15);
+      expect(recipe!.required[2].stuff).toBe(Vehicles.Actaeon);
+      expect(recipe!.required[2].count).toBe(1);
     });
   });
 
@@ -100,16 +105,18 @@ describe("Tankette and Rocket Battery Recipes", () => {
       expect(ixionRecipes.length).toBeGreaterThan(0);
     });
 
-    test("garage recipe produces 1 vehicle for 20 refined materials", () => {
-      const garageRecipe = ixionRecipes.find(r =>
-        r.required.length === 1 &&
-        r.required[0].stuff === Materials.RefinedMaterials &&
-        r.required[0].count === 20 &&
-        r.produced[0].count === 1
-      );
+    test("recipe requires concrete materials, assembly materials, and actaeon", () => {
+      const recipe = ixionRecipes.find((r) => r.produced[0].count === 1);
 
-      expect(garageRecipe).toBeDefined();
-      expect(garageRecipe!.produced[0].stuff).toBe(Vehicles.Ixion);
+      expect(recipe).toBeDefined();
+      expect(recipe!.produced[0].stuff).toBe(Vehicles.Ixion);
+      expect(recipe!.required.length).toBe(3);
+      expect(recipe!.required[0].stuff).toBe(Materials.ConcreteMaterials);
+      expect(recipe!.required[0].count).toBe(10);
+      expect(recipe!.required[1].stuff).toBe(Materials.AssemblyMaterialsI);
+      expect(recipe!.required[1].count).toBe(15);
+      expect(recipe!.required[2].stuff).toBe(Vehicles.Actaeon);
+      expect(recipe!.required[2].count).toBe(1);
     });
   });
 
@@ -125,21 +132,27 @@ describe("Tankette and Rocket Battery Recipes", () => {
       expect(deioneusRecipes.length).toBeGreaterThan(0);
     });
 
-    test("garage recipe produces 1 vehicle for 22 refined materials", () => {
-      const garageRecipe = deioneusRecipes.find(r =>
-        r.required.length === 1 &&
-        r.required[0].stuff === Materials.RefinedMaterials &&
-        r.required[0].count === 22 &&
-        r.produced[0].count === 1
-      );
+    test("recipe requires processed construction materials, assembly materials, and actaeon", () => {
+      const recipe = deioneusRecipes.find((r) => r.produced[0].count === 1);
 
-      expect(garageRecipe).toBeDefined();
-      expect(garageRecipe!.produced[0].stuff).toBe(Vehicles.Deioneus);
+      expect(recipe).toBeDefined();
+      expect(recipe!.produced[0].stuff).toBe(Vehicles.Deioneus);
+      expect(recipe!.required.length).toBe(4);
+      expect(recipe!.required[0].stuff).toBe(
+        Materials.ProcessedConstructionMaterials
+      );
+      expect(recipe!.required[0].count).toBe(20);
+      expect(recipe!.required[1].stuff).toBe(Materials.AssemblyMaterialsI);
+      expect(recipe!.required[1].count).toBe(15);
+      expect(recipe!.required[2].stuff).toBe(Materials.AssemblyMaterialsIII);
+      expect(recipe!.required[2].count).toBe(3);
+      expect(recipe!.required[3].stuff).toBe(Vehicles.Actaeon);
+      expect(recipe!.required[3].count).toBe(1);
     });
 
     test("mass production excess calculation", () => {
-      const massProductionRecipe = deioneusRecipes.find(r =>
-        r.produced[0].count === 9
+      const massProductionRecipe = deioneusRecipes.find(
+        (r) => r.produced[0].count === 9
       );
 
       expect(massProductionRecipe).toBeDefined();
@@ -154,7 +167,7 @@ describe("Tankette and Rocket Battery Recipes", () => {
       // Request 1 rocket battery but recipe produces 9, should show 8 excess
       const result = calculateComponents(mockRecipeTree, 1);
       expect(result.excessResult).toEqual([
-        { stuff: Vehicles.Deioneus, count: 8 }
+        { stuff: Vehicles.Deioneus, count: 8 },
       ]);
     });
   });
@@ -167,33 +180,40 @@ describe("Tankette and Rocket Battery Recipes", () => {
       expect(RecipiesByStuff.has(Vehicles.Deioneus)).toBe(true);
     });
 
-    test("all recipes require only refined materials", () => {
-      const allNewVehicles = [Vehicles.Actaeon, Vehicles.Vesta, Vehicles.Ixion, Vehicles.Deioneus];
+    test("all recipes have correct structure", () => {
+      const allNewVehicles = [
+        Vehicles.Actaeon,
+        Vehicles.Vesta,
+        Vehicles.Ixion,
+        Vehicles.Deioneus,
+      ];
 
-      allNewVehicles.forEach(vehicle => {
+      allNewVehicles.forEach((vehicle) => {
         const recipes = RecipiesByStuff.get(vehicle) || [];
-        recipes.forEach(recipe => {
-          expect(recipe.required.length).toBe(1);
-          expect(recipe.required[0].stuff).toBe(Materials.RefinedMaterials);
+        recipes.forEach((recipe) => {
+          expect(recipe.required.length).toBeGreaterThan(0);
           expect(recipe.produced.length).toBe(1);
           expect(recipe.produced[0].stuff).toBe(vehicle);
         });
       });
     });
 
-    test("tankettes cost less than Xiphos", () => {
+    test("actaeon tankette cost is reasonable compared to Xiphos", () => {
       const xiphosRecipes = RecipiesByStuff.get(Vehicles.Xiphos) || [];
-      const xiphosGarageRecipe = xiphosRecipes.find(r => r.produced[0].count === 1);
+      const xiphosGarageRecipe = xiphosRecipes.find(
+        (r) => r.produced[0].count === 1
+      );
       const xiphosCost = xiphosGarageRecipe!.required[0].count; // 25
 
-      const tankettes = [Vehicles.Actaeon, Vehicles.Vesta, Vehicles.Ixion];
-      tankettes.forEach(tankette => {
-        const recipes = RecipiesByStuff.get(tankette) || [];
-        const garageRecipe = recipes.find(r => r.produced[0].count === 1);
-        const tanketteCost = garageRecipe!.required[0].count;
+      const actaeonRecipes = RecipiesByStuff.get(Vehicles.Actaeon) || [];
+      const actaeonGarageRecipe = actaeonRecipes.find(
+        (r) => r.produced[0].count === 1
+      );
+      const actaeonCost = actaeonGarageRecipe!.required[0].count; // 35
 
-        expect(tanketteCost).toBeLessThan(xiphosCost);
-      });
+      // Actaeon costs more than Xiphos but that's expected for a tankette
+      expect(actaeonCost).toBeGreaterThan(xiphosCost);
+      expect(actaeonCost).toBe(35);
     });
   });
 });

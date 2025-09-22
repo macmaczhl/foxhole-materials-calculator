@@ -38,7 +38,7 @@ describe("IconService", () => {
         "ArmoredCarVehicleIcon.png"
       );
       expect(IconService.getIconName(Vehicles.Actaeon)).toBe(
-        "ArmoredCarVehicleIcon.png"
+        "TanketteCVehicleIcon.png"
       );
     });
 
