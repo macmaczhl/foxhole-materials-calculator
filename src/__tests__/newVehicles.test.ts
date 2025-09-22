@@ -27,7 +27,7 @@ describe("New Vehicles", () => {
       });
     });
 
-    test("all vehicle recipes require Refined Materials", () => {
+    test("all vehicle recipes have valid requirements", () => {
       const newVehicles = [
         Vehicles.WaspNest,
         Vehicles.Koronides,
@@ -46,8 +46,9 @@ describe("New Vehicles", () => {
         const recipes = RecipiesByStuff.get(vehicle)!;
         recipes.forEach((recipe) => {
           expect(recipe.required.length).toBeGreaterThan(0);
-          expect(recipe.required[0].stuff).toBe(Materials.RefinedMaterials);
           expect(recipe.required[0].count).toBeGreaterThan(0);
+          // Each recipe should have valid material requirements
+          expect(recipe.required[0].stuff).toBeDefined();
         });
       });
     });
@@ -70,7 +71,7 @@ describe("New Vehicles", () => {
 
     test("has correct recipe requirements", () => {
       expect(collinsCannonRecipe.required).toEqual([
-        { stuff: Materials.RefinedMaterials, count: 145 }
+        { stuff: Materials.RefinedMaterials, count: 20 }
       ]);
       expect(collinsCannonRecipe.produced).toEqual([
         { stuff: Vehicles.CollinsCannon, count: 1 }
@@ -81,7 +82,7 @@ describe("New Vehicles", () => {
       const result = calculateComponents(collinsCannonRecipeTree, 1);
 
       expect(result.initial).toEqual([
-        { stuff: Materials.RefinedMaterials, count: 145 }
+        { stuff: Materials.RefinedMaterials, count: 20 }
       ]);
     });
 
@@ -89,7 +90,7 @@ describe("New Vehicles", () => {
       const result = calculateComponents(collinsCannonRecipeTree, 3);
 
       expect(result.initial).toEqual([
-        { stuff: Materials.RefinedMaterials, count: 435 }
+        { stuff: Materials.RefinedMaterials, count: 60 }
       ]);
     });
   });
@@ -101,23 +102,15 @@ describe("New Vehicles", () => {
       waspNestRecipes = RecipiesByStuff.get(Vehicles.WaspNest)!;
     });
 
-    test("has garage and mass production recipes", () => {
+    test("has complex material requirements", () => {
       expect(waspNestRecipes.length).toBeGreaterThanOrEqual(1);
 
-      // Check garage recipe
-      const garageRecipe = waspNestRecipes.find(r => r.produced[0].count === 1);
-      expect(garageRecipe).toBeDefined();
-      expect(garageRecipe!.required[0].stuff).toBe(Materials.RefinedMaterials);
-      expect(garageRecipe!.required[0].count).toBe(15);
-    });
-
-    test("has efficient mass production recipe", () => {
-      // Check for mass production recipe that produces multiple units
-      const massProductionRecipe = waspNestRecipes.find(r => r.produced[0].count > 1);
-      if (massProductionRecipe) {
-        expect(massProductionRecipe.produced[0].count).toBeGreaterThan(1);
-        expect(massProductionRecipe.required[0].stuff).toBe(Materials.RefinedMaterials);
-      }
+      // Check the recipe with multiple material types
+      const recipe = waspNestRecipes[0];
+      expect(recipe).toBeDefined();
+      expect(recipe.required.length).toBe(3); // Should have 3 different materials
+      expect(recipe.required[0].stuff).toBe(Materials.ProcessedConstructionMaterials);
+      expect(recipe.required[0].count).toBe(20);
     });
   });
 
@@ -127,7 +120,7 @@ describe("New Vehicles", () => {
       const garageRecipe = recipes[0];
 
       expect(garageRecipe.required[0].stuff).toBe(Materials.RefinedMaterials);
-      expect(garageRecipe.required[0].count).toBe(185); // Heavy artillery should be expensive
+      expect(garageRecipe.required[0].count).toBe(50); // Updated cost from wiki
     });
 
     test("Falconer 250mm has appropriate cost", () => {
@@ -135,23 +128,43 @@ describe("New Vehicles", () => {
       const garageRecipe = recipes[0];
 
       expect(garageRecipe.required[0].stuff).toBe(Materials.RefinedMaterials);
-      expect(garageRecipe.required[0].count).toBe(200); // Heaviest artillery should be most expensive
+      expect(garageRecipe.required[0].count).toBe(35); // Updated cost from wiki
     });
   });
 
-  describe("Anti-Tank weapons cost progression", () => {
-    test("vehicles have reasonable cost progression", () => {
-      const stygianBoltCost = RecipiesByStuff.get(Vehicles.StygianBolt)![0].required[0].count;
-      const stockadeCost = RecipiesByStuff.get(Vehicles.Stockade)![0].required[0].count;
-      const rampartCost = RecipiesByStuff.get(Vehicles.Rampart)![0].required[0].count;
-      const collinsCannonCost = RecipiesByStuff.get(Vehicles.CollinsCannon)![0].required[0].count;
-      const wolfhoundCost = RecipiesByStuff.get(Vehicles.Wolfhound)![0].required[0].count;
+  describe("Recipe complexity validation", () => {
+    test("vehicles with simple recipes use refined materials", () => {
+      const simpleVehicles = [
+        Vehicles.Koronides,
+        Vehicles.Wolfhound,
+        Vehicles.CollinsCannon,
+        Vehicles.BatteringRam,
+        Vehicles.Falconer,
+        Vehicles.Tisiphone,
+      ];
 
-      // Verify cost progression makes sense
-      expect(stygianBoltCost).toBeLessThan(stockadeCost);
-      expect(stockadeCost).toBeLessThan(rampartCost);
-      expect(rampartCost).toBeLessThan(collinsCannonCost);
-      expect(collinsCannonCost).toBeLessThan(wolfhoundCost);
+      simpleVehicles.forEach((vehicle) => {
+        const recipes = RecipiesByStuff.get(vehicle)!;
+        const garageRecipe = recipes[0];
+        expect(garageRecipe.required[0].stuff).toBe(Materials.RefinedMaterials);
+        expect(garageRecipe.required[0].count).toBeGreaterThan(0);
+      });
+    });
+
+    test("vehicles with complex recipes use multiple materials", () => {
+      const complexVehicles = [
+        Vehicles.WaspNest,
+        Vehicles.Rampart,
+        Vehicles.Smelter,
+        Vehicles.Stockade,
+        Vehicles.StygianBolt,
+      ];
+
+      complexVehicles.forEach((vehicle) => {
+        const recipes = RecipiesByStuff.get(vehicle)!;
+        const recipe = recipes[0];
+        expect(recipe.required.length).toBeGreaterThan(1); // Should use multiple materials
+      });
     });
   });
 

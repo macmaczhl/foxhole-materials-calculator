@@ -424,104 +424,211 @@ const xiphosRecipes: IRecipe[] = [
 
 // Rycker 4/3-F Wasp Nest recipes (Bunker-building vehicle)
 const waspNestRecipes: IRecipe[] = [
-  // Garage production: 15 x Refined Materials → 1 x Wasp Nest
+  // Field Bunker production: 20 x Processed Construction Materials + 15 x Assembly Materials II + 3 x Assembly Materials IV → 1 x Wasp Nest
   createRecipe(
-    [{ stuff: Materials.RefinedMaterials, count: 15 }],
+    [
+      { stuff: Materials.ProcessedConstructionMaterials, count: 20 },
+      { stuff: Materials.AssemblyMaterialsII, count: 15 },
+      { stuff: Materials.AssemblyMaterialsIV, count: 3 }
+    ],
     [{ stuff: Vehicles.WaspNest, count: 1 }]
-  ),
-  // Mass Production Factory: 134 x Refined Materials → 3 crates of 3 x Wasp Nest (9 total)
-  createRecipe(
-    [{ stuff: Materials.RefinedMaterials, count: 134 }],
-    [{ stuff: Vehicles.WaspNest, count: 9 }]
   ),
 ];
 
 // 120-68 "Koronides" Field Gun recipes (Heavy Artillery)
 const koronidesRecipes: IRecipe[] = [
-  // Garage production: 185 x Refined Materials → 1 x Koronides Field Gun
+  // Garage production: 50 x Refined Materials → 1 x Koronides Field Gun
   createRecipe(
-    [{ stuff: Materials.RefinedMaterials, count: 185 }],
+    [{ stuff: Materials.RefinedMaterials, count: 50 }],
     [{ stuff: Vehicles.Koronides, count: 1 }]
+  ),
+  // Mass Production Factory: 360 x Refined Materials → 3 crates of 3 x Koronides Field Gun (9 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 360 }],
+    [{ stuff: Vehicles.Koronides, count: 9 }]
+  ),
+  // Mass Production Factory: 450 x Refined Materials → 4 crates of 3 x Koronides Field Gun (12 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 450 }],
+    [{ stuff: Vehicles.Koronides, count: 12 }]
+  ),
+  // Mass Production Factory: 525 x Refined Materials → 5 crates of 3 x Koronides Field Gun (15 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 525 }],
+    [{ stuff: Vehicles.Koronides, count: 15 }]
   ),
 ];
 
 // Balfour Wolfhound 40mm recipes (Anti-Tank)
 const wolfhoundRecipes: IRecipe[] = [
-  // Garage production: 165 x Refined Materials → 1 x Wolfhound 40mm
+  // Garage production: 20 x Refined Materials → 1 x Wolfhound 40mm
   createRecipe(
-    [{ stuff: Materials.RefinedMaterials, count: 165 }],
+    [{ stuff: Materials.RefinedMaterials, count: 20 }],
     [{ stuff: Vehicles.Wolfhound, count: 1 }]
+  ),
+  // Mass Production Factory: 144 x Refined Materials → 3 crates of 3 x Wolfhound 40mm (9 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 144 }],
+    [{ stuff: Vehicles.Wolfhound, count: 9 }]
+  ),
+  // Mass Production Factory: 180 x Refined Materials → 4 crates of 3 x Wolfhound 40mm (12 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 180 }],
+    [{ stuff: Vehicles.Wolfhound, count: 12 }]
+  ),
+  // Mass Production Factory: 210 x Refined Materials → 5 crates of 3 x Wolfhound 40mm (15 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 210 }],
+    [{ stuff: Vehicles.Wolfhound, count: 15 }]
   ),
 ];
 
 // Collins Cannon 68mm recipes (Anti-Tank Field Gun)
 const collinsCannonRecipes: IRecipe[] = [
-  // Garage production: 145 x Refined Materials → 1 x Collins Cannon 68mm
+  // Garage production: 20 x Refined Materials → 1 x Collins Cannon 68mm
   createRecipe(
-    [{ stuff: Materials.RefinedMaterials, count: 145 }],
+    [{ stuff: Materials.RefinedMaterials, count: 20 }],
     [{ stuff: Vehicles.CollinsCannon, count: 1 }]
+  ),
+  // Mass Production Factory: 144 x Refined Materials → 3 crates of 3 x Collins Cannon 68mm (9 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 144 }],
+    [{ stuff: Vehicles.CollinsCannon, count: 9 }]
+  ),
+  // Mass Production Factory: 180 x Refined Materials → 4 crates of 3 x Collins Cannon 68mm (12 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 180 }],
+    [{ stuff: Vehicles.CollinsCannon, count: 12 }]
+  ),
+  // Mass Production Factory: 210 x Refined Materials → 5 crates of 3 x Collins Cannon 68mm (15 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 210 }],
+    [{ stuff: Vehicles.CollinsCannon, count: 15 }]
   ),
 ];
 
 // AA-2 Battering Ram recipes (Siege Vehicle)
 const batteringRamRecipes: IRecipe[] = [
-  // Garage production: 125 x Refined Materials → 1 x AA-2 Battering Ram
+  // Garage production: 20 x Refined Materials → 1 x AA-2 Battering Ram
   createRecipe(
-    [{ stuff: Materials.RefinedMaterials, count: 125 }],
+    [{ stuff: Materials.RefinedMaterials, count: 20 }],
     [{ stuff: Vehicles.BatteringRam, count: 1 }]
+  ),
+  // Mass Production Factory: 144 x Refined Materials → 3 crates of 3 x AA-2 Battering Ram (9 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 144 }],
+    [{ stuff: Vehicles.BatteringRam, count: 9 }]
+  ),
+  // Mass Production Factory: 180 x Refined Materials → 4 crates of 3 x AA-2 Battering Ram (12 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 180 }],
+    [{ stuff: Vehicles.BatteringRam, count: 12 }]
+  ),
+  // Mass Production Factory: 210 x Refined Materials → 5 crates of 3 x AA-2 Battering Ram (15 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 210 }],
+    [{ stuff: Vehicles.BatteringRam, count: 15 }]
   ),
 ];
 
 // Balfour Falconer 250mm recipes (Heavy Artillery)
 const falconerRecipes: IRecipe[] = [
-  // Garage production: 200 x Refined Materials → 1 x Falconer 250mm
+  // Garage production: 35 x Refined Materials → 1 x Falconer 250mm
   createRecipe(
-    [{ stuff: Materials.RefinedMaterials, count: 200 }],
+    [{ stuff: Materials.RefinedMaterials, count: 35 }],
     [{ stuff: Vehicles.Falconer, count: 1 }]
+  ),
+  // Mass Production Factory: 251 x Refined Materials → 3 crates of 3 x Falconer 250mm (9 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 251 }],
+    [{ stuff: Vehicles.Falconer, count: 9 }]
+  ),
+  // Mass Production Factory: 314 x Refined Materials → 4 crates of 3 x Falconer 250mm (12 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 314 }],
+    [{ stuff: Vehicles.Falconer, count: 12 }]
+  ),
+  // Mass Production Factory: 366 x Refined Materials → 5 crates of 3 x Falconer 250mm (15 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 366 }],
+    [{ stuff: Vehicles.Falconer, count: 15 }]
   ),
 ];
 
 // 30-250 "Tisiphone" Field Cannon recipes (Field Artillery)
 const tisiphoneRecipes: IRecipe[] = [
-  // Garage production: 155 x Refined Materials → 1 x Tisiphone Field Cannon
+  // Garage production: 35 x Refined Materials → 1 x Tisiphone Field Cannon
   createRecipe(
-    [{ stuff: Materials.RefinedMaterials, count: 155 }],
+    [{ stuff: Materials.RefinedMaterials, count: 35 }],
     [{ stuff: Vehicles.Tisiphone, count: 1 }]
+  ),
+  // Mass Production Factory: 251 x Refined Materials → 3 crates of 3 x Tisiphone Field Cannon (9 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 251 }],
+    [{ stuff: Vehicles.Tisiphone, count: 9 }]
+  ),
+  // Mass Production Factory: 314 x Refined Materials → 4 crates of 3 x Tisiphone Field Cannon (12 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 314 }],
+    [{ stuff: Vehicles.Tisiphone, count: 12 }]
+  ),
+  // Mass Production Factory: 366 x Refined Materials → 5 crates of 3 x Tisiphone Field Cannon (15 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 366 }],
+    [{ stuff: Vehicles.Tisiphone, count: 15 }]
   ),
 ];
 
 // Balfour Rampart 68mm recipes (Anti-Tank)
 const rampartRecipes: IRecipe[] = [
-  // Garage production: 135 x Refined Materials → 1 x Rampart 68mm
+  // Production: 5 x Processed Construction Materials + 5 x Assembly Materials IV + 1 x Collins Cannon 68mm → 1 x Rampart 68mm
   createRecipe(
-    [{ stuff: Materials.RefinedMaterials, count: 135 }],
+    [
+      { stuff: Materials.ProcessedConstructionMaterials, count: 5 },
+      { stuff: Materials.AssemblyMaterialsIV, count: 5 },
+      { stuff: Vehicles.CollinsCannon, count: 1 }
+    ],
     [{ stuff: Vehicles.Rampart, count: 1 }]
   ),
 ];
 
 // 40-45 "Smelter" Heavy Field Gun recipes (Heavy Artillery)
 const smelterRecipes: IRecipe[] = [
-  // Garage production: 175 x Refined Materials → 1 x Smelter Heavy Field Gun
+  // Production: 5 x Processed Construction Materials + 5 x Assembly Materials IV + 1 x AA-2 Battering Ram → 1 x Smelter Heavy Field Gun
   createRecipe(
-    [{ stuff: Materials.RefinedMaterials, count: 175 }],
+    [
+      { stuff: Materials.ProcessedConstructionMaterials, count: 5 },
+      { stuff: Materials.AssemblyMaterialsIV, count: 5 },
+      { stuff: Vehicles.BatteringRam, count: 1 }
+    ],
     [{ stuff: Vehicles.Smelter, count: 1 }]
   ),
 ];
 
 // Balfour Stockade 75mm recipes (Field Gun)
 const stockadeRecipes: IRecipe[] = [
-  // Garage production: 115 x Refined Materials → 1 x Stockade 75mm
+  // Production: 15 x Steel Construction Materials + 20 x Assembly Materials II + 15 x Assembly Materials III + 1 x Wolfhound 40mm → 1 x Stockade 75mm
   createRecipe(
-    [{ stuff: Materials.RefinedMaterials, count: 115 }],
+    [
+      { stuff: Materials.SteelConstructionMaterials, count: 15 },
+      { stuff: Materials.AssemblyMaterialsII, count: 20 },
+      { stuff: Materials.AssemblyMaterialsIII, count: 15 },
+      { stuff: Vehicles.Wolfhound, count: 1 }
+    ],
     [{ stuff: Vehicles.Stockade, count: 1 }]
   ),
 ];
 
 // 945g "Stygian Bolt" recipes (Heavy Weapon/Launcher)
 const stygianBoltRecipes: IRecipe[] = [
-  // Garage production: 95 x Refined Materials → 1 x Stygian Bolt
+  // Production: 15 x Steel Construction Materials + 20 x Assembly Materials II + 15 x Assembly Materials III + 1 x AA-2 Battering Ram → 1 x Stygian Bolt
   createRecipe(
-    [{ stuff: Materials.RefinedMaterials, count: 95 }],
+    [
+      { stuff: Materials.SteelConstructionMaterials, count: 15 },
+      { stuff: Materials.AssemblyMaterialsII, count: 20 },
+      { stuff: Materials.AssemblyMaterialsIII, count: 15 },
+      { stuff: Vehicles.BatteringRam, count: 1 }
+    ],
     [{ stuff: Vehicles.StygianBolt, count: 1 }]
   ),
 ];
