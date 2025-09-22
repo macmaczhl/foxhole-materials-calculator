@@ -1,0 +1,10 @@
+---
+name: Vehicle adding
+about: Add new vehicle(s)
+title: ''
+labels: ''
+assignees: ''
+
+---
+
+Take recipes and icon for following vehicles from the foxhole wiki site:

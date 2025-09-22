@@ -482,6 +482,82 @@ const mulloyLPCRecipes: IRecipe[] = [
   ),
 ];
 
+// T12 "Actaeon" Tankette recipes
+const actaeonRecipes: IRecipe[] = [
+  // Garage production: 35 x Refined Materials → 1 x T12 "Actaeon" Tankette
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 35 }],
+    [{ stuff: Vehicles.Actaeon, count: 1 }]
+  ),
+  // Mass Production Factory: 251 x Refined Materials → 3 crates of 3 x T12 "Actaeon" Tankette (9 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 251 }],
+    [{ stuff: Vehicles.Actaeon, count: 9 }]
+  ),
+  // Mass Production Factory: 314 x Refined Materials → 4 crates of 3 x T12 "Actaeon" Tankette (12 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 314 }],
+    [{ stuff: Vehicles.Actaeon, count: 12 }]
+  ),
+  // Mass Production Factory: 366 x Refined Materials → 5 crates of 3 x T12 "Actaeon" Tankette (15 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 366 }],
+    [{ stuff: Vehicles.Actaeon, count: 15 }]
+  ),
+];
+
+// T14 "Vesta" Tankette recipes
+const vestaRecipes: IRecipe[] = [
+  createRecipe(
+    [
+      { stuff: Materials.ProcessedConstructionMaterials, count: 10 },
+      { stuff: Materials.AssemblyMaterialsI, count: 15 },
+      { stuff: Vehicles.Actaeon, count: 1 },
+    ],
+    [{ stuff: Vehicles.Vesta, count: 1 }]
+  ),
+];
+
+// T20 "Ixion" Tankette recipes
+const ixionRecipes: IRecipe[] = [
+  createRecipe(
+    [
+      { stuff: Materials.ConcreteMaterials, count: 10 },
+      { stuff: Materials.AssemblyMaterialsI, count: 15 },
+      { stuff: Vehicles.Actaeon, count: 1 },
+    ],
+    [{ stuff: Vehicles.Ixion, count: 1 }]
+  ),
+];
+
+// T13 "Deioneus" Rocket Battery recipes
+const deioneusRecipes: IRecipe[] = [
+  createRecipe(
+    [
+      { stuff: Materials.ProcessedConstructionMaterials, count: 20 },
+      { stuff: Materials.AssemblyMaterialsI, count: 15 },
+      { stuff: Materials.AssemblyMaterialsIII, count: 3 },
+      { stuff: Vehicles.Actaeon, count: 1 },
+    ],
+    [{ stuff: Vehicles.Deioneus, count: 1 }]
+  ),
+  // Mass Production Factory: 198 x Refined Materials → 3 crates of 3 x T13 "Deioneus" Rocket Battery (9 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 198 }],
+    [{ stuff: Vehicles.Deioneus, count: 9 }]
+  ),
+  // Mass Production Factory: 247 x Refined Materials → 4 crates of 3 x T13 "Deioneus" Rocket Battery (12 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 247 }],
+    [{ stuff: Vehicles.Deioneus, count: 12 }]
+  ),
+  // Mass Production Factory: 286 x Refined Materials → 5 crates of 3 x T13 "Deioneus" Rocket Battery (15 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 286 }],
+    [{ stuff: Vehicles.Deioneus, count: 15 }]
+  ),
+];
+
 export const RecipiesByStuff = new Map<string, IRecipe[]>([
   [Materials.ConstructionMaterials, constructionMaterialsRecipes],
   [
@@ -516,6 +592,10 @@ export const RecipiesByStuff = new Map<string, IRecipe[]>([
   [Vehicles.Acheron, acheronRecipes],
   [Vehicles.Doru, doruRecipes],
   [Vehicles.MulloyLPC, mulloyLPCRecipes],
+  [Vehicles.Actaeon, actaeonRecipes],
+  [Vehicles.Vesta, vestaRecipes],
+  [Vehicles.Ixion, ixionRecipes],
+  [Vehicles.Deioneus, deioneusRecipes],
 
   emptyRecipePair(RawResources.Salvage),
   emptyRecipePair(RawResources.DamagedComponents),
