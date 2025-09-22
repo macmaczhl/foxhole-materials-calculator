@@ -69,6 +69,10 @@ export function calculateCanCount(liquidName: string, liters: number): number {
 
 export enum Vehicles {
   Xiphos = 'T3 "Xiphos"',
+  Actaeon = 'T12 "Actaeon" Tankette',
+  Vesta = 'T14 "Vesta" Tankette',
+  Ixion = 'T20 "Ixion" Tankette',
+  Deioneus = 'T13 "Deioneus" Rocket Battery',
 }
 
 export enum RawResources {
@@ -110,6 +114,10 @@ export const availableMaterials: Stuff[] = [
   { name: Liquids.EnrichedOil },
   { name: Liquids.Oil },
   { name: Vehicles.Xiphos },
+  { name: Vehicles.Actaeon },
+  { name: Vehicles.Vesta },
+  { name: Vehicles.Ixion },
+  { name: Vehicles.Deioneus },
 ];
 
 export const stuffList: Stuff[] = availableMaterials;
