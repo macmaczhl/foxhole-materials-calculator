@@ -53,7 +53,7 @@ describe("Item Grouping", () => {
       const vehicleGroup = grouped.find((g) => g.group === ItemGroup.Vehicle);
 
       expect(vehicleGroup).toBeDefined();
-      expect(vehicleGroup!.items).toHaveLength(7);
+      expect(vehicleGroup!.items).toHaveLength(8);
 
       // Check that all vehicles are present
       const vehicleNames = vehicleGroup!.items.map(item => item.name);
