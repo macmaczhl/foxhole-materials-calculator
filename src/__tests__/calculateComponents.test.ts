@@ -35,8 +35,8 @@ const xiphosRecipeTree: RecipeTree = {
 // Mock Acheron crate recipe for testing Landing APC
 const acheronCrateRecipe: IRecipe = {
   id: 3,
-  required: [{ stuff: Materials.RefinedMaterials, count: 245 }],
-  produced: [{ stuff: Vehicles.Acheron, count: 6 }],
+  required: [{ stuff: Materials.RefinedMaterials, count: 144 }],
+  produced: [{ stuff: Vehicles.Acheron, count: 9 }],
 };
 
 const acheronRecipeTree: RecipeTree = {
@@ -46,25 +46,28 @@ const acheronRecipeTree: RecipeTree = {
   required: [],
 };
 
-// Mock Doru crate recipe for testing Landing APC
-const doruCrateRecipe: IRecipe = {
+// Mock Doru recipe for testing Landing APC (single production recipe)
+const doruGarageRecipe: IRecipe = {
   id: 4,
-  required: [{ stuff: Materials.RefinedMaterials, count: 215 }],
-  produced: [{ stuff: Vehicles.Doru, count: 6 }],
+  required: [
+    { stuff: Materials.ProcessedConstructionMaterials, count: 5 },
+    { stuff: Materials.AssemblyMaterialsIII, count: 3 },
+  ],
+  produced: [{ stuff: Vehicles.Doru, count: 1 }],
 };
 
 const doruRecipeTree: RecipeTree = {
   stuff: Vehicles.Doru,
-  selectedRecipe: doruCrateRecipe,
-  recipes: [doruCrateRecipe],
+  selectedRecipe: doruGarageRecipe,
+  recipes: [doruGarageRecipe],
   required: [],
 };
 
 // Mock Mulloy LPC crate recipe for testing Landing APC
 const mulloyLPCCrateRecipe: IRecipe = {
   id: 5,
-  required: [{ stuff: Materials.RefinedMaterials, count: 275 }],
-  produced: [{ stuff: Vehicles.MulloyLPC, count: 6 }],
+  required: [{ stuff: Materials.RefinedMaterials, count: 144 }],
+  produced: [{ stuff: Vehicles.MulloyLPC, count: 9 }],
 };
 
 const mulloyLPCRecipeTree: RecipeTree = {
@@ -128,38 +131,41 @@ describe("calculateComponents", () => {
   test("calculates components for AB-8 Acheron Landing APC", () => {
     const result = calculateComponents(acheronRecipeTree, 1);
 
-    // When requesting 1 Acheron but crate recipe produces 6, should show 5 excess
-    expect(result.excessResult).toEqual([{ stuff: Vehicles.Acheron, count: 5 }]);
-    expect(result.initial).toEqual([{ stuff: Materials.RefinedMaterials, count: 245 }]);
+    // When requesting 1 Acheron but crate recipe produces 9, should show 8 excess
+    expect(result.excessResult).toEqual([{ stuff: Vehicles.Acheron, count: 8 }]);
+    expect(result.initial).toEqual([{ stuff: Materials.RefinedMaterials, count: 144 }]);
   });
 
   test("calculates components for AB-11 Doru Landing APC", () => {
-    const result = calculateComponents(doruRecipeTree, 2);
+    const result = calculateComponents(doruRecipeTree, 1);
 
-    // When requesting 2 Doru but crate recipe produces 6, should show 4 excess
-    expect(result.excessResult).toEqual([{ stuff: Vehicles.Doru, count: 4 }]);
-    expect(result.initial).toEqual([{ stuff: Materials.RefinedMaterials, count: 215 }]);
+    // Doru has no excess (single production recipe)
+    expect(result.excessResult).toEqual([]);
+    expect(result.initial).toEqual([
+      { stuff: Materials.ProcessedConstructionMaterials, count: 5 },
+      { stuff: Materials.AssemblyMaterialsIII, count: 3 },
+    ]);
   });
 
   test("calculates components for Mulloy LPC Landing APC", () => {
     const result = calculateComponents(mulloyLPCRecipeTree, 3);
 
-    // When requesting 3 Mulloy LPC but crate recipe produces 6, should show 3 excess
-    expect(result.excessResult).toEqual([{ stuff: Vehicles.MulloyLPC, count: 3 }]);
-    expect(result.initial).toEqual([{ stuff: Materials.RefinedMaterials, count: 275 }]);
+    // When requesting 3 Mulloy LPC but crate recipe produces 9, should show 6 excess
+    expect(result.excessResult).toEqual([{ stuff: Vehicles.MulloyLPC, count: 6 }]);
+    expect(result.initial).toEqual([{ stuff: Materials.RefinedMaterials, count: 144 }]);
   });
 
   test("no excess for Landing APCs when requesting exact crate amount", () => {
-    // Test Acheron exact amount
-    const acheronResult = calculateComponents(acheronRecipeTree, 6);
+    // Test Acheron exact amount (9 vehicles)
+    const acheronResult = calculateComponents(acheronRecipeTree, 9);
     expect(acheronResult.excessResult).toEqual([]);
 
-    // Test Doru exact amount
-    const doruResult = calculateComponents(doruRecipeTree, 6);
+    // Test Doru exact amount (1 vehicle - single recipe)
+    const doruResult = calculateComponents(doruRecipeTree, 1);
     expect(doruResult.excessResult).toEqual([]);
 
-    // Test Mulloy LPC exact amount
-    const mulloyResult = calculateComponents(mulloyLPCRecipeTree, 6);
+    // Test Mulloy LPC exact amount (9 vehicles)
+    const mulloyResult = calculateComponents(mulloyLPCRecipeTree, 9);
     expect(mulloyResult.excessResult).toEqual([]);
   });
 });
