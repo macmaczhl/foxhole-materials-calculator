@@ -11,7 +11,7 @@ Inspired by [reddit post](https://www.reddit.com/r/foxholegame/comments/ym64ru/f
 ### 🏭 Comprehensive Material Support
 
 - **different materials** across multiple categories:
-  - **Vehicles**
+  - **Vehicles**: Including complete tankette production chains (T12 "Actaeon", T14 "Vesta", T20 "Ixion", T13 "Deioneus")
   - **Components**: Construction Materials, Refined Materials, Assembly Materials I-V, and more
   - **Liquids**: Petrol, Heavy Oil, Water, Enriched Oil, Oil
   - **Raw Resources**: Salvage, Components, Coal, Sulfur, Rare Metal, etc.
@@ -96,6 +96,26 @@ npm start
 - Explore different recipe options in the right panel
 - Compare efficiency between production methods
 - Optimize for available materials vs production speed
+
+### Tankette Production Planning
+
+The calculator includes comprehensive tankette recipes based on official Foxhole Wiki data:
+
+1. **T12 "Actaeon" Tankette** (Base vehicle)
+   - Garage: 35 Refined Materials → 1 vehicle
+   - Mass Production: 251/314/366 Refined Materials → 9/12/15 vehicles
+
+2. **T14 "Vesta" Tankette** (Flame variant)
+   - Requires: T12 "Actaeon" + 10 Processed Construction Materials + 15 Assembly Materials I
+   - Production: Small Assembly Station with Tank Factory upgrade
+
+3. **T20 "Ixion" Tankette** (Offensive variant)
+   - Requires: T12 "Actaeon" + 10 Concrete Materials + 15 Assembly Materials I
+   - Production: Small Assembly Station with Tank Factory upgrade
+
+4. **T13 "Deioneus" Rocket Battery** (Artillery variant)
+   - Requires: T12 "Actaeon" + 20 Processed Construction Materials + 15 Assembly Materials I + 3 Assembly Materials III
+   - Mass Production: 198/247/286 Refined Materials → 9/12/15 vehicles
 
 ## Technology Stack
 
@@ -244,10 +264,16 @@ npm start        # Serve production build locally
 
 ### Recipe Data Sources
 
-Recipe data is based on current Foxhole game mechanics. When updating:
+Recipe data is based on current Foxhole game mechanics and sourced from the official Foxhole Wiki. When updating:
 
 - Verify recipes against current game version
-- Include source/validation in PR description
+- Include source/validation in PR description  
 - Test calculations with known examples
+
+**Tankette recipes** have been researched and validated against:
+- [Foxhole Wiki - Tankette](https://foxhole.wiki.gg/wiki/Tankette)
+- [Foxhole Wiki - T12 "Actaeon" Tankette](https://foxhole.wiki.gg/wiki/T12_%22Actaeon%22_Tankette)
+- [Foxhole Wiki - Small Assembly Station](https://foxhole.wiki.gg/wiki/Small_Assembly_Station)
+- [Foxhole Wiki - Large Assembly Station](https://foxhole.wiki.gg/wiki/Large_Assembly_Station)
 
 Thank you for contributing to make the Foxhole Materials Calculator better for the community!
