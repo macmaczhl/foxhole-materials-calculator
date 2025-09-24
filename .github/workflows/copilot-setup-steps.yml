@@ -22,9 +22,15 @@ on:
         type: string
 
 jobs:
-  setup:
+  copilot-setup-steps:
     name: Setup Environment for Copilot
     runs-on: ubuntu-latest
+    
+    # Set the permissions to the lowest permissions possible needed for your steps.
+    # Copilot will be given its own token for its operations.
+    permissions:
+      # If you want to clone the repository as part of your setup steps, for example to install dependencies, you'll need the contents: read permission. If you don't clone the repository in your setup steps, Copilot will do this for you automatically after the steps complete.
+      contents: read
     
     steps:
       - name: Checkout code
@@ -41,6 +47,12 @@ jobs:
           # Cache both package-lock.json and node_modules
           cache-dependency-path: package-lock.json
 
+      - name: Install dependencies
+        run: npm install
+        env:
+          # Skip optional dependencies and audit for faster installation
+          NODE_ENV: development
+
       - name: Cache node_modules
         uses: actions/cache@v4
         id: cache-node-modules
@@ -52,21 +64,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      - name: Cache Next.js build cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            .next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
-          restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
-
-      - name: Install dependencies
-        run: npm ci
-        env:
-          # Skip optional dependencies and audit for faster installation
-          NODE_ENV: development
-
       - name: Verify installation
         run: |
           echo "Node.js version: $(node --version)"
@@ -75,13 +72,6 @@ jobs:
           npm list --depth=0 --production=false | head -20
           echo "..."
           echo "Total packages: $(npm list --depth=0 --production=false | grep -c '@')"
-
-      - name: Run quick validation
-        run: |
-          echo "Running quick validation checks..."
-          npm run lint --silent
-          npm test --passWithNoTests --silent
-          echo "✅ Environment setup complete and validated!"
 
     outputs:
       cache-hit: ${{ steps.cache-node-modules.outputs.cache-hit }}
