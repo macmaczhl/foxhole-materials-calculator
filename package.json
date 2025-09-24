@@ -11,7 +11,9 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "validate": "npm run lint && npm test && npm run build",
+    "setup": "npm install && npm run validate"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.0",
