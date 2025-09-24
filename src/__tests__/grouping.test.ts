@@ -12,6 +12,7 @@ describe("Item Grouping", () => {
   describe("getItemGroup", () => {
     test("categorizes vehicles correctly", () => {
       expect(getItemGroup(Vehicles.Xiphos)).toBe(ItemGroup.Vehicle);
+      expect(getItemGroup(Vehicles.Tisiphone)).toBe(ItemGroup.Vehicle);
       expect(getItemGroup(Vehicles.Alekto)).toBe(ItemGroup.Vehicle);
       expect(getItemGroup(Vehicles.Acheron)).toBe(ItemGroup.Vehicle);
       expect(getItemGroup(Vehicles.Doru)).toBe(ItemGroup.Vehicle);
@@ -54,11 +55,12 @@ describe("Item Grouping", () => {
       const vehicleGroup = grouped.find((g) => g.group === ItemGroup.Vehicle);
 
       expect(vehicleGroup).toBeDefined();
-      expect(vehicleGroup!.items).toHaveLength(9);
+      expect(vehicleGroup!.items).toHaveLength(10);
 
       // Check that all vehicles are present
       const vehicleNames = vehicleGroup!.items.map(item => item.name);
       expect(vehicleNames).toContain(Vehicles.Xiphos);
+      expect(vehicleNames).toContain(Vehicles.Tisiphone);
       expect(vehicleNames).toContain(Vehicles.Alekto);
       expect(vehicleNames).toContain(Vehicles.Acheron);
       expect(vehicleNames).toContain(Vehicles.Doru);
@@ -106,8 +108,8 @@ describe("Item Grouping", () => {
         0
       );
 
-      // Should equal the number of items in availableMaterials (currently 35 items: 27 base + 8 vehicles from main + 1 Alekto)
-      expect(totalItems).toBe(35);
+      // Should equal the number of items in availableMaterials (currently 36 items: 27 base + 8 vehicles from main + 1 Tisiphone + 1 Alekto)
+      expect(totalItems).toBe(36);
     });
   });
 });

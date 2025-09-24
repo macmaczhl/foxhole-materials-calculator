@@ -32,17 +32,23 @@ const xiphosRecipeTree: RecipeTree = {
   required: [],
 };
 
-// Mock Alekto crate recipe for testing
-const alektoCrateRecipe: IRecipe = {
+// Mock Alekto recipe for testing with new complex ingredients
+const alektoComplexRecipe: IRecipe = {
   id: 3,
-  required: [{ stuff: Materials.RefinedMaterials, count: 252 }],
-  produced: [{ stuff: Vehicles.Alekto, count: 6 }],
+  required: [
+    { stuff: Materials.SteelConstructionMaterials, count: 10 },
+    { stuff: Materials.AssemblyMaterialsII, count: 20 },
+    { stuff: Materials.AssemblyMaterialsIII, count: 15 },
+    { stuff: Materials.RareAlloys, count: 1 },
+    { stuff: Vehicles.Tisiphone, count: 1 },
+  ],
+  produced: [{ stuff: Vehicles.Alekto, count: 1 }],
 };
 
 const alektoRecipeTree: RecipeTree = {
   stuff: Vehicles.Alekto,
-  selectedRecipe: alektoCrateRecipe,
-  recipes: [alektoCrateRecipe],
+  selectedRecipe: alektoComplexRecipe,
+  recipes: [alektoComplexRecipe],
   required: [],
 };
 
@@ -142,25 +148,32 @@ describe("calculateComponents", () => {
     expect(result.excessResult).toEqual([{ stuff: Vehicles.Xiphos, count: 8 }]);
   });
 
-  test("calculates excess result for Alekto when requesting single unit", () => {
+  test("calculates components for Alekto with complex recipe", () => {
     const result = calculateComponents(alektoRecipeTree, 1);
 
-    // When requesting 1 Alekto but crate recipe produces 6, should show 5 excess
-    expect(result.excessResult).toEqual([{ stuff: Vehicles.Alekto, count: 5 }]);
-  });
-
-  test("no excess result for Alekto when requesting exact crate amount", () => {
-    const result = calculateComponents(alektoRecipeTree, 6);
-
-    // When requesting exactly 6 Alekto, no excess should be shown
+    // Alekto has complex recipe with no excess (single production)
     expect(result.excessResult).toEqual([]);
+    expect(result.initial).toEqual([
+      { stuff: Materials.SteelConstructionMaterials, count: 10 },
+      { stuff: Materials.AssemblyMaterialsII, count: 20 },
+      { stuff: Materials.AssemblyMaterialsIII, count: 15 },
+      { stuff: Materials.RareAlloys, count: 1 },
+      { stuff: Vehicles.Tisiphone, count: 1 },
+    ]);
   });
 
-  test("calculates excess result for Alekto with multiple crates", () => {
-    const result = calculateComponents(alektoRecipeTree, 7);
+  test("calculates components for multiple Alekto", () => {
+    const result = calculateComponents(alektoRecipeTree, 2);
 
-    // When requesting 7 Alekto, need 2 crates (12 total), so 5 excess
-    expect(result.excessResult).toEqual([{ stuff: Vehicles.Alekto, count: 5 }]);
+    // When requesting 2 Alekto, should scale all ingredients by 2
+    expect(result.excessResult).toEqual([]);
+    expect(result.initial).toEqual([
+      { stuff: Materials.SteelConstructionMaterials, count: 20 },
+      { stuff: Materials.AssemblyMaterialsII, count: 40 },
+      { stuff: Materials.AssemblyMaterialsIII, count: 30 },
+      { stuff: Materials.RareAlloys, count: 2 },
+      { stuff: Vehicles.Tisiphone, count: 2 },
+    ]);
   });
 
   test("calculates components for AB-8 Acheron Landing APC", () => {

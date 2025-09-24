@@ -25,27 +25,27 @@ const xiphosRecipes: IRecipe[] = [
   ),
 ];
 
+// 30-250 "Tisiphone" Field Cannon vehicle recipes
+const tisiphoneRecipes: IRecipe[] = [
+  // Garage production: Basic recipe for Tisiphone (placeholder - needs proper recipe from wiki)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 25 }],
+    [{ stuff: Vehicles.Tisiphone, count: 1 }]
+  ),
+];
+
 // 40-250 "Alekto" Heavy Cannon vehicle recipes
 const alektoRecipes: IRecipe[] = [
-  // Garage production: 35 x Refined Materials → 1 x 40-250 "Alekto" Heavy Cannon
+  // Single recipe as per wiki requirements
   createRecipe(
-    [{ stuff: Materials.RefinedMaterials, count: 35 }],
+    [
+      { stuff: Materials.SteelConstructionMaterials, count: 10 },
+      { stuff: Materials.AssemblyMaterialsII, count: 20 },
+      { stuff: Materials.AssemblyMaterialsIII, count: 15 },
+      { stuff: Materials.RareAlloys, count: 1 },
+      { stuff: Vehicles.Tisiphone, count: 1 },
+    ],
     [{ stuff: Vehicles.Alekto, count: 1 }]
-  ),
-  // Mass Production Factory: 252 x Refined Materials → 3 crates of 2 x 40-250 "Alekto" Heavy Cannon (6 total)
-  createRecipe(
-    [{ stuff: Materials.RefinedMaterials, count: 252 }],
-    [{ stuff: Vehicles.Alekto, count: 6 }]
-  ),
-  // Mass Production Factory: 315 x Refined Materials → 4 crates of 2 x 40-250 "Alekto" Heavy Cannon (8 total)
-  createRecipe(
-    [{ stuff: Materials.RefinedMaterials, count: 315 }],
-    [{ stuff: Vehicles.Alekto, count: 8 }]
-  ),
-  // Mass Production Factory: 378 x Refined Materials → 5 crates of 2 x 40-250 "Alekto" Heavy Cannon (10 total)
-  createRecipe(
-    [{ stuff: Materials.RefinedMaterials, count: 378 }],
-    [{ stuff: Vehicles.Alekto, count: 10 }]
   ),
 ];
 
@@ -188,6 +188,7 @@ const deioneusRecipes: IRecipe[] = [
 
 export const vehicleRecipes = new Map<string, IRecipe[]>([
   [Vehicles.Xiphos, xiphosRecipes],
+  [Vehicles.Tisiphone, tisiphoneRecipes],
   [Vehicles.Alekto, alektoRecipes],
   [Vehicles.Acheron, acheronRecipes],
   [Vehicles.Doru, doruRecipes],
