@@ -128,6 +128,33 @@ describe("calculateComponents", () => {
     expect(result.excessResult).toEqual([{ stuff: Vehicles.Xiphos, count: 8 }]);
   });
 
+  test("calculates components for AB-8 Acheron Landing APC", () => {
+    const result = calculateComponents(acheronRecipeTree, 1);
+
+    // When requesting 1 Acheron but crate recipe produces 9, should show 8 excess
+    expect(result.excessResult).toEqual([{ stuff: Vehicles.Acheron, count: 8 }]);
+    expect(result.initial).toEqual([{ stuff: Materials.RefinedMaterials, count: 144 }]);
+  });
+
+  test("calculates components for AB-11 Doru Landing APC", () => {
+    const result = calculateComponents(doruRecipeTree, 1);
+
+    // Doru has no excess (single production recipe)
+    expect(result.excessResult).toEqual([]);
+    expect(result.initial).toEqual([
+      { stuff: Materials.ProcessedConstructionMaterials, count: 5 },
+      { stuff: Materials.AssemblyMaterialsIII, count: 3 },
+    ]);
+  });
+
+  test("calculates components for Mulloy LPC Landing APC", () => {
+    const result = calculateComponents(mulloyLPCRecipeTree, 1);
+
+    // When requesting 1 Mulloy LPC but crate recipe produces 9, should show 8 excess
+    expect(result.excessResult).toEqual([{ stuff: Vehicles.MulloyLPC, count: 8 }]);
+    expect(result.initial).toEqual([{ stuff: Materials.RefinedMaterials, count: 144 }]);
+  });
+
   // Test for Duncan's Coin 20mm Field AT Rifle with correct wiki recipe
   const duncansCoinRecipe: IRecipe = {
     id: 3,
