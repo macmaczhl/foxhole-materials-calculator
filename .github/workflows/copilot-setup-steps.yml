@@ -1,0 +1,78 @@
+name: Copilot Environment Setup
+
+# This workflow sets up the environment for GitHub Copilot agents
+# It installs dependencies and caches everything needed for development
+
+on:
+  workflow_call:
+    # Can be called by other workflows if needed
+    inputs:
+      node-version:
+        description: 'Node.js version to use'
+        required: false
+        default: '24.x'
+        type: string
+  workflow_dispatch:
+    # Can be triggered manually for testing
+    inputs:
+      node-version:
+        description: 'Node.js version to use'
+        required: false
+        default: '24.x'
+        type: string
+
+jobs:
+  copilot-setup-steps:
+    name: Setup Environment for Copilot
+    runs-on: ubuntu-latest
+    
+    # Set the permissions to the lowest permissions possible needed for your steps.
+    # Copilot will be given its own token for its operations.
+    permissions:
+      # If you want to clone the repository as part of your setup steps, for example to install dependencies, you'll need the contents: read permission. If you don't clone the repository in your setup steps, Copilot will do this for you automatically after the steps complete.
+      contents: read
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          # Get full history for better caching
+          fetch-depth: 0
+
+      - name: Setup Node.js ${{ inputs.node-version || '24.x' }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node-version || '24.x' }}
+          cache: 'npm'
+          # Cache both package-lock.json and node_modules
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm install
+        env:
+          # Skip optional dependencies and audit for faster installation
+          NODE_ENV: development
+
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        id: cache-node-modules
+        with:
+          path: |
+            node_modules
+            ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Verify installation
+        run: |
+          echo "Node.js version: $(node --version)"
+          echo "npm version: $(npm --version)"
+          echo "Dependencies installed:"
+          npm list --depth=0 --production=false | head -20
+          echo "..."
+          echo "Total packages: $(npm list --depth=0 --production=false | grep -c '@')"
+
+    outputs:
+      cache-hit: ${{ steps.cache-node-modules.outputs.cache-hit }}
+      node-version: ${{ inputs.node-version || '24.x' }}

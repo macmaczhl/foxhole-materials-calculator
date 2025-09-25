@@ -32,9 +32,29 @@ const xiphosRecipeTree: RecipeTree = {
   required: [],
 };
 
+// Mock Alekto recipe for testing with new complex ingredients
+const alektoComplexRecipe: IRecipe = {
+  id: 3,
+  required: [
+    { stuff: Materials.SteelConstructionMaterials, count: 10 },
+    { stuff: Materials.AssemblyMaterialsII, count: 20 },
+    { stuff: Materials.AssemblyMaterialsIII, count: 15 },
+    { stuff: Materials.RareAlloys, count: 1 },
+    { stuff: Vehicles.Tisiphone, count: 1 },
+  ],
+  produced: [{ stuff: Vehicles.Alekto, count: 1 }],
+};
+
+const alektoRecipeTree: RecipeTree = {
+  stuff: Vehicles.Alekto,
+  selectedRecipe: alektoComplexRecipe,
+  recipes: [alektoComplexRecipe],
+  required: [],
+};
+
 // Mock Acheron crate recipe for testing Landing APC
 const acheronCrateRecipe: IRecipe = {
-  id: 3,
+  id: 4,
   required: [{ stuff: Materials.RefinedMaterials, count: 144 }],
   produced: [{ stuff: Vehicles.Acheron, count: 9 }],
 };
@@ -48,7 +68,7 @@ const acheronRecipeTree: RecipeTree = {
 
 // Mock Doru recipe for testing Landing APC (single production recipe)
 const doruGarageRecipe: IRecipe = {
-  id: 4,
+  id: 5,
   required: [
     { stuff: Materials.ProcessedConstructionMaterials, count: 5 },
     { stuff: Materials.AssemblyMaterialsIII, count: 3 },
@@ -65,7 +85,7 @@ const doruRecipeTree: RecipeTree = {
 
 // Mock Mulloy LPC crate recipe for testing Landing APC
 const mulloyLPCCrateRecipe: IRecipe = {
-  id: 5,
+  id: 6,
   required: [{ stuff: Materials.RefinedMaterials, count: 144 }],
   produced: [{ stuff: Vehicles.MulloyLPC, count: 9 }],
 };
@@ -126,6 +146,34 @@ describe("calculateComponents", () => {
 
     // When requesting 10 Xiphos, need 2 crates (18 total), so 8 excess
     expect(result.excessResult).toEqual([{ stuff: Vehicles.Xiphos, count: 8 }]);
+  });
+
+  test("calculates components for Alekto with complex recipe", () => {
+    const result = calculateComponents(alektoRecipeTree, 1);
+
+    // Alekto has complex recipe with no excess (single production)
+    expect(result.excessResult).toEqual([]);
+    expect(result.initial).toEqual([
+      { stuff: Materials.SteelConstructionMaterials, count: 10 },
+      { stuff: Materials.AssemblyMaterialsII, count: 20 },
+      { stuff: Materials.AssemblyMaterialsIII, count: 15 },
+      { stuff: Materials.RareAlloys, count: 1 },
+      { stuff: Vehicles.Tisiphone, count: 1 },
+    ]);
+  });
+
+  test("calculates components for multiple Alekto", () => {
+    const result = calculateComponents(alektoRecipeTree, 2);
+
+    // When requesting 2 Alekto, should scale all ingredients by 2
+    expect(result.excessResult).toEqual([]);
+    expect(result.initial).toEqual([
+      { stuff: Materials.SteelConstructionMaterials, count: 20 },
+      { stuff: Materials.AssemblyMaterialsII, count: 40 },
+      { stuff: Materials.AssemblyMaterialsIII, count: 30 },
+      { stuff: Materials.RareAlloys, count: 2 },
+      { stuff: Vehicles.Tisiphone, count: 2 },
+    ]);
   });
 
   test("calculates components for AB-8 Acheron Landing APC", () => {
