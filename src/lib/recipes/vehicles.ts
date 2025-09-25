@@ -25,15 +25,6 @@ const xiphosRecipes: IRecipe[] = [
   ),
 ];
 
-// 30-250 "Tisiphone" Field Cannon vehicle recipes
-const tisiphoneRecipes: IRecipe[] = [
-  // Garage production: Basic recipe for Tisiphone (placeholder - needs proper recipe from wiki)
-  createRecipe(
-    [{ stuff: Materials.RefinedMaterials, count: 25 }],
-    [{ stuff: Vehicles.Tisiphone, count: 1 }]
-  ),
-];
-
 // 40-250 "Alekto" Heavy Cannon vehicle recipes
 const alektoRecipes: IRecipe[] = [
   // Single recipe as per wiki requirements
@@ -399,7 +390,6 @@ const stygianBoltRecipes: IRecipe[] = [
 
 export const vehicleRecipes = new Map<string, IRecipe[]>([
   [Vehicles.Xiphos, xiphosRecipes],
-  [Vehicles.Tisiphone, tisiphoneRecipes],
   [Vehicles.Alekto, alektoRecipes],
   [Vehicles.Acheron, acheronRecipes],
   [Vehicles.Doru, doruRecipes],
