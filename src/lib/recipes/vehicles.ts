@@ -409,7 +409,6 @@ const stygianBoltRecipes: IRecipe[] = [
       { stuff: Vehicles.BatteringRam, count: 1 }
     ],
     [{ stuff: Vehicles.StygianBolt, count: 1 }]
->>>>>>> origin/main
   ),
 ];
 
