@@ -55,13 +55,27 @@ describe("Item Grouping", () => {
       const vehicleGroup = grouped.find((g) => g.group === ItemGroup.Vehicle);
 
       expect(vehicleGroup).toBeDefined();
-      expect(vehicleGroup!.items).toHaveLength(10);
+      expect(vehicleGroup!.items).toHaveLength(20); // 1 (Xiphos) + 11 (new vehicles) + 7 (tankettes) + 1 (Alekto) = 20 total
 
-      // Check that all vehicles are present
+      // Verify all vehicles are present
       const vehicleNames = vehicleGroup!.items.map(item => item.name);
+      // Original vehicle
       expect(vehicleNames).toContain(Vehicles.Xiphos);
+      // New vehicles added in main
+      expect(vehicleNames).toContain(Vehicles.WaspNest);
+      expect(vehicleNames).toContain(Vehicles.Koronides);
+      expect(vehicleNames).toContain(Vehicles.Wolfhound);
+      expect(vehicleNames).toContain(Vehicles.CollinsCannon);
+      expect(vehicleNames).toContain(Vehicles.BatteringRam);
+      expect(vehicleNames).toContain(Vehicles.Falconer);
       expect(vehicleNames).toContain(Vehicles.Tisiphone);
+      expect(vehicleNames).toContain(Vehicles.Rampart);
+      expect(vehicleNames).toContain(Vehicles.Smelter);
+      expect(vehicleNames).toContain(Vehicles.Stockade);
+      expect(vehicleNames).toContain(Vehicles.StygianBolt);
+      // My additions
       expect(vehicleNames).toContain(Vehicles.Alekto);
+      // Tankettes from main branch
       expect(vehicleNames).toContain(Vehicles.Acheron);
       expect(vehicleNames).toContain(Vehicles.Doru);
       expect(vehicleNames).toContain(Vehicles.MulloyLPC);
@@ -108,8 +122,8 @@ describe("Item Grouping", () => {
         0
       );
 
-      // Should equal the number of items in availableMaterials (currently 36 items: 27 base + 8 vehicles from main + 1 Tisiphone + 1 Alekto)
-      expect(totalItems).toBe(36);
+      // Should equal the number of items in availableMaterials (26 base materials + 20 vehicles = 46 total)
+      expect(totalItems).toBe(46);
     });
   });
 });
