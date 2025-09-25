@@ -25,6 +25,21 @@ const xiphosRecipes: IRecipe[] = [
   ),
 ];
 
+// 40-250 "Alekto" Heavy Cannon vehicle recipes
+const alektoRecipes: IRecipe[] = [
+  // Single recipe as per wiki requirements
+  createRecipe(
+    [
+      { stuff: Materials.SteelConstructionMaterials, count: 10 },
+      { stuff: Materials.AssemblyMaterialsII, count: 20 },
+      { stuff: Materials.AssemblyMaterialsIII, count: 15 },
+      { stuff: Materials.RareAlloys, count: 1 },
+      { stuff: Vehicles.Tisiphone, count: 1 },
+    ],
+    [{ stuff: Vehicles.Alekto, count: 1 }]
+  ),
+];
+
 // AB-8 "Acheron" Landing APC recipes
 const acheronRecipes: IRecipe[] = [
   // Garage production: 20 x Refined Materials → 1 x AB-8 "Acheron"
@@ -375,6 +390,7 @@ const stygianBoltRecipes: IRecipe[] = [
 
 export const vehicleRecipes = new Map<string, IRecipe[]>([
   [Vehicles.Xiphos, xiphosRecipes],
+  [Vehicles.Alekto, alektoRecipes],
   [Vehicles.Acheron, acheronRecipes],
   [Vehicles.Doru, doruRecipes],
   [Vehicles.MulloyLPC, mulloyLPCRecipes],

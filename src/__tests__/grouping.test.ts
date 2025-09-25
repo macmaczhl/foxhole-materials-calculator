@@ -12,6 +12,8 @@ describe("Item Grouping", () => {
   describe("getItemGroup", () => {
     test("categorizes vehicles correctly", () => {
       expect(getItemGroup(Vehicles.Xiphos)).toBe(ItemGroup.Vehicle);
+      expect(getItemGroup(Vehicles.Tisiphone)).toBe(ItemGroup.Vehicle);
+      expect(getItemGroup(Vehicles.Alekto)).toBe(ItemGroup.Vehicle);
       expect(getItemGroup(Vehicles.Acheron)).toBe(ItemGroup.Vehicle);
       expect(getItemGroup(Vehicles.Doru)).toBe(ItemGroup.Vehicle);
       expect(getItemGroup(Vehicles.MulloyLPC)).toBe(ItemGroup.Vehicle);
@@ -53,13 +55,13 @@ describe("Item Grouping", () => {
       const vehicleGroup = grouped.find((g) => g.group === ItemGroup.Vehicle);
 
       expect(vehicleGroup).toBeDefined();
-      expect(vehicleGroup!.items).toHaveLength(19); // 1 (Xiphos) + 11 (new vehicles) + 7 (tankettes) = 19 total
+      expect(vehicleGroup!.items).toHaveLength(20); // 1 (Xiphos) + 11 (new vehicles) + 7 (tankettes) + 1 (Alekto) = 20 total
 
       // Verify all vehicles are present
       const vehicleNames = vehicleGroup!.items.map(item => item.name);
       // Original vehicle
       expect(vehicleNames).toContain(Vehicles.Xiphos);
-      // New vehicles added in my PR
+      // New vehicles added in main
       expect(vehicleNames).toContain(Vehicles.WaspNest);
       expect(vehicleNames).toContain(Vehicles.Koronides);
       expect(vehicleNames).toContain(Vehicles.Wolfhound);
@@ -71,6 +73,8 @@ describe("Item Grouping", () => {
       expect(vehicleNames).toContain(Vehicles.Smelter);
       expect(vehicleNames).toContain(Vehicles.Stockade);
       expect(vehicleNames).toContain(Vehicles.StygianBolt);
+      // My additions
+      expect(vehicleNames).toContain(Vehicles.Alekto);
       // Tankettes from main branch
       expect(vehicleNames).toContain(Vehicles.Acheron);
       expect(vehicleNames).toContain(Vehicles.Doru);
@@ -118,8 +122,8 @@ describe("Item Grouping", () => {
         0
       );
 
-      // Should equal the number of items in availableMaterials (26 base materials + 19 vehicles = 45 total)
-      expect(totalItems).toBe(45);
+      // Should equal the number of items in availableMaterials (26 base materials + 20 vehicles = 46 total)
+      expect(totalItems).toBe(46);
     });
   });
 });
