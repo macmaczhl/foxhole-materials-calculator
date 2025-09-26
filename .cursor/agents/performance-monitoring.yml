@@ -1,0 +1,133 @@
+name: "Performance Monitoring Agent"
+description: "Monitors and optimizes build performance, bundle size, and runtime performance"
+version: "1.0.0"
+
+triggers:
+  file_changes:
+    - "src/**/*.ts"
+    - "src/**/*.tsx"
+    - "package.json"
+    - "next.config.ts"
+  build_events:
+    - "build_start"
+    - "build_complete"
+    - "build_failure"
+  scheduled:
+    - "daily_at_2am"
+    - "weekly_on_sunday_at_3am"
+
+tasks:
+  build_optimization:
+    description: "Monitor and optimize build performance"
+    priority: "high"
+    conditions:
+      - "build_time_exceeds_threshold"
+      - "build_failure_detected"
+    actions:
+      - "analyze_build_metrics"
+      - "identify_bottlenecks"
+      - "suggest_optimizations"
+      - "implement_quick_fixes"
+
+  bundle_analysis:
+    description: "Track bundle size and suggest optimizations"
+    priority: "medium"
+    conditions:
+      - "bundle_size_increased"
+      - "scheduled_analysis"
+    actions:
+      - "analyze_bundle_composition"
+      - "identify_large_dependencies"
+      - "suggest_code_splitting"
+      - "recommend_optimizations"
+
+  runtime_performance:
+    description: "Monitor runtime performance and suggest improvements"
+    priority: "medium"
+    conditions:
+      - "performance_regression_detected"
+      - "scheduled_monitoring"
+    actions:
+      - "analyze_runtime_metrics"
+      - "identify_slow_components"
+      - "suggest_optimizations"
+      - "recommend_best_practices"
+
+configuration:
+  build_monitoring:
+    target_build_time: 30
+    warning_threshold: 25
+    critical_threshold: 45
+    timeout_threshold: 180
+
+  bundle_monitoring:
+    target_bundle_size: "500KB"
+    warning_threshold: "400KB"
+    critical_threshold: "600KB"
+    analyze_after_build: true
+
+  performance_metrics:
+    - "build_time"
+    - "bundle_size"
+    - "first_contentful_paint"
+    - "largest_contentful_paint"
+    - "cumulative_layout_shift"
+    - "first_input_delay"
+
+  optimization_targets:
+    - "webpack_configuration"
+    - "nextjs_optimization"
+    - "code_splitting"
+    - "tree_shaking"
+    - "image_optimization"
+    - "css_optimization"
+    - "javascript_optimization"
+
+  monitoring_tools:
+    - "webpack_bundle_analyzer"
+    - "lighthouse"
+    - "nextjs_analytics"
+    - "performance_api"
+
+validation:
+  required_commands:
+    - "npm run build"
+    - "npm run dev"
+  success_criteria:
+    - "build_time_under_threshold"
+    - "bundle_size_acceptable"
+    - "no_performance_regressions"
+    - "lighthouse_score_above_90"
+  failure_actions:
+    - "report_performance_issues"
+    - "suggest_optimizations"
+    - "create_optimization_tasks"
+    - "escalate_critical_issues"
+
+notifications:
+  on_performance_issue:
+    - "log_performance_metrics"
+    - "highlight_specific_problems"
+    - "suggest_immediate_fixes"
+  on_optimization_success:
+    - "log_improvement_metrics"
+    - "report_optimization_impact"
+  on_critical_issues:
+    - "alert_immediate_attention"
+    - "create_urgent_tasks"
+
+monitoring:
+  track_metrics:
+    - "build_performance"
+    - "bundle_evolution"
+    - "runtime_performance"
+    - "user_experience_metrics"
+  alerting:
+    - "build_time_regression"
+    - "bundle_size_increase"
+    - "performance_degradation"
+    - "critical_failures"
+  reporting:
+    - "daily_performance_summary"
+    - "weekly_optimization_report"
+    - "monthly_trend_analysis"
