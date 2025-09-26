@@ -1,0 +1,92 @@
+name: "Test Automation Agent"
+description: "Automatically generates and maintains tests for the Foxhole Materials Calculator"
+version: "1.0.0"
+
+triggers:
+  file_changes:
+    - "src/**/*.ts"
+    - "src/**/*.tsx"
+    - "src/**/*.js"
+    - "src/**/*.jsx"
+  new_files:
+    - "src/**/*.ts"
+    - "src/**/*.tsx"
+    - "src/**/*.js"
+    - "src/**/*.jsx"
+  before_commit: true
+
+tasks:
+  generate_tests:
+    description: "Generate comprehensive tests for new or changed code"
+    priority: "high"
+    conditions:
+      - "file_has_no_tests"
+      - "file_contains_functions_or_components"
+    actions:
+      - "analyze_code_structure"
+      - "generate_unit_tests"
+      - "generate_integration_tests"
+      - "ensure_test_coverage"
+
+  update_tests:
+    description: "Update existing tests when code changes"
+    priority: "high"
+    conditions:
+      - "file_has_existing_tests"
+      - "code_structure_changed"
+    actions:
+      - "analyze_test_changes_needed"
+      - "update_test_cases"
+      - "verify_test_accuracy"
+      - "maintain_test_coverage"
+
+  coverage_check:
+    description: "Ensure 100% test coverage is maintained"
+    priority: "critical"
+    conditions:
+      - "after_code_changes"
+    actions:
+      - "run_coverage_analysis"
+      - "identify_uncovered_code"
+      - "generate_missing_tests"
+      - "validate_coverage_threshold"
+
+configuration:
+  test_framework: "jest"
+  testing_library: "@testing-library/react"
+  coverage_threshold: 100
+  test_directory: "src/__tests__"
+  test_patterns:
+    - "*.test.ts"
+    - "*.test.tsx"
+    - "*.spec.ts"
+    - "*.spec.tsx"
+
+  test_types:
+    - "unit_tests"
+    - "integration_tests"
+    - "component_tests"
+
+  mock_strategies:
+    - "external_apis"
+    - "redux_store"
+    - "complex_dependencies"
+
+  test_scenarios:
+    - "success_cases"
+    - "error_cases"
+    - "edge_cases"
+    - "user_interactions"
+
+validation:
+  required_commands:
+    - "npm test"
+    - "npm run test:watch"
+  success_criteria:
+    - "all_tests_pass"
+    - "coverage_above_threshold"
+    - "no_test_warnings"
+  failure_actions:
+    - "fix_failing_tests"
+    - "regenerate_problematic_tests"
+    - "report_coverage_gaps"

@@ -1,0 +1,129 @@
+name: "Recipe Validation Agent"
+description: "Validates recipe data consistency and accuracy for Foxhole game mechanics"
+version: "1.0.0"
+
+triggers:
+  file_changes:
+    - "src/lib/recipes.ts"
+    - "src/lib/models.ts"
+    - "src/lib/constants.ts"
+  scheduled:
+    - "daily_at_6am"
+    - "weekly_on_monday_at_9am"
+  before_commit: true
+
+tasks:
+  validate_recipes:
+    description: "Check recipe data consistency and accuracy"
+    priority: "high"
+    conditions:
+      - "recipe_files_changed"
+      - "scheduled_validation"
+    actions:
+      - "validate_recipe_structure"
+      - "check_material_references"
+      - "verify_recipe_math"
+      - "validate_enum_consistency"
+
+  suggest_updates:
+    description: "Identify potential recipe improvements and updates"
+    priority: "medium"
+    conditions:
+      - "recipe_validation_completed"
+      - "inconsistencies_detected"
+    actions:
+      - "analyze_recipe_patterns"
+      - "identify_missing_recipes"
+      - "suggest_optimizations"
+      - "check_game_version_compatibility"
+
+  test_calculations:
+    description: "Verify calculation accuracy with known examples"
+    priority: "critical"
+    conditions:
+      - "recipe_changes_detected"
+      - "calculation_logic_changed"
+    actions:
+      - "run_known_test_cases"
+      - "validate_complex_calculations"
+      - "check_excess_tracking"
+      - "verify_scaling_accuracy"
+
+configuration:
+  recipe_files:
+    - "src/lib/recipes.ts"
+    - "src/lib/models.ts"
+    - "src/lib/constants.ts"
+
+  validation_rules:
+    - "all_materials_have_recipes"
+    - "recipe_math_is_correct"
+    - "enum_values_match_usage"
+    - "no_orphaned_references"
+    - "consistent_naming_conventions"
+
+  test_cases:
+    construction_materials:
+      input: 5
+      expected_salvage: 50
+    xiphos_garage:
+      input: 5
+      expected_refined: 125
+    xiphos_mass_production:
+      input: 5
+      expected_refined: 179
+      expected_excess: 4
+
+  material_categories:
+    - "Raw Resources"
+    - "Construction Materials"
+    - "Refined Materials"
+    - "Assembly Materials I-V"
+    - "Liquids"
+    - "Vehicles"
+
+  validation_checks:
+    - "recipe_dependencies_exist"
+    - "circular_dependencies_absent"
+    - "production_methods_consistent"
+    - "excess_calculations_accurate"
+    - "scaling_works_correctly"
+
+validation:
+  required_commands:
+    - "npm test"
+    - "npm run build"
+  success_criteria:
+    - "all_recipe_tests_pass"
+    - "no_validation_errors"
+    - "calculations_accurate"
+    - "data_consistency_maintained"
+  failure_actions:
+    - "report_validation_errors"
+    - "suggest_fixes"
+    - "highlight_problematic_recipes"
+    - "prevent_commit_if_critical"
+
+notifications:
+  on_validation_success:
+    - "log_success_message"
+    - "report_validation_summary"
+  on_validation_failure:
+    - "log_error_details"
+    - "highlight_specific_issues"
+    - "suggest_corrections"
+  on_suggestions:
+    - "log_improvement_suggestions"
+    - "create_improvement_tasks"
+
+monitoring:
+  track_changes:
+    - "recipe_additions"
+    - "recipe_modifications"
+    - "material_enum_changes"
+    - "calculation_logic_changes"
+  metrics:
+    - "validation_success_rate"
+    - "recipe_accuracy_score"
+    - "calculation_performance"
+    - "data_consistency_score"

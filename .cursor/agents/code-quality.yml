@@ -1,0 +1,119 @@
+name: "Code Quality Agent"
+description: "Maintains code quality, formatting, and linting standards"
+version: "1.0.0"
+
+triggers:
+  file_save: true
+  before_commit: true
+  file_changes:
+    - "src/**/*.ts"
+    - "src/**/*.tsx"
+    - "src/**/*.js"
+    - "src/**/*.jsx"
+  scheduled:
+    - "daily_at_9am"
+
+tasks:
+  lint_fix:
+    description: "Automatically fix ESLint issues"
+    priority: "high"
+    conditions:
+      - "linting_errors_detected"
+    actions:
+      - "run_eslint_fix"
+      - "validate_fixes"
+      - "report_remaining_issues"
+
+  format_code:
+    description: "Apply Prettier formatting consistently"
+    priority: "medium"
+    conditions:
+      - "formatting_inconsistencies_detected"
+    actions:
+      - "run_prettier_format"
+      - "validate_formatting"
+      - "ensure_consistency"
+
+  type_check:
+    description: "Validate TypeScript types and fix issues"
+    priority: "high"
+    conditions:
+      - "typescript_errors_detected"
+    actions:
+      - "run_type_check"
+      - "fix_type_issues"
+      - "validate_type_safety"
+
+  run_tests:
+    description: "Execute relevant test suites after code changes"
+    priority: "critical"
+    conditions:
+      - "code_changes_detected"
+    actions:
+      - "identify_affected_tests"
+      - "run_relevant_tests"
+      - "validate_test_results"
+      - "report_test_status"
+
+configuration:
+  linting:
+    tool: "eslint"
+    config_file: "eslint.config.mjs"
+    fix_command: "npm run lint:fix"
+    check_command: "npm run lint"
+
+  formatting:
+    tool: "prettier"
+    config_file: ".prettierrc"
+    format_command: "npm run format"
+    check_command: "npm run format:check"
+
+  type_checking:
+    tool: "typescript"
+    config_file: "tsconfig.json"
+    strict_mode: true
+
+  testing:
+    framework: "jest"
+    test_command: "npm test"
+    watch_command: "npm run test:watch"
+
+  file_patterns:
+    include:
+      - "src/**/*.ts"
+      - "src/**/*.tsx"
+      - "src/**/*.js"
+      - "src/**/*.jsx"
+    exclude:
+      - "node_modules/**"
+      - "dist/**"
+      - "out/**"
+      - "**/*.d.ts"
+
+validation:
+  required_commands:
+    - "npm run lint"
+    - "npm run format:check"
+    - "npm test"
+    - "npm run build"
+  success_criteria:
+    - "no_linting_errors"
+    - "consistent_formatting"
+    - "no_typescript_errors"
+    - "all_tests_pass"
+    - "build_succeeds"
+  failure_actions:
+    - "auto_fix_issues"
+    - "report_unfixable_issues"
+    - "suggest_manual_fixes"
+    - "prevent_commit_if_critical"
+
+notifications:
+  on_success:
+    - "log_success_message"
+  on_failure:
+    - "log_error_details"
+    - "suggest_fixes"
+  on_warning:
+    - "log_warning_message"
+    - "suggest_improvements"
