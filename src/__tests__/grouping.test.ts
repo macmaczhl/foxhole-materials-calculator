@@ -12,6 +12,12 @@ describe("Item Grouping", () => {
   describe("getItemGroup", () => {
     test("categorizes vehicles correctly", () => {
       expect(getItemGroup(Vehicles.Xiphos)).toBe(ItemGroup.Vehicle);
+      expect(getItemGroup(Vehicles.Tisiphone)).toBe(ItemGroup.Vehicle);
+      expect(getItemGroup(Vehicles.Alekto)).toBe(ItemGroup.Vehicle);
+      expect(getItemGroup(Vehicles.Acheron)).toBe(ItemGroup.Vehicle);
+      expect(getItemGroup(Vehicles.Doru)).toBe(ItemGroup.Vehicle);
+      expect(getItemGroup(Vehicles.MulloyLPC)).toBe(ItemGroup.Vehicle);
+      // Half-trucks I'm adding
       expect(getItemGroup(Vehicles.Javelin)).toBe(ItemGroup.Vehicle);
       expect(getItemGroup(Vehicles.Hoplite)).toBe(ItemGroup.Vehicle);
       expect(getItemGroup(Vehicles.Peltast)).toBe(ItemGroup.Vehicle);
@@ -57,13 +63,42 @@ describe("Item Grouping", () => {
       const vehicleGroup = grouped.find((g) => g.group === ItemGroup.Vehicle);
 
       expect(vehicleGroup).toBeDefined();
-      expect(vehicleGroup!.items).toHaveLength(8); // Now includes all half-trucks
+      expect(vehicleGroup!.items).toHaveLength(27); // 1 (Xiphos) + 11 (new vehicles) + 7 (tankettes) + 1 (Alekto) + 7 (half-trucks) = 27 total
 
-      // Check that all items are vehicles
-      const vehicleNames = Object.values(Vehicles);
-      vehicleGroup!.items.forEach((item) => {
-        expect(vehicleNames).toContain(item.name as Vehicles);
-      });
+      // Verify all vehicles are present
+      const vehicleNames = vehicleGroup!.items.map(item => item.name);
+      // Original vehicle
+      expect(vehicleNames).toContain(Vehicles.Xiphos);
+      // New vehicles added in main
+      expect(vehicleNames).toContain(Vehicles.WaspNest);
+      expect(vehicleNames).toContain(Vehicles.Koronides);
+      expect(vehicleNames).toContain(Vehicles.Wolfhound);
+      expect(vehicleNames).toContain(Vehicles.CollinsCannon);
+      expect(vehicleNames).toContain(Vehicles.BatteringRam);
+      expect(vehicleNames).toContain(Vehicles.Falconer);
+      expect(vehicleNames).toContain(Vehicles.Tisiphone);
+      expect(vehicleNames).toContain(Vehicles.Rampart);
+      expect(vehicleNames).toContain(Vehicles.Smelter);
+      expect(vehicleNames).toContain(Vehicles.Stockade);
+      expect(vehicleNames).toContain(Vehicles.StygianBolt);
+      // My additions
+      expect(vehicleNames).toContain(Vehicles.Alekto);
+      // Tankettes from main branch
+      expect(vehicleNames).toContain(Vehicles.Acheron);
+      expect(vehicleNames).toContain(Vehicles.Doru);
+      expect(vehicleNames).toContain(Vehicles.MulloyLPC);
+      expect(vehicleNames).toContain(Vehicles.Actaeon);
+      expect(vehicleNames).toContain(Vehicles.Vesta);
+      expect(vehicleNames).toContain(Vehicles.Ixion);
+      expect(vehicleNames).toContain(Vehicles.Deioneus);
+      // Half-trucks I'm adding
+      expect(vehicleNames).toContain(Vehicles.Javelin);
+      expect(vehicleNames).toContain(Vehicles.Hoplite);
+      expect(vehicleNames).toContain(Vehicles.Peltast);
+      expect(vehicleNames).toContain(Vehicles.NiskaMkI);
+      expect(vehicleNames).toContain(Vehicles.NiskaMkII);
+      expect(vehicleNames).toContain(Vehicles.NiskaMkIII);
+      expect(vehicleNames).toContain(Vehicles.NiskaRyckerMkIX);
     });
 
     test("raw resources group contains only raw materials", () => {
@@ -103,8 +138,8 @@ describe("Item Grouping", () => {
         0
       );
 
-      // Should equal the number of items in availableMaterials (now 34 items: 26 original + 7 new half-trucks)
-      expect(totalItems).toBe(34);
+      // Should equal the number of items in availableMaterials (26 base materials + 27 vehicles = 53 total)
+      expect(totalItems).toBe(53);
     });
   });
 });
