@@ -51,7 +51,7 @@ export const ICONS_MAP = new Map<string, string>([
   [Vehicles.Koronides, "FieldArtilleryColVehicleIcon"],
   [Vehicles.Wolfhound, "FieldCannonWVehicleIcon"],
   [Vehicles.CollinsCannon, "FieldAntiTankWarVehicleIcon"],
-  [Vehicles.BatteringRam, "ConcreteMixerIcon"],
+  [Vehicles.BatteringRam, "FieldAntiTankColVehicleIcon"],
   [Vehicles.Falconer, "FieldMortarWIcon"],
   [Vehicles.Tisiphone, "FieldMortarCIcon"],
   [Vehicles.Alekto, "LargeFieldMortarCIcon"],
