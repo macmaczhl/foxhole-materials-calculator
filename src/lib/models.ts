@@ -69,7 +69,7 @@ export function calculateCanCount(liquidName: string, liters: number): number {
 
 export enum Vehicles {
   Xiphos = 'T3 "Xiphos"',
-  ActaeonTankette = 'T12 "Actaeon" Tankette',
+  // Armored Cars (added by PR)
   Percutio = 'T5 "Percutio"',
   Gemini = 'T8 "Gemini"',
   OBrienGravekeeper = 'O\'Brien v.113 Gravekeeper',
@@ -79,6 +79,28 @@ export enum Vehicles {
   OBrienWildJack = 'O\'Brien V.130 Wild Jack',
   OBrienKnave = 'O\'Brien V.190 Knave',
   OBrienSquire = 'O\'Brien V.200 Squire',
+  // Field Guns and Artillery (from main)
+  WaspNest = 'Rycker 4/3-F Wasp Nest',
+  Koronides = '120-68 "Koronides" Field Gun',
+  Wolfhound = 'Balfour Wolfhound 40mm',
+  CollinsCannon = 'Collins Cannon 68mm',
+  BatteringRam = 'AA-2 Battering Ram',
+  Falconer = 'Balfour Falconer 250mm',
+  Tisiphone = '30-250 "Tisiphone" Field Cannon',
+  Alekto = '40-250 "Alekto" Heavy Cannon',
+  Rampart = 'Balfour Rampart 68mm',
+  Smelter = '40-45 "Smelter" Heavy Field Gun',
+  Stockade = 'Balfour Stockade 75mm',
+  StygianBolt = '945g "Stygian Bolt"',
+  // APCs (from main)
+  Acheron = 'AB-8 "Acheron"',
+  Doru = 'AB-11 "Doru"',
+  MulloyLPC = "Mulloy LPC",
+  // Tankettes (from main)
+  Actaeon = 'T12 "Actaeon" Tankette',
+  Vesta = 'T14 "Vesta" Tankette',
+  Ixion = 'T20 "Ixion" Tankette',
+  Deioneus = 'T13 "Deioneus" Rocket Battery',
 }
 
 export enum RawResources {
@@ -120,7 +142,7 @@ export const availableMaterials: Stuff[] = [
   { name: Liquids.EnrichedOil },
   { name: Liquids.Oil },
   { name: Vehicles.Xiphos },
-  { name: Vehicles.ActaeonTankette },
+  // Armored Cars (added by PR)
   { name: Vehicles.Percutio },
   { name: Vehicles.Gemini },
   { name: Vehicles.OBrienGravekeeper },
@@ -130,6 +152,28 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.OBrienWildJack },
   { name: Vehicles.OBrienKnave },
   { name: Vehicles.OBrienSquire },
+  // Field Guns and Artillery (from main)
+  { name: Vehicles.WaspNest },
+  { name: Vehicles.Koronides },
+  { name: Vehicles.Wolfhound },
+  { name: Vehicles.CollinsCannon },
+  { name: Vehicles.BatteringRam },
+  { name: Vehicles.Falconer },
+  { name: Vehicles.Tisiphone },
+  { name: Vehicles.Alekto },
+  { name: Vehicles.Rampart },
+  { name: Vehicles.Smelter },
+  { name: Vehicles.Stockade },
+  { name: Vehicles.StygianBolt },
+  // APCs (from main)
+  { name: Vehicles.Acheron },
+  { name: Vehicles.Doru },
+  { name: Vehicles.MulloyLPC },
+  // Tankettes (from main)
+  { name: Vehicles.Actaeon },
+  { name: Vehicles.Vesta },
+  { name: Vehicles.Ixion },
+  { name: Vehicles.Deioneus },
 ];
 
 export const stuffList: Stuff[] = availableMaterials;

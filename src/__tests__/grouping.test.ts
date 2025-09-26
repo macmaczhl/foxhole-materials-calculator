@@ -12,6 +12,11 @@ describe("Item Grouping", () => {
   describe("getItemGroup", () => {
     test("categorizes vehicles correctly", () => {
       expect(getItemGroup(Vehicles.Xiphos)).toBe(ItemGroup.Vehicle);
+      expect(getItemGroup(Vehicles.Tisiphone)).toBe(ItemGroup.Vehicle);
+      expect(getItemGroup(Vehicles.Alekto)).toBe(ItemGroup.Vehicle);
+      expect(getItemGroup(Vehicles.Acheron)).toBe(ItemGroup.Vehicle);
+      expect(getItemGroup(Vehicles.Doru)).toBe(ItemGroup.Vehicle);
+      expect(getItemGroup(Vehicles.MulloyLPC)).toBe(ItemGroup.Vehicle);
     });
 
     test("categorizes raw resources correctly", () => {
@@ -50,12 +55,13 @@ describe("Item Grouping", () => {
       const vehicleGroup = grouped.find((g) => g.group === ItemGroup.Vehicle);
 
       expect(vehicleGroup).toBeDefined();
-      expect(vehicleGroup!.items).toHaveLength(11);
+      expect(vehicleGroup!.items).toHaveLength(29); // 1 (Xiphos) + 9 (armored cars) + 19 (main branch vehicles)
 
       // Check that all vehicles are included
       const vehicleNames = vehicleGroup!.items.map((item) => item.name);
+      // Original vehicle
       expect(vehicleNames).toContain(Vehicles.Xiphos);
-      expect(vehicleNames).toContain(Vehicles.ActaeonTankette);
+      // Armored cars (from PR)
       expect(vehicleNames).toContain(Vehicles.Percutio);
       expect(vehicleNames).toContain(Vehicles.Gemini);
       expect(vehicleNames).toContain(Vehicles.OBrienGravekeeper);
@@ -65,6 +71,27 @@ describe("Item Grouping", () => {
       expect(vehicleNames).toContain(Vehicles.OBrienWildJack);
       expect(vehicleNames).toContain(Vehicles.OBrienKnave);
       expect(vehicleNames).toContain(Vehicles.OBrienSquire);
+      // Field guns and artillery (from main)
+      expect(vehicleNames).toContain(Vehicles.WaspNest);
+      expect(vehicleNames).toContain(Vehicles.Koronides);
+      expect(vehicleNames).toContain(Vehicles.Wolfhound);
+      expect(vehicleNames).toContain(Vehicles.CollinsCannon);
+      expect(vehicleNames).toContain(Vehicles.BatteringRam);
+      expect(vehicleNames).toContain(Vehicles.Falconer);
+      expect(vehicleNames).toContain(Vehicles.Tisiphone);
+      expect(vehicleNames).toContain(Vehicles.Alekto);
+      expect(vehicleNames).toContain(Vehicles.Rampart);
+      expect(vehicleNames).toContain(Vehicles.Smelter);
+      expect(vehicleNames).toContain(Vehicles.Stockade);
+      expect(vehicleNames).toContain(Vehicles.StygianBolt);
+      // APCs and tankettes (from main)
+      expect(vehicleNames).toContain(Vehicles.Acheron);
+      expect(vehicleNames).toContain(Vehicles.Doru);
+      expect(vehicleNames).toContain(Vehicles.MulloyLPC);
+      expect(vehicleNames).toContain(Vehicles.Actaeon);
+      expect(vehicleNames).toContain(Vehicles.Vesta);
+      expect(vehicleNames).toContain(Vehicles.Ixion);
+      expect(vehicleNames).toContain(Vehicles.Deioneus);
     });
 
     test("raw resources group contains only raw materials", () => {
@@ -104,8 +131,13 @@ describe("Item Grouping", () => {
         0
       );
 
+<<<<<<< HEAD
       // Should equal the number of items in availableMaterials (currently 37 items)
       expect(totalItems).toBe(37);
+=======
+      // Should equal the number of items in availableMaterials (26 base materials + 20 vehicles = 46 total)
+      expect(totalItems).toBe(46);
+>>>>>>> origin/main
     });
   });
 });

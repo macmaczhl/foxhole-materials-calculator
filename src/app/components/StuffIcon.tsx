@@ -1,6 +1,5 @@
 import { Liquids, calculateCanCount } from "@/lib/models";
-import { ICONS_MAP } from "@/lib/constants";
-import { getBasePath } from "@/lib/utils";
+import { IconService } from "@/lib/services/iconService";
 import Image from "next/image";
 import styles from "./StuffIcon.module.css";
 
@@ -15,7 +14,7 @@ interface StuffIconProps {
 }
 
 export function StuffIcon({ stuffName, count }: StuffIconProps) {
-  const iconPath = ICONS_MAP.get(stuffName);
+  const iconUrl = IconService.getIconUrl(stuffName, 60);
   const displayCount = isLiquid(stuffName) ? `${count}L` : count;
 
   // Calculate can information for liquids
@@ -27,16 +26,12 @@ export function StuffIcon({ stuffName, count }: StuffIconProps) {
       ? `${stuffName}: ${count}L (${canCount} can${canCount !== 1 ? "s" : ""})`
       : stuffName;
 
-  // Get the base path from environment variable
-  const basePath = getBasePath();
-  const fullIconPath = `${basePath}/${iconPath}`;
-
   return (
     <div className={styles.iconTile}>
-      {iconPath ? (
+      {iconUrl ? (
         <Image
           alt={stuffName}
-          src={fullIconPath}
+          src={iconUrl}
           decoding="async"
           loading="lazy"
           width={60}
