@@ -131,13 +131,9 @@ describe("Item Grouping", () => {
         0
       );
 
-<<<<<<< HEAD
-      // Should equal the number of items in availableMaterials (currently 37 items)
-      expect(totalItems).toBe(37);
-=======
-      // Should equal the number of items in availableMaterials (26 base materials + 20 vehicles = 46 total)
-      expect(totalItems).toBe(46);
->>>>>>> origin/main
+      // Should equal the number of items in availableMaterials
+      // (26 base materials + 29 vehicles = 55 total)
+      expect(totalItems).toBe(55);
     });
   });
 });

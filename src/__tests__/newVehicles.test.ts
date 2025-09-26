@@ -272,7 +272,7 @@ describe("New Vehicles", () => {
     test("O'Brien V.190 Knave has mass production recipes", () => {
       const recipes = RecipiesByStuff.get(Vehicles.OBrienKnave)!;
       expect(recipes.length).toBe(4);
-      
+
       // Check basic recipe (40 → 1)
       const basicRecipe = recipes.find(r => r.produced[0].count === 1);
       expect(basicRecipe).toBeDefined();
@@ -287,16 +287,16 @@ describe("New Vehicles", () => {
     test("O'Brien V.200 Squire has complex upgrade recipe", () => {
       const recipes = RecipiesByStuff.get(Vehicles.OBrienSquire)!;
       expect(recipes.length).toBe(1);
-      
+
       const recipe = recipes[0];
       const ingredients = recipe.required.map(r => r.stuff);
-      
+
       // Should require multiple material types and O'Brien V.190 Knave
       expect(ingredients).toContain(Materials.ProcessedConstructionMaterials);
       expect(ingredients).toContain(Materials.AssemblyMaterialsI);
       expect(ingredients).toContain(Materials.AssemblyMaterialsIII);
       expect(ingredients).toContain(Vehicles.OBrienKnave);
-      
+
       // Check quantities
       const processedMaterials = recipe.required.find(r => r.stuff === Materials.ProcessedConstructionMaterials);
       expect(processedMaterials!.count).toBe(35);
