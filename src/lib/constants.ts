@@ -47,8 +47,8 @@ export const ICONS_MAP = new Map<string, string>([
 
   // Vehicles
   [Vehicles.Xiphos, "ArmoredCarVehicleIcon"],
-  [Vehicles.Swallowtail, "FieldMachineGunIcon"],
-  [Vehicles.Sagittarii, "FieldMachineGunIcon"],
+  [Vehicles.Swallowtail, "FieldMachineGunWar"],
+  [Vehicles.Sagittarii, "FieldMachineGun"],
   [Vehicles.WaspNest, "FieldMultiWItemIcon"],
   [Vehicles.Koronides, "FieldArtilleryColVehicleIcon"],
   [Vehicles.Wolfhound, "FieldCannonWVehicleIcon"],
