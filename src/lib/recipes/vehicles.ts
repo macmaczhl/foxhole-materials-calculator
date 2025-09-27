@@ -179,11 +179,12 @@ const deioneusRecipes: IRecipe[] = [
 
 // Duncan's Coin 20mm Field AT Rifle recipes
 const duncansCoin20mmRecipes: IRecipe[] = [
-  // Small Assembly Station (Motor Pool): 30 x Construction Materials + 20 x Assembly Materials II → 1 x Duncan's Coin 20mm
+  // Small Assembly Station (Motor Pool): 30 x Construction Materials + 20 x Assembly Materials II + 1 x Swallowtail 988/127-2 → 1 x Duncan's Coin 20mm
   createRecipe(
     [
       { stuff: Materials.ConstructionMaterials, count: 30 },
       { stuff: Materials.AssemblyMaterialsII, count: 20 },
+      { stuff: Vehicles.Swallowtail, count: 1 },
     ],
     [{ stuff: Vehicles.DuncansCoin20mm, count: 1 }]
   ),
@@ -191,11 +192,12 @@ const duncansCoin20mmRecipes: IRecipe[] = [
 
 // GA6 "Cestus" Field AT Rifle recipes
 const ga6CestusRecipes: IRecipe[] = [
-  // Small Assembly Station (Motor Pool): 30 x Construction Materials + 20 x Assembly Materials II → 1 x GA6 "Cestus"
+  // Small Assembly Station (Motor Pool): 30 x Construction Materials + 20 x Assembly Materials II + 1 x G40 "Sagittarii" → 1 x GA6 "Cestus"
   createRecipe(
     [
       { stuff: Materials.ConstructionMaterials, count: 30 },
       { stuff: Materials.AssemblyMaterialsII, count: 20 },
+      { stuff: Vehicles.Sagittarii, count: 1 },
     ],
     [{ stuff: Vehicles.GA6Cestus, count: 1 }]
   ),
