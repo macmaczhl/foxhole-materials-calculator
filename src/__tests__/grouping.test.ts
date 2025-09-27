@@ -55,12 +55,15 @@ describe("Item Grouping", () => {
       const vehicleGroup = grouped.find((g) => g.group === ItemGroup.Vehicle);
 
       expect(vehicleGroup).toBeDefined();
-      expect(vehicleGroup!.items).toHaveLength(20); // 1 (Xiphos) + 11 (new vehicles) + 7 (tankettes) + 1 (Alekto) = 20 total
+      expect(vehicleGroup!.items).toHaveLength(22); // 1 (Xiphos) + 11 (new vehicles) + 7 (tankettes) + 1 (Alekto) + 2 (field machine guns) = 22 total
 
       // Verify all vehicles are present
       const vehicleNames = vehicleGroup!.items.map(item => item.name);
       // Original vehicle
       expect(vehicleNames).toContain(Vehicles.Xiphos);
+      // Field machine guns
+      expect(vehicleNames).toContain(Vehicles.Swallowtail);
+      expect(vehicleNames).toContain(Vehicles.Sagittarii);
       // New vehicles added in main
       expect(vehicleNames).toContain(Vehicles.WaspNest);
       expect(vehicleNames).toContain(Vehicles.Koronides);
@@ -122,8 +125,8 @@ describe("Item Grouping", () => {
         0
       );
 
-      // Should equal the number of items in availableMaterials (26 base materials + 20 vehicles = 46 total)
-      expect(totalItems).toBe(46);
+      // Should equal the number of items in availableMaterials (26 base materials + 22 vehicles = 48 total)
+      expect(totalItems).toBe(48);
     });
   });
 });

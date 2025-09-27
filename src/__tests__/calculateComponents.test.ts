@@ -148,6 +148,48 @@ describe("calculateComponents", () => {
     expect(result.excessResult).toEqual([{ stuff: Vehicles.Xiphos, count: 8 }]);
   });
 
+  test("handles field machine gun recipes correctly", () => {
+    // Mock Swallowtail crate recipe for testing
+    const swallowtailCrateRecipe: IRecipe = {
+      id: 3,
+      required: [{ stuff: Materials.RefinedMaterials, count: 120 }],
+      produced: [{ stuff: Vehicles.Swallowtail, count: 9 }],
+    };
+
+    const swallowtailRecipeTree: RecipeTree = {
+      stuff: Vehicles.Swallowtail,
+      selectedRecipe: swallowtailCrateRecipe,
+      recipes: [swallowtailCrateRecipe],
+      required: [],
+    };
+
+    const result = calculateComponents(swallowtailRecipeTree, 5);
+
+    // When requesting 5 Swallowtail, need 1 crate (9 total), so 4 excess
+    expect(result.excessResult).toEqual([{ stuff: Vehicles.Swallowtail, count: 4 }]);
+  });
+
+  test("handles Sagittarii recipes correctly", () => {
+    // Mock Sagittarii crate recipe for testing
+    const sagittariiCrateRecipe: IRecipe = {
+      id: 4,
+      required: [{ stuff: Materials.RefinedMaterials, count: 120 }],
+      produced: [{ stuff: Vehicles.Sagittarii, count: 9 }],
+    };
+
+    const sagittariiRecipeTree: RecipeTree = {
+      stuff: Vehicles.Sagittarii,
+      selectedRecipe: sagittariiCrateRecipe,
+      recipes: [sagittariiCrateRecipe],
+      required: [],
+    };
+
+    const result = calculateComponents(sagittariiRecipeTree, 10);
+
+    // When requesting 10 Sagittarii, need 2 crates (18 total), so 8 excess
+    expect(result.excessResult).toEqual([{ stuff: Vehicles.Sagittarii, count: 8 }]);
+  });
+
   test("calculates components for Alekto with complex recipe", () => {
     const result = calculateComponents(alektoRecipeTree, 1);
 

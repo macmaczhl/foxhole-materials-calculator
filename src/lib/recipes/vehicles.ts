@@ -388,8 +388,48 @@ const stygianBoltRecipes: IRecipe[] = [
   ),
 ];
 
+// Swallowtail 988/127-2 field machine gun recipes
+const swallowtailRecipes: IRecipe[] = [
+  // Garrison: 15 x Refined Materials → 1 x Swallowtail 988/127-2
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 15 }],
+    [{ stuff: Vehicles.Swallowtail, count: 1 }]
+  ),
+  // Mass Production Factory: 120 x Refined Materials → 3 crates of 3 x Swallowtail (9 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 120 }],
+    [{ stuff: Vehicles.Swallowtail, count: 9 }]
+  ),
+  // Mass Production Factory: 150 x Refined Materials → 4 crates of 3 x Swallowtail (12 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 150 }],
+    [{ stuff: Vehicles.Swallowtail, count: 12 }]
+  ),
+];
+
+// G40 "Sagittarii" field machine gun recipes
+const sagittariiRecipes: IRecipe[] = [
+  // Garrison: 15 x Refined Materials → 1 x G40 "Sagittarii"
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 15 }],
+    [{ stuff: Vehicles.Sagittarii, count: 1 }]
+  ),
+  // Mass Production Factory: 120 x Refined Materials → 3 crates of 3 x Sagittarii (9 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 120 }],
+    [{ stuff: Vehicles.Sagittarii, count: 9 }]
+  ),
+  // Mass Production Factory: 150 x Refined Materials → 4 crates of 3 x Sagittarii (12 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 150 }],
+    [{ stuff: Vehicles.Sagittarii, count: 12 }]
+  ),
+];
+
 export const vehicleRecipes = new Map<string, IRecipe[]>([
   [Vehicles.Xiphos, xiphosRecipes],
+  [Vehicles.Swallowtail, swallowtailRecipes],
+  [Vehicles.Sagittarii, sagittariiRecipes],
   [Vehicles.Alekto, alektoRecipes],
   [Vehicles.Acheron, acheronRecipes],
   [Vehicles.Doru, doruRecipes],
