@@ -65,6 +65,9 @@ describe("Item Grouping", () => {
       expect(vehicleNames).toContain(Vehicles.Xiphos);
       expect(vehicleNames).toContain(Vehicles.DuncansCoin20mm);
       expect(vehicleNames).toContain(Vehicles.GA6Cestus);
+      // Field machine guns
+      expect(vehicleNames).toContain(Vehicles.Swallowtail);
+      expect(vehicleNames).toContain(Vehicles.Sagittarii);
       // New vehicles added in main
       expect(vehicleNames).toContain(Vehicles.WaspNest);
       expect(vehicleNames).toContain(Vehicles.Koronides);
