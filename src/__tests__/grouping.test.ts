@@ -56,6 +56,7 @@ describe("Item Grouping", () => {
 
       expect(vehicleGroup).toBeDefined();
       expect(vehicleGroup!.items).toHaveLength(22); // 1 (Xiphos) + 11 (new vehicles) + 7 (tankettes) + 1 (Alekto) + 2 (field machine guns) = 22 total
+      expect(vehicleGroup!.items).toHaveLength(20); // 1 (Xiphos) + 11 (new vehicles) + 7 (tankettes) + 1 (Alekto) = 20 total
 
       // Verify all vehicles are present
       const vehicleNames = vehicleGroup!.items.map(item => item.name);

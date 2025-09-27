@@ -189,7 +189,7 @@ describe("calculateComponents", () => {
     // When requesting 10 Sagittarii, need 2 crates (18 total), so 8 excess
     expect(result.excessResult).toEqual([{ stuff: Vehicles.Sagittarii, count: 8 }]);
   });
-
+  
   test("calculates components for Alekto with complex recipe", () => {
     const result = calculateComponents(alektoRecipeTree, 1);
 
