@@ -6,6 +6,7 @@ describe("New Vehicles", () => {
   describe("Recipe availability", () => {
     test("all new vehicles have recipes defined", () => {
       const newVehicles = [
+        // Field guns and artillery (from main)
         Vehicles.WaspNest,
         Vehicles.Koronides,
         Vehicles.Wolfhound,
@@ -17,6 +18,16 @@ describe("New Vehicles", () => {
         Vehicles.Smelter,
         Vehicles.Stockade,
         Vehicles.StygianBolt,
+        // Armored cars (from PR)
+        Vehicles.Percutio,
+        Vehicles.Gemini,
+        Vehicles.OBrienGravekeeper,
+        Vehicles.OBrienHighlander,
+        Vehicles.OBrienFreeman,
+        Vehicles.OBrienV110,
+        Vehicles.OBrienWildJack,
+        Vehicles.OBrienKnave,
+        Vehicles.OBrienSquire,
       ];
 
       newVehicles.forEach((vehicle) => {
@@ -29,6 +40,7 @@ describe("New Vehicles", () => {
 
     test("all vehicle recipes have valid requirements", () => {
       const newVehicles = [
+        // Field guns and artillery (from main)
         Vehicles.WaspNest,
         Vehicles.Koronides,
         Vehicles.Wolfhound,
@@ -40,6 +52,16 @@ describe("New Vehicles", () => {
         Vehicles.Smelter,
         Vehicles.Stockade,
         Vehicles.StygianBolt,
+        // Armored cars (from PR)
+        Vehicles.Percutio,
+        Vehicles.Gemini,
+        Vehicles.OBrienGravekeeper,
+        Vehicles.OBrienHighlander,
+        Vehicles.OBrienFreeman,
+        Vehicles.OBrienV110,
+        Vehicles.OBrienWildJack,
+        Vehicles.OBrienKnave,
+        Vehicles.OBrienSquire,
       ];
 
       newVehicles.forEach((vehicle) => {
@@ -171,6 +193,7 @@ describe("New Vehicles", () => {
   describe("Recipe calculation integration", () => {
     test("all new vehicles can be calculated without errors", () => {
       const newVehicles = [
+        // Field guns and artillery (from main)
         Vehicles.WaspNest,
         Vehicles.Koronides,
         Vehicles.Wolfhound,
@@ -182,6 +205,16 @@ describe("New Vehicles", () => {
         Vehicles.Smelter,
         Vehicles.Stockade,
         Vehicles.StygianBolt,
+        // Armored cars (from PR)
+        Vehicles.Percutio,
+        Vehicles.Gemini,
+        Vehicles.OBrienGravekeeper,
+        Vehicles.OBrienHighlander,
+        Vehicles.OBrienFreeman,
+        Vehicles.OBrienV110,
+        Vehicles.OBrienWildJack,
+        Vehicles.OBrienKnave,
+        Vehicles.OBrienSquire,
       ];
 
       newVehicles.forEach((vehicle) => {
@@ -199,6 +232,74 @@ describe("New Vehicles", () => {
           expect(result.initial.length).toBeGreaterThan(0);
         }).not.toThrow();
       });
+    });
+  });
+
+  describe("Armored Car Upgrade System", () => {
+    test("upgrade vehicles require base vehicles as ingredients", () => {
+      // T5 Percutio requires T3 Xiphos
+      const percutioRecipes = RecipiesByStuff.get(Vehicles.Percutio)!;
+      expect(percutioRecipes.length).toBe(1);
+      const percutioIngredients = percutioRecipes[0].required.map(r => r.stuff);
+      expect(percutioIngredients).toContain(Vehicles.Xiphos);
+
+      // T8 Gemini requires T3 Xiphos
+      const geminiRecipes = RecipiesByStuff.get(Vehicles.Gemini)!;
+      expect(geminiRecipes.length).toBe(1);
+      const geminiIngredients = geminiRecipes[0].required.map(r => r.stuff);
+      expect(geminiIngredients).toContain(Vehicles.Xiphos);
+
+      // O'Brien v.113 Gravekeeper requires O'Brien V.110
+      const gravekeeperRecipes = RecipiesByStuff.get(Vehicles.OBrienGravekeeper)!;
+      expect(gravekeeperRecipes.length).toBe(1);
+      const gravekeeperIngredients = gravekeeperRecipes[0].required.map(r => r.stuff);
+      expect(gravekeeperIngredients).toContain(Vehicles.OBrienV110);
+    });
+
+    test("O'Brien V.130 Wild Jack uses Processed Construction Materials", () => {
+      const recipes = RecipiesByStuff.get(Vehicles.OBrienWildJack);
+      expect(recipes).toBeDefined();
+      expect(recipes!.length).toBe(1);
+
+      const basicRecipe = recipes!.find(r => r.produced[0].count === 1);
+      expect(basicRecipe).toBeDefined();
+      expect(basicRecipe!.required[0].stuff).toBe(Materials.ProcessedConstructionMaterials);
+      expect(basicRecipe!.required[0].count).toBe(10);
+      expect(basicRecipe!.required[1].stuff).toBe(Materials.AssemblyMaterialsI);
+      expect(basicRecipe!.required[1].count).toBe(10);
+    });
+
+    test("O'Brien V.190 Knave has mass production recipes", () => {
+      const recipes = RecipiesByStuff.get(Vehicles.OBrienKnave)!;
+      expect(recipes.length).toBe(4);
+
+      // Check basic recipe (40 → 1)
+      const basicRecipe = recipes.find(r => r.produced[0].count === 1);
+      expect(basicRecipe).toBeDefined();
+      expect(basicRecipe!.required[0].stuff).toBe(Materials.RefinedMaterials);
+      expect(basicRecipe!.required[0].count).toBe(40);
+
+      // Check mass production recipes exist
+      const massProduction = recipes.filter(r => r.produced[0].count > 1);
+      expect(massProduction.length).toBe(3);
+    });
+
+    test("O'Brien V.200 Squire has complex upgrade recipe", () => {
+      const recipes = RecipiesByStuff.get(Vehicles.OBrienSquire)!;
+      expect(recipes.length).toBe(1);
+
+      const recipe = recipes[0];
+      const ingredients = recipe.required.map(r => r.stuff);
+
+      // Should require multiple material types and O'Brien V.190 Knave
+      expect(ingredients).toContain(Materials.ProcessedConstructionMaterials);
+      expect(ingredients).toContain(Materials.AssemblyMaterialsI);
+      expect(ingredients).toContain(Materials.AssemblyMaterialsIII);
+      expect(ingredients).toContain(Vehicles.OBrienKnave);
+
+      // Check quantities
+      const processedMaterials = recipe.required.find(r => r.stuff === Materials.ProcessedConstructionMaterials);
+      expect(processedMaterials!.count).toBe(35);
     });
   });
 });

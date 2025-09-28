@@ -25,6 +25,145 @@ const xiphosRecipes: IRecipe[] = [
   ),
 ];
 
+// T5 "Percutio" vehicle recipes (Armored Car upgrade)
+const percutioRecipes: IRecipe[] = [
+  // Upgrade recipe: 10 x Construction Materials + 10 x Assembly Materials I + 1 x T3 "Xiphos" → 1 x T5 "Percutio"
+  createRecipe(
+    [
+      { stuff: Materials.ConstructionMaterials, count: 10 },
+      { stuff: Materials.AssemblyMaterialsI, count: 10 },
+      { stuff: Vehicles.Xiphos, count: 1 }
+    ],
+    [{ stuff: Vehicles.Percutio, count: 1 }]
+  ),
+];
+
+// T8 "Gemini" vehicle recipes (Armored Car upgrade)
+const geminiRecipes: IRecipe[] = [
+  // Upgrade recipe: 10 x Construction Materials + 10 x Assembly Materials I + 1 x T3 "Xiphos" → 1 x T8 "Gemini"
+  createRecipe(
+    [
+      { stuff: Materials.ConstructionMaterials, count: 10 },
+      { stuff: Materials.AssemblyMaterialsI, count: 10 },
+      { stuff: Vehicles.Xiphos, count: 1 }
+    ],
+    [{ stuff: Vehicles.Gemini, count: 1 }]
+  ),
+];
+
+// O'Brien v.113 Gravekeeper vehicle recipes (Armored Car upgrade)
+const oBrienGravekeeperRecipes: IRecipe[] = [
+  // Upgrade recipe: 5 x Construction Materials + 5 x Assembly Materials I + 1 x O'Brien V.110 → 1 x O'Brien v.113 Gravekeeper
+  createRecipe(
+    [
+      { stuff: Materials.ConstructionMaterials, count: 5 },
+      { stuff: Materials.AssemblyMaterialsI, count: 5 },
+      { stuff: Vehicles.OBrienV110, count: 1 }
+    ],
+    [{ stuff: Vehicles.OBrienGravekeeper, count: 1 }]
+  ),
+];
+
+// O'Brien v.121 Highlander vehicle recipes (Armored Car upgrade)
+const oBrienHighlanderRecipes: IRecipe[] = [
+  // Upgrade recipe: 15 x Construction Materials + 15 x Assembly Materials I + 1 x O'Brien V.190 Knave → 1 x O'Brien v.121 Highlander
+  createRecipe(
+    [
+      { stuff: Materials.ConstructionMaterials, count: 15 },
+      { stuff: Materials.AssemblyMaterialsI, count: 15 },
+      { stuff: Vehicles.OBrienKnave, count: 1 }
+    ],
+    [{ stuff: Vehicles.OBrienHighlander, count: 1 }]
+  ),
+];
+
+// O'Brien v.101 Freeman vehicle recipes (Armored Car upgrade)
+const oBrienFreemanRecipes: IRecipe[] = [
+  // Upgrade recipe: 15 x Construction Materials + 15 x Assembly Materials I + 1 x O'Brien V.190 Knave → 1 x O'Brien v.101 Freeman
+  createRecipe(
+    [
+      { stuff: Materials.ConstructionMaterials, count: 15 },
+      { stuff: Materials.AssemblyMaterialsI, count: 15 },
+      { stuff: Vehicles.OBrienKnave, count: 1 }
+    ],
+    [{ stuff: Vehicles.OBrienFreeman, count: 1 }]
+  ),
+];
+
+// O'Brien v.110 vehicle recipes (Base Armored Car)
+const oBrienV110Recipes: IRecipe[] = [
+  // Recipe 1: 25 x Refined Materials → 1 x O'Brien v.110
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 25 }],
+    [{ stuff: Vehicles.OBrienV110, count: 1 }]
+  ),
+  // Recipe 2: 179 x Refined Materials → 9 x O'Brien v.110
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 179 }],
+    [{ stuff: Vehicles.OBrienV110, count: 9 }]
+  ),
+  // Recipe 3: 224 x Refined Materials → 12 x O'Brien v.110
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 224 }],
+    [{ stuff: Vehicles.OBrienV110, count: 12 }]
+  ),
+  // Recipe 4: 261 x Refined Materials → 15 x O'Brien v.110
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 261 }],
+    [{ stuff: Vehicles.OBrienV110, count: 15 }]
+  ),
+];
+
+// O'Brien V.130 Wild Jack vehicle recipes (Base Armored Car)
+const oBrienWildJackRecipes: IRecipe[] = [
+  // Recipe: 10 x Processed Construction Materials + 10 x Assembly Materials I → 1 x O'Brien V.130 Wild Jack
+  createRecipe(
+    [
+      { stuff: Materials.ProcessedConstructionMaterials, count: 10 },
+      { stuff: Materials.AssemblyMaterialsI, count: 10 }
+    ],
+    [{ stuff: Vehicles.OBrienWildJack, count: 1 }]
+  ),
+];
+
+// O'Brien V.190 Knave vehicle recipes (Base Armored Car)
+const oBrienKnaveRecipes: IRecipe[] = [
+  // Recipe 1: 40 x Refined Materials → 1 x O'Brien V.190 Knave
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 40 }],
+    [{ stuff: Vehicles.OBrienKnave, count: 1 }]
+  ),
+  // Recipe 2: 288 x Refined Materials → 9 x O'Brien V.190 Knave
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 288 }],
+    [{ stuff: Vehicles.OBrienKnave, count: 9 }]
+  ),
+  // Recipe 3: 360 x Refined Materials → 12 x O'Brien V.190 Knave
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 360 }],
+    [{ stuff: Vehicles.OBrienKnave, count: 12 }]
+  ),
+  // Recipe 4: 420 x Refined Materials → 15 x O'Brien V.190 Knave
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 420 }],
+    [{ stuff: Vehicles.OBrienKnave, count: 15 }]
+  ),
+];
+
+// O'Brien V.200 Squire vehicle recipes (Advanced Armored Car upgrade)
+const oBrienSquireRecipes: IRecipe[] = [
+  // Complex upgrade recipe: 35 x Processed Construction Materials + 10 x Assembly Materials I + 8 x Assembly Materials III + 1 x O'Brien V.190 Knave → 1 x O'Brien V.200 Squire
+  createRecipe(
+    [
+      { stuff: Materials.ProcessedConstructionMaterials, count: 35 },
+      { stuff: Materials.AssemblyMaterialsI, count: 10 },
+      { stuff: Materials.AssemblyMaterialsIII, count: 8 },
+      { stuff: Vehicles.OBrienKnave, count: 1 }
+    ],
+    [{ stuff: Vehicles.OBrienSquire, count: 1 }]
+  ),
+];
+
 // 40-250 "Alekto" Heavy Cannon vehicle recipes
 const alektoRecipes: IRecipe[] = [
   // Single recipe as per wiki requirements
@@ -454,10 +593,22 @@ const sagittariiRecipes: IRecipe[] = [
 
 export const vehicleRecipes = new Map<string, IRecipe[]>([
   [Vehicles.Xiphos, xiphosRecipes],
+  // Armored Cars (added by PR)
+  [Vehicles.Percutio, percutioRecipes],
+  [Vehicles.Gemini, geminiRecipes],
+  [Vehicles.OBrienGravekeeper, oBrienGravekeeperRecipes],
+  [Vehicles.OBrienHighlander, oBrienHighlanderRecipes],
+  [Vehicles.OBrienFreeman, oBrienFreemanRecipes],
+  [Vehicles.OBrienV110, oBrienV110Recipes],
+  [Vehicles.OBrienWildJack, oBrienWildJackRecipes],
+  [Vehicles.OBrienKnave, oBrienKnaveRecipes],
+  [Vehicles.OBrienSquire, oBrienSquireRecipes],
+  // Field AT Rifles and Machine Guns (from main)
   [Vehicles.DuncansCoin20mm, duncansCoin20mmRecipes],
   [Vehicles.GA6Cestus, ga6CestusRecipes],
   [Vehicles.Swallowtail, swallowtailRecipes],
   [Vehicles.Sagittarii, sagittariiRecipes],
+  // Other vehicles (from main)
   [Vehicles.Alekto, alektoRecipes],
   [Vehicles.Acheron, acheronRecipes],
   [Vehicles.Doru, doruRecipes],

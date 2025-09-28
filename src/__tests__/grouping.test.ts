@@ -57,18 +57,28 @@ describe("Item Grouping", () => {
       const vehicleGroup = grouped.find((g) => g.group === ItemGroup.Vehicle);
 
       expect(vehicleGroup).toBeDefined();
-      expect(vehicleGroup!.items).toHaveLength(24); // 1 (Xiphos) + 2 (Field AT Rifles) + 2 (Field Machine Guns) + 11 (new vehicles) + 7 (tankettes) + 1 (Alekto) = 24 total
+      expect(vehicleGroup!.items).toHaveLength(33); // 1 (Xiphos) + 9 (armored cars) + 2 (Field AT Rifles) + 2 (Field Machine Guns) + 11 (new vehicles) + 7 (tankettes) + 1 (Alekto) = 33 total
 
-      // Verify all vehicles are present
-      const vehicleNames = vehicleGroup!.items.map(item => item.name);
+      // Check that all vehicles are included
+      const vehicleNames = vehicleGroup!.items.map((item) => item.name);
       // Original vehicle
       expect(vehicleNames).toContain(Vehicles.Xiphos);
+      // Armored cars (from PR)
+      expect(vehicleNames).toContain(Vehicles.Percutio);
+      expect(vehicleNames).toContain(Vehicles.Gemini);
+      expect(vehicleNames).toContain(Vehicles.OBrienGravekeeper);
+      expect(vehicleNames).toContain(Vehicles.OBrienHighlander);
+      expect(vehicleNames).toContain(Vehicles.OBrienFreeman);
+      expect(vehicleNames).toContain(Vehicles.OBrienV110);
+      expect(vehicleNames).toContain(Vehicles.OBrienWildJack);
+      expect(vehicleNames).toContain(Vehicles.OBrienKnave);
+      expect(vehicleNames).toContain(Vehicles.OBrienSquire);
+      // Field AT Rifles and Machine Guns (from main)
       expect(vehicleNames).toContain(Vehicles.DuncansCoin20mm);
       expect(vehicleNames).toContain(Vehicles.GA6Cestus);
-      // Field machine guns
       expect(vehicleNames).toContain(Vehicles.Swallowtail);
       expect(vehicleNames).toContain(Vehicles.Sagittarii);
-      // New vehicles added in main
+      // Field guns and artillery (from main)
       expect(vehicleNames).toContain(Vehicles.WaspNest);
       expect(vehicleNames).toContain(Vehicles.Koronides);
       expect(vehicleNames).toContain(Vehicles.Wolfhound);
@@ -76,13 +86,12 @@ describe("Item Grouping", () => {
       expect(vehicleNames).toContain(Vehicles.BatteringRam);
       expect(vehicleNames).toContain(Vehicles.Falconer);
       expect(vehicleNames).toContain(Vehicles.Tisiphone);
+      expect(vehicleNames).toContain(Vehicles.Alekto);
       expect(vehicleNames).toContain(Vehicles.Rampart);
       expect(vehicleNames).toContain(Vehicles.Smelter);
       expect(vehicleNames).toContain(Vehicles.Stockade);
       expect(vehicleNames).toContain(Vehicles.StygianBolt);
-      // My additions
-      expect(vehicleNames).toContain(Vehicles.Alekto);
-      // Tankettes from main branch
+      // APCs and tankettes (from main)
       expect(vehicleNames).toContain(Vehicles.Acheron);
       expect(vehicleNames).toContain(Vehicles.Doru);
       expect(vehicleNames).toContain(Vehicles.MulloyLPC);
@@ -129,8 +138,9 @@ describe("Item Grouping", () => {
         0
       );
 
-      // Should equal the number of items in availableMaterials (26 base materials + 24 vehicles = 50 total)
-      expect(totalItems).toBe(50);
+      // Should equal the number of items in availableMaterials
+      // (26 base materials + 33 vehicles = 59 total)
+      expect(totalItems).toBe(59);
     });
   });
 });
