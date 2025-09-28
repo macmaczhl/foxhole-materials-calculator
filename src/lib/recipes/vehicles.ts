@@ -593,7 +593,6 @@ const sagittariiRecipes: IRecipe[] = [
 
 export const vehicleRecipes = new Map<string, IRecipe[]>([
   [Vehicles.Xiphos, xiphosRecipes],
-<<<<<<< HEAD
   // Armored Cars (added by PR)
   [Vehicles.Percutio, percutioRecipes],
   [Vehicles.Gemini, geminiRecipes],

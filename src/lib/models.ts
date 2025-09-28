@@ -148,7 +148,6 @@ export const availableMaterials: Stuff[] = [
   { name: Liquids.EnrichedOil },
   { name: Liquids.Oil },
   { name: Vehicles.Xiphos },
-<<<<<<< HEAD
   // Armored Cars (added by PR)
   { name: Vehicles.Percutio },
   { name: Vehicles.Gemini },
@@ -159,13 +158,12 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.OBrienWildJack },
   { name: Vehicles.OBrienKnave },
   { name: Vehicles.OBrienSquire },
-  // Field Guns and Artillery (from main)
-=======
+  // Field AT Rifles and Machine Guns (from main)
   { name: Vehicles.DuncansCoin20mm },
   { name: Vehicles.GA6Cestus },
   { name: Vehicles.Swallowtail },
   { name: Vehicles.Sagittarii },
->>>>>>> 5efb8c96de10d1869847080f177242395da0c5d7
+  // Field Guns and Artillery (from main)
   { name: Vehicles.WaspNest },
   { name: Vehicles.Koronides },
   { name: Vehicles.Wolfhound },
