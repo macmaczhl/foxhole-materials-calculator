@@ -65,7 +65,7 @@ describe("Item Grouping", () => {
       const vehicleGroup = grouped.find((g) => g.group === ItemGroup.Vehicle);
 
       expect(vehicleGroup).toBeDefined();
-      expect(vehicleGroup!.items).toHaveLength(27); // 1 (Xiphos) + 11 (new vehicles) + 7 (tankettes) + 1 (Alekto) + 7 (half-trucks) = 27 total
+      expect(vehicleGroup!.items).toHaveLength(31); // 1 (Xiphos) + 4 (field weapons) + 20 (existing vehicles) + 6 (tankettes/etc) + 7 (half-trucks) = 31 total
 
       // Verify all vehicles are present
       const vehicleNames = vehicleGroup!.items.map(item => item.name);
@@ -145,8 +145,8 @@ describe("Item Grouping", () => {
         0
       );
 
-      // Should equal the number of items in availableMaterials (26 base materials + 27 vehicles = 53 total)
-      expect(totalItems).toBe(53);
+      // Should equal the number of items in availableMaterials (26 base materials + 31 vehicles = 57 total)
+      expect(totalItems).toBe(57);
     });
   });
 });

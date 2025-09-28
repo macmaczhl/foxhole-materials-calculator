@@ -527,6 +527,8 @@ const niskaRyckerMkIXRecipes: IRecipe[] = [
       { stuff: Vehicles.NiskaMkI, count: 1 },
     ],
     [{ stuff: Vehicles.NiskaRyckerMkIX, count: 1 }]
+  ),
+];
 
 // Swallowtail 988/127-2 field machine gun recipes
 const swallowtailRecipes: IRecipe[] = [
