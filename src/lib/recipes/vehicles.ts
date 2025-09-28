@@ -177,6 +177,32 @@ const deioneusRecipes: IRecipe[] = [
   ),
 ];
 
+// Duncan's Coin 20mm Field AT Rifle recipes
+const duncansCoin20mmRecipes: IRecipe[] = [
+  // Small Assembly Station (Motor Pool): 30 x Construction Materials + 20 x Assembly Materials II + 1 x Swallowtail 988/127-2 → 1 x Duncan's Coin 20mm
+  createRecipe(
+    [
+      { stuff: Materials.ConstructionMaterials, count: 30 },
+      { stuff: Materials.AssemblyMaterialsII, count: 20 },
+      { stuff: Vehicles.Swallowtail, count: 1 },
+    ],
+    [{ stuff: Vehicles.DuncansCoin20mm, count: 1 }]
+  ),
+];
+
+// GA6 "Cestus" Field AT Rifle recipes
+const ga6CestusRecipes: IRecipe[] = [
+  // Small Assembly Station (Motor Pool): 30 x Construction Materials + 20 x Assembly Materials II + 1 x G40 "Sagittarii" → 1 x GA6 "Cestus"
+  createRecipe(
+    [
+      { stuff: Materials.ConstructionMaterials, count: 30 },
+      { stuff: Materials.AssemblyMaterialsII, count: 20 },
+      { stuff: Vehicles.Sagittarii, count: 1 },
+    ],
+    [{ stuff: Vehicles.GA6Cestus, count: 1 }]
+  ),
+];
+
 // Rycker 4/3-F Wasp Nest recipes (Bunker-building vehicle)
 const waspNestRecipes: IRecipe[] = [
   // Field Bunker production: 20 x Processed Construction Materials + 15 x Assembly Materials II + 3 x Assembly Materials IV → 1 x Wasp Nest
@@ -428,6 +454,8 @@ const sagittariiRecipes: IRecipe[] = [
 
 export const vehicleRecipes = new Map<string, IRecipe[]>([
   [Vehicles.Xiphos, xiphosRecipes],
+  [Vehicles.DuncansCoin20mm, duncansCoin20mmRecipes],
+  [Vehicles.GA6Cestus, ga6CestusRecipes],
   [Vehicles.Swallowtail, swallowtailRecipes],
   [Vehicles.Sagittarii, sagittariiRecipes],
   [Vehicles.Alekto, alektoRecipes],

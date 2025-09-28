@@ -12,6 +12,8 @@ describe("Item Grouping", () => {
   describe("getItemGroup", () => {
     test("categorizes vehicles correctly", () => {
       expect(getItemGroup(Vehicles.Xiphos)).toBe(ItemGroup.Vehicle);
+      expect(getItemGroup(Vehicles.DuncansCoin20mm)).toBe(ItemGroup.Vehicle);
+      expect(getItemGroup(Vehicles.GA6Cestus)).toBe(ItemGroup.Vehicle);
       expect(getItemGroup(Vehicles.Tisiphone)).toBe(ItemGroup.Vehicle);
       expect(getItemGroup(Vehicles.Alekto)).toBe(ItemGroup.Vehicle);
       expect(getItemGroup(Vehicles.Acheron)).toBe(ItemGroup.Vehicle);
@@ -55,12 +57,14 @@ describe("Item Grouping", () => {
       const vehicleGroup = grouped.find((g) => g.group === ItemGroup.Vehicle);
 
       expect(vehicleGroup).toBeDefined();
-      expect(vehicleGroup!.items).toHaveLength(22); // 1 (Xiphos) + 11 (new vehicles) + 7 (tankettes) + 1 (Alekto) + 2 (field machine guns) = 22 total
+      expect(vehicleGroup!.items).toHaveLength(24); // 1 (Xiphos) + 2 (Field AT Rifles) + 2 (Field Machine Guns) + 11 (new vehicles) + 7 (tankettes) + 1 (Alekto) = 24 total
 
       // Verify all vehicles are present
       const vehicleNames = vehicleGroup!.items.map(item => item.name);
       // Original vehicle
       expect(vehicleNames).toContain(Vehicles.Xiphos);
+      expect(vehicleNames).toContain(Vehicles.DuncansCoin20mm);
+      expect(vehicleNames).toContain(Vehicles.GA6Cestus);
       // Field machine guns
       expect(vehicleNames).toContain(Vehicles.Swallowtail);
       expect(vehicleNames).toContain(Vehicles.Sagittarii);
@@ -125,8 +129,8 @@ describe("Item Grouping", () => {
         0
       );
 
-      // Should equal the number of items in availableMaterials (26 base materials + 22 vehicles = 48 total)
-      expect(totalItems).toBe(48);
+      // Should equal the number of items in availableMaterials (26 base materials + 24 vehicles = 50 total)
+      expect(totalItems).toBe(50);
     });
   });
 });
