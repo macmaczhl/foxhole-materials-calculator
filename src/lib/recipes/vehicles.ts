@@ -414,6 +414,122 @@ const stygianBoltRecipes: IRecipe[] = [
   ),
 ];
 
+// HH-a "Javelin" half-truck recipes (based on wiki feedback)
+const javelinRecipes: IRecipe[] = [
+  // Garage production: 55 x Refined Materials → 1 x HH-a "Javelin"
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 55 }],
+    [{ stuff: Vehicles.Javelin, count: 1 }]
+  ),
+  // Mass Production Factory: 395 x Refined Materials → 3 crates of 3 x HH-a "Javelin" (9 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 395 }],
+    [{ stuff: Vehicles.Javelin, count: 9 }]
+  ),
+  // Mass Production Factory: 494 x Refined Materials → 4 crates of 3 x HH-a "Javelin" (12 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 494 }],
+    [{ stuff: Vehicles.Javelin, count: 12 }]
+  ),
+  // Mass Production Factory: 576 x Refined Materials → 5 crates of 3 x HH-a "Javelin" (15 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 576 }],
+    [{ stuff: Vehicles.Javelin, count: 15 }]
+  ),
+];
+
+// HH-b "Hoplite" half-truck recipes (based on wiki feedback)
+const hopliteRecipes: IRecipe[] = [
+  // Only one recipe as per wiki: requires Javelin + materials
+  createRecipe(
+    [
+      { stuff: Materials.ProcessedConstructionMaterials, count: 3 },
+      { stuff: Materials.AssemblyMaterialsIV, count: 3 },
+      { stuff: Vehicles.Javelin, count: 1 },
+    ],
+    [{ stuff: Vehicles.Hoplite, count: 1 }]
+  ),
+];
+
+// HH-d "Peltast" half-truck recipes (based on wiki feedback)
+const peltastRecipes: IRecipe[] = [
+  // Only one recipe as per wiki: requires Javelin + materials
+  createRecipe(
+    [
+      { stuff: Materials.ProcessedConstructionMaterials, count: 5 },
+      { stuff: Materials.AssemblyMaterialsII, count: 5 },
+      { stuff: Materials.AssemblyMaterialsIV, count: 3 },
+      { stuff: Vehicles.Javelin, count: 1 },
+    ],
+    [{ stuff: Vehicles.Peltast, count: 1 }]
+  ),
+];
+
+// Niska Mk. I Gun Motor Carriage recipes (based on wiki feedback)
+const niskaMkIRecipes: IRecipe[] = [
+  // Garage production: 60 x Refined Materials → 1 x Niska Mk. I Gun Motor Carriage
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 60 }],
+    [{ stuff: Vehicles.NiskaMkI, count: 1 }]
+  ),
+  // Mass Production Factory: 432 x Refined Materials → 3 crates of 3 x Niska Mk. I Gun Motor Carriage (9 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 432 }],
+    [{ stuff: Vehicles.NiskaMkI, count: 9 }]
+  ),
+  // Mass Production Factory: 540 x Refined Materials → 4 crates of 3 x Niska Mk. I Gun Motor Carriage (12 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 540 }],
+    [{ stuff: Vehicles.NiskaMkI, count: 12 }]
+  ),
+  // Mass Production Factory: 630 x Refined Materials → 5 crates of 3 x Niska Mk. I Gun Motor Carriage (15 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 630 }],
+    [{ stuff: Vehicles.NiskaMkI, count: 15 }]
+  ),
+];
+
+// Niska Mk. II Blinder recipes (based on wiki feedback)
+const niskaMkIIRecipes: IRecipe[] = [
+  // Only one recipe as per wiki: requires Niska Mk. I + materials
+  createRecipe(
+    [
+      { stuff: Materials.ProcessedConstructionMaterials, count: 5 },
+      { stuff: Materials.AssemblyMaterialsII, count: 10 },
+      { stuff: Materials.AssemblyMaterialsIV, count: 3 },
+      { stuff: Vehicles.NiskaMkI, count: 1 },
+    ],
+    [{ stuff: Vehicles.NiskaMkII, count: 1 }]
+  ),
+];
+
+// Niska Mk. III Scar Twin recipes (based on wiki feedback)
+const niskaMkIIIRecipes: IRecipe[] = [
+  // Only one recipe as per wiki: requires Niska Mk. I + materials
+  createRecipe(
+    [
+      { stuff: Materials.ProcessedConstructionMaterials, count: 5 },
+      { stuff: Materials.AssemblyMaterialsIV, count: 5 },
+      { stuff: Vehicles.NiskaMkI, count: 1 },
+    ],
+    [{ stuff: Vehicles.NiskaMkIII, count: 1 }]
+  ),
+];
+
+// Niska-Rycker Mk. IX Skycaller recipes (based on wiki feedback)
+const niskaRyckerMkIXRecipes: IRecipe[] = [
+  // Only one recipe as per wiki: requires Niska Mk. I + materials
+  createRecipe(
+    [
+      { stuff: Materials.ProcessedConstructionMaterials, count: 10 },
+      { stuff: Materials.AssemblyMaterialsI, count: 10 },
+      { stuff: Materials.AssemblyMaterialsIII, count: 8 },
+      { stuff: Vehicles.NiskaMkI, count: 1 },
+    ],
+    [{ stuff: Vehicles.NiskaRyckerMkIX, count: 1 }]
+  ),
+];
+
 // Swallowtail 988/127-2 field machine gun recipes
 const swallowtailRecipes: IRecipe[] = [
   // Garrison: 15 x Refined Materials → 1 x Swallowtail 988/127-2
@@ -477,4 +593,11 @@ export const vehicleRecipes = new Map<string, IRecipe[]>([
   [Vehicles.Smelter, smelterRecipes],
   [Vehicles.Stockade, stockadeRecipes],
   [Vehicles.StygianBolt, stygianBoltRecipes],
+  [Vehicles.Javelin, javelinRecipes],
+  [Vehicles.Hoplite, hopliteRecipes],
+  [Vehicles.Peltast, peltastRecipes],
+  [Vehicles.NiskaMkI, niskaMkIRecipes],
+  [Vehicles.NiskaMkII, niskaMkIIRecipes],
+  [Vehicles.NiskaMkIII, niskaMkIIIRecipes],
+  [Vehicles.NiskaRyckerMkIX, niskaRyckerMkIXRecipes],
 ]);
