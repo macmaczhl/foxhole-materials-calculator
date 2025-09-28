@@ -12,6 +12,8 @@ describe("Item Grouping", () => {
   describe("getItemGroup", () => {
     test("categorizes vehicles correctly", () => {
       expect(getItemGroup(Vehicles.Xiphos)).toBe(ItemGroup.Vehicle);
+      expect(getItemGroup(Vehicles.DuncansCoin20mm)).toBe(ItemGroup.Vehicle);
+      expect(getItemGroup(Vehicles.GA6Cestus)).toBe(ItemGroup.Vehicle);
       expect(getItemGroup(Vehicles.Tisiphone)).toBe(ItemGroup.Vehicle);
       expect(getItemGroup(Vehicles.Alekto)).toBe(ItemGroup.Vehicle);
       expect(getItemGroup(Vehicles.Acheron)).toBe(ItemGroup.Vehicle);
@@ -69,6 +71,11 @@ describe("Item Grouping", () => {
       const vehicleNames = vehicleGroup!.items.map(item => item.name);
       // Original vehicle
       expect(vehicleNames).toContain(Vehicles.Xiphos);
+      expect(vehicleNames).toContain(Vehicles.DuncansCoin20mm);
+      expect(vehicleNames).toContain(Vehicles.GA6Cestus);
+      // Field machine guns
+      expect(vehicleNames).toContain(Vehicles.Swallowtail);
+      expect(vehicleNames).toContain(Vehicles.Sagittarii);
       // New vehicles added in main
       expect(vehicleNames).toContain(Vehicles.WaspNest);
       expect(vehicleNames).toContain(Vehicles.Koronides);

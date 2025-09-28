@@ -69,6 +69,10 @@ export function calculateCanCount(liquidName: string, liters: number): number {
 
 export enum Vehicles {
   Xiphos = 'T3 "Xiphos"',
+  DuncansCoin20mm = "Duncan's Coin 20mm",
+  GA6Cestus = 'GA6 "Cestus"',
+  Swallowtail = 'Swallowtail 988/127-2',
+  Sagittarii = 'G40 "Sagittarii"',
   WaspNest = 'Rycker 4/3-F Wasp Nest',
   Koronides = '120-68 "Koronides" Field Gun',
   Wolfhound = 'Balfour Wolfhound 40mm',
@@ -136,6 +140,10 @@ export const availableMaterials: Stuff[] = [
   { name: Liquids.EnrichedOil },
   { name: Liquids.Oil },
   { name: Vehicles.Xiphos },
+  { name: Vehicles.DuncansCoin20mm },
+  { name: Vehicles.GA6Cestus },
+  { name: Vehicles.Swallowtail },
+  { name: Vehicles.Sagittarii },
   { name: Vehicles.WaspNest },
   { name: Vehicles.Koronides },
   { name: Vehicles.Wolfhound },
