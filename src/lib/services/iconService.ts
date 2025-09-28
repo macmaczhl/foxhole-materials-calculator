@@ -4,7 +4,7 @@ import { ICONS_MAP } from "@/lib/constants";
  * Service for generating Foxhole wiki icon URLs
  */
 export class IconService {
-  private static readonly WIKI_BASE_URL = "http://foxhole.wiki.gg/images/thumb";
+  private static readonly WIKI_BASE_URL = "https://foxhole.wiki.gg/images/thumb";
   private static readonly DEFAULT_PIXELS = 24;
 
   /**

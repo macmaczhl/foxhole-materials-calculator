@@ -12,6 +12,8 @@ describe("Item Grouping", () => {
   describe("getItemGroup", () => {
     test("categorizes vehicles correctly", () => {
       expect(getItemGroup(Vehicles.Xiphos)).toBe(ItemGroup.Vehicle);
+      expect(getItemGroup(Vehicles.DuncansCoin20mm)).toBe(ItemGroup.Vehicle);
+      expect(getItemGroup(Vehicles.GA6Cestus)).toBe(ItemGroup.Vehicle);
       expect(getItemGroup(Vehicles.Tisiphone)).toBe(ItemGroup.Vehicle);
       expect(getItemGroup(Vehicles.Alekto)).toBe(ItemGroup.Vehicle);
       expect(getItemGroup(Vehicles.Acheron)).toBe(ItemGroup.Vehicle);
@@ -55,7 +57,7 @@ describe("Item Grouping", () => {
       const vehicleGroup = grouped.find((g) => g.group === ItemGroup.Vehicle);
 
       expect(vehicleGroup).toBeDefined();
-      expect(vehicleGroup!.items).toHaveLength(29); // 1 (Xiphos) + 9 (armored cars) + 19 (main branch vehicles)
+      expect(vehicleGroup!.items).toHaveLength(33); // 1 (Xiphos) + 9 (armored cars) + 2 (Field AT Rifles) + 2 (Field Machine Guns) + 11 (new vehicles) + 7 (tankettes) + 1 (Alekto) = 33 total
 
       // Check that all vehicles are included
       const vehicleNames = vehicleGroup!.items.map((item) => item.name);
@@ -71,6 +73,11 @@ describe("Item Grouping", () => {
       expect(vehicleNames).toContain(Vehicles.OBrienWildJack);
       expect(vehicleNames).toContain(Vehicles.OBrienKnave);
       expect(vehicleNames).toContain(Vehicles.OBrienSquire);
+      // Field AT Rifles and Machine Guns (from main)
+      expect(vehicleNames).toContain(Vehicles.DuncansCoin20mm);
+      expect(vehicleNames).toContain(Vehicles.GA6Cestus);
+      expect(vehicleNames).toContain(Vehicles.Swallowtail);
+      expect(vehicleNames).toContain(Vehicles.Sagittarii);
       // Field guns and artillery (from main)
       expect(vehicleNames).toContain(Vehicles.WaspNest);
       expect(vehicleNames).toContain(Vehicles.Koronides);
@@ -132,8 +139,8 @@ describe("Item Grouping", () => {
       );
 
       // Should equal the number of items in availableMaterials
-      // (26 base materials + 29 vehicles = 55 total)
-      expect(totalItems).toBe(55);
+      // (26 base materials + 33 vehicles = 59 total)
+      expect(totalItems).toBe(59);
     });
   });
 });

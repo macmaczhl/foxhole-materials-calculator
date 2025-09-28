@@ -316,6 +316,32 @@ const deioneusRecipes: IRecipe[] = [
   ),
 ];
 
+// Duncan's Coin 20mm Field AT Rifle recipes
+const duncansCoin20mmRecipes: IRecipe[] = [
+  // Small Assembly Station (Motor Pool): 30 x Construction Materials + 20 x Assembly Materials II + 1 x Swallowtail 988/127-2 → 1 x Duncan's Coin 20mm
+  createRecipe(
+    [
+      { stuff: Materials.ConstructionMaterials, count: 30 },
+      { stuff: Materials.AssemblyMaterialsII, count: 20 },
+      { stuff: Vehicles.Swallowtail, count: 1 },
+    ],
+    [{ stuff: Vehicles.DuncansCoin20mm, count: 1 }]
+  ),
+];
+
+// GA6 "Cestus" Field AT Rifle recipes
+const ga6CestusRecipes: IRecipe[] = [
+  // Small Assembly Station (Motor Pool): 30 x Construction Materials + 20 x Assembly Materials II + 1 x G40 "Sagittarii" → 1 x GA6 "Cestus"
+  createRecipe(
+    [
+      { stuff: Materials.ConstructionMaterials, count: 30 },
+      { stuff: Materials.AssemblyMaterialsII, count: 20 },
+      { stuff: Vehicles.Sagittarii, count: 1 },
+    ],
+    [{ stuff: Vehicles.GA6Cestus, count: 1 }]
+  ),
+];
+
 // Rycker 4/3-F Wasp Nest recipes (Bunker-building vehicle)
 const waspNestRecipes: IRecipe[] = [
   // Field Bunker production: 20 x Processed Construction Materials + 15 x Assembly Materials II + 3 x Assembly Materials IV → 1 x Wasp Nest
@@ -527,8 +553,47 @@ const stygianBoltRecipes: IRecipe[] = [
   ),
 ];
 
+// Swallowtail 988/127-2 field machine gun recipes
+const swallowtailRecipes: IRecipe[] = [
+  // Garrison: 15 x Refined Materials → 1 x Swallowtail 988/127-2
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 15 }],
+    [{ stuff: Vehicles.Swallowtail, count: 1 }]
+  ),
+  // Mass Production Factory: 120 x Refined Materials → 3 crates of 3 x Swallowtail (9 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 120 }],
+    [{ stuff: Vehicles.Swallowtail, count: 9 }]
+  ),
+  // Mass Production Factory: 150 x Refined Materials → 4 crates of 3 x Swallowtail (12 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 150 }],
+    [{ stuff: Vehicles.Swallowtail, count: 12 }]
+  ),
+];
+
+// G40 "Sagittarii" field machine gun recipes
+const sagittariiRecipes: IRecipe[] = [
+  // Garrison: 15 x Refined Materials → 1 x G40 "Sagittarii"
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 15 }],
+    [{ stuff: Vehicles.Sagittarii, count: 1 }]
+  ),
+  // Mass Production Factory: 120 x Refined Materials → 3 crates of 3 x Sagittarii (9 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 120 }],
+    [{ stuff: Vehicles.Sagittarii, count: 9 }]
+  ),
+  // Mass Production Factory: 150 x Refined Materials → 4 crates of 3 x Sagittarii (12 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 150 }],
+    [{ stuff: Vehicles.Sagittarii, count: 12 }]
+  ),
+];
+
 export const vehicleRecipes = new Map<string, IRecipe[]>([
   [Vehicles.Xiphos, xiphosRecipes],
+<<<<<<< HEAD
   // Armored Cars (added by PR)
   [Vehicles.Percutio, percutioRecipes],
   [Vehicles.Gemini, geminiRecipes],
@@ -539,6 +604,11 @@ export const vehicleRecipes = new Map<string, IRecipe[]>([
   [Vehicles.OBrienWildJack, oBrienWildJackRecipes],
   [Vehicles.OBrienKnave, oBrienKnaveRecipes],
   [Vehicles.OBrienSquire, oBrienSquireRecipes],
+  // Field AT Rifles and Machine Guns (from main)
+  [Vehicles.DuncansCoin20mm, duncansCoin20mmRecipes],
+  [Vehicles.GA6Cestus, ga6CestusRecipes],
+  [Vehicles.Swallowtail, swallowtailRecipes],
+  [Vehicles.Sagittarii, sagittariiRecipes],
   // Other vehicles (from main)
   [Vehicles.Alekto, alektoRecipes],
   [Vehicles.Acheron, acheronRecipes],

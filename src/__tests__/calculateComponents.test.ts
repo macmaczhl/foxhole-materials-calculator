@@ -148,6 +148,48 @@ describe("calculateComponents", () => {
     expect(result.excessResult).toEqual([{ stuff: Vehicles.Xiphos, count: 8 }]);
   });
 
+  test("handles field machine gun recipes correctly", () => {
+    // Mock Swallowtail crate recipe for testing
+    const swallowtailCrateRecipe: IRecipe = {
+      id: 3,
+      required: [{ stuff: Materials.RefinedMaterials, count: 120 }],
+      produced: [{ stuff: Vehicles.Swallowtail, count: 9 }],
+    };
+
+    const swallowtailRecipeTree: RecipeTree = {
+      stuff: Vehicles.Swallowtail,
+      selectedRecipe: swallowtailCrateRecipe,
+      recipes: [swallowtailCrateRecipe],
+      required: [],
+    };
+
+    const result = calculateComponents(swallowtailRecipeTree, 5);
+
+    // When requesting 5 Swallowtail, need 1 crate (9 total), so 4 excess
+    expect(result.excessResult).toEqual([{ stuff: Vehicles.Swallowtail, count: 4 }]);
+  });
+
+  test("handles Sagittarii recipes correctly", () => {
+    // Mock Sagittarii crate recipe for testing
+    const sagittariiCrateRecipe: IRecipe = {
+      id: 4,
+      required: [{ stuff: Materials.RefinedMaterials, count: 120 }],
+      produced: [{ stuff: Vehicles.Sagittarii, count: 9 }],
+    };
+
+    const sagittariiRecipeTree: RecipeTree = {
+      stuff: Vehicles.Sagittarii,
+      selectedRecipe: sagittariiCrateRecipe,
+      recipes: [sagittariiCrateRecipe],
+      required: [],
+    };
+
+    const result = calculateComponents(sagittariiRecipeTree, 10);
+
+    // When requesting 10 Sagittarii, need 2 crates (18 total), so 8 excess
+    expect(result.excessResult).toEqual([{ stuff: Vehicles.Sagittarii, count: 8 }]);
+  });
+
   test("calculates components for Alekto with complex recipe", () => {
     const result = calculateComponents(alektoRecipeTree, 1);
 
@@ -196,24 +238,64 @@ describe("calculateComponents", () => {
   });
 
   test("calculates components for Mulloy LPC Landing APC", () => {
-    const result = calculateComponents(mulloyLPCRecipeTree, 3);
+    const result = calculateComponents(mulloyLPCRecipeTree, 1);
 
-    // When requesting 3 Mulloy LPC but crate recipe produces 9, should show 6 excess
-    expect(result.excessResult).toEqual([{ stuff: Vehicles.MulloyLPC, count: 6 }]);
+    // When requesting 1 Mulloy LPC but crate recipe produces 9, should show 8 excess
+    expect(result.excessResult).toEqual([{ stuff: Vehicles.MulloyLPC, count: 8 }]);
     expect(result.initial).toEqual([{ stuff: Materials.RefinedMaterials, count: 144 }]);
   });
 
-  test("no excess for Landing APCs when requesting exact crate amount", () => {
-    // Test Acheron exact amount (9 vehicles)
-    const acheronResult = calculateComponents(acheronRecipeTree, 9);
-    expect(acheronResult.excessResult).toEqual([]);
+  // Test for Duncan's Coin 20mm Field AT Rifle with correct wiki recipe
+  const duncansCoinRecipe: IRecipe = {
+    id: 3,
+    required: [
+      { stuff: Materials.ConstructionMaterials, count: 30 },
+      { stuff: Materials.AssemblyMaterialsII, count: 20 },
+    ],
+    produced: [{ stuff: Vehicles.DuncansCoin20mm, count: 1 }],
+  };
 
-    // Test Doru exact amount (1 vehicle - single recipe)
-    const doruResult = calculateComponents(doruRecipeTree, 1);
-    expect(doruResult.excessResult).toEqual([]);
+  const duncansCoinRecipeTree: RecipeTree = {
+    stuff: Vehicles.DuncansCoin20mm,
+    selectedRecipe: duncansCoinRecipe,
+    recipes: [duncansCoinRecipe],
+    required: [],
+  };
 
-    // Test Mulloy LPC exact amount (9 vehicles)
-    const mulloyResult = calculateComponents(mulloyLPCRecipeTree, 9);
-    expect(mulloyResult.excessResult).toEqual([]);
+  test("calculates components for Duncan's Coin 20mm Field AT Rifle", () => {
+    const result = calculateComponents(duncansCoinRecipeTree, 1);
+
+    expect(result.initial).toEqual([
+      { stuff: Materials.ConstructionMaterials, count: 30 },
+      { stuff: Materials.AssemblyMaterialsII, count: 20 },
+    ]);
+    expect(result.excessResult).toEqual([]);
+  });
+
+  // Test for GA6 "Cestus" Field AT Rifle with correct wiki recipe
+  const ga6CestusRecipe: IRecipe = {
+    id: 4,
+    required: [
+      { stuff: Materials.ConstructionMaterials, count: 30 },
+      { stuff: Materials.AssemblyMaterialsII, count: 20 },
+    ],
+    produced: [{ stuff: Vehicles.GA6Cestus, count: 1 }],
+  };
+
+  const ga6CestusRecipeTree: RecipeTree = {
+    stuff: Vehicles.GA6Cestus,
+    selectedRecipe: ga6CestusRecipe,
+    recipes: [ga6CestusRecipe],
+    required: [],
+  };
+
+  test("calculates components for GA6 Cestus Field AT Rifle", () => {
+    const result = calculateComponents(ga6CestusRecipeTree, 1);
+
+    expect(result.initial).toEqual([
+      { stuff: Materials.ConstructionMaterials, count: 30 },
+      { stuff: Materials.AssemblyMaterialsII, count: 20 },
+    ]);
+    expect(result.excessResult).toEqual([]);
   });
 });

@@ -52,35 +52,35 @@ describe("IconService", () => {
     it("should generate correct wiki URL with default pixels", () => {
       const url = IconService.getIconUrl(Materials.ConstructionMaterials);
       expect(url).toBe(
-        "http://foxhole.wiki.gg/images/thumb/ConstructionMaterialsIcon.png/24px-ConstructionMaterialsIcon.png"
+        "https://foxhole.wiki.gg/images/thumb/ConstructionMaterialsIcon.png/24px-ConstructionMaterialsIcon.png"
       );
     });
 
     it("should generate correct wiki URL with custom pixels", () => {
       const url = IconService.getIconUrl(Materials.ConstructionMaterials, 60);
       expect(url).toBe(
-        "http://foxhole.wiki.gg/images/thumb/ConstructionMaterialsIcon.png/60px-ConstructionMaterialsIcon.png"
+        "https://foxhole.wiki.gg/images/thumb/ConstructionMaterialsIcon.png/60px-ConstructionMaterialsIcon.png"
       );
     });
 
     it("should generate correct wiki URL for liquids", () => {
       const url = IconService.getIconUrl(Liquids.Petrol, 16);
       expect(url).toBe(
-        "http://foxhole.wiki.gg/images/thumb/RefinedFuelIcon.png/16px-RefinedFuelIcon.png"
+        "https://foxhole.wiki.gg/images/thumb/RefinedFuelIcon.png/16px-RefinedFuelIcon.png"
       );
     });
 
     it("should generate correct wiki URL for raw resources", () => {
       const url = IconService.getIconUrl(RawResources.Salvage, 32);
       expect(url).toBe(
-        "http://foxhole.wiki.gg/images/thumb/SalvageIcon.png/32px-SalvageIcon.png"
+        "https://foxhole.wiki.gg/images/thumb/SalvageIcon.png/32px-SalvageIcon.png"
       );
     });
 
     it("should generate correct wiki URL for vehicles", () => {
       const url = IconService.getIconUrl(Vehicles.Xiphos, 48);
       expect(url).toBe(
-        "http://foxhole.wiki.gg/images/thumb/ArmoredCarVehicleIcon.png/48px-ArmoredCarVehicleIcon.png"
+        "https://foxhole.wiki.gg/images/thumb/ArmoredCarVehicleIcon.png/48px-ArmoredCarVehicleIcon.png"
       );
     });
 

@@ -69,6 +69,7 @@ export function calculateCanCount(liquidName: string, liters: number): number {
 
 export enum Vehicles {
   Xiphos = 'T3 "Xiphos"',
+<<<<<<< HEAD
   // Armored Cars (added by PR)
   Percutio = 'T5 "Percutio"',
   Gemini = 'T8 "Gemini"',
@@ -79,6 +80,11 @@ export enum Vehicles {
   OBrienWildJack = 'O\'Brien V.130 Wild Jack',
   OBrienKnave = 'O\'Brien V.190 Knave',
   OBrienSquire = 'O\'Brien V.200 Squire',
+  // Field AT Rifles and Machine Guns (from main)
+  DuncansCoin20mm = "Duncan's Coin 20mm",
+  GA6Cestus = 'GA6 "Cestus"',
+  Swallowtail = 'Swallowtail 988/127-2',
+  Sagittarii = 'G40 "Sagittarii"',
   // Field Guns and Artillery (from main)
   WaspNest = 'Rycker 4/3-F Wasp Nest',
   Koronides = '120-68 "Koronides" Field Gun',
@@ -142,6 +148,7 @@ export const availableMaterials: Stuff[] = [
   { name: Liquids.EnrichedOil },
   { name: Liquids.Oil },
   { name: Vehicles.Xiphos },
+<<<<<<< HEAD
   // Armored Cars (added by PR)
   { name: Vehicles.Percutio },
   { name: Vehicles.Gemini },
@@ -153,6 +160,12 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.OBrienKnave },
   { name: Vehicles.OBrienSquire },
   // Field Guns and Artillery (from main)
+=======
+  { name: Vehicles.DuncansCoin20mm },
+  { name: Vehicles.GA6Cestus },
+  { name: Vehicles.Swallowtail },
+  { name: Vehicles.Sagittarii },
+>>>>>>> 5efb8c96de10d1869847080f177242395da0c5d7
   { name: Vehicles.WaspNest },
   { name: Vehicles.Koronides },
   { name: Vehicles.Wolfhound },
