@@ -19,6 +19,14 @@ describe("Item Grouping", () => {
       expect(getItemGroup(Vehicles.Acheron)).toBe(ItemGroup.Vehicle);
       expect(getItemGroup(Vehicles.Doru)).toBe(ItemGroup.Vehicle);
       expect(getItemGroup(Vehicles.MulloyLPC)).toBe(ItemGroup.Vehicle);
+      // Half-trucks I'm adding
+      expect(getItemGroup(Vehicles.Javelin)).toBe(ItemGroup.Vehicle);
+      expect(getItemGroup(Vehicles.Hoplite)).toBe(ItemGroup.Vehicle);
+      expect(getItemGroup(Vehicles.Peltast)).toBe(ItemGroup.Vehicle);
+      expect(getItemGroup(Vehicles.NiskaMkI)).toBe(ItemGroup.Vehicle);
+      expect(getItemGroup(Vehicles.NiskaMkII)).toBe(ItemGroup.Vehicle);
+      expect(getItemGroup(Vehicles.NiskaMkIII)).toBe(ItemGroup.Vehicle);
+      expect(getItemGroup(Vehicles.NiskaRyckerMkIX)).toBe(ItemGroup.Vehicle);
     });
 
     test("categorizes raw resources correctly", () => {
@@ -57,7 +65,7 @@ describe("Item Grouping", () => {
       const vehicleGroup = grouped.find((g) => g.group === ItemGroup.Vehicle);
 
       expect(vehicleGroup).toBeDefined();
-      expect(vehicleGroup!.items).toHaveLength(33); // 1 (Xiphos) + 9 (armored cars) + 2 (Field AT Rifles) + 2 (Field Machine Guns) + 11 (new vehicles) + 7 (tankettes) + 1 (Alekto) = 33 total
+      expect(vehicleGroup!.items).toHaveLength(40); // 10 armored cars + 4 field weapons + 12 field artillery + 3 APCs + 4 tankettes + 7 half-trucks = 40 total
 
       // Check that all vehicles are included
       const vehicleNames = vehicleGroup!.items.map((item) => item.name);
@@ -99,6 +107,14 @@ describe("Item Grouping", () => {
       expect(vehicleNames).toContain(Vehicles.Vesta);
       expect(vehicleNames).toContain(Vehicles.Ixion);
       expect(vehicleNames).toContain(Vehicles.Deioneus);
+      // Half-trucks I'm adding
+      expect(vehicleNames).toContain(Vehicles.Javelin);
+      expect(vehicleNames).toContain(Vehicles.Hoplite);
+      expect(vehicleNames).toContain(Vehicles.Peltast);
+      expect(vehicleNames).toContain(Vehicles.NiskaMkI);
+      expect(vehicleNames).toContain(Vehicles.NiskaMkII);
+      expect(vehicleNames).toContain(Vehicles.NiskaMkIII);
+      expect(vehicleNames).toContain(Vehicles.NiskaRyckerMkIX);
     });
 
     test("raw resources group contains only raw materials", () => {
@@ -139,8 +155,8 @@ describe("Item Grouping", () => {
       );
 
       // Should equal the number of items in availableMaterials
-      // (26 base materials + 33 vehicles = 59 total)
-      expect(totalItems).toBe(59);
+      // (26 base materials + 40 vehicles = 66 total)
+      expect(totalItems).toBe(66);
     });
   });
 });
