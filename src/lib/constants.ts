@@ -70,4 +70,11 @@ export const ICONS_MAP = new Map<string, string>([
   [Vehicles.Vesta, "TanketteFlameCIcon"],
   [Vehicles.Ixion, "TanketteOffensiveCVehicleIcon"],
   [Vehicles.Deioneus, "TanketteMultiCIcon"],
+  [Vehicles.Javelin, "HalfTrackColVehicleIcon"],
+  [Vehicles.Hoplite, "HalfTrackColHeavyArmorVehicleIcon"],
+  [Vehicles.Peltast, "HalfTrackArtilleryCIcon"],
+  [Vehicles.NiskaMkI, "HalfTrackWarVehicleIcon"],
+  [Vehicles.NiskaMkII, "HalfTrackOffensiveWarVehicleIcon"],
+  [Vehicles.NiskaMkIII, "HalftrackTwinW"],
+  [Vehicles.NiskaRyckerMkIX, "HalftrackMultiWIcon"],
 ]);
