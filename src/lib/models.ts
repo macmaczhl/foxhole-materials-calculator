@@ -69,7 +69,6 @@ export function calculateCanCount(liquidName: string, liters: number): number {
 
 export enum Vehicles {
   Xiphos = 'T3 "Xiphos"',
-  // Armored Cars (added by PR)
   Percutio = 'T5 "Percutio"',
   Gemini = 'T8 "Gemini"',
   OBrienGravekeeper = 'O\'Brien v.113 Gravekeeper',
@@ -79,12 +78,10 @@ export enum Vehicles {
   OBrienWildJack = 'O\'Brien V.130 Wild Jack',
   OBrienKnave = 'O\'Brien V.190 Knave',
   OBrienSquire = 'O\'Brien V.200 Squire',
-  // Field AT Rifles and Machine Guns (from main)
   DuncansCoin20mm = "Duncan's Coin 20mm",
   GA6Cestus = 'GA6 "Cestus"',
   Swallowtail = 'Swallowtail 988/127-2',
   Sagittarii = 'G40 "Sagittarii"',
-  // Field Guns and Artillery (from main)
   WaspNest = 'Rycker 4/3-F Wasp Nest',
   Koronides = '120-68 "Koronides" Field Gun',
   Wolfhound = 'Balfour Wolfhound 40mm',
@@ -97,16 +94,13 @@ export enum Vehicles {
   Smelter = '40-45 "Smelter" Heavy Field Gun',
   Stockade = 'Balfour Stockade 75mm',
   StygianBolt = '945g "Stygian Bolt"',
-  // APCs (from main)
   Acheron = 'AB-8 "Acheron"',
   Doru = 'AB-11 "Doru"',
   MulloyLPC = "Mulloy LPC",
-  // Tankettes (from main)
   Actaeon = 'T12 "Actaeon" Tankette',
   Vesta = 'T14 "Vesta" Tankette',
   Ixion = 'T20 "Ixion" Tankette',
   Deioneus = 'T13 "Deioneus" Rocket Battery',
-  // Half-trucks (from main)
   Javelin = 'HH-a "Javelin"',
   Hoplite = 'HH-b "Hoplite"',
   Peltast = 'HH-d "Peltast"',
@@ -155,7 +149,6 @@ export const availableMaterials: Stuff[] = [
   { name: Liquids.EnrichedOil },
   { name: Liquids.Oil },
   { name: Vehicles.Xiphos },
-  // Armored Cars (added by PR)
   { name: Vehicles.Percutio },
   { name: Vehicles.Gemini },
   { name: Vehicles.OBrienGravekeeper },
@@ -165,12 +158,10 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.OBrienWildJack },
   { name: Vehicles.OBrienKnave },
   { name: Vehicles.OBrienSquire },
-  // Field AT Rifles and Machine Guns (from main)
   { name: Vehicles.DuncansCoin20mm },
   { name: Vehicles.GA6Cestus },
   { name: Vehicles.Swallowtail },
   { name: Vehicles.Sagittarii },
-  // Field Guns and Artillery (from main)
   { name: Vehicles.WaspNest },
   { name: Vehicles.Koronides },
   { name: Vehicles.Wolfhound },
@@ -183,11 +174,9 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.Smelter },
   { name: Vehicles.Stockade },
   { name: Vehicles.StygianBolt },
-  // APCs (from main)
   { name: Vehicles.Acheron },
   { name: Vehicles.Doru },
   { name: Vehicles.MulloyLPC },
-  // Tankettes (from main)
   { name: Vehicles.Actaeon },
   { name: Vehicles.Vesta },
   { name: Vehicles.Ixion },
