@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <rect width="64" height="64" fill="#2a2a2a"/>
-  <rect x="8" y="24" width="48" height="16" rx="2" fill="#555"/>
-  <circle cx="18" cy="50" r="5" fill="#333"/>
-  <circle cx="46" cy="50" r="5" fill="#333"/>
-  <rect x="24" y="18" width="16" height="12" rx="2" fill="#666"/>
-  <text x="32" y="36" text-anchor="middle" fill="#fff" font-size="6" font-family="Arial">WAR</text>
-</svg>
