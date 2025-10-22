@@ -669,6 +669,30 @@ const niskaRyckerMkIXRecipes: IRecipe[] = [
   ),
 ];
 
+// King Spire Mk. I Scout Tank recipes
+const kingSpireMkIRecipes: IRecipe[] = [
+  // Garage production: 70 x Refined Materials → 1 x King Spire Mk. I
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 70 }],
+    [{ stuff: Vehicles.KingSpireMkI, count: 1 }]
+  ),
+  // Mass Production Factory: 504 x Refined Materials → 3 crates of 3 x King Spire Mk. I (9 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 504 }],
+    [{ stuff: Vehicles.KingSpireMkI, count: 9 }]
+  ),
+  // Mass Production Factory: 630 x Refined Materials → 4 crates of 3 x King Spire Mk. I (12 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 630 }],
+    [{ stuff: Vehicles.KingSpireMkI, count: 12 }]
+  ),
+  // Mass Production Factory: 735 x Refined Materials → 5 crates of 3 x King Spire Mk. I (15 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 735 }],
+    [{ stuff: Vehicles.KingSpireMkI, count: 15 }]
+  ),
+];
+
 // Swallowtail 988/127-2 field machine gun recipes
 const swallowtailRecipes: IRecipe[] = [
   // Garrison: 15 x Refined Materials → 1 x Swallowtail 988/127-2
@@ -751,4 +775,5 @@ export const vehicleRecipes = new Map<string, IRecipe[]>([
   [Vehicles.NiskaMkII, niskaMkIIRecipes],
   [Vehicles.NiskaMkIII, niskaMkIIIRecipes],
   [Vehicles.NiskaRyckerMkIX, niskaRyckerMkIXRecipes],
+  [Vehicles.KingSpireMkI, kingSpireMkIRecipes],
 ]);
