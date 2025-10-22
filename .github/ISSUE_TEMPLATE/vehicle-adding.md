@@ -7,4 +7,4 @@ assignees: ''
 
 ---
 
-Take recipes and icon for following vehicles from the foxhole wiki site:
+Take recipes and icon path for following vehicles from the foxhole wiki site. Icon path is taken from main html on vehicle page
