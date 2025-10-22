@@ -65,7 +65,7 @@ describe("Item Grouping", () => {
       const vehicleGroup = grouped.find((g) => g.group === ItemGroup.Vehicle);
 
       expect(vehicleGroup).toBeDefined();
-      expect(vehicleGroup!.items).toHaveLength(40); // 10 armored cars + 4 field weapons + 12 field artillery + 3 APCs + 4 tankettes + 7 half-trucks = 40 total
+      expect(vehicleGroup!.items).toHaveLength(41); // 10 armored cars + 4 field weapons + 12 field artillery + 3 APCs + 4 tankettes + 7 half-trucks + 1 scout tank = 41 total
 
       // Check that all vehicles are included
       const vehicleNames = vehicleGroup!.items.map((item) => item.name);
@@ -155,8 +155,8 @@ describe("Item Grouping", () => {
       );
 
       // Should equal the number of items in availableMaterials
-      // (26 base materials + 40 vehicles = 66 total)
-      expect(totalItems).toBe(66);
+      // (26 base materials + 41 vehicles = 67 total)
+      expect(totalItems).toBe(67);
     });
   });
 });
