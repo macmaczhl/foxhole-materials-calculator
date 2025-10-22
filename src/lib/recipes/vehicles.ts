@@ -669,7 +669,7 @@ const niskaRyckerMkIXRecipes: IRecipe[] = [
   ),
 ];
 
-// King Spire Mk. I Scout Tank recipes (base vehicle)
+// King Spire Mk. I Scout Tank recipes
 const kingSpireMkIRecipes: IRecipe[] = [
   // Garage production: 70 x Refined Materials → 1 x King Spire Mk. I
   createRecipe(
@@ -705,6 +705,7 @@ const kingGallantMkIIRecipes: IRecipe[] = [
     [{ stuff: Vehicles.KingGallantMkII, count: 1 }]
   ),
 ];
+
 
 // Swallowtail 988/127-2 field machine gun recipes
 const swallowtailRecipes: IRecipe[] = [

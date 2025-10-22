@@ -28,6 +28,8 @@ describe("New Vehicles", () => {
         Vehicles.OBrienWildJack,
         Vehicles.OBrienKnave,
         Vehicles.OBrienSquire,
+        // Scout Tank
+        Vehicles.KingSpireMkI,
       ];
 
       newVehicles.forEach((vehicle) => {
@@ -62,6 +64,8 @@ describe("New Vehicles", () => {
         Vehicles.OBrienWildJack,
         Vehicles.OBrienKnave,
         Vehicles.OBrienSquire,
+        // Scout Tank
+        Vehicles.KingSpireMkI,
       ];
 
       newVehicles.forEach((vehicle) => {
@@ -215,6 +219,8 @@ describe("New Vehicles", () => {
         Vehicles.OBrienWildJack,
         Vehicles.OBrienKnave,
         Vehicles.OBrienSquire,
+        // Scout Tank
+        Vehicles.KingSpireMkI,
       ];
 
       newVehicles.forEach((vehicle) => {
@@ -300,6 +306,74 @@ describe("New Vehicles", () => {
       // Check quantities
       const processedMaterials = recipe.required.find(r => r.stuff === Materials.ProcessedConstructionMaterials);
       expect(processedMaterials!.count).toBe(35);
+    });
+  });
+
+  describe("King Spire Mk. I Scout Tank", () => {
+    let kingSpireRecipes: IRecipe[];
+    let kingSpireRecipeTree: RecipeTree;
+
+    beforeEach(() => {
+      kingSpireRecipes = RecipiesByStuff.get(Vehicles.KingSpireMkI)!;
+      kingSpireRecipeTree = {
+        stuff: Vehicles.KingSpireMkI,
+        selectedRecipe: kingSpireRecipes[0],
+        recipes: kingSpireRecipes,
+        required: [],
+      };
+    });
+
+    test("has correct recipe requirements", () => {
+      const garageRecipe = kingSpireRecipes[0];
+      expect(garageRecipe.required).toEqual([
+        { stuff: Materials.RefinedMaterials, count: 70 }
+      ]);
+      expect(garageRecipe.produced).toEqual([
+        { stuff: Vehicles.KingSpireMkI, count: 1 }
+      ]);
+    });
+
+    test("has mass production recipes", () => {
+      expect(kingSpireRecipes.length).toBe(4);
+
+      // Check basic recipe (70 → 1)
+      const basicRecipe = kingSpireRecipes.find(r => r.produced[0].count === 1);
+      expect(basicRecipe).toBeDefined();
+      expect(basicRecipe!.required[0].stuff).toBe(Materials.RefinedMaterials);
+      expect(basicRecipe!.required[0].count).toBe(70);
+
+      // Check mass production recipes exist
+      const massProduction = kingSpireRecipes.filter(r => r.produced[0].count > 1);
+      expect(massProduction.length).toBe(3);
+
+      // Verify mass production recipe quantities
+      const recipe9 = kingSpireRecipes.find(r => r.produced[0].count === 9);
+      expect(recipe9).toBeDefined();
+      expect(recipe9!.required[0].count).toBe(504);
+
+      const recipe12 = kingSpireRecipes.find(r => r.produced[0].count === 12);
+      expect(recipe12).toBeDefined();
+      expect(recipe12!.required[0].count).toBe(630);
+
+      const recipe15 = kingSpireRecipes.find(r => r.produced[0].count === 15);
+      expect(recipe15).toBeDefined();
+      expect(recipe15!.required[0].count).toBe(735);
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const result = calculateComponents(kingSpireRecipeTree, 1);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.RefinedMaterials, count: 70 }
+      ]);
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const result = calculateComponents(kingSpireRecipeTree, 3);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.RefinedMaterials, count: 210 }
+      ]);
     });
   });
 });
