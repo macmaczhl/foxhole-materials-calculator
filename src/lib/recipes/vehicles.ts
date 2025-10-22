@@ -32,7 +32,7 @@ const percutioRecipes: IRecipe[] = [
     [
       { stuff: Materials.ConstructionMaterials, count: 10 },
       { stuff: Materials.AssemblyMaterialsI, count: 10 },
-      { stuff: Vehicles.Xiphos, count: 1 }
+      { stuff: Vehicles.Xiphos, count: 1 },
     ],
     [{ stuff: Vehicles.Percutio, count: 1 }]
   ),
@@ -45,7 +45,7 @@ const geminiRecipes: IRecipe[] = [
     [
       { stuff: Materials.ConstructionMaterials, count: 10 },
       { stuff: Materials.AssemblyMaterialsI, count: 10 },
-      { stuff: Vehicles.Xiphos, count: 1 }
+      { stuff: Vehicles.Xiphos, count: 1 },
     ],
     [{ stuff: Vehicles.Gemini, count: 1 }]
   ),
@@ -53,12 +53,12 @@ const geminiRecipes: IRecipe[] = [
 
 // O'Brien v.113 Gravekeeper vehicle recipes (Armored Car upgrade)
 const oBrienGravekeeperRecipes: IRecipe[] = [
-  // Upgrade recipe: 5 x Construction Materials + 5 x Assembly Materials I + 1 x O'Brien V.110 → 1 x O'Brien v.113 Gravekeeper
+  // Upgrade recipe: 10 x Processed Construction Materials + 10 x Assembly Materials I + 1 x O'Brien V.110 → 1 x O'Brien v.113 Gravekeeper
   createRecipe(
     [
-      { stuff: Materials.ConstructionMaterials, count: 5 },
-      { stuff: Materials.AssemblyMaterialsI, count: 5 },
-      { stuff: Vehicles.OBrienV110, count: 1 }
+      { stuff: Materials.ProcessedConstructionMaterials, count: 10 },
+      { stuff: Materials.AssemblyMaterialsI, count: 10 },
+      { stuff: Vehicles.OBrienV110, count: 1 },
     ],
     [{ stuff: Vehicles.OBrienGravekeeper, count: 1 }]
   ),
@@ -66,12 +66,12 @@ const oBrienGravekeeperRecipes: IRecipe[] = [
 
 // O'Brien v.121 Highlander vehicle recipes (Armored Car upgrade)
 const oBrienHighlanderRecipes: IRecipe[] = [
-  // Upgrade recipe: 15 x Construction Materials + 15 x Assembly Materials I + 1 x O'Brien V.190 Knave → 1 x O'Brien v.121 Highlander
+  // Upgrade recipe: 5 x Processed Construction Materials + 5 x Assembly Materials I + 1 x O'Brien V.190 Knave → 1 x O'Brien v.121 Highlander
   createRecipe(
     [
-      { stuff: Materials.ConstructionMaterials, count: 15 },
-      { stuff: Materials.AssemblyMaterialsI, count: 15 },
-      { stuff: Vehicles.OBrienKnave, count: 1 }
+      { stuff: Materials.ConstructionMaterials, count: 5 },
+      { stuff: Materials.AssemblyMaterialsI, count: 5 },
+      { stuff: Vehicles.OBrienKnave, count: 1 },
     ],
     [{ stuff: Vehicles.OBrienHighlander, count: 1 }]
   ),
@@ -84,7 +84,7 @@ const oBrienFreemanRecipes: IRecipe[] = [
     [
       { stuff: Materials.ConstructionMaterials, count: 15 },
       { stuff: Materials.AssemblyMaterialsI, count: 15 },
-      { stuff: Vehicles.OBrienKnave, count: 1 }
+      { stuff: Vehicles.OBrienKnave, count: 1 },
     ],
     [{ stuff: Vehicles.OBrienFreeman, count: 1 }]
   ),
@@ -120,7 +120,7 @@ const oBrienWildJackRecipes: IRecipe[] = [
   createRecipe(
     [
       { stuff: Materials.ProcessedConstructionMaterials, count: 10 },
-      { stuff: Materials.AssemblyMaterialsI, count: 10 }
+      { stuff: Materials.AssemblyMaterialsI, count: 10 },
     ],
     [{ stuff: Vehicles.OBrienWildJack, count: 1 }]
   ),
@@ -158,7 +158,7 @@ const oBrienSquireRecipes: IRecipe[] = [
       { stuff: Materials.ProcessedConstructionMaterials, count: 35 },
       { stuff: Materials.AssemblyMaterialsI, count: 10 },
       { stuff: Materials.AssemblyMaterialsIII, count: 8 },
-      { stuff: Vehicles.OBrienKnave, count: 1 }
+      { stuff: Vehicles.OBrienKnave, count: 1 },
     ],
     [{ stuff: Vehicles.OBrienSquire, count: 1 }]
   ),
@@ -349,7 +349,7 @@ const waspNestRecipes: IRecipe[] = [
     [
       { stuff: Materials.ProcessedConstructionMaterials, count: 20 },
       { stuff: Materials.AssemblyMaterialsII, count: 15 },
-      { stuff: Materials.AssemblyMaterialsIV, count: 3 }
+      { stuff: Materials.AssemblyMaterialsIV, count: 3 },
     ],
     [{ stuff: Vehicles.WaspNest, count: 1 }]
   ),
@@ -506,7 +506,7 @@ const rampartRecipes: IRecipe[] = [
     [
       { stuff: Materials.ProcessedConstructionMaterials, count: 5 },
       { stuff: Materials.AssemblyMaterialsIV, count: 5 },
-      { stuff: Vehicles.CollinsCannon, count: 1 }
+      { stuff: Vehicles.CollinsCannon, count: 1 },
     ],
     [{ stuff: Vehicles.Rampart, count: 1 }]
   ),
@@ -519,7 +519,7 @@ const smelterRecipes: IRecipe[] = [
     [
       { stuff: Materials.ProcessedConstructionMaterials, count: 5 },
       { stuff: Materials.AssemblyMaterialsIV, count: 5 },
-      { stuff: Vehicles.BatteringRam, count: 1 }
+      { stuff: Vehicles.BatteringRam, count: 1 },
     ],
     [{ stuff: Vehicles.Smelter, count: 1 }]
   ),
@@ -533,7 +533,7 @@ const stockadeRecipes: IRecipe[] = [
       { stuff: Materials.SteelConstructionMaterials, count: 15 },
       { stuff: Materials.AssemblyMaterialsII, count: 20 },
       { stuff: Materials.AssemblyMaterialsIII, count: 15 },
-      { stuff: Vehicles.Wolfhound, count: 1 }
+      { stuff: Vehicles.Wolfhound, count: 1 },
     ],
     [{ stuff: Vehicles.Stockade, count: 1 }]
   ),
@@ -547,7 +547,7 @@ const stygianBoltRecipes: IRecipe[] = [
       { stuff: Materials.SteelConstructionMaterials, count: 15 },
       { stuff: Materials.AssemblyMaterialsII, count: 20 },
       { stuff: Materials.AssemblyMaterialsIII, count: 15 },
-      { stuff: Vehicles.BatteringRam, count: 1 }
+      { stuff: Vehicles.BatteringRam, count: 1 },
     ],
     [{ stuff: Vehicles.StygianBolt, count: 1 }]
   ),
