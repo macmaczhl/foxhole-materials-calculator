@@ -47,6 +47,17 @@ export const ICONS_MAP = new Map<string, string>([
 
   // Vehicles
   [Vehicles.Xiphos, "ArmoredCarVehicleIcon"],
+  // Armored Cars (added by PR)
+  [Vehicles.Percutio, "ArmoredCarOffensiveCVehicleIcon"],
+  [Vehicles.Gemini, "ArmoredCarTwinCItemIcon"],
+  [Vehicles.OBrienGravekeeper, "ArmoredCarATWVehicleIcon"],
+  [Vehicles.OBrienHighlander, "ArmoredCarMobilityWarVehicleIcon"],
+  [Vehicles.OBrienFreeman, "ArmoredCarOffensiveWVehicleIcon"],
+  [Vehicles.OBrienV110, "ArmoredCarWarVehicleIcon"],
+  [Vehicles.OBrienWildJack, "ArmoredCarWarVehicleIcon"],
+  [Vehicles.OBrienKnave, "ArmoredCarTwinWIcon"],
+  [Vehicles.OBrienSquire, "ArmoredCarWarVehicleIcon"],
+  // Field AT Rifles and Machine Guns (from main)
   [Vehicles.DuncansCoin20mm, "FieldAT2WIcon"],
   [Vehicles.GA6Cestus, "FieldAT2CIcon"],
   [Vehicles.Swallowtail, "FieldMachineGunWar"],
