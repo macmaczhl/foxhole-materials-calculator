@@ -47,7 +47,7 @@ export default function StuffCombobox({ value, onChange, placeholder }: Props) {
     onChange("");
   };
 
-  const showClearButton = query.length > 0 || value.length > 0;
+  const showClearButton = query.length > 0 || (value && value.length > 0);
 
   return (
     <Combobox value={value} onChange={onChange} immediate>
