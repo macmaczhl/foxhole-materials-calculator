@@ -1,8 +1,8 @@
 import { selectAdjustedReport } from "../lib/selectors";
-import { selectRows } from "../lib/features/desiredSlice";
-import { selectExistingItems } from "../lib/features/existingSlice";
 import { Materials, Vehicles } from "../lib/models";
 import type { RootState } from "../lib/store";
+import type { DesiredRow } from "../lib/features/desiredSlice";
+import type { ExistingItem } from "../lib/features/existingSlice";
 
 // Mock the calculateComponents function
 jest.mock("../lib/services/calculateComponents", () => ({
@@ -20,7 +20,10 @@ describe("selectAdjustedReport", () => {
     jest.clearAllMocks();
   });
 
-  const createMockState = (rows: any[], existingItems: any[] = []): RootState =>
+  const createMockState = (
+    rows: DesiredRow[],
+    existingItems: ExistingItem[] = []
+  ): RootState =>
     ({
       desired: {
         rows,
@@ -28,7 +31,7 @@ describe("selectAdjustedReport", () => {
       existing: {
         items: existingItems,
       },
-    }) as any;
+    }) as RootState;
 
   test("returns empty arrays when no rows are present", () => {
     const state = createMockState([]);
@@ -44,8 +47,8 @@ describe("selectAdjustedReport", () => {
 
   test("returns empty arrays when rows have no recipeTree", () => {
     const state = createMockState([
-      { id: "1", count: 5, recipeTree: null },
-      { id: "2", count: 3, recipeTree: undefined },
+      { id: "1", count: 5, stuffName: "Test Item", recipeTree: undefined },
+      { id: "2", count: 3, stuffName: "Test Item 2", recipeTree: undefined },
     ]);
     const result = selectAdjustedReport(state);
 
@@ -66,8 +69,13 @@ describe("selectAdjustedReport", () => {
     };
 
     const state = createMockState([
-      { id: "1", count: 0, recipeTree: mockRecipeTree },
-      { id: "2", count: -1, recipeTree: mockRecipeTree },
+      { id: "1", count: 0, stuffName: "Test Item", recipeTree: mockRecipeTree },
+      {
+        id: "2",
+        count: -1,
+        stuffName: "Test Item 2",
+        recipeTree: mockRecipeTree,
+      },
     ]);
     const result = selectAdjustedReport(state);
 
@@ -95,7 +103,7 @@ describe("selectAdjustedReport", () => {
     });
 
     const state = createMockState([
-      { id: "1", count: 3, recipeTree: mockRecipeTree },
+      { id: "1", count: 3, stuffName: "Test Item", recipeTree: mockRecipeTree },
     ]);
     const result = selectAdjustedReport(state);
 
@@ -138,8 +146,18 @@ describe("selectAdjustedReport", () => {
       });
 
     const state = createMockState([
-      { id: "1", count: 2, recipeTree: mockRecipeTree1 },
-      { id: "2", count: 3, recipeTree: mockRecipeTree2 },
+      {
+        id: "1",
+        count: 2,
+        stuffName: "Test Item 1",
+        recipeTree: mockRecipeTree1,
+      },
+      {
+        id: "2",
+        count: 3,
+        stuffName: "Test Item 2",
+        recipeTree: mockRecipeTree2,
+      },
     ]);
     const result = selectAdjustedReport(state);
 
@@ -175,8 +193,15 @@ describe("selectAdjustedReport", () => {
     });
 
     const state = createMockState(
-      [{ id: "1", count: 5, recipeTree: mockRecipeTree }],
-      [{ stuffName: "Salvage", count: 20 }]
+      [
+        {
+          id: "1",
+          count: 5,
+          stuffName: "Test Item",
+          recipeTree: mockRecipeTree,
+        },
+      ],
+      [{ id: "1", stuffName: "Salvage", count: 20 }]
     );
     const result = selectAdjustedReport(state);
 
@@ -202,8 +227,15 @@ describe("selectAdjustedReport", () => {
     });
 
     const state = createMockState(
-      [{ id: "1", count: 10, recipeTree: mockRecipeTree }],
-      [{ stuffName: Materials.ConstructionMaterials, count: 3 }]
+      [
+        {
+          id: "1",
+          count: 10,
+          stuffName: "Test Item",
+          recipeTree: mockRecipeTree,
+        },
+      ],
+      [{ id: "1", stuffName: Materials.ConstructionMaterials, count: 3 }]
     );
     const result = selectAdjustedReport(state);
 
@@ -228,8 +260,15 @@ describe("selectAdjustedReport", () => {
     });
 
     const state = createMockState(
-      [{ id: "1", count: 1, recipeTree: mockRecipeTree }],
-      [{ stuffName: "Construction Materials", count: 5 }]
+      [
+        {
+          id: "1",
+          count: 1,
+          stuffName: "Test Item",
+          recipeTree: mockRecipeTree,
+        },
+      ],
+      [{ id: "1", stuffName: "Construction Materials", count: 5 }]
     );
     const result = selectAdjustedReport(state);
 
@@ -256,8 +295,15 @@ describe("selectAdjustedReport", () => {
     });
 
     const state = createMockState(
-      [{ id: "1", count: 1, recipeTree: mockRecipeTree }],
-      [{ stuffName: "Processed Construction Materials", count: 2 }]
+      [
+        {
+          id: "1",
+          count: 1,
+          stuffName: "Test Item",
+          recipeTree: mockRecipeTree,
+        },
+      ],
+      [{ id: "1", stuffName: "Processed Construction Materials", count: 2 }]
     );
     const result = selectAdjustedReport(state);
 
@@ -289,8 +335,15 @@ describe("selectAdjustedReport", () => {
     });
 
     const state = createMockState(
-      [{ id: "1", count: 1, recipeTree: mockRecipeTree }],
-      [{ stuffName: "Refined Materials", count: 3 }]
+      [
+        {
+          id: "1",
+          count: 1,
+          stuffName: "Test Item",
+          recipeTree: mockRecipeTree,
+        },
+      ],
+      [{ id: "1", stuffName: "Refined Materials", count: 3 }]
     );
     const result = selectAdjustedReport(state);
 
@@ -319,7 +372,7 @@ describe("selectAdjustedReport", () => {
     });
 
     const state = createMockState([
-      { id: "1", count: 1, recipeTree: mockRecipeTree },
+      { id: "1", count: 1, stuffName: "Test Item", recipeTree: mockRecipeTree },
     ]);
 
     const result1 = selectAdjustedReport(state);
@@ -345,11 +398,11 @@ describe("selectAdjustedReport", () => {
     });
 
     const state1 = createMockState([
-      { id: "1", count: 1, recipeTree: mockRecipeTree },
+      { id: "1", count: 1, stuffName: "Test Item", recipeTree: mockRecipeTree },
     ]);
 
     const state2 = createMockState([
-      { id: "1", count: 2, recipeTree: mockRecipeTree },
+      { id: "1", count: 2, stuffName: "Test Item", recipeTree: mockRecipeTree },
     ]);
 
     const result1 = selectAdjustedReport(state1);
@@ -375,8 +428,15 @@ describe("selectAdjustedReport", () => {
     });
 
     const state = createMockState(
-      [{ id: "1", count: 1, recipeTree: mockRecipeTree }],
-      [{ stuffName: "Salvage", count: 0 }]
+      [
+        {
+          id: "1",
+          count: 1,
+          stuffName: "Test Item",
+          recipeTree: mockRecipeTree,
+        },
+      ],
+      [{ id: "1", stuffName: "Salvage", count: 0 }]
     );
     const result = selectAdjustedReport(state);
 
@@ -402,8 +462,15 @@ describe("selectAdjustedReport", () => {
     });
 
     const state = createMockState(
-      [{ id: "1", count: 1, recipeTree: mockRecipeTree }],
-      [{ stuffName: "Salvage", count: 20 }]
+      [
+        {
+          id: "1",
+          count: 1,
+          stuffName: "Test Item",
+          recipeTree: mockRecipeTree,
+        },
+      ],
+      [{ id: "1", stuffName: "Salvage", count: 20 }]
     );
     const result = selectAdjustedReport(state);
 
