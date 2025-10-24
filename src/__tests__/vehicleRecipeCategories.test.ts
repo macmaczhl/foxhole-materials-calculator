@@ -150,7 +150,7 @@ describe("Vehicle Recipe Organization", () => {
 
   describe("Recipe Integrity", () => {
     test("all vehicle recipes have at least one recipe", () => {
-      for (const [vehicle, recipes] of vehicleRecipes.entries()) {
+      for (const [, recipes] of vehicleRecipes.entries()) {
         expect(recipes.length).toBeGreaterThan(0);
         expect(recipes[0]).toHaveProperty("id");
         expect(recipes[0]).toHaveProperty("required");
