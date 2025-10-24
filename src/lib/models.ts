@@ -109,6 +109,7 @@ export enum Vehicles {
   NiskaMkIII = 'Niska Mk. III Scar Twin',
   NiskaRyckerMkIX = 'Niska-Rycker Mk. IX Skycaller',
   KingSpireMkI = 'King Spire Mk. I',
+  KingGallantMkII = 'King Gallant Mk. II',
 }
 
 export enum RawResources {
@@ -190,6 +191,7 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.NiskaMkIII },
   { name: Vehicles.NiskaRyckerMkIX },
   { name: Vehicles.KingSpireMkI },
+  { name: Vehicles.KingGallantMkII },
 ];
 
 export const stuffList: Stuff[] = availableMaterials;
