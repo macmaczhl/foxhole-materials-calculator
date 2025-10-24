@@ -708,6 +708,19 @@ const kingJesterMkI1Recipes: IRecipe[] = [
   ),
 ];
 
+// King Gallant Mk. II Scout Tank recipes (upgraded vehicle)
+const kingGallantMkIIRecipes: IRecipe[] = [
+  // Small Assembly Station upgrade recipe: 5 x Processed Construction Materials + 5 x Assembly Materials III + 1 x King Spire Mk. I → 1 x King Gallant Mk. II
+  createRecipe(
+    [
+      { stuff: Materials.ProcessedConstructionMaterials, count: 5 },
+      { stuff: Materials.AssemblyMaterialsIII, count: 5 },
+      { stuff: Vehicles.KingSpireMkI, count: 1 },
+    ],
+    [{ stuff: Vehicles.KingGallantMkII, count: 1 }]
+  ),
+];
+
 // Swallowtail 988/127-2 field machine gun recipes
 const swallowtailRecipes: IRecipe[] = [
   // Garrison: 15 x Refined Materials → 1 x Swallowtail 988/127-2
@@ -792,4 +805,5 @@ export const vehicleRecipes = new Map<string, IRecipe[]>([
   [Vehicles.NiskaRyckerMkIX, niskaRyckerMkIXRecipes],
   [Vehicles.KingSpireMkI, kingSpireMkIRecipes],
   [Vehicles.KingJesterMkI1, kingJesterMkI1Recipes],
+  [Vehicles.KingGallantMkII, kingGallantMkIIRecipes],
 ]);

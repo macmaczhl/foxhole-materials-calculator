@@ -17,6 +17,13 @@ describe("Scout Tanks", () => {
       expect(recipes).toBeDefined();
       expect(recipes!.length).toBe(1); // upgrade recipe only
     });
+
+    test("King Gallant Mk. II has recipe defined", () => {
+      expect(RecipiesByStuff.has(Vehicles.KingGallantMkII)).toBe(true);
+      const recipes = RecipiesByStuff.get(Vehicles.KingGallantMkII);
+      expect(recipes).toBeDefined();
+      expect(recipes!.length).toBe(1); // upgrade recipe only
+    });
   });
 
   describe("King Spire Mk. I", () => {
@@ -173,9 +180,51 @@ describe("Scout Tanks", () => {
     });
   });
 
+  describe("King Gallant Mk. II", () => {
+    let kingGallantRecipes: IRecipe[];
+
+    beforeAll(() => {
+      kingGallantRecipes = RecipiesByStuff.get(Vehicles.KingGallantMkII) || [];
+    });
+
+    test("has recipes defined", () => {
+      expect(kingGallantRecipes).toBeDefined();
+      expect(kingGallantRecipes.length).toBeGreaterThan(0);
+    });
+
+    test("recipe requires processed construction materials, assembly materials III, and King Spire Mk. I", () => {
+      const recipe = kingGallantRecipes.find((r) => r.produced[0].count === 1);
+
+      expect(recipe).toBeDefined();
+      expect(recipe!.produced[0].stuff).toBe(Vehicles.KingGallantMkII);
+      expect(recipe!.required.length).toBe(3);
+      expect(recipe!.required[0].stuff).toBe(
+        Materials.ProcessedConstructionMaterials
+      );
+      expect(recipe!.required[0].count).toBe(5);
+      expect(recipe!.required[1].stuff).toBe(Materials.AssemblyMaterialsIII);
+      expect(recipe!.required[1].count).toBe(5);
+      expect(recipe!.required[2].stuff).toBe(Vehicles.KingSpireMkI);
+      expect(recipe!.required[2].count).toBe(1);
+    });
+
+    test("is in RecipiesByStuff map", () => {
+      expect(RecipiesByStuff.has(Vehicles.KingGallantMkII)).toBe(true);
+    });
+
+    test("recipe has correct structure", () => {
+      const recipes = RecipiesByStuff.get(Vehicles.KingGallantMkII) || [];
+      recipes.forEach((recipe) => {
+        expect(recipe.required.length).toBeGreaterThan(0);
+        expect(recipe.produced.length).toBe(1);
+        expect(recipe.produced[0].stuff).toBe(Vehicles.KingGallantMkII);
+      });
+    });
+  });
+
   describe("Recipe integration", () => {
-    test("both scout tanks can be calculated without errors", () => {
-      const scoutTanks = [Vehicles.KingSpireMkI, Vehicles.KingJesterMkI1];
+    test("all scout tanks can be calculated without errors", () => {
+      const scoutTanks = [Vehicles.KingSpireMkI, Vehicles.KingJesterMkI1, Vehicles.KingGallantMkII];
 
       scoutTanks.forEach((vehicle) => {
         const recipes = RecipiesByStuff.get(vehicle)!;
@@ -198,6 +247,17 @@ describe("Scout Tanks", () => {
     test("King Jester requires King Spire as prerequisite", () => {
       const jesterRecipes = RecipiesByStuff.get(Vehicles.KingJesterMkI1)!;
       const upgradeRecipe = jesterRecipes[0];
+
+      const requiresKingSpire = upgradeRecipe.required.some(
+        req => req.stuff === Vehicles.KingSpireMkI
+      );
+
+      expect(requiresKingSpire).toBe(true);
+    });
+
+    test("King Gallant requires King Spire as prerequisite", () => {
+      const gallantRecipes = RecipiesByStuff.get(Vehicles.KingGallantMkII)!;
+      const upgradeRecipe = gallantRecipes[0];
 
       const requiresKingSpire = upgradeRecipe.required.some(
         req => req.stuff === Vehicles.KingSpireMkI

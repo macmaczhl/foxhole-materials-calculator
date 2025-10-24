@@ -12,6 +12,18 @@ npm run lint    # 2s - check code style
 npm run build   # 30s - production build (NEVER CANCEL)
 ```
 
+## Updating existing branch
+
+Before starting any work on an existing branch:
+
+1. **Always pull latest changes** from the target branch (`main` branch)
+2. **Rebase or merge** your working branch with the target branch to ensure you have the latest code
+3. **Resolve any conflicts** before beginning new development
+4. **Verify tests still pass** after updating to ensure no regressions were introduced
+5. **Check for any breaking changes** in dependencies or configuration that might affect your work
+
+This prevents merge conflicts and ensures your work is based on the most recent codebase state.
+
 ## Critical Requirements
 
 - **All new/changed code MUST have unit tests** (100% coverage)

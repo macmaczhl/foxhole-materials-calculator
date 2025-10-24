@@ -90,4 +90,5 @@ export const ICONS_MAP = new Map<string, string>([
   [Vehicles.NiskaRyckerMkIX, "HalftrackMultiWIcon"],
   [Vehicles.KingSpireMkI, "ScoutTankWIcon"],
   [Vehicles.KingJesterMkI1, "ScoutTankMultiWIcon"],
+  [Vehicles.KingGallantMkII, "ScoutTankOffensiveWIcon"],
 ]);
