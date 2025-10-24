@@ -693,6 +693,21 @@ const kingSpireMkIRecipes: IRecipe[] = [
   ),
 ];
 
+// King Jester - Mk. I-1 Scout Tank recipes
+const kingJesterMkI1Recipes: IRecipe[] = [
+  // Small Assembly Station upgrade: 5 x Steel Construction Materials + 15 x Assembly Materials I + 3 x Assembly Materials III + 1 x Rare Alloys + 1 x King Spire Mk. I → 1 x King Jester - Mk. I-1
+  createRecipe(
+    [
+      { stuff: Materials.SteelConstructionMaterials, count: 5 },
+      { stuff: Materials.AssemblyMaterialsI, count: 15 },
+      { stuff: Materials.AssemblyMaterialsIII, count: 3 },
+      { stuff: Materials.RareAlloys, count: 1 },
+      { stuff: Vehicles.KingSpireMkI, count: 1 },
+    ],
+    [{ stuff: Vehicles.KingJesterMkI1, count: 1 }]
+  ),
+];
+
 // King Gallant Mk. II Scout Tank recipes (upgraded vehicle)
 const kingGallantMkIIRecipes: IRecipe[] = [
   // Small Assembly Station upgrade recipe: 5 x Processed Construction Materials + 5 x Assembly Materials III + 1 x King Spire Mk. I → 1 x King Gallant Mk. II
@@ -705,7 +720,6 @@ const kingGallantMkIIRecipes: IRecipe[] = [
     [{ stuff: Vehicles.KingGallantMkII, count: 1 }]
   ),
 ];
-
 
 // Swallowtail 988/127-2 field machine gun recipes
 const swallowtailRecipes: IRecipe[] = [
@@ -790,5 +804,6 @@ export const vehicleRecipes = new Map<string, IRecipe[]>([
   [Vehicles.NiskaMkIII, niskaMkIIIRecipes],
   [Vehicles.NiskaRyckerMkIX, niskaRyckerMkIXRecipes],
   [Vehicles.KingSpireMkI, kingSpireMkIRecipes],
+  [Vehicles.KingJesterMkI1, kingJesterMkI1Recipes],
   [Vehicles.KingGallantMkII, kingGallantMkIIRecipes],
 ]);
