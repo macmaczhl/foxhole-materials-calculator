@@ -153,7 +153,6 @@ describe("Item Grouping", () => {
         0
       );
 
-      // Should equal the number of items in availableMaterials
       expect(totalItems).toBeGreaterThan(0);
     });
   });
