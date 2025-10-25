@@ -135,4 +135,120 @@ describe("Light Tanks", () => {
       expect(massCostPerUnit).toBeLessThanOrEqual(garageCostPerUnit);
     });
   });
+
+  describe("Recipe availability", () => {
+    test('H-10 "Pelekys" has recipes defined', () => {
+      expect(RecipiesByStuff.has(Vehicles.H10Pelekys)).toBe(true);
+      const recipes = RecipiesByStuff.get(Vehicles.H10Pelekys);
+      expect(recipes).toBeDefined();
+      expect(recipes!.length).toBe(1); // 1 facility recipe
+    });
+  });
+
+  describe('H-10 "Pelekys"', () => {
+    let recipes: IRecipe[];
+
+    beforeEach(() => {
+      recipes = RecipiesByStuff.get(Vehicles.H10Pelekys)!;
+    });
+
+    test("facility recipe requires correct materials", () => {
+      const facilityRecipe = recipes[0];
+      expect(facilityRecipe).toBeDefined();
+      expect(facilityRecipe.required).toHaveLength(4);
+
+      // Check all required materials
+      expect(facilityRecipe.required).toContainEqual({
+        stuff: Materials.ProcessedConstructionMaterials,
+        count: 8,
+      });
+      expect(facilityRecipe.required).toContainEqual({
+        stuff: Materials.AssemblyMaterialsII,
+        count: 20,
+      });
+      expect(facilityRecipe.required).toContainEqual({
+        stuff: Materials.AssemblyMaterialsIII,
+        count: 5,
+      });
+      expect(facilityRecipe.required).toContainEqual({
+        stuff: Vehicles.H5Hatchet,
+        count: 1,
+      });
+
+      expect(facilityRecipe.produced).toEqual([
+        { stuff: Vehicles.H10Pelekys, count: 1 },
+      ]);
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const facilityRecipe = recipes[0];
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.H10Pelekys,
+        selectedRecipe: facilityRecipe,
+        recipes: recipes,
+        required: [],
+      };
+
+      const result = calculateComponents(recipeTree, 1);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.ProcessedConstructionMaterials, count: 8 },
+        { stuff: Materials.AssemblyMaterialsII, count: 20 },
+        { stuff: Materials.AssemblyMaterialsIII, count: 5 },
+        { stuff: Vehicles.H5Hatchet, count: 1 },
+      ]);
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const facilityRecipe = recipes[0];
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.H10Pelekys,
+        selectedRecipe: facilityRecipe,
+        recipes: recipes,
+        required: [],
+      };
+
+      const result = calculateComponents(recipeTree, 3);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.ProcessedConstructionMaterials, count: 24 },
+        { stuff: Materials.AssemblyMaterialsII, count: 60 },
+        { stuff: Materials.AssemblyMaterialsIII, count: 15 },
+        { stuff: Vehicles.H5Hatchet, count: 3 },
+      ]);
+    });
+
+    test("all recipes produce H-10 Pelekys", () => {
+      recipes.forEach((recipe) => {
+        expect(recipe.produced.length).toBe(1);
+        expect(recipe.produced[0].stuff).toBe(Vehicles.H10Pelekys);
+      });
+    });
+
+    test("requires H-5 Hatchet as prerequisite", () => {
+      recipes.forEach((recipe) => {
+        const hasH5Hatchet = recipe.required.some(
+          (req) => req.stuff === Vehicles.H5Hatchet
+        );
+        expect(hasH5Hatchet).toBe(true);
+      });
+    });
+  });
+
+  describe("Recipe integration", () => {
+    test("H-10 Pelekys can be calculated without errors", () => {
+      const recipes = RecipiesByStuff.get(Vehicles.H10Pelekys)!;
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.H10Pelekys,
+        selectedRecipe: recipes[0],
+        recipes: recipes,
+        required: [],
+      };
+
+      expect(() => {
+        const result = calculateComponents(recipeTree, 1);
+        expect(result.initial.length).toBeGreaterThan(0);
+      }).not.toThrow();
+    });
+  });
 });
