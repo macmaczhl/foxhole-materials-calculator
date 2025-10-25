@@ -27,7 +27,32 @@ const h5HatchetRecipes: IRecipe[] = [
   ),
 ];
 
+// Devitt Mk. III Light Tank recipes
+const devittMkIIIRecipes: IRecipe[] = [
+  // Garage production: 120 x Refined Materials → 1 x Devitt Mk. III
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 120 }],
+    [{ stuff: Vehicles.DevittMkIII, count: 1 }]
+  ),
+  // Mass Production Factory: 864 x Refined Materials → 3 crates of 3 x Devitt Mk. III (9 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 864 }],
+    [{ stuff: Vehicles.DevittMkIII, count: 9 }]
+  ),
+  // Mass Production Factory: 1080 x Refined Materials → 4 crates of 3 x Devitt Mk. III (12 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 1080 }],
+    [{ stuff: Vehicles.DevittMkIII, count: 12 }]
+  ),
+  // Mass Production Factory: 1260 x Refined Materials → 5 crates of 3 x Devitt Mk. III (15 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 1260 }],
+    [{ stuff: Vehicles.DevittMkIII, count: 15 }]
+  ),
+];
+
 export const lightTankRecipes = new Map<string, IRecipe[]>([
   // Light Tanks
   [Vehicles.H5Hatchet, h5HatchetRecipes],
+  [Vehicles.DevittMkIII, devittMkIIIRecipes],
 ]);

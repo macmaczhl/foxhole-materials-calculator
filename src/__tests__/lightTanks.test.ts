@@ -10,6 +10,13 @@ describe("Light Tanks", () => {
       expect(recipes).toBeDefined();
       expect(recipes!.length).toBe(4); // 1 garage + 3 mass production
     });
+
+    test("Devitt Mk. III has recipes defined", () => {
+      expect(RecipiesByStuff.has(Vehicles.DevittMkIII)).toBe(true);
+      const recipes = RecipiesByStuff.get(Vehicles.DevittMkIII);
+      expect(recipes).toBeDefined();
+      expect(recipes!.length).toBe(4); // 1 garage + 3 mass production
+    });
   });
 
   describe('H-5 "Hatchet"', () => {
@@ -106,6 +113,100 @@ describe("Light Tanks", () => {
     });
   });
 
+  describe("Devitt Mk. III", () => {
+    let recipes: IRecipe[];
+
+    beforeEach(() => {
+      recipes = RecipiesByStuff.get(Vehicles.DevittMkIII)!;
+    });
+
+    test("garage recipe requires 120 refined materials", () => {
+      const garageRecipe = recipes.find((r) => r.produced[0].count === 1);
+      expect(garageRecipe).toBeDefined();
+      expect(garageRecipe!.required).toEqual([
+        { stuff: Materials.RefinedMaterials, count: 120 },
+      ]);
+      expect(garageRecipe!.produced).toEqual([
+        { stuff: Vehicles.DevittMkIII, count: 1 },
+      ]);
+    });
+
+    test("mass production recipes exist with correct quantities", () => {
+      // 864 → 9
+      const recipe9 = recipes.find((r) => r.produced[0].count === 9);
+      expect(recipe9).toBeDefined();
+      expect(recipe9!.required[0].stuff).toBe(Materials.RefinedMaterials);
+      expect(recipe9!.required[0].count).toBe(864);
+
+      // 1080 → 12
+      const recipe12 = recipes.find((r) => r.produced[0].count === 12);
+      expect(recipe12).toBeDefined();
+      expect(recipe12!.required[0].stuff).toBe(Materials.RefinedMaterials);
+      expect(recipe12!.required[0].count).toBe(1080);
+
+      // 1260 → 15
+      const recipe15 = recipes.find((r) => r.produced[0].count === 15);
+      expect(recipe15).toBeDefined();
+      expect(recipe15!.required[0].stuff).toBe(Materials.RefinedMaterials);
+      expect(recipe15!.required[0].count).toBe(1260);
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const garageRecipe = recipes.find((r) => r.produced[0].count === 1)!;
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.DevittMkIII,
+        selectedRecipe: garageRecipe,
+        recipes: recipes,
+        required: [],
+      };
+
+      const result = calculateComponents(recipeTree, 1);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.RefinedMaterials, count: 120 },
+      ]);
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const garageRecipe = recipes.find((r) => r.produced[0].count === 1)!;
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.DevittMkIII,
+        selectedRecipe: garageRecipe,
+        recipes: recipes,
+        required: [],
+      };
+
+      const result = calculateComponents(recipeTree, 3);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.RefinedMaterials, count: 360 },
+      ]);
+    });
+
+    test("all recipes produce Devitt Mk. III", () => {
+      recipes.forEach((recipe) => {
+        expect(recipe.produced.length).toBe(1);
+        expect(recipe.produced[0].stuff).toBe(Vehicles.DevittMkIII);
+      });
+    });
+
+    test("all recipes require only refined materials", () => {
+      recipes.forEach((recipe) => {
+        expect(recipe.required.length).toBe(1);
+        expect(recipe.required[0].stuff).toBe(Materials.RefinedMaterials);
+      });
+    });
+
+    test("does not require another vehicle as prerequisite", () => {
+      recipes.forEach((recipe) => {
+        const hasVehicleRequirement = recipe.required.some((req) =>
+          Object.values(Vehicles).includes(req.stuff as Vehicles)
+        );
+        expect(hasVehicleRequirement).toBe(false);
+      });
+    });
+  });
+
   describe("Recipe integration", () => {
     test("H-5 Hatchet can be calculated without errors", () => {
       const recipes = RecipiesByStuff.get(Vehicles.H5Hatchet)!;
@@ -122,8 +223,36 @@ describe("Light Tanks", () => {
       }).not.toThrow();
     });
 
+    test("Devitt Mk. III can be calculated without errors", () => {
+      const recipes = RecipiesByStuff.get(Vehicles.DevittMkIII)!;
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.DevittMkIII,
+        selectedRecipe: recipes[0],
+        recipes: recipes,
+        required: [],
+      };
+
+      expect(() => {
+        const result = calculateComponents(recipeTree, 1);
+        expect(result.initial.length).toBeGreaterThan(0);
+      }).not.toThrow();
+    });
+
     test("mass production is more efficient than garage production", () => {
       const recipes = RecipiesByStuff.get(Vehicles.H5Hatchet)!;
+      const garageRecipe = recipes.find((r) => r.produced[0].count === 1)!;
+      const massRecipe9 = recipes.find((r) => r.produced[0].count === 9)!;
+
+      // Calculate cost per unit
+      const garageCostPerUnit = garageRecipe.required[0].count / garageRecipe.produced[0].count;
+      const massCostPerUnit = massRecipe9.required[0].count / massRecipe9.produced[0].count;
+
+      // Mass production should be cheaper or equal per unit
+      expect(massCostPerUnit).toBeLessThanOrEqual(garageCostPerUnit);
+    });
+
+    test("Devitt Mk. III mass production is more efficient than garage production", () => {
+      const recipes = RecipiesByStuff.get(Vehicles.DevittMkIII)!;
       const garageRecipe = recipes.find((r) => r.produced[0].count === 1)!;
       const massRecipe9 = recipes.find((r) => r.produced[0].count === 9)!;
 
