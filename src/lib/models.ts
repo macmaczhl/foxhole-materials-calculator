@@ -112,6 +112,7 @@ export enum Vehicles {
   KingJesterMkI1 = 'King Jester - Mk. I-1',
   KingGallantMkII = 'King Gallant Mk. II',
   H5Hatchet = 'H-5 "Hatchet"',
+  H10Pelekys = 'H-10 "Pelekys"',
 }
 
 export enum RawResources {
@@ -196,6 +197,7 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.KingJesterMkI1 },
   { name: Vehicles.KingGallantMkII },
   { name: Vehicles.H5Hatchet },
+  { name: Vehicles.H10Pelekys },
 ];
 
 export const stuffList: Stuff[] = availableMaterials;
