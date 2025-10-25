@@ -8,6 +8,7 @@ import { fieldWeaponRecipes } from "../lib/recipes/fieldWeapons";
 import { tankRecipes } from "../lib/recipes/tanks";
 import { logisticsVehicleRecipes } from "../lib/recipes/logisticsVehicles";
 import { scoutVehicleRecipes } from "../lib/recipes/scoutVehicles";
+import { lightTankRecipes } from "../lib/recipes/lightTanks";
 
 describe("Vehicle Recipe Organization", () => {
   describe("Category Files", () => {
@@ -113,7 +114,8 @@ describe("Vehicle Recipe Organization", () => {
         fieldWeaponRecipes.size +
         tankRecipes.size +
         logisticsVehicleRecipes.size +
-        scoutVehicleRecipes.size;
+        scoutVehicleRecipes.size +
+        lightTankRecipes.size;
 
       expect(vehicleRecipes.size).toBe(totalExpectedSize);
     });
