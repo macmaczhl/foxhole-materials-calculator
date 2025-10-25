@@ -143,6 +143,112 @@ describe("Light Tanks", () => {
     });
   });
 
+  describe('H-8 "Kranesca"', () => {
+    let recipes: IRecipe[];
+
+    beforeEach(() => {
+      recipes = RecipiesByStuff.get(Vehicles.H8Kranesca)!;
+    });
+
+    test("assembly station recipe requires correct materials", () => {
+      const assemblyRecipe = recipes[0];
+      expect(assemblyRecipe).toBeDefined();
+      expect(assemblyRecipe.required).toHaveLength(4);
+      expect(assemblyRecipe.required).toContainEqual({
+        stuff: Vehicles.H5Hatchet,
+        count: 1,
+      });
+      expect(assemblyRecipe.required).toContainEqual({
+        stuff: Materials.ProcessedConstructionMaterials,
+        count: 5,
+      });
+      expect(assemblyRecipe.required).toContainEqual({
+        stuff: Materials.AssemblyMaterialsI,
+        count: 20,
+      });
+      expect(assemblyRecipe.required).toContainEqual({
+        stuff: Materials.AssemblyMaterialsIV,
+        count: 5,
+      });
+      expect(assemblyRecipe.produced).toEqual([
+        { stuff: Vehicles.H8Kranesca, count: 1 },
+      ]);
+    });
+
+    test("produces H-8 Kranesca", () => {
+      recipes.forEach((recipe) => {
+        expect(recipe.produced.length).toBe(1);
+        expect(recipe.produced[0].stuff).toBe(Vehicles.H8Kranesca);
+      });
+    });
+
+    test("requires H-5 Hatchet as prerequisite", () => {
+      const assemblyRecipe = recipes[0];
+      const hasHatchetRequirement = assemblyRecipe.required.some(
+        (req) => req.stuff === Vehicles.H5Hatchet
+      );
+      expect(hasHatchetRequirement).toBe(true);
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const assemblyRecipe = recipes[0];
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.H8Kranesca,
+        selectedRecipe: assemblyRecipe,
+        recipes: recipes,
+        required: [],
+      };
+
+      const result = calculateComponents(recipeTree, 1);
+
+      expect(result.initial).toContainEqual({
+        stuff: Vehicles.H5Hatchet,
+        count: 1,
+      });
+      expect(result.initial).toContainEqual({
+        stuff: Materials.ProcessedConstructionMaterials,
+        count: 5,
+      });
+      expect(result.initial).toContainEqual({
+        stuff: Materials.AssemblyMaterialsI,
+        count: 20,
+      });
+      expect(result.initial).toContainEqual({
+        stuff: Materials.AssemblyMaterialsIV,
+        count: 5,
+      });
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const assemblyRecipe = recipes[0];
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.H8Kranesca,
+        selectedRecipe: assemblyRecipe,
+        recipes: recipes,
+        required: [],
+      };
+
+      const result = calculateComponents(recipeTree, 2);
+
+      expect(result.initial).toContainEqual({
+        stuff: Vehicles.H5Hatchet,
+        count: 2,
+      });
+      expect(result.initial).toContainEqual({
+        stuff: Materials.ProcessedConstructionMaterials,
+        count: 10,
+      });
+      expect(result.initial).toContainEqual({
+        stuff: Materials.AssemblyMaterialsI,
+        count: 40,
+      });
+      expect(result.initial).toContainEqual({
+        stuff: Materials.AssemblyMaterialsIV,
+        count: 10,
+      });
+    });
+  });
+
   describe('H-19 "Vulcan"', () => {
     let recipes: IRecipe[];
 
