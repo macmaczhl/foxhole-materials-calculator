@@ -43,25 +43,15 @@ const h8KranescaRecipes: IRecipe[] = [
 
 // H-19 "Vulcan" Light Tank recipes
 const h19VulcanRecipes: IRecipe[] = [
-  // Garage production: 125 x Refined Materials → 1 x H-19 "Vulcan"
+  // Small Assembly Station: 1 x H-5 "Hatchet" + 8 x Processed Construction Materials + 20 x Assembly Materials II + 5 x Assembly Materials III → 1 x H-19 "Vulcan"
   createRecipe(
-    [{ stuff: Materials.RefinedMaterials, count: 125 }],
+    [
+      { stuff: Vehicles.H5Hatchet, count: 1 },
+      { stuff: Materials.ProcessedConstructionMaterials, count: 8 },
+      { stuff: Materials.AssemblyMaterialsII, count: 20 },
+      { stuff: Materials.AssemblyMaterialsIII, count: 5 },
+    ],
     [{ stuff: Vehicles.H19Vulcan, count: 1 }]
-  ),
-  // Mass Production Factory: 900 x Refined Materials → 3 crates of 3 x H-19 "Vulcan" (9 total)
-  createRecipe(
-    [{ stuff: Materials.RefinedMaterials, count: 900 }],
-    [{ stuff: Vehicles.H19Vulcan, count: 9 }]
-  ),
-  // Mass Production Factory: 1125 x Refined Materials → 4 crates of 3 x H-19 "Vulcan" (12 total)
-  createRecipe(
-    [{ stuff: Materials.RefinedMaterials, count: 1125 }],
-    [{ stuff: Vehicles.H19Vulcan, count: 12 }]
-  ),
-  // Mass Production Factory: 1313 x Refined Materials → 5 crates of 3 x H-19 "Vulcan" (15 total)
-  createRecipe(
-    [{ stuff: Materials.RefinedMaterials, count: 1313 }],
-    [{ stuff: Vehicles.H19Vulcan, count: 15 }]
   ),
 ];
 
