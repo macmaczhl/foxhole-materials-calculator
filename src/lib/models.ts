@@ -112,6 +112,7 @@ export enum Vehicles {
   KingJesterMkI1 = 'King Jester - Mk. I-1',
   KingGallantMkII = 'King Gallant Mk. II',
   H5Hatchet = 'H-5 "Hatchet"',
+  H8Kranesca = 'H-8 "Kranesca"',
   Falchion85Kb = '85K-b "Falchion"',
 }
 
@@ -197,6 +198,7 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.KingJesterMkI1 },
   { name: Vehicles.KingGallantMkII },
   { name: Vehicles.H5Hatchet },
+  { name: Vehicles.H8Kranesca },
   { name: Vehicles.Falchion85Kb },
 ];
 
