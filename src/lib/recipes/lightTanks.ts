@@ -29,7 +29,7 @@ const h5HatchetRecipes: IRecipe[] = [
 
 // H-8 "Kranesca" Light Tank recipes
 const h8KranescaRecipes: IRecipe[] = [
-  // Small Assembly Station: 1 x H-5 "Hatchet" + 5 x Processed Construction Materials + 20 x Assembly Materials I + 5 x  Assembly Materials IV → 1 x H-8 "Kranesca"
+  // Small Assembly Station: 1 x H-5 "Hatchet" + 5 x Processed Construction Materials + 20 x Assembly Materials I + 5 x Assembly Materials IV → 1 x H-8 "Kranesca"
   createRecipe(
     [
       { stuff: Vehicles.H5Hatchet, count: 1 },
