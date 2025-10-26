@@ -18,11 +18,21 @@ Before starting any work on an existing branch:
 
 1. **Always pull latest changes** from the target branch (`main` branch)
 2. **Rebase or merge** your working branch with the target branch to ensure you have the latest code
+   - Rebase our branch onto main. If rebase is unsafe, merge main into our branch.
 3. **Resolve any conflicts** before beginning new development
 4. **Verify tests still pass** after updating to ensure no regressions were introduced
 5. **Check for any breaking changes** in dependencies or configuration that might affect your work
 
 This prevents merge conflicts and ensures your work is based on the most recent codebase state.
+
+### Conflict Resolution Strategy
+
+When resolving merge or rebase conflicts, follow these guidelines:
+
+- **Dependency versions**: Keep dependency versions from main if they are newer; otherwise keep ours.
+- **New files**: Preserve new files we added; reconcile imports/types so TypeScript builds.
+- **Overlapping code**: Prefer our feature logic, then adapt to compile and pass tests.
+- **Ambiguous cases**: If ambiguity remains, add clear TODO comments and proceed; do not drop functionality.
 
 ## Critical Requirements
 
