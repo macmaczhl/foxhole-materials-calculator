@@ -27,6 +27,20 @@ const h5HatchetRecipes: IRecipe[] = [
   ),
 ];
 
+// H-8 "Kranesca" Light Tank recipes
+const h8KranescaRecipes: IRecipe[] = [
+  // Small Assembly Station: 1 x H-5 "Hatchet" + 5 x Processed Construction Materials + 20 x Assembly Materials I + 5 x Assembly Materials IV → 1 x H-8 "Kranesca"
+  createRecipe(
+    [
+      { stuff: Vehicles.H5Hatchet, count: 1 },
+      { stuff: Materials.ProcessedConstructionMaterials, count: 5 },
+      { stuff: Materials.AssemblyMaterialsI, count: 20 },
+      { stuff: Materials.AssemblyMaterialsIV, count: 5 },
+    ],
+    [{ stuff: Vehicles.H8Kranesca, count: 1 }]
+  ),
+];
+
 // H-10 "Pelekys" Light Tank Destroyer recipes
 const h10PelekysRecipes: IRecipe[] = [
   // Small Assembly Station (Tank Factory): 8 x PCM + 20 x AM II + 5 x AM III + 1 x H-5 "Hatchet" → 1 x H-10 "Pelekys"
@@ -44,5 +58,6 @@ const h10PelekysRecipes: IRecipe[] = [
 export const lightTankRecipes = new Map<string, IRecipe[]>([
   // Light Tanks
   [Vehicles.H5Hatchet, h5HatchetRecipes],
+  [Vehicles.H8Kranesca, h8KranescaRecipes],
   [Vehicles.H10Pelekys, h10PelekysRecipes],
 ]);
