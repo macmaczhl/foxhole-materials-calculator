@@ -41,6 +41,20 @@ const h8KranescaRecipes: IRecipe[] = [
   ),
 ];
 
+// H-19 "Vulcan" Light Tank recipes
+const h19VulcanRecipes: IRecipe[] = [
+  // Small Assembly Station: 1 x H-5 "Hatchet" + 8 x Processed Construction Materials + 20 x Assembly Materials II + 5 x Assembly Materials III → 1 x H-19 "Vulcan"
+  createRecipe(
+    [
+      { stuff: Vehicles.H5Hatchet, count: 1 },
+      { stuff: Materials.ProcessedConstructionMaterials, count: 8 },
+      { stuff: Materials.AssemblyMaterialsII, count: 20 },
+      { stuff: Materials.AssemblyMaterialsIII, count: 5 },
+    ],
+    [{ stuff: Vehicles.H19Vulcan, count: 1 }]
+  ),
+];
+
 // Devitt Mk. III Light Tank recipes
 const devittMkIIIRecipes: IRecipe[] = [
   // Garage production: 120 x Refined Materials → 1 x Devitt Mk. III
@@ -69,5 +83,6 @@ export const lightTankRecipes = new Map<string, IRecipe[]>([
   // Light Tanks
   [Vehicles.H5Hatchet, h5HatchetRecipes],
   [Vehicles.H8Kranesca, h8KranescaRecipes],
+  [Vehicles.H19Vulcan, h19VulcanRecipes],
   [Vehicles.DevittMkIII, devittMkIIIRecipes],
 ]);
