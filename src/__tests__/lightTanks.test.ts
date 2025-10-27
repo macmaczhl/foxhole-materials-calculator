@@ -295,7 +295,7 @@ describe("Light Tanks", () => {
       ]);
     });
 
-    test("produces H-10 Pelekys", () => {
+    test('produces H-10 "Pelekys"', () => {
       recipes.forEach((recipe) => {
         expect(recipe.produced.length).toBe(1);
         expect(recipe.produced[0].stuff).toBe(Vehicles.H10Pelekys);
