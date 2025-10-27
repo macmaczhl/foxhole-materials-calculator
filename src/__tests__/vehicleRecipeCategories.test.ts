@@ -9,6 +9,7 @@ import { tankRecipes } from "../lib/recipes/tanks";
 import { logisticsVehicleRecipes } from "../lib/recipes/logisticsVehicles";
 import { scoutVehicleRecipes } from "../lib/recipes/scoutVehicles";
 import { lightTankRecipes } from "../lib/recipes/lightTanks";
+import { assaultTankRecipes } from "../lib/recipes/assaultTanks";
 
 describe("Vehicle Recipe Organization", () => {
   describe("Category Files", () => {
@@ -98,6 +99,10 @@ describe("Vehicle Recipe Organization", () => {
       expect(tankRecipes.has(Vehicles.KingGallantMkII)).toBe(true);
     });
 
+    test("assaultTankRecipes contains assault tanks", () => {
+      expect(assaultTankRecipes.has(Vehicles.Falchion)).toBe(true);
+    });
+
     test("logisticsVehicleRecipes is empty (placeholder)", () => {
       expect(logisticsVehicleRecipes.size).toBe(0);
     });
@@ -115,7 +120,8 @@ describe("Vehicle Recipe Organization", () => {
         tankRecipes.size +
         logisticsVehicleRecipes.size +
         scoutVehicleRecipes.size +
-        lightTankRecipes.size;
+        lightTankRecipes.size +
+        assaultTankRecipes.size;
 
       expect(vehicleRecipes.size).toBe(totalExpectedSize);
     });
