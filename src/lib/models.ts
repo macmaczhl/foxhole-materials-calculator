@@ -114,6 +114,7 @@ export enum Vehicles {
   H5Hatchet = 'H-5 "Hatchet"',
   H8Kranesca = 'H-8 "Kranesca"',
   H19Vulcan = 'H-19 "Vulcan"',
+  DevittMkIII = 'Devitt Mk. III',
 }
 
 export enum RawResources {
@@ -200,6 +201,7 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.H5Hatchet },
   { name: Vehicles.H8Kranesca },
   { name: Vehicles.H19Vulcan },
+  { name: Vehicles.DevittMkIII },
 ];
 
 export const stuffList: Stuff[] = availableMaterials;
