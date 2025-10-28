@@ -10,6 +10,13 @@ describe("Assault Tanks", () => {
       expect(recipes).toBeDefined();
       expect(recipes!.length).toBe(4); // 1 garage + 3 mass production
     });
+
+    test('86K-a "Bardiche" has recipes defined', () => {
+      expect(RecipiesByStuff.has(Vehicles.Bardiche)).toBe(true);
+      const recipes = RecipiesByStuff.get(Vehicles.Bardiche);
+      expect(recipes).toBeDefined();
+      expect(recipes!.length).toBe(4); // 1 garage + 3 mass production
+    });
   });
 
   describe('85K-b "Falchion"', () => {
@@ -164,6 +171,119 @@ describe("Assault Tanks", () => {
       massRecipes.forEach((recipe) => {
         expect(recipe.produced[0].count % 5).toBe(0);
       });
+    });
+  });
+
+  describe('86K-a "Bardiche"', () => {
+    let recipes: IRecipe[];
+
+    beforeEach(() => {
+      recipes = RecipiesByStuff.get(Vehicles.Bardiche)!;
+    });
+
+    test("garage recipe requires 165 refined materials", () => {
+      const garageRecipe = recipes.find((r) => r.produced[0].count === 1);
+      expect(garageRecipe).toBeDefined();
+      expect(garageRecipe!.required).toEqual([
+        { stuff: Materials.RefinedMaterials, count: 165 },
+      ]);
+      expect(garageRecipe!.produced).toEqual([
+        { stuff: Vehicles.Bardiche, count: 1 },
+      ]);
+    });
+
+    test("mass production recipes exist with correct quantities", () => {
+      // 1187 → 9
+      const recipe9 = recipes.find((r) => r.produced[0].count === 9);
+      expect(recipe9).toBeDefined();
+      expect(recipe9!.required[0].stuff).toBe(Materials.RefinedMaterials);
+      expect(recipe9!.required[0].count).toBe(1187);
+
+      // 1484 → 12
+      const recipe12 = recipes.find((r) => r.produced[0].count === 12);
+      expect(recipe12).toBeDefined();
+      expect(recipe12!.required[0].stuff).toBe(Materials.RefinedMaterials);
+      expect(recipe12!.required[0].count).toBe(1484);
+
+      // 1731 → 15
+      const recipe15 = recipes.find((r) => r.produced[0].count === 15);
+      expect(recipe15).toBeDefined();
+      expect(recipe15!.required[0].stuff).toBe(Materials.RefinedMaterials);
+      expect(recipe15!.required[0].count).toBe(1731);
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const garageRecipe = recipes.find((r) => r.produced[0].count === 1)!;
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.Bardiche,
+        selectedRecipe: garageRecipe,
+        recipes: recipes,
+        required: [],
+      };
+
+      const result = calculateComponents(recipeTree, 1);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.RefinedMaterials, count: 165 },
+      ]);
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const garageRecipe = recipes.find((r) => r.produced[0].count === 1)!;
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.Bardiche,
+        selectedRecipe: garageRecipe,
+        recipes: recipes,
+        required: [],
+      };
+
+      const result = calculateComponents(recipeTree, 3);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.RefinedMaterials, count: 495 },
+      ]);
+    });
+
+    test("all recipes produce 86K-a Bardiche", () => {
+      recipes.forEach((recipe) => {
+        expect(recipe.produced.length).toBe(1);
+        expect(recipe.produced[0].stuff).toBe(Vehicles.Bardiche);
+      });
+    });
+
+    test("all recipes require only refined materials", () => {
+      recipes.forEach((recipe) => {
+        expect(recipe.required.length).toBe(1);
+        expect(recipe.required[0].stuff).toBe(Materials.RefinedMaterials);
+      });
+    });
+
+    test("does not require another vehicle as prerequisite", () => {
+      recipes.forEach((recipe) => {
+        const hasVehicleRequirement = recipe.required.some((req) =>
+          Object.values(Vehicles).includes(req.stuff as Vehicles)
+        );
+        expect(hasVehicleRequirement).toBe(false);
+      });
+    });
+
+    test("mass production produces 3 per crate", () => {
+      // The Bardiche produces 3 per crate like most tanks
+      const recipe9 = recipes.find((r) => r.produced[0].count === 9);
+      const recipe12 = recipes.find((r) => r.produced[0].count === 12);
+      const recipe15 = recipes.find((r) => r.produced[0].count === 15);
+
+      // 3 crates = 9 tanks (3 per crate)
+      expect(recipe9).toBeDefined();
+      expect(recipe9!.produced[0].count).toBe(9);
+
+      // 4 crates = 12 tanks (3 per crate)
+      expect(recipe12).toBeDefined();
+      expect(recipe12!.produced[0].count).toBe(12);
+
+      // 5 crates = 15 tanks (3 per crate)
+      expect(recipe15).toBeDefined();
+      expect(recipe15!.produced[0].count).toBe(15);
     });
   });
 });
