@@ -101,5 +101,6 @@ export const ICONS_MAP = new Map<string, string>([
   [Vehicles.SilverhandMkIV, "WardenMediumTankIcon"],
   [Vehicles.DevittMkIII, "LightTankWarVehicleIcon"],
   [Vehicles.DevittIronhideMkIV, "LightTankWarDefensiveVehicleIcon"],
+  [Vehicles.DevittCaineMkIVMMR, "LightTankArtilleryWar"],
   [Vehicles.Bardiche, "MediumTank2CIcon"],
 ]);

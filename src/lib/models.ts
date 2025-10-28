@@ -121,6 +121,7 @@ export enum Vehicles {
   SilverhandMkIV = 'Silverhand - Mk. IV',
   DevittMkIII = 'Devitt Mk. III',
   DevittIronhideMkIV = 'Devitt Ironhide Mk. IV',
+  DevittCaineMkIVMMR = 'Devitt-Caine Mk. IV MMR',
   Bardiche = '86K-a "Bardiche"',
 }
 
@@ -215,6 +216,7 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.SilverhandMkIV },
   { name: Vehicles.DevittMkIII },
   { name: Vehicles.DevittIronhideMkIV },
+  { name: Vehicles.DevittCaineMkIVMMR },
   { name: Vehicles.Bardiche },
 ];
 
