@@ -10,6 +10,13 @@ describe("Assault Tanks", () => {
       expect(recipes).toBeDefined();
       expect(recipes!.length).toBe(4); // 1 garage + 3 mass production
     });
+
+    test('85V-g "Talos" has recipes defined', () => {
+      expect(RecipiesByStuff.has(Vehicles.Talos)).toBe(true);
+      const recipes = RecipiesByStuff.get(Vehicles.Talos);
+      expect(recipes).toBeDefined();
+      expect(recipes!.length).toBe(1); // 1 small assembly station
+    });
   });
 
   describe('85K-b "Falchion"', () => {
@@ -164,6 +171,101 @@ describe("Assault Tanks", () => {
       massRecipes.forEach((recipe) => {
         expect(recipe.produced[0].count % 5).toBe(0);
       });
+    });
+  });
+
+  describe('85V-g "Talos"', () => {
+    let recipes: IRecipe[];
+
+    beforeEach(() => {
+      recipes = RecipiesByStuff.get(Vehicles.Talos)!;
+    });
+
+    test("small assembly station recipe requires correct materials", () => {
+      const assemblyRecipe = recipes[0];
+      expect(assemblyRecipe).toBeDefined();
+      expect(assemblyRecipe.required).toEqual([
+        { stuff: Materials.ProcessedConstructionMaterials, count: 15 },
+        { stuff: Materials.AssemblyMaterialsI, count: 10 },
+        { stuff: Materials.AssemblyMaterialsIII, count: 15 },
+        { stuff: Materials.AssemblyMaterialsIV, count: 15 },
+        { stuff: Vehicles.Falchion, count: 1 },
+      ]);
+      expect(assemblyRecipe.produced).toEqual([
+        { stuff: Vehicles.Talos, count: 1 },
+      ]);
+    });
+
+    test("requires Falchion as prerequisite", () => {
+      const assemblyRecipe = recipes[0];
+      const hasVehicleRequirement = assemblyRecipe.required.some(
+        (req) => req.stuff === Vehicles.Falchion
+      );
+      expect(hasVehicleRequirement).toBe(true);
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const assemblyRecipe = recipes[0];
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.Talos,
+        selectedRecipe: assemblyRecipe,
+        recipes: recipes,
+        required: [],
+      };
+
+      const result = calculateComponents(recipeTree, 1);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.ProcessedConstructionMaterials, count: 15 },
+        { stuff: Materials.AssemblyMaterialsI, count: 10 },
+        { stuff: Materials.AssemblyMaterialsIII, count: 15 },
+        { stuff: Materials.AssemblyMaterialsIV, count: 15 },
+        { stuff: Vehicles.Falchion, count: 1 },
+      ]);
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const assemblyRecipe = recipes[0];
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.Talos,
+        selectedRecipe: assemblyRecipe,
+        recipes: recipes,
+        required: [],
+      };
+
+      const result = calculateComponents(recipeTree, 3);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.ProcessedConstructionMaterials, count: 45 },
+        { stuff: Materials.AssemblyMaterialsI, count: 30 },
+        { stuff: Materials.AssemblyMaterialsIII, count: 45 },
+        { stuff: Materials.AssemblyMaterialsIV, count: 45 },
+        { stuff: Vehicles.Falchion, count: 3 },
+      ]);
+    });
+
+    test("all recipes produce 85V-g Talos", () => {
+      recipes.forEach((recipe) => {
+        expect(recipe.produced.length).toBe(1);
+        expect(recipe.produced[0].stuff).toBe(Vehicles.Talos);
+      });
+    });
+
+    test("is a Velian modification requiring assembly materials", () => {
+      const assemblyRecipe = recipes[0];
+      const hasAssemblyMaterialsI = assemblyRecipe.required.some(
+        (req) => req.stuff === Materials.AssemblyMaterialsI
+      );
+      const hasAssemblyMaterialsIII = assemblyRecipe.required.some(
+        (req) => req.stuff === Materials.AssemblyMaterialsIII
+      );
+      const hasAssemblyMaterialsIV = assemblyRecipe.required.some(
+        (req) => req.stuff === Materials.AssemblyMaterialsIV
+      );
+
+      expect(hasAssemblyMaterialsI).toBe(true);
+      expect(hasAssemblyMaterialsIII).toBe(true);
+      expect(hasAssemblyMaterialsIV).toBe(true);
     });
   });
 });
