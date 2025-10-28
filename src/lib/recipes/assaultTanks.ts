@@ -40,9 +40,26 @@ const spathaRecipes: IRecipe[] = [
     [{ stuff: Vehicles.Spatha, count: 1 }]
   ),
 ];
+// 85V-g "Talos" Assault Tank recipes
+const talosRecipes: IRecipe[] = [
+  // Small Assembly Station (Weapons Platform) production:
+  // 15 Processed Construction Materials + 10 Assembly Materials I +
+  // 15 Assembly Materials III + 15 Assembly Materials IV + 1 85K-b "Falchion" → 1 85V-g "Talos"
+  createRecipe(
+    [
+      { stuff: Materials.ProcessedConstructionMaterials, count: 15 },
+      { stuff: Materials.AssemblyMaterialsI, count: 10 },
+      { stuff: Materials.AssemblyMaterialsIII, count: 15 },
+      { stuff: Materials.AssemblyMaterialsIV, count: 15 },
+      { stuff: Vehicles.Falchion, count: 1 },
+    ],
+    [{ stuff: Vehicles.Talos, count: 1 }]
+  ),
+];
 
 export const assaultTankRecipes = new Map<string, IRecipe[]>([
   // Assault Tanks
   [Vehicles.Falchion, falchionRecipes],
   [Vehicles.Spatha, spathaRecipes],
+  [Vehicles.Talos, talosRecipes],
 ]);
