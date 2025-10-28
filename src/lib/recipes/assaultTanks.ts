@@ -11,6 +11,7 @@ const nemesisRecipes: IRecipe[] = [
     [{ stuff: Vehicles.Nemesis, count: 1 }]
   ),
   // Mass Production Factory: 1080 x Refined Materials → 3 crates of 3 x 90T-v "Nemesis" (9 total)
+  // Note: Nemesis uses 3 per crate, unlike Falchion which uses 5 per crate
   createRecipe(
     [{ stuff: Materials.RefinedMaterials, count: 1080 }],
     [{ stuff: Vehicles.Nemesis, count: 9 }]

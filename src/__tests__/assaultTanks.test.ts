@@ -267,8 +267,8 @@ describe("Assault Tanks", () => {
       });
     });
 
-    test("mass production produces 3 per crate (standard)", () => {
-      // The Nemesis uses standard 3-per-crate MPF production
+    test("mass production produces 3 per crate (differs from Falchion's 5 per crate)", () => {
+      // The Nemesis uses 3-per-crate MPF production, unlike the Falchion which uses 5-per-crate
       const recipe9 = recipes.find((r) => r.produced[0].count === 9);
       const recipe12 = recipes.find((r) => r.produced[0].count === 12);
       const recipe15 = recipes.find((r) => r.produced[0].count === 15);
