@@ -27,7 +27,32 @@ const falchionRecipes: IRecipe[] = [
   ),
 ];
 
+// Silverhand - Mk. IV Assault Tank recipes
+const silverhandMkIVRecipes: IRecipe[] = [
+  // Garage production: 155 x Refined Materials → 1 x Silverhand - Mk. IV
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 155 }],
+    [{ stuff: Vehicles.SilverhandMkIV, count: 1 }]
+  ),
+  // Mass Production Factory: 1115 x Refined Materials → 3 crates of 3 x Silverhand - Mk. IV (9 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 1115 }],
+    [{ stuff: Vehicles.SilverhandMkIV, count: 9 }]
+  ),
+  // Mass Production Factory: 1394 x Refined Materials → 4 crates of 3 x Silverhand - Mk. IV (12 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 1394 }],
+    [{ stuff: Vehicles.SilverhandMkIV, count: 12 }]
+  ),
+  // Mass Production Factory: 1626 x Refined Materials → 5 crates of 3 x Silverhand - Mk. IV (15 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 1626 }],
+    [{ stuff: Vehicles.SilverhandMkIV, count: 15 }]
+  ),
+];
+
 export const assaultTankRecipes = new Map<string, IRecipe[]>([
   // Assault Tanks
   [Vehicles.Falchion, falchionRecipes],
+  [Vehicles.SilverhandMkIV, silverhandMkIVRecipes],
 ]);
