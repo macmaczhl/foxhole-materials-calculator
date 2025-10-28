@@ -107,7 +107,6 @@ const devittCaineMkIVMMRRecipes: IRecipe[] = [
   ),
 ];
 
-
 export const lightTankRecipes = new Map<string, IRecipe[]>([
   // Light Tanks
   [Vehicles.H5Hatchet, h5HatchetRecipes],
