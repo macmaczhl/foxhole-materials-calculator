@@ -125,11 +125,158 @@ describe("Assault Tanks", () => {
     });
   });
 
+  describe('85K-a "Spatha"', () => {
+    let recipes: IRecipe[];
+
+    beforeEach(() => {
+      recipes = RecipiesByStuff.get(Vehicles.Spatha)!;
+    });
+
+    test("has recipes defined", () => {
+      expect(RecipiesByStuff.has(Vehicles.Spatha)).toBe(true);
+      expect(recipes).toBeDefined();
+      expect(recipes!.length).toBe(1); // Only Small Assembly Station recipe
+    });
+
+    test("Small Assembly Station recipe requires Falchion chassis and materials", () => {
+      const recipe = recipes[0];
+      expect(recipe).toBeDefined();
+
+      // Check required materials
+      expect(recipe.required).toHaveLength(4);
+      expect(recipe.required).toContainEqual({
+        stuff: Vehicles.Falchion,
+        count: 1,
+      });
+      expect(recipe.required).toContainEqual({
+        stuff: Materials.ProcessedConstructionMaterials,
+        count: 8,
+      });
+      expect(recipe.required).toContainEqual({
+        stuff: Materials.AssemblyMaterialsI,
+        count: 10,
+      });
+      expect(recipe.required).toContainEqual({
+        stuff: Materials.AssemblyMaterialsIV,
+        count: 8,
+      });
+
+      // Check produced output
+      expect(recipe.produced).toEqual([
+        { stuff: Vehicles.Spatha, count: 1 },
+      ]);
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const recipe = recipes[0];
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.Spatha,
+        selectedRecipe: recipe,
+        recipes: recipes,
+        required: [],
+      };
+
+      const result = calculateComponents(recipeTree, 1);
+
+      expect(result.initial).toContainEqual({
+        stuff: Vehicles.Falchion,
+        count: 1,
+      });
+      expect(result.initial).toContainEqual({
+        stuff: Materials.ProcessedConstructionMaterials,
+        count: 8,
+      });
+      expect(result.initial).toContainEqual({
+        stuff: Materials.AssemblyMaterialsI,
+        count: 10,
+      });
+      expect(result.initial).toContainEqual({
+        stuff: Materials.AssemblyMaterialsIV,
+        count: 8,
+      });
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const recipe = recipes[0];
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.Spatha,
+        selectedRecipe: recipe,
+        recipes: recipes,
+        required: [],
+      };
+
+      const result = calculateComponents(recipeTree, 3);
+
+      expect(result.initial).toContainEqual({
+        stuff: Vehicles.Falchion,
+        count: 3,
+      });
+      expect(result.initial).toContainEqual({
+        stuff: Materials.ProcessedConstructionMaterials,
+        count: 24,
+      });
+      expect(result.initial).toContainEqual({
+        stuff: Materials.AssemblyMaterialsI,
+        count: 30,
+      });
+      expect(result.initial).toContainEqual({
+        stuff: Materials.AssemblyMaterialsIV,
+        count: 24,
+      });
+    });
+
+    test("all recipes produce 85K-a Spatha", () => {
+      recipes.forEach((recipe) => {
+        expect(recipe.produced.length).toBe(1);
+        expect(recipe.produced[0].stuff).toBe(Vehicles.Spatha);
+      });
+    });
+
+    test("requires Falchion chassis as prerequisite", () => {
+      recipes.forEach((recipe) => {
+        const hasFalchionRequirement = recipe.required.some(
+          (req) => req.stuff === Vehicles.Falchion
+        );
+        expect(hasFalchionRequirement).toBe(true);
+      });
+    });
+
+    test("Spatha requires upgrade materials beyond base Falchion", () => {
+      const recipe = recipes[0];
+
+      // Verify it requires high-tier assembly materials
+      const hasAssemblyMaterialsI = recipe.required.some(
+        (req) => req.stuff === Materials.AssemblyMaterialsI
+      );
+      const hasAssemblyMaterialsIV = recipe.required.some(
+        (req) => req.stuff === Materials.AssemblyMaterialsIV
+      );
+
+      expect(hasAssemblyMaterialsI).toBe(true);
+      expect(hasAssemblyMaterialsIV).toBe(true);
+    });
+  });
+
   describe("Recipe integration", () => {
     test("85K-b Falchion can be calculated without errors", () => {
       const recipes = RecipiesByStuff.get(Vehicles.Falchion)!;
       const recipeTree: RecipeTree = {
         stuff: Vehicles.Falchion,
+        selectedRecipe: recipes[0],
+        recipes: recipes,
+        required: [],
+      };
+
+      expect(() => {
+        const result = calculateComponents(recipeTree, 1);
+        expect(result.initial.length).toBeGreaterThan(0);
+      }).not.toThrow();
+    });
+
+    test("85K-a Spatha can be calculated without errors", () => {
+      const recipes = RecipiesByStuff.get(Vehicles.Spatha)!;
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.Spatha,
         selectedRecipe: recipes[0],
         recipes: recipes,
         required: [],

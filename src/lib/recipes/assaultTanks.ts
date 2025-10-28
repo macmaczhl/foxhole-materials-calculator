@@ -27,7 +27,22 @@ const falchionRecipes: IRecipe[] = [
   ),
 ];
 
+// 85K-a "Spatha" Assault Tank recipes
+const spathaRecipes: IRecipe[] = [
+  // Small Assembly Station: 1 x 85K-b "Falchion" + 8 x Processed Construction Materials + 10 x Assembly Materials I + 8 x Assembly Materials IV → 1 x 85K-a "Spatha"
+  createRecipe(
+    [
+      { stuff: Vehicles.Falchion, count: 1 },
+      { stuff: Materials.ProcessedConstructionMaterials, count: 8 },
+      { stuff: Materials.AssemblyMaterialsI, count: 10 },
+      { stuff: Materials.AssemblyMaterialsIV, count: 8 },
+    ],
+    [{ stuff: Vehicles.Spatha, count: 1 }]
+  ),
+];
+
 export const assaultTankRecipes = new Map<string, IRecipe[]>([
   // Assault Tanks
   [Vehicles.Falchion, falchionRecipes],
+  [Vehicles.Spatha, spathaRecipes],
 ]);
