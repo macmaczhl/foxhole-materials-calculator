@@ -93,6 +93,21 @@ const devittMkIIIRecipes: IRecipe[] = [
   ),
 ];
 
+// Devitt-Caine Mk. IV MMR Light Tank recipes
+const devittCaineMkIVMMRRecipes: IRecipe[] = [
+  // Small Assembly Station: 1 x Devitt Mk. III + 3 x Processed Construction Materials + 20 x Assembly Materials I + 3 x Assembly Materials IV → 1 x Devitt-Caine Mk. IV MMR
+  createRecipe(
+    [
+      { stuff: Vehicles.DevittMkIII, count: 1 },
+      { stuff: Materials.ProcessedConstructionMaterials, count: 3 },
+      { stuff: Materials.AssemblyMaterialsI, count: 20 },
+      { stuff: Materials.AssemblyMaterialsIV, count: 3 },
+    ],
+    [{ stuff: Vehicles.DevittCaineMkIVMMR, count: 1 }]
+  ),
+];
+
+
 export const lightTankRecipes = new Map<string, IRecipe[]>([
   // Light Tanks
   [Vehicles.H5Hatchet, h5HatchetRecipes],
@@ -100,4 +115,5 @@ export const lightTankRecipes = new Map<string, IRecipe[]>([
   [Vehicles.H10Pelekys, h10PelekysRecipes],
   [Vehicles.H19Vulcan, h19VulcanRecipes],
   [Vehicles.DevittMkIII, devittMkIIIRecipes],
+  [Vehicles.DevittCaineMkIVMMR, devittCaineMkIVMMRRecipes],
 ]);

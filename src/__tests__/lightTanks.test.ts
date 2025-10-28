@@ -31,6 +31,13 @@ describe("Light Tanks", () => {
       expect(recipes).toBeDefined();
       expect(recipes!.length).toBe(4); // 1 garage + 3 mass production
     });
+
+    test("Devitt-Caine Mk. IV MMR has recipes defined", () => {
+      expect(RecipiesByStuff.has(Vehicles.DevittCaineMkIVMMR)).toBe(true);
+      const recipes = RecipiesByStuff.get(Vehicles.DevittCaineMkIVMMR);
+      expect(recipes).toBeDefined();
+      expect(recipes!.length).toBe(1); // 1 Small Assembly Station recipe
+    });
   });
 
   describe('H-5 "Hatchet"', () => {
@@ -565,6 +572,112 @@ describe("Light Tanks", () => {
           Object.values(Vehicles).includes(req.stuff as Vehicles)
         );
         expect(hasVehicleRequirement).toBe(false);
+      });
+    });
+  });
+
+  describe("Devitt-Caine Mk. IV MMR", () => {
+    let recipes: IRecipe[];
+
+    beforeEach(() => {
+      recipes = RecipiesByStuff.get(Vehicles.DevittCaineMkIVMMR)!;
+    });
+
+    test("assembly station recipe requires correct materials", () => {
+      const assemblyRecipe = recipes[0];
+      expect(assemblyRecipe).toBeDefined();
+      expect(assemblyRecipe.required).toHaveLength(4);
+      expect(assemblyRecipe.required).toContainEqual({
+        stuff: Vehicles.DevittMkIII,
+        count: 1,
+      });
+      expect(assemblyRecipe.required).toContainEqual({
+        stuff: Materials.ProcessedConstructionMaterials,
+        count: 3,
+      });
+      expect(assemblyRecipe.required).toContainEqual({
+        stuff: Materials.AssemblyMaterialsI,
+        count: 20,
+      });
+      expect(assemblyRecipe.required).toContainEqual({
+        stuff: Materials.AssemblyMaterialsIV,
+        count: 3,
+      });
+      expect(assemblyRecipe.produced).toEqual([
+        { stuff: Vehicles.DevittCaineMkIVMMR, count: 1 },
+      ]);
+    });
+
+    test("produces Devitt-Caine Mk. IV MMR", () => {
+      recipes.forEach((recipe) => {
+        expect(recipe.produced.length).toBe(1);
+        expect(recipe.produced[0].stuff).toBe(Vehicles.DevittCaineMkIVMMR);
+      });
+    });
+
+    test("requires Devitt Mk. III as prerequisite", () => {
+      const assemblyRecipe = recipes[0];
+      const hasDevittMkIIIRequirement = assemblyRecipe.required.some(
+        (req) => req.stuff === Vehicles.DevittMkIII
+      );
+      expect(hasDevittMkIIIRequirement).toBe(true);
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const assemblyRecipe = recipes[0];
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.DevittCaineMkIVMMR,
+        selectedRecipe: assemblyRecipe,
+        recipes: recipes,
+        required: [],
+      };
+
+      const result = calculateComponents(recipeTree, 1);
+
+      expect(result.initial).toContainEqual({
+        stuff: Vehicles.DevittMkIII,
+        count: 1,
+      });
+      expect(result.initial).toContainEqual({
+        stuff: Materials.ProcessedConstructionMaterials,
+        count: 3,
+      });
+      expect(result.initial).toContainEqual({
+        stuff: Materials.AssemblyMaterialsI,
+        count: 20,
+      });
+      expect(result.initial).toContainEqual({
+        stuff: Materials.AssemblyMaterialsIV,
+        count: 3,
+      });
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const assemblyRecipe = recipes[0];
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.DevittCaineMkIVMMR,
+        selectedRecipe: assemblyRecipe,
+        recipes: recipes,
+        required: [],
+      };
+
+      const result = calculateComponents(recipeTree, 2);
+
+      expect(result.initial).toContainEqual({
+        stuff: Vehicles.DevittMkIII,
+        count: 2,
+      });
+      expect(result.initial).toContainEqual({
+        stuff: Materials.ProcessedConstructionMaterials,
+        count: 6,
+      });
+      expect(result.initial).toContainEqual({
+        stuff: Materials.AssemblyMaterialsI,
+        count: 40,
+      });
+      expect(result.initial).toContainEqual({
+        stuff: Materials.AssemblyMaterialsIV,
+        count: 6,
       });
     });
   });
