@@ -120,6 +120,7 @@ export enum Vehicles {
   Talos = '85V-g "Talos"',
   DevittMkIII = 'Devitt Mk. III',
   DevittIronhideMkIV = 'Devitt Ironhide Mk. IV',
+  Bardiche = '86K-a "Bardiche"',
 }
 
 export enum RawResources {
@@ -212,6 +213,7 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.Talos },
   { name: Vehicles.DevittMkIII },
   { name: Vehicles.DevittIronhideMkIV },
+  { name: Vehicles.Bardiche },
 ];
 
 export const stuffList: Stuff[] = availableMaterials;
