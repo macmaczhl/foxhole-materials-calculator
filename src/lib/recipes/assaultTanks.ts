@@ -105,6 +105,30 @@ const silverhandMkIVRecipes: IRecipe[] = [
   ),
 ];
 
+// 90T-v "Nemesis" Assault Tank recipes
+const nemesisRecipes: IRecipe[] = [
+  // Garage production: 150 x Refined Materials → 1 x 90T-v "Nemesis"
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 150 }],
+    [{ stuff: Vehicles.Nemesis, count: 1 }]
+  ),
+  // Mass Production Factory: 1080 x Refined Materials → 3 crates of 3 x 90T-v "Nemesis" (9 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 1080 }],
+    [{ stuff: Vehicles.Nemesis, count: 9 }]
+  ),
+  // Mass Production Factory: 1350 x Refined Materials → 4 crates of 3 x 90T-v "Nemesis" (12 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 1350 }],
+    [{ stuff: Vehicles.Nemesis, count: 12 }]
+  ),
+  // Mass Production Factory: 1575 x Refined Materials → 5 crates of 3 x 90T-v "Nemesis" (15 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 1575 }],
+    [{ stuff: Vehicles.Nemesis, count: 15 }]
+  ),
+];
+
 export const assaultTankRecipes = new Map<string, IRecipe[]>([
   // Assault Tanks
   [Vehicles.Falchion, falchionRecipes],
@@ -112,4 +136,5 @@ export const assaultTankRecipes = new Map<string, IRecipe[]>([
   [Vehicles.Talos, talosRecipes],
   [Vehicles.Bardiche, bardicheRecipes],
   [Vehicles.SilverhandMkIV, silverhandMkIVRecipes],
+  [Vehicles.Nemesis, nemesisRecipes],
 ]);
