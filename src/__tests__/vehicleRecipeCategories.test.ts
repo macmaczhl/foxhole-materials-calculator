@@ -10,6 +10,7 @@ import { logisticsVehicleRecipes } from "../lib/recipes/logisticsVehicles";
 import { scoutVehicleRecipes } from "../lib/recipes/scoutVehicles";
 import { lightTankRecipes } from "../lib/recipes/lightTanks";
 import { assaultTankRecipes } from "../lib/recipes/assaultTanks";
+import { destroyerTankRecipes } from "../lib/recipes/destroyerTanks";
 
 describe("Vehicle Recipe Organization", () => {
   describe("Category Files", () => {
@@ -103,6 +104,10 @@ describe("Vehicle Recipe Organization", () => {
       expect(assaultTankRecipes.has(Vehicles.Falchion)).toBe(true);
     });
 
+    test("destroyerTankRecipes contains destroyer tanks", () => {
+      expect(destroyerTankRecipes.has(Vehicles.NobleWidowMkXIV)).toBe(true);
+    });
+
     test("logisticsVehicleRecipes is empty (placeholder)", () => {
       expect(logisticsVehicleRecipes.size).toBe(0);
     });
@@ -121,7 +126,8 @@ describe("Vehicle Recipe Organization", () => {
         logisticsVehicleRecipes.size +
         scoutVehicleRecipes.size +
         lightTankRecipes.size +
-        assaultTankRecipes.size;
+        assaultTankRecipes.size +
+        destroyerTankRecipes.size;
 
       expect(vehicleRecipes.size).toBe(totalExpectedSize);
     });
@@ -173,6 +179,9 @@ describe("Vehicle Recipe Organization", () => {
         ...tankRecipes.keys(),
         ...logisticsVehicleRecipes.keys(),
         ...scoutVehicleRecipes.keys(),
+        ...lightTankRecipes.keys(),
+        ...assaultTankRecipes.keys(),
+        ...destroyerTankRecipes.keys(),
       ];
 
       // Check no duplicates across categories
