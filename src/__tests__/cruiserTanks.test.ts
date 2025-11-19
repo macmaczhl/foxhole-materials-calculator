@@ -10,6 +10,13 @@ describe("Cruiser Tanks", () => {
       expect(recipes).toBeDefined();
       expect(recipes!.length).toBe(4); // 1 garage + 3 mass production
     });
+
+    test("Gallagher Highwayman Mk. III has recipes defined", () => {
+      expect(RecipiesByStuff.has(Vehicles.GallagherHighwaymanMkIII)).toBe(true);
+      const recipes = RecipiesByStuff.get(Vehicles.GallagherHighwaymanMkIII);
+      expect(recipes).toBeDefined();
+      expect(recipes!.length).toBe(1); // 1 assembly station recipe
+    });
   });
 
   describe("Gallagher Brigand Mk. I", () => {
@@ -141,6 +148,66 @@ describe("Cruiser Tanks", () => {
       // Should use garage recipe: 5 x 150 = 750 refined materials
       expect(result.initial).toEqual([
         { stuff: Materials.RefinedMaterials, count: 750 },
+      ]);
+    });
+  });
+
+  describe("Gallagher Highwayman Mk. III", () => {
+    let recipes: IRecipe[];
+
+    beforeEach(() => {
+      recipes = RecipiesByStuff.get(Vehicles.GallagherHighwaymanMkIII)!;
+    });
+
+    test("assembly station recipe requires chassis and materials", () => {
+      const assemblyRecipe = recipes.find((r) => r.produced[0].count === 1);
+      expect(assemblyRecipe).toBeDefined();
+      expect(assemblyRecipe!.required).toEqual([
+        { stuff: Vehicles.GallagherBrigandMkI, count: 1 },
+        { stuff: Materials.ProcessedConstructionMaterials, count: 5 },
+        { stuff: Materials.AssemblyMaterialsII, count: 10 },
+        { stuff: Materials.AssemblyMaterialsIII, count: 5 },
+      ]);
+      expect(assemblyRecipe!.produced).toEqual([
+        { stuff: Vehicles.GallagherHighwaymanMkIII, count: 1 },
+      ]);
+    });
+
+    test("calculateComponents correctly computes resources for 1 Gallagher Highwayman Mk. III", () => {
+      const assemblyRecipe = recipes.find((r) => r.produced[0].count === 1)!;
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.GallagherHighwaymanMkIII,
+        selectedRecipe: assemblyRecipe,
+        recipes: recipes,
+        required: [],
+      };
+
+      const result = calculateComponents(recipeTree, 1);
+
+      expect(result.initial).toEqual([
+        { stuff: Vehicles.GallagherBrigandMkI, count: 1 },
+        { stuff: Materials.ProcessedConstructionMaterials, count: 5 },
+        { stuff: Materials.AssemblyMaterialsII, count: 10 },
+        { stuff: Materials.AssemblyMaterialsIII, count: 5 },
+      ]);
+    });
+
+    test("calculateComponents correctly computes resources for 3 Gallagher Highwayman Mk. III", () => {
+      const assemblyRecipe = recipes.find((r) => r.produced[0].count === 1)!;
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.GallagherHighwaymanMkIII,
+        selectedRecipe: assemblyRecipe,
+        recipes: recipes,
+        required: [],
+      };
+
+      const result = calculateComponents(recipeTree, 3);
+
+      expect(result.initial).toEqual([
+        { stuff: Vehicles.GallagherBrigandMkI, count: 3 },
+        { stuff: Materials.ProcessedConstructionMaterials, count: 15 },
+        { stuff: Materials.AssemblyMaterialsII, count: 30 },
+        { stuff: Materials.AssemblyMaterialsIII, count: 15 },
       ]);
     });
   });
