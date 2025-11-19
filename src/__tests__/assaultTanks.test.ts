@@ -714,4 +714,173 @@ describe("Assault Tanks", () => {
       }).not.toThrow();
     });
   });
+
+  describe('86K-c "Ranseur"', () => {
+    let recipes: IRecipe[];
+
+    beforeEach(() => {
+      recipes = RecipiesByStuff.get(Vehicles.Ranseur)!;
+    });
+
+    test('86K-c "Ranseur" has recipes defined', () => {
+      expect(RecipiesByStuff.has(Vehicles.Ranseur)).toBe(true);
+      expect(recipes).toBeDefined();
+      expect(recipes!.length).toBe(1); // Only Small Assembly Station recipe
+    });
+
+    test("Small Assembly Station recipe requires Bardiche chassis and materials", () => {
+      const recipe = recipes[0];
+      expect(recipe).toBeDefined();
+
+      // Check required materials
+      expect(recipe.required).toHaveLength(4);
+      expect(recipe.required).toContainEqual({
+        stuff: Vehicles.Bardiche,
+        count: 1,
+      });
+      expect(recipe.required).toContainEqual({
+        stuff: Materials.ProcessedConstructionMaterials,
+        count: 10,
+      });
+      expect(recipe.required).toContainEqual({
+        stuff: Materials.AssemblyMaterialsII,
+        count: 10,
+      });
+      expect(recipe.required).toContainEqual({
+        stuff: Materials.AssemblyMaterialsIII,
+        count: 10,
+      });
+
+      // Check produced output
+      expect(recipe.produced).toEqual([
+        { stuff: Vehicles.Ranseur, count: 1 },
+      ]);
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const recipe = recipes[0];
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.Ranseur,
+        selectedRecipe: recipe,
+        recipes: recipes,
+        required: [],
+      };
+
+      const result = calculateComponents(recipeTree, 1);
+
+      expect(result.initial).toContainEqual({
+        stuff: Vehicles.Bardiche,
+        count: 1,
+      });
+      expect(result.initial).toContainEqual({
+        stuff: Materials.ProcessedConstructionMaterials,
+        count: 10,
+      });
+      expect(result.initial).toContainEqual({
+        stuff: Materials.AssemblyMaterialsII,
+        count: 10,
+      });
+      expect(result.initial).toContainEqual({
+        stuff: Materials.AssemblyMaterialsIII,
+        count: 10,
+      });
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const recipe = recipes[0];
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.Ranseur,
+        selectedRecipe: recipe,
+        recipes: recipes,
+        required: [],
+      };
+
+      const result = calculateComponents(recipeTree, 3);
+
+      expect(result.initial).toContainEqual({
+        stuff: Vehicles.Bardiche,
+        count: 3,
+      });
+      expect(result.initial).toContainEqual({
+        stuff: Materials.ProcessedConstructionMaterials,
+        count: 30,
+      });
+      expect(result.initial).toContainEqual({
+        stuff: Materials.AssemblyMaterialsII,
+        count: 30,
+      });
+      expect(result.initial).toContainEqual({
+        stuff: Materials.AssemblyMaterialsIII,
+        count: 30,
+      });
+    });
+
+    test('all recipes produce 86K-c "Ranseur"', () => {
+      recipes.forEach((recipe) => {
+        expect(recipe.produced.length).toBe(1);
+        expect(recipe.produced[0].stuff).toBe(Vehicles.Ranseur);
+      });
+    });
+
+    test("requires Bardiche chassis as prerequisite", () => {
+      recipes.forEach((recipe) => {
+        const hasBardicheRequirement = recipe.required.some(
+          (req) => req.stuff === Vehicles.Bardiche
+        );
+        expect(hasBardicheRequirement).toBe(true);
+      });
+    });
+
+    test("Ranseur requires upgrade materials beyond base Bardiche", () => {
+      const recipe = recipes[0];
+
+      // Verify it requires mid-tier assembly materials
+      const hasAssemblyMaterialsII = recipe.required.some(
+        (req) => req.stuff === Materials.AssemblyMaterialsII
+      );
+      const hasAssemblyMaterialsIII = recipe.required.some(
+        (req) => req.stuff === Materials.AssemblyMaterialsIII
+      );
+
+      expect(hasAssemblyMaterialsII).toBe(true);
+      expect(hasAssemblyMaterialsIII).toBe(true);
+    });
+
+    test("Ranseur can be calculated without errors", () => {
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.Ranseur,
+        selectedRecipe: recipes[0],
+        recipes: recipes,
+        required: [],
+      };
+
+      expect(() => {
+        const result = calculateComponents(recipeTree, 1);
+        expect(result.initial.length).toBeGreaterThan(0);
+      }).not.toThrow();
+    });
+
+    test("is an upgrade variant of Bardiche with quad-mounted RPG launchers", () => {
+      const recipe = recipes[0];
+
+      // This is an upgrade/variant vehicle, so it should:
+      // 1. Require the base vehicle (Bardiche)
+      const requiresBardiche = recipe.required.some(
+        (req) => req.stuff === Vehicles.Bardiche
+      );
+      expect(requiresBardiche).toBe(true);
+
+      // 2. Require processed construction materials for modifications
+      const requiresPCM = recipe.required.some(
+        (req) => req.stuff === Materials.ProcessedConstructionMaterials
+      );
+      expect(requiresPCM).toBe(true);
+
+      // 3. Require assembly materials for the specialized equipment
+      const requiresAssemblyMats = recipe.required.some(
+        (req) => req.stuff === Materials.AssemblyMaterialsII || req.stuff === Materials.AssemblyMaterialsIII
+      );
+      expect(requiresAssemblyMats).toBe(true);
+    });
+  });
 });
