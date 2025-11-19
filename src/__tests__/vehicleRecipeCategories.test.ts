@@ -10,6 +10,7 @@ import { logisticsVehicleRecipes } from "../lib/recipes/logisticsVehicles";
 import { scoutVehicleRecipes } from "../lib/recipes/scoutVehicles";
 import { lightTankRecipes } from "../lib/recipes/lightTanks";
 import { assaultTankRecipes } from "../lib/recipes/assaultTanks";
+import { siegeTankRecipes } from "../lib/recipes/siegeTanks";
 
 describe("Vehicle Recipe Organization", () => {
   describe("Category Files", () => {
@@ -110,6 +111,11 @@ describe("Vehicle Recipe Organization", () => {
     test("scoutVehicleRecipes is empty (placeholder)", () => {
       expect(scoutVehicleRecipes.size).toBe(0);
     });
+
+    test("siegeTankRecipes contains siege tanks", () => {
+      expect(siegeTankRecipes.has(Vehicles.HC2Scorpion)).toBe(true);
+      expect(siegeTankRecipes.has(Vehicles.HC7Ballista)).toBe(true);
+    });
   });
 
   describe("Central Registry", () => {
@@ -121,7 +127,8 @@ describe("Vehicle Recipe Organization", () => {
         logisticsVehicleRecipes.size +
         scoutVehicleRecipes.size +
         lightTankRecipes.size +
-        assaultTankRecipes.size;
+        assaultTankRecipes.size +
+        siegeTankRecipes.size;
 
       expect(vehicleRecipes.size).toBe(totalExpectedSize);
     });
@@ -140,6 +147,11 @@ describe("Vehicle Recipe Organization", () => {
 
     test("vehicleRecipes contains recipes from tanks", () => {
       expect(vehicleRecipes.has(Vehicles.KingSpireMkI)).toBe(true);
+    });
+
+    test("vehicleRecipes contains recipes from siegeTanks", () => {
+      expect(vehicleRecipes.has(Vehicles.HC2Scorpion)).toBe(true);
+      expect(vehicleRecipes.has(Vehicles.HC7Ballista)).toBe(true);
     });
 
     test("all vehicle recipes return same data whether accessed from category or central registry", () => {

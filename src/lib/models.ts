@@ -127,6 +127,8 @@ export enum Vehicles {
   Bardiche = '86K-a "Bardiche"',
   Ranseur = '86K-c "Ranseur"',
   Nemesis = '90T-v "Nemesis"',
+  HC2Scorpion = 'HC-2 "Scorpion"',
+  HC7Ballista = 'HC-7 "Ballista"',
 }
 
 export enum RawResources {
@@ -226,6 +228,8 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.Bardiche },
   { name: Vehicles.Ranseur },
   { name: Vehicles.Nemesis },
+  { name: Vehicles.HC2Scorpion },
+  { name: Vehicles.HC7Ballista },
 ];
 
 export const stuffList: Stuff[] = availableMaterials;
