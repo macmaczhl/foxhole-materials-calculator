@@ -81,6 +81,20 @@ const bardicheRecipes: IRecipe[] = [
   ),
 ];
 
+// 86K-c "Ranseur" Assault Tank recipes
+const ranseurRecipes: IRecipe[] = [
+  // Small Assembly Station: 1 x 86K-a "Bardiche" + 10 x Processed Construction Materials + 10 x Assembly Materials II + 10 x Assembly Materials III → 1 x 86K-c "Ranseur"
+  createRecipe(
+    [
+      { stuff: Vehicles.Bardiche, count: 1 },
+      { stuff: Materials.ProcessedConstructionMaterials, count: 10 },
+      { stuff: Materials.AssemblyMaterialsII, count: 10 },
+      { stuff: Materials.AssemblyMaterialsIII, count: 10 },
+    ],
+    [{ stuff: Vehicles.Ranseur, count: 1 }]
+  ),
+];
+
 // Silverhand - Mk. IV Assault Tank recipes
 const silverhandMkIVRecipes: IRecipe[] = [
   // Garage production: 155 x Refined Materials → 1 x Silverhand - Mk. IV
@@ -149,6 +163,7 @@ export const assaultTankRecipes = new Map<string, IRecipe[]>([
   [Vehicles.Spatha, spathaRecipes],
   [Vehicles.Talos, talosRecipes],
   [Vehicles.Bardiche, bardicheRecipes],
+  [Vehicles.Ranseur, ranseurRecipes],
   [Vehicles.SilverhandMkIV, silverhandMkIVRecipes],
   [Vehicles.SilverhandLordscarMkX, silverhandLordscarMkXRecipes],
   [Vehicles.Nemesis, nemesisRecipes],
