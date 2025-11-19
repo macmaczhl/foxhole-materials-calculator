@@ -121,6 +121,30 @@ const devittCaineMkIVMMRRecipes: IRecipe[] = [
   ),
 ];
 
+// HC-2 "Scorpion" Light Infantry Tank recipes
+const hc2ScorpionRecipes: IRecipe[] = [
+  // Garage production: 100 x Refined Materials → 1 x HC-2 "Scorpion"
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 100 }],
+    [{ stuff: Vehicles.HC2Scorpion, count: 1 }]
+  ),
+  // Mass Production Factory: 720 x Refined Materials → 3 crates of 3 x HC-2 "Scorpion" (9 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 720 }],
+    [{ stuff: Vehicles.HC2Scorpion, count: 9 }]
+  ),
+  // Mass Production Factory: 900 x Refined Materials → 4 crates of 3 x HC-2 "Scorpion" (12 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 900 }],
+    [{ stuff: Vehicles.HC2Scorpion, count: 12 }]
+  ),
+  // Mass Production Factory: 1050 x Refined Materials → 5 crates of 3 x HC-2 "Scorpion" (15 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 1050 }],
+    [{ stuff: Vehicles.HC2Scorpion, count: 15 }]
+  ),
+];
+
 export const lightTankRecipes = new Map<string, IRecipe[]>([
   // Light Tanks
   [Vehicles.H5Hatchet, h5HatchetRecipes],
@@ -130,4 +154,5 @@ export const lightTankRecipes = new Map<string, IRecipe[]>([
   [Vehicles.DevittMkIII, devittMkIIIRecipes],
   [Vehicles.DevittIronhideMkIV, devittIronhideMkIVRecipes],
   [Vehicles.DevittCaineMkIVMMR, devittCaineMkIVMMRRecipes],
+  [Vehicles.HC2Scorpion, hc2ScorpionRecipes],
 ]);
