@@ -127,6 +127,7 @@ export enum Vehicles {
   Bardiche = '86K-a "Bardiche"',
   Ranseur = '86K-c "Ranseur"',
   Nemesis = '90T-v "Nemesis"',
+  GallagherBrigandMkI = 'Gallagher Brigand Mk. I',
 }
 
 export enum RawResources {
@@ -226,6 +227,7 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.Bardiche },
   { name: Vehicles.Ranseur },
   { name: Vehicles.Nemesis },
+  { name: Vehicles.GallagherBrigandMkI },
 ];
 
 export const stuffList: Stuff[] = availableMaterials;
