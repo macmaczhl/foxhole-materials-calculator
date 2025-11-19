@@ -11,6 +11,7 @@ import { scoutVehicleRecipes } from "../lib/recipes/scoutVehicles";
 import { lightTankRecipes } from "../lib/recipes/lightTanks";
 import { assaultTankRecipes } from "../lib/recipes/assaultTanks";
 import { battleTankRecipes } from "../lib/recipes/battleTanks";
+import { cruiserTankRecipes } from "../lib/recipes/cruiserTanks";
 
 describe("Vehicle Recipe Organization", () => {
   describe("Category Files", () => {
@@ -108,6 +109,10 @@ describe("Vehicle Recipe Organization", () => {
       expect(battleTankRecipes.has(Vehicles.FloodJuggernautMkVII)).toBe(true);
     });
 
+    test("cruiserTankRecipes contains cruiser tanks", () => {
+      expect(cruiserTankRecipes.has(Vehicles.GallagherBrigandMkI)).toBe(true);
+    });
+
     test("logisticsVehicleRecipes is empty (placeholder)", () => {
       expect(logisticsVehicleRecipes.size).toBe(0);
     });
@@ -127,7 +132,8 @@ describe("Vehicle Recipe Organization", () => {
         scoutVehicleRecipes.size +
         lightTankRecipes.size +
         assaultTankRecipes.size +
-        battleTankRecipes.size;
+        battleTankRecipes.size +
+        cruiserTankRecipes.size;
 
       expect(vehicleRecipes.size).toBe(totalExpectedSize);
     });
@@ -179,6 +185,10 @@ describe("Vehicle Recipe Organization", () => {
         ...tankRecipes.keys(),
         ...logisticsVehicleRecipes.keys(),
         ...scoutVehicleRecipes.keys(),
+        ...lightTankRecipes.keys(),
+        ...assaultTankRecipes.keys(),
+        ...battleTankRecipes.keys(),
+        ...cruiserTankRecipes.keys(),
       ];
 
       // Check no duplicates across categories
