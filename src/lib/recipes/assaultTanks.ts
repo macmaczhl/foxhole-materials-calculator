@@ -119,6 +119,20 @@ const silverhandMkIVRecipes: IRecipe[] = [
   ),
 ];
 
+// Silverhand Lordscar - Mk. X Assault Tank recipes
+const silverhandLordscarMkXRecipes: IRecipe[] = [
+  // Small Assembly Station (Weapons Platform) upgrade: 40 x Steel Construction Materials + 25 x Assembly Materials II + 25 x Assembly Materials III + 1 x Silverhand - Mk. IV → 1 x Silverhand Lordscar - Mk. X
+  createRecipe(
+    [
+      { stuff: Materials.SteelConstructionMaterials, count: 40 },
+      { stuff: Materials.AssemblyMaterialsII, count: 25 },
+      { stuff: Materials.AssemblyMaterialsIII, count: 25 },
+      { stuff: Vehicles.SilverhandMkIV, count: 1 },
+    ],
+    [{ stuff: Vehicles.SilverhandLordscarMkX, count: 1 }]
+  ),
+];
+
 // 90T-v "Nemesis" Assault Tank recipes
 const nemesisRecipes: IRecipe[] = [
   // Garage production: 150 x Refined Materials → 1 x 90T-v "Nemesis"
@@ -151,5 +165,6 @@ export const assaultTankRecipes = new Map<string, IRecipe[]>([
   [Vehicles.Bardiche, bardicheRecipes],
   [Vehicles.Ranseur, ranseurRecipes],
   [Vehicles.SilverhandMkIV, silverhandMkIVRecipes],
+  [Vehicles.SilverhandLordscarMkX, silverhandLordscarMkXRecipes],
   [Vehicles.Nemesis, nemesisRecipes],
 ]);
