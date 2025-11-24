@@ -10,6 +10,13 @@ describe("Destroyer Tanks", () => {
       expect(recipes).toBeDefined();
       expect(recipes!.length).toBe(4); // 1 garage + 3 mass production
     });
+
+    test("Noble Firebrand Mk. XVII has recipes defined", () => {
+      expect(RecipiesByStuff.has(Vehicles.NobleFirebrandMkXVII)).toBe(true);
+      const recipes = RecipiesByStuff.get(Vehicles.NobleFirebrandMkXVII);
+      expect(recipes).toBeDefined();
+      expect(recipes!.length).toBe(1); // 1 assembly station recipe
+    });
   });
 
   describe("Noble Widow MK. XIV", () => {
@@ -200,6 +207,142 @@ describe("Destroyer Tanks", () => {
       // Verify all mass production recipes produce multiples of 3
       massRecipes.forEach((recipe) => {
         expect(recipe.produced[0].count % 3).toBe(0);
+      });
+    });
+  });
+
+  describe("Noble Firebrand Mk. XVII", () => {
+    let recipes: IRecipe[];
+
+    beforeEach(() => {
+      recipes = RecipiesByStuff.get(Vehicles.NobleFirebrandMkXVII)!;
+    });
+
+    test("assembly station recipe requires correct materials", () => {
+      const recipe = recipes[0];
+      expect(recipe).toBeDefined();
+      expect(recipe.required).toEqual([
+        { stuff: Materials.ProcessedConstructionMaterials, count: 10 },
+        { stuff: Materials.AssemblyMaterialsII, count: 10 },
+        { stuff: Materials.AssemblyMaterialsIII, count: 15 },
+        { stuff: Vehicles.NobleWidowMkXIV, count: 1 },
+      ]);
+      expect(recipe.produced).toEqual([
+        { stuff: Vehicles.NobleFirebrandMkXVII, count: 1 },
+      ]);
+    });
+
+    test("requires Noble Widow MK. XIV as prerequisite", () => {
+      const recipe = recipes[0];
+      const hasPrerequisite = recipe.required.some(
+        (req) => req.stuff === Vehicles.NobleWidowMkXIV
+      );
+      expect(hasPrerequisite).toBe(true);
+    });
+
+    test("requires 10 Processed Construction Materials", () => {
+      const recipe = recipes[0];
+      const pcmReq = recipe.required.find(
+        (req) => req.stuff === Materials.ProcessedConstructionMaterials
+      );
+      expect(pcmReq).toBeDefined();
+      expect(pcmReq!.count).toBe(10);
+    });
+
+    test("requires 10 Assembly Materials II", () => {
+      const recipe = recipes[0];
+      const amIIReq = recipe.required.find(
+        (req) => req.stuff === Materials.AssemblyMaterialsII
+      );
+      expect(amIIReq).toBeDefined();
+      expect(amIIReq!.count).toBe(10);
+    });
+
+    test("requires 15 Assembly Materials III", () => {
+      const recipe = recipes[0];
+      const amIIIReq = recipe.required.find(
+        (req) => req.stuff === Materials.AssemblyMaterialsIII
+      );
+      expect(amIIIReq).toBeDefined();
+      expect(amIIIReq!.count).toBe(15);
+    });
+
+    test("produces Noble Firebrand Mk. XVII", () => {
+      const recipe = recipes[0];
+      expect(recipe.produced.length).toBe(1);
+      expect(recipe.produced[0].stuff).toBe(Vehicles.NobleFirebrandMkXVII);
+      expect(recipe.produced[0].count).toBe(1);
+    });
+
+    test("can be calculated without errors", () => {
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.NobleFirebrandMkXVII,
+        selectedRecipe: recipes[0],
+        recipes: recipes,
+        required: [],
+      };
+
+      expect(() => {
+        const result = calculateComponents(recipeTree, 1);
+        expect(result.initial.length).toBeGreaterThan(0);
+      }).not.toThrow();
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.NobleFirebrandMkXVII,
+        selectedRecipe: recipes[0],
+        recipes: recipes,
+        required: [],
+      };
+
+      const result = calculateComponents(recipeTree, 1);
+
+      // Should include all required materials
+      expect(result.initial).toContainEqual({
+        stuff: Materials.ProcessedConstructionMaterials,
+        count: 10,
+      });
+      expect(result.initial).toContainEqual({
+        stuff: Materials.AssemblyMaterialsII,
+        count: 10,
+      });
+      expect(result.initial).toContainEqual({
+        stuff: Materials.AssemblyMaterialsIII,
+        count: 15,
+      });
+      expect(result.initial).toContainEqual({
+        stuff: Vehicles.NobleWidowMkXIV,
+        count: 1,
+      });
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.NobleFirebrandMkXVII,
+        selectedRecipe: recipes[0],
+        recipes: recipes,
+        required: [],
+      };
+
+      const result = calculateComponents(recipeTree, 3);
+
+      // Should scale materials by 3
+      expect(result.initial).toContainEqual({
+        stuff: Materials.ProcessedConstructionMaterials,
+        count: 30,
+      });
+      expect(result.initial).toContainEqual({
+        stuff: Materials.AssemblyMaterialsII,
+        count: 30,
+      });
+      expect(result.initial).toContainEqual({
+        stuff: Materials.AssemblyMaterialsIII,
+        count: 45,
+      });
+      expect(result.initial).toContainEqual({
+        stuff: Vehicles.NobleWidowMkXIV,
+        count: 3,
       });
     });
   });
