@@ -109,6 +109,7 @@ export const ICONS_MAP = new Map<string, string>([
   [Vehicles.Ranseur, "MediumTank2TwinCVehicleIcon"],
   [Vehicles.Nemesis, "MediumTank3CItemIcon"],
   [Vehicles.NobleWidowMkXIV, "DestroyerTankWVehicleIcon"],
+  [Vehicles.FloodJuggernautMkVII, "BattleTankWarDefensiveVehicleIcon"],
   [Vehicles.GallagherBrigandMkI, "MediumTank2WIcon"],
   [Vehicles.GallagherHighwaymanMkIII, "MediumTank2MultiWIcon"],
   [Vehicles.GallagherThornfallMkVI, "MediumTank2IndirectWIcon"],
