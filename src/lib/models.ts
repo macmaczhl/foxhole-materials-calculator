@@ -138,6 +138,7 @@ export enum Vehicles {
   GallagherThornfallMkVI = 'Gallagher Thornfall Mk. VI',
   CullenPredatorMkIII = 'Cullen Predator Mk. III',
   Lance25Hasta = 'Lance-25 "Hasta"',
+  Lance36 = 'Lance-36',
 }
 
 export enum RawResources {
@@ -248,6 +249,7 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.GallagherThornfallMkVI },
   { name: Vehicles.CullenPredatorMkIII },
   { name: Vehicles.Lance25Hasta },
+  { name: Vehicles.Lance36 },
 ];
 
 export const stuffList: Stuff[] = availableMaterials;
