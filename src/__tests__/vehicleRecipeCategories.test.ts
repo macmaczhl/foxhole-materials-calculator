@@ -10,6 +10,7 @@ import { logisticsVehicleRecipes } from "../lib/recipes/logisticsVehicles";
 import { scoutVehicleRecipes } from "../lib/recipes/scoutVehicles";
 import { lightTankRecipes } from "../lib/recipes/lightTanks";
 import { assaultTankRecipes } from "../lib/recipes/assaultTanks";
+import { siegeTankRecipes } from "../lib/recipes/siegeTanks";
 import { destroyerTankRecipes } from "../lib/recipes/destroyerTanks";
 import { battleTankRecipes } from "../lib/recipes/battleTanks";
 import { cruiserTankRecipes } from "../lib/recipes/cruiserTanks";
@@ -129,6 +130,10 @@ describe("Vehicle Recipe Organization", () => {
     test("scoutVehicleRecipes is empty (placeholder)", () => {
       expect(scoutVehicleRecipes.size).toBe(0);
     });
+
+    test("siegeTankRecipes contains siege tanks", () => {
+      expect(siegeTankRecipes.has(Vehicles.HC7Ballista)).toBe(true);
+    });
   });
 
   describe("Central Registry", () => {
@@ -141,6 +146,7 @@ describe("Vehicle Recipe Organization", () => {
         scoutVehicleRecipes.size +
         lightTankRecipes.size +
         assaultTankRecipes.size +
+        siegeTankRecipes.size +
         destroyerTankRecipes.size +
         battleTankRecipes.size +
         cruiserTankRecipes.size;
@@ -162,6 +168,10 @@ describe("Vehicle Recipe Organization", () => {
 
     test("vehicleRecipes contains recipes from tanks", () => {
       expect(vehicleRecipes.has(Vehicles.KingSpireMkI)).toBe(true);
+    });
+
+    test("vehicleRecipes contains recipes from siegeTanks", () => {
+      expect(vehicleRecipes.has(Vehicles.HC7Ballista)).toBe(true);
     });
 
     test("all vehicle recipes return same data whether accessed from category or central registry", () => {
@@ -197,6 +207,7 @@ describe("Vehicle Recipe Organization", () => {
         ...scoutVehicleRecipes.keys(),
         ...lightTankRecipes.keys(),
         ...assaultTankRecipes.keys(),
+        ...siegeTankRecipes.keys(),
         ...destroyerTankRecipes.keys(),
         ...battleTankRecipes.keys(),
         ...cruiserTankRecipes.keys(),
