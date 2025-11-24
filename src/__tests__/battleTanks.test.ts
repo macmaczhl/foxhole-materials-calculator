@@ -10,6 +10,13 @@ describe("Battle Tanks", () => {
       expect(recipes).toBeDefined();
       expect(recipes!.length).toBe(1); // Only Large Assembly Station recipe
     });
+
+    test("Cullen Predator Mk. III has recipes defined", () => {
+      expect(RecipiesByStuff.has(Vehicles.CullenPredatorMkIII)).toBe(true);
+      const recipes = RecipiesByStuff.get(Vehicles.CullenPredatorMkIII);
+      expect(recipes).toBeDefined();
+      expect(recipes!.length).toBe(1); // Only Large Assembly Station recipe
+    });
   });
 
   describe("Flood Juggernaut Mk. VII", () => {
@@ -198,6 +205,157 @@ describe("Battle Tanks", () => {
       const recipes = RecipiesByStuff.get(Vehicles.FloodJuggernautMkVII)!;
 
       // Battle tanks can only be produced at Large Assembly Station
+      // No garage or mass production factory recipes
+      expect(recipes.length).toBe(1);
+      expect(recipes[0].produced[0].count).toBe(1);
+    });
+  });
+
+  describe("Cullen Predator Mk. III", () => {
+    let recipes: IRecipe[];
+
+    beforeEach(() => {
+      recipes = RecipiesByStuff.get(Vehicles.CullenPredatorMkIII)!;
+    });
+
+    test("Large Assembly Station recipe requires correct materials", () => {
+      const assemblyRecipe = recipes[0];
+      expect(assemblyRecipe).toBeDefined();
+      expect(assemblyRecipe.required).toEqual([
+        { stuff: Materials.SteelConstructionMaterials, count: 275 },
+        { stuff: Materials.AssemblyMaterialsIII, count: 105 },
+        { stuff: Materials.AssemblyMaterialsIV, count: 95 },
+        { stuff: Materials.AssemblyMaterialsV, count: 105 },
+        { stuff: Materials.RareAlloys, count: 3 },
+      ]);
+      expect(assemblyRecipe.produced).toEqual([
+        { stuff: Vehicles.CullenPredatorMkIII, count: 1 },
+      ]);
+    });
+
+    test("does not require another vehicle as prerequisite", () => {
+      recipes.forEach((recipe) => {
+        const hasVehicleRequirement = recipe.required.some((req) =>
+          Object.values(Vehicles).includes(req.stuff as Vehicles)
+        );
+        expect(hasVehicleRequirement).toBe(false);
+      });
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const assemblyRecipe = recipes[0];
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.CullenPredatorMkIII,
+        selectedRecipe: assemblyRecipe,
+        recipes: recipes,
+        required: [],
+      };
+
+      const result = calculateComponents(recipeTree, 1);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.SteelConstructionMaterials, count: 275 },
+        { stuff: Materials.AssemblyMaterialsIII, count: 105 },
+        { stuff: Materials.AssemblyMaterialsIV, count: 95 },
+        { stuff: Materials.AssemblyMaterialsV, count: 105 },
+        { stuff: Materials.RareAlloys, count: 3 },
+      ]);
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const assemblyRecipe = recipes[0];
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.CullenPredatorMkIII,
+        selectedRecipe: assemblyRecipe,
+        recipes: recipes,
+        required: [],
+      };
+
+      const result = calculateComponents(recipeTree, 2);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.SteelConstructionMaterials, count: 550 },
+        { stuff: Materials.AssemblyMaterialsIII, count: 210 },
+        { stuff: Materials.AssemblyMaterialsIV, count: 190 },
+        { stuff: Materials.AssemblyMaterialsV, count: 210 },
+        { stuff: Materials.RareAlloys, count: 6 },
+      ]);
+    });
+
+    test("all recipes produce Cullen Predator Mk. III", () => {
+      recipes.forEach((recipe) => {
+        expect(recipe.produced.length).toBe(1);
+        expect(recipe.produced[0].stuff).toBe(Vehicles.CullenPredatorMkIII);
+      });
+    });
+
+    test("requires high-tier assembly materials and rare alloys", () => {
+      const assemblyRecipe = recipes[0];
+      const hasSteelConstruction = assemblyRecipe.required.some(
+        (req) => req.stuff === Materials.SteelConstructionMaterials
+      );
+      const hasAssemblyMaterialsIII = assemblyRecipe.required.some(
+        (req) => req.stuff === Materials.AssemblyMaterialsIII
+      );
+      const hasAssemblyMaterialsIV = assemblyRecipe.required.some(
+        (req) => req.stuff === Materials.AssemblyMaterialsIV
+      );
+      const hasAssemblyMaterialsV = assemblyRecipe.required.some(
+        (req) => req.stuff === Materials.AssemblyMaterialsV
+      );
+      const hasRareAlloys = assemblyRecipe.required.some(
+        (req) => req.stuff === Materials.RareAlloys
+      );
+
+      expect(hasSteelConstruction).toBe(true);
+      expect(hasAssemblyMaterialsIII).toBe(true);
+      expect(hasAssemblyMaterialsIV).toBe(true);
+      expect(hasAssemblyMaterialsV).toBe(true);
+      expect(hasRareAlloys).toBe(true);
+    });
+
+    test("is a super tank requiring rare alloys", () => {
+      const assemblyRecipe = recipes[0];
+
+      // Super tanks should require rare alloys (unlike regular battle tanks)
+      const rareAlloysRequirement = assemblyRecipe.required.find(
+        (req) => req.stuff === Materials.RareAlloys
+      );
+      expect(rareAlloysRequirement).toBeDefined();
+      expect(rareAlloysRequirement!.count).toBe(3);
+    });
+
+    test("Cullen Predator Mk. III can be calculated without errors", () => {
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.CullenPredatorMkIII,
+        selectedRecipe: recipes[0],
+        recipes: recipes,
+        required: [],
+      };
+
+      expect(() => {
+        const result = calculateComponents(recipeTree, 1);
+        expect(result.initial.length).toBeGreaterThan(0);
+      }).not.toThrow();
+    });
+
+    test("requires very high steel construction materials for super heavy armor", () => {
+      const assemblyRecipe = recipes[0];
+      const steelRequirement = assemblyRecipe.required.find(
+        (req) => req.stuff === Materials.SteelConstructionMaterials
+      );
+
+      expect(steelRequirement).toBeDefined();
+      expect(steelRequirement!.count).toBe(275);
+    });
+
+    test("has 5 different material requirements", () => {
+      const assemblyRecipe = recipes[0];
+      expect(assemblyRecipe.required.length).toBe(5);
+    });
+
+    test("Large Assembly Station is the only production method", () => {
+      // Super tanks can only be produced at Large Assembly Station
       // No garage or mass production factory recipes
       expect(recipes.length).toBe(1);
       expect(recipes[0].produced[0].count).toBe(1);
