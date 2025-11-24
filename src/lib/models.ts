@@ -130,11 +130,13 @@ export enum Vehicles {
   Nemesis = '90T-v "Nemesis"',
   HC7Ballista = 'HC-7 "Ballista"',
   NobleWidowMkXIV = 'Noble Widow MK. XIV',
+  FloodMkI = 'Flood Mk. I',
   FloodJuggernautMkVII = 'Flood Juggernaut Mk. VII',
   FloodMkIXStain = 'Flood Mk. IX Stain',
   GallagherBrigandMkI = 'Gallagher Brigand Mk. I',
   GallagherHighwaymanMkIII = 'Gallagher Highwayman Mk. III',
   GallagherThornfallMkVI = 'Gallagher Thornfall Mk. VI',
+  CullenPredatorMkIII = 'Cullen Predator Mk. III',
 }
 
 export enum RawResources {
@@ -237,11 +239,13 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.Nemesis },
   { name: Vehicles.HC7Ballista },
   { name: Vehicles.NobleWidowMkXIV },
+  { name: Vehicles.FloodMkI },
   { name: Vehicles.FloodJuggernautMkVII },
   { name: Vehicles.FloodMkIXStain },
   { name: Vehicles.GallagherBrigandMkI },
   { name: Vehicles.GallagherHighwaymanMkIII },
   { name: Vehicles.GallagherThornfallMkVI },
+  { name: Vehicles.CullenPredatorMkIII },
 ];
 
 export const stuffList: Stuff[] = availableMaterials;
