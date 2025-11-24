@@ -11,6 +11,7 @@ import { scoutVehicleRecipes } from "../lib/recipes/scoutVehicles";
 import { lightTankRecipes } from "../lib/recipes/lightTanks";
 import { assaultTankRecipes } from "../lib/recipes/assaultTanks";
 import { siegeTankRecipes } from "../lib/recipes/siegeTanks";
+import { cruiserTankRecipes } from "../lib/recipes/cruiserTanks";
 
 describe("Vehicle Recipe Organization", () => {
   describe("Category Files", () => {
@@ -104,6 +105,10 @@ describe("Vehicle Recipe Organization", () => {
       expect(assaultTankRecipes.has(Vehicles.Falchion)).toBe(true);
     });
 
+    test("cruiserTankRecipes contains cruiser tanks", () => {
+      expect(cruiserTankRecipes.has(Vehicles.GallagherBrigandMkI)).toBe(true);
+    });
+
     test("logisticsVehicleRecipes is empty (placeholder)", () => {
       expect(logisticsVehicleRecipes.size).toBe(0);
     });
@@ -113,7 +118,6 @@ describe("Vehicle Recipe Organization", () => {
     });
 
     test("siegeTankRecipes contains siege tanks", () => {
-      expect(siegeTankRecipes.has(Vehicles.HC2Scorpion)).toBe(true);
       expect(siegeTankRecipes.has(Vehicles.HC7Ballista)).toBe(true);
     });
   });
@@ -128,7 +132,8 @@ describe("Vehicle Recipe Organization", () => {
         scoutVehicleRecipes.size +
         lightTankRecipes.size +
         assaultTankRecipes.size +
-        siegeTankRecipes.size;
+        siegeTankRecipes.size +
+        cruiserTankRecipes.size;
 
       expect(vehicleRecipes.size).toBe(totalExpectedSize);
     });
@@ -150,7 +155,6 @@ describe("Vehicle Recipe Organization", () => {
     });
 
     test("vehicleRecipes contains recipes from siegeTanks", () => {
-      expect(vehicleRecipes.has(Vehicles.HC2Scorpion)).toBe(true);
       expect(vehicleRecipes.has(Vehicles.HC7Ballista)).toBe(true);
     });
 
@@ -185,6 +189,10 @@ describe("Vehicle Recipe Organization", () => {
         ...tankRecipes.keys(),
         ...logisticsVehicleRecipes.keys(),
         ...scoutVehicleRecipes.keys(),
+        ...lightTankRecipes.keys(),
+        ...assaultTankRecipes.keys(),
+        ...siegeTankRecipes.keys(),
+        ...cruiserTankRecipes.keys(),
       ];
 
       // Check no duplicates across categories
