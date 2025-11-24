@@ -114,4 +114,5 @@ export const ICONS_MAP = new Map<string, string>([
   [Vehicles.GallagherBrigandMkI, "MediumTank2WIcon"],
   [Vehicles.GallagherHighwaymanMkIII, "MediumTank2MultiWIcon"],
   [Vehicles.GallagherThornfallMkVI, "MediumTank2IndirectWIcon"],
+  [Vehicles.CullenPredatorMkIII, "SuperTankWVehicleIcon"],
 ]);
