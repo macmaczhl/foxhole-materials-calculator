@@ -111,6 +111,9 @@ describe("Vehicle Recipe Organization", () => {
 
     test("cruiserTankRecipes contains cruiser tanks", () => {
       expect(cruiserTankRecipes.has(Vehicles.GallagherBrigandMkI)).toBe(true);
+      expect(cruiserTankRecipes.has(Vehicles.GallagherThornfallMkVI)).toBe(
+        true
+      );
     });
 
     test("logisticsVehicleRecipes is empty (placeholder)", () => {

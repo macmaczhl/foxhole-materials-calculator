@@ -10,6 +10,13 @@ describe("Cruiser Tanks", () => {
       expect(recipes).toBeDefined();
       expect(recipes!.length).toBe(4); // 1 garage + 3 mass production
     });
+
+    test("Gallagher Thornfall Mk. VI has recipes defined", () => {
+      expect(RecipiesByStuff.has(Vehicles.GallagherThornfallMkVI)).toBe(true);
+      const recipes = RecipiesByStuff.get(Vehicles.GallagherThornfallMkVI);
+      expect(recipes).toBeDefined();
+      expect(recipes!.length).toBe(1); // 1 small assembly station recipe
+    });
   });
 
   describe("Gallagher Brigand Mk. I", () => {
@@ -141,6 +148,69 @@ describe("Cruiser Tanks", () => {
       // Should use garage recipe: 5 x 150 = 750 refined materials
       expect(result.initial).toEqual([
         { stuff: Materials.RefinedMaterials, count: 750 },
+      ]);
+    });
+  });
+
+  describe("Gallagher Thornfall Mk. VI", () => {
+    let recipes: IRecipe[];
+
+    beforeEach(() => {
+      recipes = RecipiesByStuff.get(Vehicles.GallagherThornfallMkVI)!;
+    });
+
+    test("small assembly station recipe requires 1 Brigand + materials", () => {
+      const assemblyRecipe = recipes.find((r) => r.produced[0].count === 1);
+      expect(assemblyRecipe).toBeDefined();
+      expect(assemblyRecipe!.required).toEqual([
+        { stuff: Vehicles.GallagherBrigandMkI, count: 1 },
+        { stuff: Materials.ProcessedConstructionMaterials, count: 60 },
+        { stuff: Materials.AssemblyMaterialsI, count: 10 },
+        { stuff: Materials.AssemblyMaterialsIII, count: 15 },
+        { stuff: Materials.AssemblyMaterialsIV, count: 15 },
+      ]);
+      expect(assemblyRecipe!.produced).toEqual([
+        { stuff: Vehicles.GallagherThornfallMkVI, count: 1 },
+      ]);
+    });
+
+    test("calculateComponents correctly computes resources for 1 Gallagher Thornfall Mk. VI", () => {
+      const assemblyRecipe = recipes.find((r) => r.produced[0].count === 1)!;
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.GallagherThornfallMkVI,
+        selectedRecipe: assemblyRecipe,
+        recipes: recipes,
+        required: [],
+      };
+
+      const result = calculateComponents(recipeTree, 1);
+
+      expect(result.initial).toEqual([
+        { stuff: Vehicles.GallagherBrigandMkI, count: 1 },
+        { stuff: Materials.ProcessedConstructionMaterials, count: 60 },
+        { stuff: Materials.AssemblyMaterialsI, count: 10 },
+        { stuff: Materials.AssemblyMaterialsIII, count: 15 },
+        { stuff: Materials.AssemblyMaterialsIV, count: 15 },
+      ]);
+    });
+
+    test("calculateComponents correctly computes resources for multiple Gallagher Thornfall Mk. VI", () => {
+      const assemblyRecipe = recipes.find((r) => r.produced[0].count === 1)!;
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.GallagherThornfallMkVI,
+        selectedRecipe: assemblyRecipe,
+        recipes: recipes,
+        required: [],
+      };
+
+      const result = calculateComponents(recipeTree, 3);
+
+      expect(result.initial).toEqual([
+        { stuff: Vehicles.GallagherBrigandMkI, count: 3 },
+        { stuff: Materials.ProcessedConstructionMaterials, count: 180 },
+        { stuff: Materials.AssemblyMaterialsI, count: 30 },
+        { stuff: Materials.AssemblyMaterialsIII, count: 45 },
+        { stuff: Materials.AssemblyMaterialsIV, count: 45 },
       ]);
     });
   });
