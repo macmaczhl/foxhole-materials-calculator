@@ -129,6 +129,7 @@ export enum Vehicles {
   Ranseur = '86K-c "Ranseur"',
   Nemesis = '90T-v "Nemesis"',
   GallagherBrigandMkI = 'Gallagher Brigand Mk. I',
+  GallagherHighwaymanMkIII = 'Gallagher Highwayman Mk. III',
   GallagherThornfallMkVI = 'Gallagher Thornfall Mk. VI',
 }
 
@@ -231,6 +232,7 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.Ranseur },
   { name: Vehicles.Nemesis },
   { name: Vehicles.GallagherBrigandMkI },
+  { name: Vehicles.GallagherHighwaymanMkIII },
   { name: Vehicles.GallagherThornfallMkVI },
 ];
 
