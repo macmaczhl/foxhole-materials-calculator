@@ -17,7 +17,22 @@ const floodJuggernautMkVIIRecipes: IRecipe[] = [
   ),
 ];
 
+// Flood Mk. IX Stain Battle Tank recipes
+const floodMkIXStainRecipes: IRecipe[] = [
+  // Large Assembly Station (Heavy Tank Assembly): 150 x Steel Construction Materials + 65 x Assembly Materials III + 40 x Assembly Materials IV + 85 x Assembly Materials V → 1 x Flood Mk. IX Stain
+  createRecipe(
+    [
+      { stuff: Materials.SteelConstructionMaterials, count: 150 },
+      { stuff: Materials.AssemblyMaterialsIII, count: 65 },
+      { stuff: Materials.AssemblyMaterialsIV, count: 40 },
+      { stuff: Materials.AssemblyMaterialsV, count: 85 },
+    ],
+    [{ stuff: Vehicles.FloodMkIXStain, count: 1 }]
+  ),
+];
+
 export const battleTankRecipes = new Map<string, IRecipe[]>([
   // Battle Tanks
   [Vehicles.FloodJuggernautMkVII, floodJuggernautMkVIIRecipes],
+  [Vehicles.FloodMkIXStain, floodMkIXStainRecipes],
 ]);
