@@ -32,8 +32,23 @@ const cullenPredatorMkIIIRecipes: IRecipe[] = [
   ),
 ];
 
+// Lance-25 "Hasta" Battle Tank Destroyer recipes
+const lance25HastaRecipes: IRecipe[] = [
+  // Large Assembly Station (Heavy Tank Assembly): 60 x Steel Construction Materials + 65 x Assembly Materials III + 45 x Assembly Materials IV + 65 x Assembly Materials V → 1 x Lance-25 "Hasta"
+  createRecipe(
+    [
+      { stuff: Materials.SteelConstructionMaterials, count: 60 },
+      { stuff: Materials.AssemblyMaterialsIII, count: 65 },
+      { stuff: Materials.AssemblyMaterialsIV, count: 45 },
+      { stuff: Materials.AssemblyMaterialsV, count: 65 },
+    ],
+    [{ stuff: Vehicles.Lance25Hasta, count: 1 }]
+  ),
+];
+
 export const battleTankRecipes = new Map<string, IRecipe[]>([
   // Battle Tanks
   [Vehicles.FloodJuggernautMkVII, floodJuggernautMkVIIRecipes],
   [Vehicles.CullenPredatorMkIII, cullenPredatorMkIIIRecipes],
+  [Vehicles.Lance25Hasta, lance25HastaRecipes],
 ]);

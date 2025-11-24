@@ -361,4 +361,165 @@ describe("Battle Tanks", () => {
       expect(recipes[0].produced[0].count).toBe(1);
     });
   });
+
+  describe("Lance-25 Hasta", () => {
+    let recipes: IRecipe[];
+
+    beforeEach(() => {
+      recipes = RecipiesByStuff.get(Vehicles.Lance25Hasta)!;
+    });
+
+    test("has recipes defined", () => {
+      expect(RecipiesByStuff.has(Vehicles.Lance25Hasta)).toBe(true);
+      expect(recipes).toBeDefined();
+      expect(recipes!.length).toBe(1); // Only Large Assembly Station recipe
+    });
+
+    test("Large Assembly Station recipe requires correct materials", () => {
+      const assemblyRecipe = recipes[0];
+      expect(assemblyRecipe).toBeDefined();
+      expect(assemblyRecipe.required).toEqual([
+        { stuff: Materials.SteelConstructionMaterials, count: 60 },
+        { stuff: Materials.AssemblyMaterialsIII, count: 65 },
+        { stuff: Materials.AssemblyMaterialsIV, count: 45 },
+        { stuff: Materials.AssemblyMaterialsV, count: 65 },
+      ]);
+      expect(assemblyRecipe.produced).toEqual([
+        { stuff: Vehicles.Lance25Hasta, count: 1 },
+      ]);
+    });
+
+    test("does not require another vehicle as prerequisite", () => {
+      recipes.forEach((recipe) => {
+        const hasVehicleRequirement = recipe.required.some((req) =>
+          Object.values(Vehicles).includes(req.stuff as Vehicles)
+        );
+        expect(hasVehicleRequirement).toBe(false);
+      });
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const assemblyRecipe = recipes[0];
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.Lance25Hasta,
+        selectedRecipe: assemblyRecipe,
+        recipes: recipes,
+        required: [],
+      };
+
+      const result = calculateComponents(recipeTree, 1);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.SteelConstructionMaterials, count: 60 },
+        { stuff: Materials.AssemblyMaterialsIII, count: 65 },
+        { stuff: Materials.AssemblyMaterialsIV, count: 45 },
+        { stuff: Materials.AssemblyMaterialsV, count: 65 },
+      ]);
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const assemblyRecipe = recipes[0];
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.Lance25Hasta,
+        selectedRecipe: assemblyRecipe,
+        recipes: recipes,
+        required: [],
+      };
+
+      const result = calculateComponents(recipeTree, 3);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.SteelConstructionMaterials, count: 180 },
+        { stuff: Materials.AssemblyMaterialsIII, count: 195 },
+        { stuff: Materials.AssemblyMaterialsIV, count: 135 },
+        { stuff: Materials.AssemblyMaterialsV, count: 195 },
+      ]);
+    });
+
+    test("all recipes produce Lance-25 Hasta", () => {
+      recipes.forEach((recipe) => {
+        expect(recipe.produced.length).toBe(1);
+        expect(recipe.produced[0].stuff).toBe(Vehicles.Lance25Hasta);
+      });
+    });
+
+    test("requires high-tier assembly materials", () => {
+      const assemblyRecipe = recipes[0];
+      const hasSteelConstruction = assemblyRecipe.required.some(
+        (req) => req.stuff === Materials.SteelConstructionMaterials
+      );
+      const hasAssemblyMaterialsIII = assemblyRecipe.required.some(
+        (req) => req.stuff === Materials.AssemblyMaterialsIII
+      );
+      const hasAssemblyMaterialsIV = assemblyRecipe.required.some(
+        (req) => req.stuff === Materials.AssemblyMaterialsIV
+      );
+      const hasAssemblyMaterialsV = assemblyRecipe.required.some(
+        (req) => req.stuff === Materials.AssemblyMaterialsV
+      );
+
+      expect(hasSteelConstruction).toBe(true);
+      expect(hasAssemblyMaterialsIII).toBe(true);
+      expect(hasAssemblyMaterialsIV).toBe(true);
+      expect(hasAssemblyMaterialsV).toBe(true);
+    });
+
+    test("is a battle tank destroyer requiring only advanced materials", () => {
+      const assemblyRecipe = recipes[0];
+
+      // Battle tank destroyers should require only high-tier materials, no basic refined materials
+      const hasRefinedMaterials = assemblyRecipe.required.some(
+        (req) => req.stuff === Materials.RefinedMaterials
+      );
+      expect(hasRefinedMaterials).toBe(false);
+
+      // Should require steel construction materials (advanced armor)
+      const hasSteel = assemblyRecipe.required.some(
+        (req) => req.stuff === Materials.SteelConstructionMaterials
+      );
+      expect(hasSteel).toBe(true);
+
+      // Should require highest tier assembly materials
+      const hasAssemblyV = assemblyRecipe.required.some(
+        (req) => req.stuff === Materials.AssemblyMaterialsV
+      );
+      expect(hasAssemblyV).toBe(true);
+    });
+
+    test("Lance-25 Hasta can be calculated without errors", () => {
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.Lance25Hasta,
+        selectedRecipe: recipes[0],
+        recipes: recipes,
+        required: [],
+      };
+
+      expect(() => {
+        const result = calculateComponents(recipeTree, 1);
+        expect(result.initial.length).toBeGreaterThan(0);
+      }).not.toThrow();
+    });
+
+    test("requires 60 steel construction materials for heavy armor", () => {
+      const assemblyRecipe = recipes[0];
+      const steelRequirement = assemblyRecipe.required.find(
+        (req) => req.stuff === Materials.SteelConstructionMaterials
+      );
+
+      expect(steelRequirement).toBeDefined();
+      expect(steelRequirement!.count).toBe(60);
+    });
+
+    test("has 4 different material requirements", () => {
+      const assemblyRecipe = recipes[0];
+      expect(assemblyRecipe.required.length).toBe(4);
+    });
+
+    test("Large Assembly Station is the only production method", () => {
+      // Battle tank destroyers can only be produced at Large Assembly Station
+      // No garage or mass production factory recipes
+      expect(recipes.length).toBe(1);
+      expect(recipes[0].produced[0].count).toBe(1);
+    });
+  });
 });
