@@ -136,6 +136,7 @@ export enum Vehicles {
   GallagherBrigandMkI = 'Gallagher Brigand Mk. I',
   GallagherHighwaymanMkIII = 'Gallagher Highwayman Mk. III',
   GallagherThornfallMkVI = 'Gallagher Thornfall Mk. VI',
+  GallagherOutlawMkII = 'Gallagher Outlaw Mk. II',
   CullenPredatorMkIII = 'Cullen Predator Mk. III',
   Lance25Hasta = 'Lance-25 "Hasta"',
 }
@@ -246,6 +247,7 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.GallagherBrigandMkI },
   { name: Vehicles.GallagherHighwaymanMkIII },
   { name: Vehicles.GallagherThornfallMkVI },
+  { name: Vehicles.GallagherOutlawMkII },
   { name: Vehicles.CullenPredatorMkIII },
   { name: Vehicles.Lance25Hasta },
 ];
