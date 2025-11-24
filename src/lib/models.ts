@@ -136,6 +136,9 @@ export enum Vehicles {
   GallagherHighwaymanMkIII = 'Gallagher Highwayman Mk. III',
   GallagherThornfallMkVI = 'Gallagher Thornfall Mk. VI',
   CullenPredatorMkIII = 'Cullen Predator Mk. III',
+  // Logistics Vehicles - Fuel Tankers
+  DunneFuelrunner2d = 'Dunne Fuelrunner 2d',
+  RR3StolonTanker = 'RR-3 "Stolon" Tanker',
 }
 
 export enum RawResources {
@@ -147,6 +150,7 @@ export enum RawResources {
   Sulfur = "Sulfur",
   RareMetal = "Rare Metal",
   HeavyExplosivePowder = "Heavy Explosive Powder",
+  BasicMaterials = "Basic Materials",
 }
 
 export const availableMaterials: Stuff[] = [
@@ -244,6 +248,9 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.GallagherHighwaymanMkIII },
   { name: Vehicles.GallagherThornfallMkVI },
   { name: Vehicles.CullenPredatorMkIII },
+  // Logistics Vehicles - Fuel Tankers
+  { name: Vehicles.DunneFuelrunner2d },
+  { name: Vehicles.RR3StolonTanker },
 ];
 
 export const stuffList: Stuff[] = availableMaterials;

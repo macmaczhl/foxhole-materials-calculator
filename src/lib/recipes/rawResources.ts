@@ -44,4 +44,5 @@ export const rawResourceRecipes = new Map<string, IRecipe[]>([
   emptyRecipePair(RawResources.Sulfur),
   emptyRecipePair(RawResources.RareMetal),
   emptyRecipePair(RawResources.HeavyExplosivePowder),
+  emptyRecipePair(RawResources.BasicMaterials),
 ]);

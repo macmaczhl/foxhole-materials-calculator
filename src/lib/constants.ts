@@ -44,6 +44,7 @@ export const ICONS_MAP = new Map<string, string>([
   [RawResources.Sulfur, "SulfurIcon"],
   [RawResources.RareMetal, "RareMaterialsIcon"],
   [RawResources.HeavyExplosivePowder, "HeavyExplosiveMaterialsIcon"],
+  [RawResources.BasicMaterials, "BasicMaterialsIcon"],
 
   // Vehicles
   [Vehicles.Xiphos, "ArmoredCarVehicleIcon"],
@@ -116,4 +117,7 @@ export const ICONS_MAP = new Map<string, string>([
   [Vehicles.GallagherHighwaymanMkIII, "MediumTank2MultiWIcon"],
   [Vehicles.GallagherThornfallMkVI, "MediumTank2IndirectWIcon"],
   [Vehicles.CullenPredatorMkIII, "SuperTankWVehicleIcon"],
+  // Logistics Vehicles - Fuel Tankers
+  [Vehicles.DunneFuelrunner2d, "OilTankerWarIcon"],
+  [Vehicles.RR3StolonTanker, "OilTankerIcon"],
 ]);
