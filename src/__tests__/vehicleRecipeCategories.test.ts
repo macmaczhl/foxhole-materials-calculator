@@ -11,6 +11,8 @@ import { scoutVehicleRecipes } from "../lib/recipes/scoutVehicles";
 import { lightTankRecipes } from "../lib/recipes/lightTanks";
 import { assaultTankRecipes } from "../lib/recipes/assaultTanks";
 import { siegeTankRecipes } from "../lib/recipes/siegeTanks";
+import { destroyerTankRecipes } from "../lib/recipes/destroyerTanks";
+import { battleTankRecipes } from "../lib/recipes/battleTanks";
 import { cruiserTankRecipes } from "../lib/recipes/cruiserTanks";
 
 describe("Vehicle Recipe Organization", () => {
@@ -105,8 +107,20 @@ describe("Vehicle Recipe Organization", () => {
       expect(assaultTankRecipes.has(Vehicles.Falchion)).toBe(true);
     });
 
+    test("destroyerTankRecipes contains destroyer tanks", () => {
+      expect(destroyerTankRecipes.has(Vehicles.NobleWidowMkXIV)).toBe(true);
+    });
+
+    test("battleTankRecipes contains battle tanks", () => {
+      expect(battleTankRecipes.has(Vehicles.FloodJuggernautMkVII)).toBe(true);
+    });
+
     test("cruiserTankRecipes contains cruiser tanks", () => {
       expect(cruiserTankRecipes.has(Vehicles.GallagherBrigandMkI)).toBe(true);
+      expect(cruiserTankRecipes.has(Vehicles.GallagherHighwaymanMkIII)).toBe(true);
+      expect(cruiserTankRecipes.has(Vehicles.GallagherThornfallMkVI)).toBe(
+        true
+      );
     });
 
     test("logisticsVehicleRecipes is empty (placeholder)", () => {
@@ -133,6 +147,8 @@ describe("Vehicle Recipe Organization", () => {
         lightTankRecipes.size +
         assaultTankRecipes.size +
         siegeTankRecipes.size +
+        destroyerTankRecipes.size +
+        battleTankRecipes.size +
         cruiserTankRecipes.size;
 
       expect(vehicleRecipes.size).toBe(totalExpectedSize);
@@ -192,6 +208,8 @@ describe("Vehicle Recipe Organization", () => {
         ...lightTankRecipes.keys(),
         ...assaultTankRecipes.keys(),
         ...siegeTankRecipes.keys(),
+        ...destroyerTankRecipes.keys(),
+        ...battleTankRecipes.keys(),
         ...cruiserTankRecipes.keys(),
       ];
 
