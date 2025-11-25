@@ -24,6 +24,13 @@ describe("Cruiser Tanks", () => {
       expect(recipes).toBeDefined();
       expect(recipes!.length).toBe(1); // 1 small assembly station recipe
     });
+
+    test("Gallagher Outlaw Mk. II has recipes defined", () => {
+      expect(RecipiesByStuff.has(Vehicles.GallagherOutlawMkII)).toBe(true);
+      const recipes = RecipiesByStuff.get(Vehicles.GallagherOutlawMkII);
+      expect(recipes).toBeDefined();
+      expect(recipes!.length).toBe(1); // 1 small assembly station recipe
+    });
   });
 
   describe("Gallagher Brigand Mk. I", () => {
@@ -278,6 +285,72 @@ describe("Cruiser Tanks", () => {
         { stuff: Materials.AssemblyMaterialsI, count: 30 },
         { stuff: Materials.AssemblyMaterialsIII, count: 45 },
         { stuff: Materials.AssemblyMaterialsIV, count: 45 },
+      ]);
+    });
+  });
+
+  describe("Gallagher Outlaw Mk. II", () => {
+    let recipes: IRecipe[];
+
+    beforeEach(() => {
+      recipes = RecipiesByStuff.get(Vehicles.GallagherOutlawMkII)!;
+    });
+
+    test("has recipes defined", () => {
+      expect(RecipiesByStuff.has(Vehicles.GallagherOutlawMkII)).toBe(true);
+      expect(recipes).toBeDefined();
+      expect(recipes!.length).toBe(1); // 1 small assembly station recipe
+    });
+
+    test("small assembly station recipe requires 1 Brigand + materials", () => {
+      const assemblyRecipe = recipes.find((r) => r.produced[0].count === 1);
+      expect(assemblyRecipe).toBeDefined();
+      expect(assemblyRecipe!.required).toEqual([
+        { stuff: Vehicles.GallagherBrigandMkI, count: 1 },
+        { stuff: Materials.ProcessedConstructionMaterials, count: 10 },
+        { stuff: Materials.AssemblyMaterialsI, count: 10 },
+        { stuff: Materials.AssemblyMaterialsIV, count: 10 },
+      ]);
+      expect(assemblyRecipe!.produced).toEqual([
+        { stuff: Vehicles.GallagherOutlawMkII, count: 1 },
+      ]);
+    });
+
+    test("calculateComponents correctly computes resources for 1 Gallagher Outlaw Mk. II", () => {
+      const assemblyRecipe = recipes.find((r) => r.produced[0].count === 1)!;
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.GallagherOutlawMkII,
+        selectedRecipe: assemblyRecipe,
+        recipes: recipes,
+        required: [],
+      };
+
+      const result = calculateComponents(recipeTree, 1);
+
+      expect(result.initial).toEqual([
+        { stuff: Vehicles.GallagherBrigandMkI, count: 1 },
+        { stuff: Materials.ProcessedConstructionMaterials, count: 10 },
+        { stuff: Materials.AssemblyMaterialsI, count: 10 },
+        { stuff: Materials.AssemblyMaterialsIV, count: 10 },
+      ]);
+    });
+
+    test("calculateComponents correctly computes resources for multiple Gallagher Outlaw Mk. II", () => {
+      const assemblyRecipe = recipes.find((r) => r.produced[0].count === 1)!;
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.GallagherOutlawMkII,
+        selectedRecipe: assemblyRecipe,
+        recipes: recipes,
+        required: [],
+      };
+
+      const result = calculateComponents(recipeTree, 3);
+
+      expect(result.initial).toEqual([
+        { stuff: Vehicles.GallagherBrigandMkI, count: 3 },
+        { stuff: Materials.ProcessedConstructionMaterials, count: 30 },
+        { stuff: Materials.AssemblyMaterialsI, count: 30 },
+        { stuff: Materials.AssemblyMaterialsIV, count: 30 },
       ]);
     });
   });

@@ -123,8 +123,11 @@ describe("Vehicle Recipe Organization", () => {
       );
     });
 
-    test("logisticsVehicleRecipes is empty (placeholder)", () => {
-      expect(logisticsVehicleRecipes.size).toBe(0);
+    test("logisticsVehicleRecipes contains fuel tankers", () => {
+      expect(logisticsVehicleRecipes.has(Vehicles.DunneFuelrunner2d)).toBe(
+        true
+      );
+      expect(logisticsVehicleRecipes.has(Vehicles.RR3StolonTanker)).toBe(true);
     });
 
     test("scoutVehicleRecipes is empty (placeholder)", () => {

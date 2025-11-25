@@ -6,6 +6,7 @@ import { Liquids, Materials, RawResources, Vehicles } from "./models";
  */
 export const ICONS_MAP = new Map<string, string>([
   // Materials
+  [Materials.BasicMaterials, "BasicMaterialsIcon"],
   [Materials.ConstructionMaterials, "ConstructionMaterialsIcon"],
   [
     Materials.ProcessedConstructionMaterials,
@@ -116,7 +117,12 @@ export const ICONS_MAP = new Map<string, string>([
   [Vehicles.GallagherBrigandMkI, "MediumTank2WIcon"],
   [Vehicles.GallagherHighwaymanMkIII, "MediumTank2MultiWIcon"],
   [Vehicles.GallagherThornfallMkVI, "MediumTank2IndirectWIcon"],
+  [Vehicles.GallagherOutlawMkII, "MediumTank2RangeWIcon"],
   [Vehicles.CullenPredatorMkIII, "SuperTankWVehicleIcon"],
   [Vehicles.Lance25Hasta, "BattleTankATCIcon"],
   [Vehicles.Lance36, "BattleTank"],
+  [Vehicles.Lance46Sarissa, "BattleTankHeavyArtilleryCIcon"],
+  // Logistics Vehicles - Fuel Tankers
+  [Vehicles.DunneFuelrunner2d, "OilTankerWarIcon"],
+  [Vehicles.RR3StolonTanker, "OilTankerIcon"],
 ]);
