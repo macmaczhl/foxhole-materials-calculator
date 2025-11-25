@@ -10,6 +10,7 @@ import { siegeTankRecipes } from "./siegeTanks";
 import { destroyerTankRecipes } from "./destroyerTanks";
 import { battleTankRecipes } from "./battleTanks";
 import { cruiserTankRecipes } from "./cruiserTanks";
+import { trailerRecipes } from "./trailers";
 
 /**
  * Central registry of all vehicle recipes.
@@ -23,7 +24,8 @@ import { cruiserTankRecipes } from "./cruiserTanks";
  * - destroyerTanks.ts: Destroyer Tanks
  * - battleTanks.ts: Battle Tanks
  * - cruiserTanks.ts: Cruiser Tanks
- * - logisticsVehicles.ts: Future logistics vehicles
+ * - logisticsVehicles.ts: Fuel Tankers
+ * - trailers.ts: Trailers
  * - scoutVehicles.ts: Future scout vehicles
  */
 export const vehicleRecipes = new Map<string, IRecipe[]>([
@@ -31,6 +33,7 @@ export const vehicleRecipes = new Map<string, IRecipe[]>([
   ...fieldWeaponRecipes,
   ...tankRecipes,
   ...logisticsVehicleRecipes,
+  ...trailerRecipes,
   ...scoutVehicleRecipes,
   ...lightTankRecipes,
   ...assaultTankRecipes,
