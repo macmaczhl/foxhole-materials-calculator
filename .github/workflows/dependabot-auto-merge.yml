@@ -55,7 +55,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const prNumber = ${{ steps.get-pr.outputs.pr_number }};
+            const prNumber = parseInt('${{ steps.get-pr.outputs.pr_number }}');
             
             try {
               await github.rest.pulls.merge({
