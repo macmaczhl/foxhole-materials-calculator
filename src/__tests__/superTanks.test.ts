@@ -45,7 +45,7 @@ describe("Super Tank Recipes", () => {
     });
   });
 
-  describe('O-75b "Ares"', () => {
+  describe("O-75b \"Ares\"", () => {
     test("has correct recipe requirements", () => {
       const recipes = superTankRecipes.get(Vehicles.O75bAres);
       expect(recipes).toBeDefined();

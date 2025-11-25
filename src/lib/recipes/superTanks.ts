@@ -5,7 +5,7 @@ import { createRecipe } from "./base";
 
 // Cullen Predator Mk. III Super Tank recipes
 const cullenPredatorMkIIIRecipes: IRecipe[] = [
-  // Large Assembly Station (Heavy Tank Assembly): 275 x Steel Construction Materials + 105 x Assembly Materials III + 95 x Assembly Materials IV + 105 x Assembly Materials V + 3 x Rare Alloys → 1 x Cullen Predator Mk. III
+  // Large Assembly Station (Heavy Tank Assembly)
   createRecipe(
     [
       { stuff: Materials.SteelConstructionMaterials, count: 275 },
@@ -20,7 +20,7 @@ const cullenPredatorMkIIIRecipes: IRecipe[] = [
 
 // O-75b "Ares" Super Tank recipes
 const o75bAresRecipes: IRecipe[] = [
-  // Large Assembly Station (Heavy Tank Assembly): 275 x Steel Construction Materials + 105 x Assembly Materials III + 95 x Assembly Materials IV + 105 x Assembly Materials V + 3 x Rare Alloys → 1 x O-75b "Ares"
+  // Large Assembly Station (Heavy Tank Assembly)
   createRecipe(
     [
       { stuff: Materials.SteelConstructionMaterials, count: 275 },
