@@ -45,7 +45,9 @@ jobs:
               return;
             }
             
-            core.setOutput('pr_number', pr.number);
+            // Use GITHUB_OUTPUT instead of deprecated setOutput
+            const fs = require('fs');
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, `pr_number=${pr.number}\n`);
 
       - name: Merge PR
         if: steps.get-pr.outputs.pr_number
