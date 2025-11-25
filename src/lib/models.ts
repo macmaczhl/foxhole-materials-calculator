@@ -21,6 +21,7 @@ export interface RecipeTree {
 }
 
 export enum Materials {
+  BasicMaterials = "Basic Materials",
   ConstructionMaterials = "Construction Materials",
   ProcessedConstructionMaterials = "Processed Construction Materials",
   RefinedMaterials = "Refined Materials",
@@ -130,6 +131,7 @@ export enum Vehicles {
   Nemesis = '90T-v "Nemesis"',
   HC7Ballista = 'HC-7 "Ballista"',
   NobleWidowMkXIV = 'Noble Widow MK. XIV',
+  NobleFirebrandMkXVII = 'Noble Firebrand Mk. XVII',
   FloodMkI = 'Flood Mk. I',
   FloodJuggernautMkVII = 'Flood Juggernaut Mk. VII',
   FloodMkIXStain = 'Flood Mk. IX Stain',
@@ -138,8 +140,13 @@ export enum Vehicles {
   GallagherThornfallMkVI = 'Gallagher Thornfall Mk. VI',
   GallagherOutlawMkII = 'Gallagher Outlaw Mk. II',
   CullenPredatorMkIII = 'Cullen Predator Mk. III',
+  O75bAres = 'O-75b "Ares"',
   Lance25Hasta = 'Lance-25 "Hasta"',
+  Lance36 = 'Lance-36',
   Lance46Sarissa = 'Lance-46 "Sarissa"',
+  // Logistics Vehicles - Fuel Tankers
+  DunneFuelrunner2d = 'Dunne Fuelrunner 2d',
+  RR3StolonTanker = 'RR-3 "Stolon" Tanker',
 }
 
 export enum RawResources {
@@ -242,6 +249,7 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.Nemesis },
   { name: Vehicles.HC7Ballista },
   { name: Vehicles.NobleWidowMkXIV },
+  { name: Vehicles.NobleFirebrandMkXVII },
   { name: Vehicles.FloodMkI },
   { name: Vehicles.FloodJuggernautMkVII },
   { name: Vehicles.FloodMkIXStain },
@@ -250,8 +258,13 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.GallagherThornfallMkVI },
   { name: Vehicles.GallagherOutlawMkII },
   { name: Vehicles.CullenPredatorMkIII },
+  { name: Vehicles.O75bAres },
   { name: Vehicles.Lance25Hasta },
+  { name: Vehicles.Lance36 },
   { name: Vehicles.Lance46Sarissa },
+  // Logistics Vehicles - Fuel Tankers
+  { name: Vehicles.DunneFuelrunner2d },
+  { name: Vehicles.RR3StolonTanker },
 ];
 
 export const stuffList: Stuff[] = availableMaterials;

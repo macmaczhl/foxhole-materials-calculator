@@ -1,31 +1,65 @@
-name: Request Dependabot squash-and-merge
+name: Dependabot Auto-Merge
 
 on:
-  pull_request_target:
-    types: [opened, reopened, edited, labeled, synchronize]
+  workflow_run:
+    workflows: ["Lint and Test"]
+    types:
+      - completed
 
 permissions:
+  contents: write
   pull-requests: write
 
 jobs:
-  comment-on-pr:
-    name: Request Dependabot squash-and-merge
+  auto-merge:
+    name: Auto-merge Dependabot PR
     runs-on: ubuntu-latest
-    if: ${{ github.event.pull_request.user.login == 'dependabot[bot]' }}
+    # Only run if the triggering workflow was successful
+    if: >
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'pull_request'
     steps:
-      - name: Comment to request Dependabot squash-and-merge
-        uses: actions/github-script@v6
+      - name: Merge Dependabot PR
+        uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const pr = context.payload.pull_request;
-            if (!pr) {
-              core.info('No pull request payload available. Skipping.');
+            // Get the PR from the workflow_run event
+            const pullRequests = context.payload.workflow_run.pull_requests;
+            
+            if (!pullRequests || pullRequests.length === 0) {
+              core.info('No pull requests found in workflow_run event');
               return;
             }
-            await github.rest.issues.createComment({
+            
+            if (pullRequests.length > 1) {
+              core.warning(`Multiple PRs found (${pullRequests.length}), using the first one`);
+            }
+            
+            const pr = pullRequests[0];
+            
+            // Get full PR details to check the author
+            const { data: prData } = await github.rest.pulls.get({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: pr.number,
-              body: '@dependabot squash and merge'
+              pull_number: pr.number
             });
+            
+            // Verify the PR is from Dependabot
+            if (prData.user.login !== 'dependabot[bot]') {
+              core.info(`PR #${pr.number} is not from Dependabot (author: ${prData.user.login}), skipping`);
+              return;
+            }
+            
+            // Merge the PR
+            try {
+              await github.rest.pulls.merge({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: pr.number,
+                merge_method: 'squash'
+              });
+              core.info(`Successfully merged PR #${pr.number}`);
+            } catch (error) {
+              core.setFailed(`Failed to merge PR #${pr.number}: ${error.message}`);
+            }
