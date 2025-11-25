@@ -6,6 +6,7 @@ import { Liquids, Materials, RawResources, Vehicles } from "./models";
  */
 export const ICONS_MAP = new Map<string, string>([
   // Materials
+  [Materials.BasicMaterials, "BasicMaterialsIcon"],
   [Materials.ConstructionMaterials, "ConstructionMaterialsIcon"],
   [
     Materials.ProcessedConstructionMaterials,
@@ -44,7 +45,6 @@ export const ICONS_MAP = new Map<string, string>([
   [RawResources.Sulfur, "SulfurIcon"],
   [RawResources.RareMetal, "RareMaterialsIcon"],
   [RawResources.HeavyExplosivePowder, "HeavyExplosiveMaterialsIcon"],
-  [RawResources.BasicMaterials, "BasicMaterialsIcon"],
 
   // Vehicles
   [Vehicles.Xiphos, "ArmoredCarVehicleIcon"],

@@ -1,7 +1,7 @@
 /**
  * Tests for Logistics Vehicles - Fuel Tankers
  */
-import { RawResources, RecipeTree, IRecipe, Vehicles } from "../lib/models";
+import { Materials, RecipeTree, IRecipe, Vehicles } from "../lib/models";
 import { calculateComponents } from "../lib/services/calculateComponents";
 import { RecipiesByStuff } from "../lib/recipes";
 import { logisticsVehicleRecipes } from "../lib/recipes/logisticsVehicles";
@@ -64,7 +64,7 @@ describe("Logistics Vehicles - Fuel Tankers", () => {
     test("has correct garage recipe requirements", () => {
       const garageRecipe = fuelrunnerRecipes[0];
       expect(garageRecipe.required).toEqual([
-        { stuff: RawResources.BasicMaterials, count: 100 },
+        { stuff: Materials.BasicMaterials, count: 100 },
       ]);
       expect(garageRecipe.produced).toEqual([
         { stuff: Vehicles.DunneFuelrunner2d, count: 1 },
@@ -79,7 +79,7 @@ describe("Logistics Vehicles - Fuel Tankers", () => {
         (r) => r.produced[0].count === 1
       );
       expect(basicRecipe).toBeDefined();
-      expect(basicRecipe!.required[0].stuff).toBe(RawResources.BasicMaterials);
+      expect(basicRecipe!.required[0].stuff).toBe(Materials.BasicMaterials);
       expect(basicRecipe!.required[0].count).toBe(100);
 
       // Check mass production recipes exist
@@ -110,7 +110,7 @@ describe("Logistics Vehicles - Fuel Tankers", () => {
       const result = calculateComponents(fuelrunnerRecipeTree, 1);
 
       expect(result.initial).toEqual([
-        { stuff: RawResources.BasicMaterials, count: 100 },
+        { stuff: Materials.BasicMaterials, count: 100 },
       ]);
     });
 
@@ -118,7 +118,7 @@ describe("Logistics Vehicles - Fuel Tankers", () => {
       const result = calculateComponents(fuelrunnerRecipeTree, 3);
 
       expect(result.initial).toEqual([
-        { stuff: RawResources.BasicMaterials, count: 300 },
+        { stuff: Materials.BasicMaterials, count: 300 },
       ]);
     });
   });
@@ -140,7 +140,7 @@ describe("Logistics Vehicles - Fuel Tankers", () => {
     test("has correct garage recipe requirements", () => {
       const garageRecipe = stolonRecipes[0];
       expect(garageRecipe.required).toEqual([
-        { stuff: RawResources.BasicMaterials, count: 100 },
+        { stuff: Materials.BasicMaterials, count: 100 },
       ]);
       expect(garageRecipe.produced).toEqual([
         { stuff: Vehicles.RR3StolonTanker, count: 1 },
@@ -153,7 +153,7 @@ describe("Logistics Vehicles - Fuel Tankers", () => {
       // Check basic recipe (100 → 1)
       const basicRecipe = stolonRecipes.find((r) => r.produced[0].count === 1);
       expect(basicRecipe).toBeDefined();
-      expect(basicRecipe!.required[0].stuff).toBe(RawResources.BasicMaterials);
+      expect(basicRecipe!.required[0].stuff).toBe(Materials.BasicMaterials);
       expect(basicRecipe!.required[0].count).toBe(100);
 
       // Check mass production recipes exist
@@ -180,7 +180,7 @@ describe("Logistics Vehicles - Fuel Tankers", () => {
       const result = calculateComponents(stolonRecipeTree, 1);
 
       expect(result.initial).toEqual([
-        { stuff: RawResources.BasicMaterials, count: 100 },
+        { stuff: Materials.BasicMaterials, count: 100 },
       ]);
     });
 
@@ -188,7 +188,7 @@ describe("Logistics Vehicles - Fuel Tankers", () => {
       const result = calculateComponents(stolonRecipeTree, 3);
 
       expect(result.initial).toEqual([
-        { stuff: RawResources.BasicMaterials, count: 300 },
+        { stuff: Materials.BasicMaterials, count: 300 },
       ]);
     });
   });

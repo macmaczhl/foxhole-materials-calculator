@@ -21,6 +21,7 @@ export interface RecipeTree {
 }
 
 export enum Materials {
+  BasicMaterials = "Basic Materials",
   ConstructionMaterials = "Construction Materials",
   ProcessedConstructionMaterials = "Processed Construction Materials",
   RefinedMaterials = "Refined Materials",
@@ -154,7 +155,6 @@ export enum RawResources {
   Sulfur = "Sulfur",
   RareMetal = "Rare Metal",
   HeavyExplosivePowder = "Heavy Explosive Powder",
-  BasicMaterials = "Basic Materials",
 }
 
 export const availableMaterials: Stuff[] = [
