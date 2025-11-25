@@ -43,7 +43,7 @@ describe("Logistics Vehicles - Fuel Tankers", () => {
         true
       );
       expect(logisticsVehicleRecipes.has(Vehicles.RR3StolonTanker)).toBe(true);
-      expect(logisticsVehicleRecipes.size).toBe(3); // 2 fuel tankers + 1 crane
+      expect(logisticsVehicleRecipes.size).toBe(5); // 2 fuel tankers + 2 heavy-duty trucks + 1 crane
     });
   });
 
@@ -348,3 +348,180 @@ describe("Logistics Vehicles - Cranes", () => {
     });
   });
 });
+
+describe("Logistics Vehicles - Heavy-Duty Trucks", () => {
+  describe("Recipe availability", () => {
+    test("all heavy-duty trucks have recipes defined", () => {
+      const heavyDutyTrucks = [
+        Vehicles.CnuteCliffwrest,
+        Vehicles.AUA150TaurineRigger,
+      ];
+
+      heavyDutyTrucks.forEach((vehicle) => {
+        expect(RecipiesByStuff.has(vehicle)).toBe(true);
+        const recipes = RecipiesByStuff.get(vehicle);
+        expect(recipes).toBeDefined();
+        expect(recipes!.length).toBeGreaterThan(0);
+      });
+    });
+
+    test("all heavy-duty truck recipes have valid requirements", () => {
+      const heavyDutyTrucks = [
+        Vehicles.CnuteCliffwrest,
+        Vehicles.AUA150TaurineRigger,
+      ];
+
+      heavyDutyTrucks.forEach((vehicle) => {
+        const recipes = RecipiesByStuff.get(vehicle)!;
+        recipes.forEach((recipe) => {
+          expect(recipe.required.length).toBeGreaterThan(0);
+          expect(recipe.required[0].count).toBeGreaterThan(0);
+          expect(recipe.required[0].stuff).toBeDefined();
+        });
+      });
+    });
+
+    test("heavy-duty trucks are in the logistics vehicle recipes", () => {
+      expect(logisticsVehicleRecipes.has(Vehicles.CnuteCliffwrest)).toBe(true);
+      expect(logisticsVehicleRecipes.has(Vehicles.AUA150TaurineRigger)).toBe(
+        true
+      );
+    });
+  });
+
+  describe("Cnute Cliffwrest (Warden Heavy-Duty Truck)", () => {
+    let cnuteRecipes: IRecipe[];
+    let cnuteRecipeTree: RecipeTree;
+
+    beforeEach(() => {
+      cnuteRecipes = RecipiesByStuff.get(Vehicles.CnuteCliffwrest)!;
+      cnuteRecipeTree = {
+        stuff: Vehicles.CnuteCliffwrest,
+        selectedRecipe: cnuteRecipes[0],
+        recipes: cnuteRecipes,
+        required: [],
+      };
+    });
+
+    test("has correct Small Assembly Station recipe requirements", () => {
+      const assemblyRecipe = cnuteRecipes[0];
+      expect(assemblyRecipe.required).toEqual([
+        { stuff: Materials.ProcessedConstructionMaterials, count: 40 },
+      ]);
+      expect(assemblyRecipe.produced).toEqual([
+        { stuff: Vehicles.CnuteCliffwrest, count: 1 },
+      ]);
+    });
+
+    test("has only one production recipe", () => {
+      expect(cnuteRecipes.length).toBe(1);
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const result = calculateComponents(cnuteRecipeTree, 1);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.ProcessedConstructionMaterials, count: 40 },
+      ]);
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const result = calculateComponents(cnuteRecipeTree, 3);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.ProcessedConstructionMaterials, count: 120 },
+      ]);
+    });
+  });
+
+  describe("AU-A150 Taurine Rigger (Colonial Heavy-Duty Truck)", () => {
+    let riggerRecipes: IRecipe[];
+    let riggerRecipeTree: RecipeTree;
+
+    beforeEach(() => {
+      riggerRecipes = RecipiesByStuff.get(Vehicles.AUA150TaurineRigger)!;
+      riggerRecipeTree = {
+        stuff: Vehicles.AUA150TaurineRigger,
+        selectedRecipe: riggerRecipes[0],
+        recipes: riggerRecipes,
+        required: [],
+      };
+    });
+
+    test("has correct Small Assembly Station recipe requirements", () => {
+      const assemblyRecipe = riggerRecipes[0];
+      expect(assemblyRecipe.required).toEqual([
+        { stuff: Materials.ProcessedConstructionMaterials, count: 40 },
+      ]);
+      expect(assemblyRecipe.produced).toEqual([
+        { stuff: Vehicles.AUA150TaurineRigger, count: 1 },
+      ]);
+    });
+
+    test("has only one production recipe", () => {
+      expect(riggerRecipes.length).toBe(1);
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const result = calculateComponents(riggerRecipeTree, 1);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.ProcessedConstructionMaterials, count: 40 },
+      ]);
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const result = calculateComponents(riggerRecipeTree, 3);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.ProcessedConstructionMaterials, count: 120 },
+      ]);
+    });
+  });
+
+  describe("Recipe calculation integration", () => {
+    test("all heavy-duty trucks can be calculated without errors", () => {
+      const heavyDutyTrucks = [
+        Vehicles.CnuteCliffwrest,
+        Vehicles.AUA150TaurineRigger,
+      ];
+
+      heavyDutyTrucks.forEach((vehicle) => {
+        const recipes = RecipiesByStuff.get(vehicle)!;
+        const recipeTree: RecipeTree = {
+          stuff: vehicle,
+          selectedRecipe: recipes[0],
+          recipes: recipes,
+          required: [],
+        };
+
+        // Should not throw an error
+        expect(() => {
+          const result = calculateComponents(recipeTree, 1);
+          expect(result.initial.length).toBeGreaterThan(0);
+        }).not.toThrow();
+      });
+    });
+  });
+
+  describe("Both factions use same production costs", () => {
+    test("Warden and Colonial heavy-duty trucks have identical costs", () => {
+      const wardenRecipes = RecipiesByStuff.get(Vehicles.CnuteCliffwrest)!;
+      const colonialRecipes = RecipiesByStuff.get(
+        Vehicles.AUA150TaurineRigger
+      )!;
+
+      expect(wardenRecipes.length).toBe(colonialRecipes.length);
+
+      // Compare each recipe's requirements
+      wardenRecipes.forEach((wardenRecipe, index) => {
+        const colonialRecipe = colonialRecipes[index];
+        expect(wardenRecipe.required).toEqual(colonialRecipe.required);
+        expect(wardenRecipe.produced[0].count).toBe(
+          colonialRecipe.produced[0].count
+        );
+      });
+    });
+  });
+});
+
