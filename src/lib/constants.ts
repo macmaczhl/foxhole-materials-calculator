@@ -131,4 +131,7 @@ export const ICONS_MAP = new Map<string, string>([
   [Vehicles.BMSClass2MobileAutoCrane, "CraneVehicleIcon"],
   // Motorcycles
   [Vehicles.O3MMCaster, "MotorcycleVehicleIcon"],
+  // Fire Engines
+  [Vehicles.DunneDousingEngine3r, "FireTruckWarIcon"],
+  [Vehicles.R12bSalvaFlameTruck, "FireTruckIcon"],
 ]);

@@ -151,6 +151,9 @@ export enum Vehicles {
   BMSClass2MobileAutoCrane = 'BMS - Class 2 Mobile Auto-Crane',
   // Motorcycles
   O3MMCaster = '03MM "Caster"',
+  // Fire Engines
+  DunneDousingEngine3r = 'Dunne Dousing Engine 3r',
+  R12bSalvaFlameTruck = 'R-12b - "Salva" Flame Truck',
 }
 
 export enum RawResources {
@@ -273,6 +276,9 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.BMSClass2MobileAutoCrane },
   // Motorcycles
   { name: Vehicles.O3MMCaster },
+  // Fire Engines
+  { name: Vehicles.DunneDousingEngine3r },
+  { name: Vehicles.R12bSalvaFlameTruck },
 ];
 
 export const stuffList: Stuff[] = availableMaterials;
