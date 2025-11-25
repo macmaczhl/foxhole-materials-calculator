@@ -32,6 +32,10 @@ jobs:
               return;
             }
             
+            if (pullRequests.length > 1) {
+              core.warning(`Multiple PRs found (${pullRequests.length}), using the first one`);
+            }
+            
             const pr = pullRequests[0];
             
             // Get full PR details to check the author
