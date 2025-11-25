@@ -139,6 +139,7 @@ export enum Vehicles {
   GallagherThornfallMkVI = 'Gallagher Thornfall Mk. VI',
   GallagherOutlawMkII = 'Gallagher Outlaw Mk. II',
   CullenPredatorMkIII = 'Cullen Predator Mk. III',
+  O75bAres = 'O-75b "Ares"',
   Lance25Hasta = 'Lance-25 "Hasta"',
   Lance46Sarissa = 'Lance-46 "Sarissa"',
   // Logistics Vehicles - Fuel Tankers
@@ -254,6 +255,7 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.GallagherThornfallMkVI },
   { name: Vehicles.GallagherOutlawMkII },
   { name: Vehicles.CullenPredatorMkIII },
+  { name: Vehicles.O75bAres },
   { name: Vehicles.Lance25Hasta },
   { name: Vehicles.Lance46Sarissa },
   // Logistics Vehicles - Fuel Tankers

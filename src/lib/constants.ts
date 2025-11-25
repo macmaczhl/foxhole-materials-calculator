@@ -119,6 +119,7 @@ export const ICONS_MAP = new Map<string, string>([
   [Vehicles.GallagherThornfallMkVI, "MediumTank2IndirectWIcon"],
   [Vehicles.GallagherOutlawMkII, "MediumTank2RangeWIcon"],
   [Vehicles.CullenPredatorMkIII, "SuperTankWVehicleIcon"],
+  [Vehicles.O75bAres, "SuperTankCtemIcon"],
   [Vehicles.Lance25Hasta, "BattleTankATCIcon"],
   [Vehicles.Lance46Sarissa, "BattleTankHeavyArtilleryCIcon"],
   // Logistics Vehicles - Fuel Tankers
