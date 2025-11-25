@@ -11,6 +11,7 @@ import { destroyerTankRecipes } from "./destroyerTanks";
 import { battleTankRecipes } from "./battleTanks";
 import { cruiserTankRecipes } from "./cruiserTanks";
 import { superTankRecipes } from "./superTanks";
+import { lightUtilityVehicleRecipes } from "./lightUtilityVehicles";
 
 /**
  * Central registry of all vehicle recipes.
@@ -27,6 +28,7 @@ import { superTankRecipes } from "./superTanks";
  * - superTanks.ts: Super Tanks
  * - logisticsVehicles.ts: Future logistics vehicles
  * - scoutVehicles.ts: Future scout vehicles
+ * - lightUtilityVehicles.ts: Light Utility Vehicles
  */
 export const vehicleRecipes = new Map<string, IRecipe[]>([
   ...armouredFightingVehicleRecipes,
@@ -41,4 +43,5 @@ export const vehicleRecipes = new Map<string, IRecipe[]>([
   ...battleTankRecipes,
   ...cruiserTankRecipes,
   ...superTankRecipes,
+  ...lightUtilityVehicleRecipes,
 ]);

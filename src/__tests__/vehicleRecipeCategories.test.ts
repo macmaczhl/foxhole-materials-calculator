@@ -15,6 +15,7 @@ import { destroyerTankRecipes } from "../lib/recipes/destroyerTanks";
 import { battleTankRecipes } from "../lib/recipes/battleTanks";
 import { cruiserTankRecipes } from "../lib/recipes/cruiserTanks";
 import { superTankRecipes } from "../lib/recipes/superTanks";
+import { lightUtilityVehicleRecipes } from "../lib/recipes/lightUtilityVehicles";
 
 describe("Vehicle Recipe Organization", () => {
   describe("Category Files", () => {
@@ -143,6 +144,10 @@ describe("Vehicle Recipe Organization", () => {
       expect(superTankRecipes.has(Vehicles.CullenPredatorMkIII)).toBe(true);
       expect(superTankRecipes.has(Vehicles.O75bAres)).toBe(true);
     });
+
+    test("lightUtilityVehicleRecipes contains light utility vehicles", () => {
+      expect(lightUtilityVehicleRecipes.has(Vehicles.UV05aArgonaut)).toBe(true);
+    });
   });
 
   describe("Central Registry", () => {
@@ -159,7 +164,8 @@ describe("Vehicle Recipe Organization", () => {
         destroyerTankRecipes.size +
         battleTankRecipes.size +
         cruiserTankRecipes.size +
-        superTankRecipes.size;
+        superTankRecipes.size +
+        lightUtilityVehicleRecipes.size;
 
       expect(vehicleRecipes.size).toBe(totalExpectedSize);
     });
@@ -189,6 +195,10 @@ describe("Vehicle Recipe Organization", () => {
       expect(vehicleRecipes.has(Vehicles.O75bAres)).toBe(true);
     });
 
+    test("vehicleRecipes contains recipes from lightUtilityVehicles", () => {
+      expect(vehicleRecipes.has(Vehicles.UV05aArgonaut)).toBe(true);
+    });
+
     test("all vehicle recipes return same data whether accessed from category or central registry", () => {
       // Test a sample from each category
       expect(vehicleRecipes.get(Vehicles.Xiphos)).toEqual(
@@ -199,6 +209,9 @@ describe("Vehicle Recipe Organization", () => {
       );
       expect(vehicleRecipes.get(Vehicles.KingSpireMkI)).toEqual(
         tankRecipes.get(Vehicles.KingSpireMkI)
+      );
+      expect(vehicleRecipes.get(Vehicles.UV05aArgonaut)).toEqual(
+        lightUtilityVehicleRecipes.get(Vehicles.UV05aArgonaut)
       );
     });
   });

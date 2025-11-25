@@ -127,4 +127,6 @@ export const ICONS_MAP = new Map<string, string>([
   // Logistics Vehicles - Fuel Tankers
   [Vehicles.DunneFuelrunner2d, "OilTankerWarIcon"],
   [Vehicles.RR3StolonTanker, "OilTankerIcon"],
+  // Light Utility Vehicles
+  [Vehicles.UV05aArgonaut, "ScoutVehicleMobilityVehicleIcon"],
 ]);
