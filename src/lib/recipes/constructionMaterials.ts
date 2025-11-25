@@ -1,6 +1,13 @@
 import { Materials, RawResources, IRecipe } from "../models";
 import { createRecipe } from "./base";
 
+const basicMaterialsRecipes: IRecipe[] = [
+  createRecipe(
+    [{ stuff: RawResources.Salvage, count: 2 }],
+    [{ stuff: Materials.BasicMaterials, count: 1 }]
+  ),
+];
+
 const constructionMaterialsRecipes: IRecipe[] = [
   createRecipe(
     [{ stuff: RawResources.Salvage, count: 10 }],
@@ -208,6 +215,7 @@ const flameAmmoRecipes: IRecipe[] = [
 ];
 
 export const constructionMaterialRecipes = new Map<string, IRecipe[]>([
+  [Materials.BasicMaterials, basicMaterialsRecipes],
   [Materials.ConstructionMaterials, constructionMaterialsRecipes],
   [
     Materials.ProcessedConstructionMaterials,
