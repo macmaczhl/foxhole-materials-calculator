@@ -11,8 +11,7 @@ jobs:
   comment-on-pr:
     name: Request Dependabot squash-and-merge
     runs-on: ubuntu-latest
-    if: |
-      github.actor == 'dependabot[bot]'
+    if: ${{ github.event.pull_request.user.login == 'dependabot[bot]' }}
     steps:
       - name: Comment to request Dependabot squash-and-merge
         uses: actions/github-script@v6
