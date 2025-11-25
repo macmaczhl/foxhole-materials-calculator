@@ -120,6 +120,7 @@ export const ICONS_MAP = new Map<string, string>([
   [Vehicles.GallagherOutlawMkII, "MediumTank2RangeWIcon"],
   [Vehicles.CullenPredatorMkIII, "SuperTankWVehicleIcon"],
   [Vehicles.Lance25Hasta, "BattleTankATCIcon"],
+  [Vehicles.Lance36, "BattleTank"],
   [Vehicles.Lance46Sarissa, "BattleTankHeavyArtilleryCIcon"],
   // Logistics Vehicles - Fuel Tankers
   [Vehicles.DunneFuelrunner2d, "OilTankerWarIcon"],

@@ -140,6 +140,7 @@ export enum Vehicles {
   GallagherOutlawMkII = 'Gallagher Outlaw Mk. II',
   CullenPredatorMkIII = 'Cullen Predator Mk. III',
   Lance25Hasta = 'Lance-25 "Hasta"',
+  Lance36 = 'Lance-36',
   Lance46Sarissa = 'Lance-46 "Sarissa"',
   // Logistics Vehicles - Fuel Tankers
   DunneFuelrunner2d = 'Dunne Fuelrunner 2d',
@@ -255,6 +256,7 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.GallagherOutlawMkII },
   { name: Vehicles.CullenPredatorMkIII },
   { name: Vehicles.Lance25Hasta },
+  { name: Vehicles.Lance36 },
   { name: Vehicles.Lance46Sarissa },
   // Logistics Vehicles - Fuel Tankers
   { name: Vehicles.DunneFuelrunner2d },

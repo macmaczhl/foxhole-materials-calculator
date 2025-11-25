@@ -74,6 +74,20 @@ const lance25HastaRecipes: IRecipe[] = [
   ),
 ];
 
+// Lance-36 Battle Tank recipes
+const lance36Recipes: IRecipe[] = [
+  // Large Assembly Station (Heavy Tank Assembly): 50 x Steel Construction Materials + 30 x Assembly Materials III + 60 x Assembly Materials IV + 35 x Assembly Materials V → 1 x Lance-36
+  createRecipe(
+    [
+      { stuff: Materials.SteelConstructionMaterials, count: 50 },
+      { stuff: Materials.AssemblyMaterialsIII, count: 30 },
+      { stuff: Materials.AssemblyMaterialsIV, count: 60 },
+      { stuff: Materials.AssemblyMaterialsV, count: 35 },
+    ],
+    [{ stuff: Vehicles.Lance36, count: 1 }]
+  ),
+];
+
 // Lance-46 "Sarissa" Battle Tank SPG recipes
 const lance46SarissaRecipes: IRecipe[] = [
   // Large Assembly Station (Heavy Tank Assembly): 150 x Steel Construction Materials + 65 x Assembly Materials III + 40 x Assembly Materials IV + 85 x Assembly Materials V → 1 x Lance-46 "Sarissa"
@@ -95,5 +109,6 @@ export const battleTankRecipes = new Map<string, IRecipe[]>([
   [Vehicles.FloodMkIXStain, floodMkIXStainRecipes],
   [Vehicles.CullenPredatorMkIII, cullenPredatorMkIIIRecipes],
   [Vehicles.Lance25Hasta, lance25HastaRecipes],
+  [Vehicles.Lance36, lance36Recipes],
   [Vehicles.Lance46Sarissa, lance46SarissaRecipes],
 ]);
