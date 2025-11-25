@@ -15,6 +15,7 @@ import { destroyerTankRecipes } from "../lib/recipes/destroyerTanks";
 import { battleTankRecipes } from "../lib/recipes/battleTanks";
 import { cruiserTankRecipes } from "../lib/recipes/cruiserTanks";
 import { superTankRecipes } from "../lib/recipes/superTanks";
+import { constructionVehicleRecipes } from "../lib/recipes/constructionVehicles";
 
 describe("Vehicle Recipe Organization", () => {
   describe("Category Files", () => {
@@ -131,6 +132,12 @@ describe("Vehicle Recipe Organization", () => {
       expect(logisticsVehicleRecipes.has(Vehicles.RR3StolonTanker)).toBe(true);
     });
 
+    test("constructionVehicleRecipes contains construction vehicles", () => {
+      expect(
+        constructionVehicleRecipes.has(Vehicles.BMSUniversalAssemblyRig)
+      ).toBe(true);
+    });
+
     test("scoutVehicleRecipes is empty (placeholder)", () => {
       expect(scoutVehicleRecipes.size).toBe(0);
     });
@@ -159,7 +166,8 @@ describe("Vehicle Recipe Organization", () => {
         destroyerTankRecipes.size +
         battleTankRecipes.size +
         cruiserTankRecipes.size +
-        superTankRecipes.size;
+        superTankRecipes.size +
+        constructionVehicleRecipes.size;
 
       expect(vehicleRecipes.size).toBe(totalExpectedSize);
     });
@@ -227,6 +235,7 @@ describe("Vehicle Recipe Organization", () => {
         ...battleTankRecipes.keys(),
         ...cruiserTankRecipes.keys(),
         ...superTankRecipes.keys(),
+        ...constructionVehicleRecipes.keys(),
       ];
 
       // Check no duplicates across categories

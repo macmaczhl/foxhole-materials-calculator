@@ -147,6 +147,8 @@ export enum Vehicles {
   // Logistics Vehicles - Fuel Tankers
   DunneFuelrunner2d = 'Dunne Fuelrunner 2d',
   RR3StolonTanker = 'RR-3 "Stolon" Tanker',
+  // Construction Vehicles
+  BMSUniversalAssemblyRig = 'BMS - Universal Assembly Rig',
 }
 
 export enum RawResources {
@@ -265,6 +267,8 @@ export const availableMaterials: Stuff[] = [
   // Logistics Vehicles - Fuel Tankers
   { name: Vehicles.DunneFuelrunner2d },
   { name: Vehicles.RR3StolonTanker },
+  // Construction Vehicles
+  { name: Vehicles.BMSUniversalAssemblyRig },
 ];
 
 export const stuffList: Stuff[] = availableMaterials;
