@@ -37,17 +37,17 @@ jobs:
               return;
             }
             
-            const pr = pulls.data[0];
+            // Find the PR from Dependabot specifically
+            const dependabotPR = pulls.data.find(pr => pr.user.login === 'dependabot[bot]');
             
-            // Verify the PR is from Dependabot
-            if (pr.user.login !== 'dependabot[bot]') {
-              core.info('PR is not from Dependabot, skipping');
+            if (!dependabotPR) {
+              core.info('No Dependabot PR found for this branch');
               return;
             }
             
             // Use GITHUB_OUTPUT instead of deprecated setOutput
             const fs = require('fs');
-            fs.appendFileSync(process.env.GITHUB_OUTPUT, `pr_number=${pr.number}\n`);
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, `pr_number=${dependabotPR.number}\n`);
 
       - name: Merge PR
         if: steps.get-pr.outputs.pr_number
@@ -55,7 +55,14 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const prNumber = parseInt('${{ steps.get-pr.outputs.pr_number }}');
+            const prNumberStr = '${{ steps.get-pr.outputs.pr_number }}';
+            const prNumber = parseInt(prNumberStr);
+            
+            // Validate the PR number
+            if (!prNumber || isNaN(prNumber)) {
+              core.setFailed('Invalid PR number');
+              return;
+            }
             
             try {
               await github.rest.pulls.merge({
