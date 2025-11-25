@@ -1,31 +1,70 @@
-name: Request Dependabot squash-and-merge
+name: Dependabot Auto-Merge
 
 on:
-  pull_request_target:
-    types: [opened, reopened, edited, labeled, synchronize]
+  workflow_run:
+    workflows: ["Lint and Test"]
+    types:
+      - completed
 
 permissions:
+  contents: write
   pull-requests: write
 
 jobs:
-  comment-on-pr:
-    name: Request Dependabot squash-and-merge
+  auto-merge:
+    name: Auto-merge Dependabot PR
     runs-on: ubuntu-latest
-    if: ${{ github.event.pull_request.user.login == 'dependabot[bot]' }}
+    # Only run if the triggering workflow was successful and the PR is from Dependabot
+    if: >
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'pull_request' &&
+      github.actor == 'dependabot[bot]'
     steps:
-      - name: Comment to request Dependabot squash-and-merge
-        uses: actions/github-script@v6
+      - name: Get PR number
+        id: get-pr
+        uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const pr = context.payload.pull_request;
-            if (!pr) {
-              core.info('No pull request payload available. Skipping.');
-              return;
-            }
-            await github.rest.issues.createComment({
+            const pulls = await github.rest.pulls.list({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: pr.number,
-              body: '@dependabot squash and merge'
+              state: 'open',
+              head: `${context.repo.owner}:${context.payload.workflow_run.head_branch}`
             });
+            
+            if (pulls.data.length === 0) {
+              core.info('No open PR found for this branch');
+              return;
+            }
+            
+            const pr = pulls.data[0];
+            
+            // Verify the PR is from Dependabot
+            if (pr.user.login !== 'dependabot[bot]') {
+              core.info('PR is not from Dependabot, skipping');
+              return;
+            }
+            
+            core.setOutput('pr_number', pr.number);
+            core.setOutput('pr_author', pr.user.login);
+
+      - name: Merge PR
+        if: steps.get-pr.outputs.pr_number
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const prNumber = ${{ steps.get-pr.outputs.pr_number }};
+            
+            try {
+              await github.rest.pulls.merge({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: prNumber,
+                merge_method: 'squash'
+              });
+              core.info(`Successfully merged PR #${prNumber}`);
+            } catch (error) {
+              core.setFailed(`Failed to merge PR: ${error.message}`);
+            }
