@@ -1,0 +1,33 @@
+name: Request Dependabot squash-and-merge
+
+on:
+  pull_request_target:
+    types: [opened, reopened, edited, labeled, synchronize]
+
+permissions:
+  pull-requests: write
+
+jobs:
+  comment-on-pr:
+    name: Request Dependabot squash-and-merge
+    runs-on: ubuntu-latest
+    if: |
+      github.actor == 'dependabot[bot]' &&
+      github.event.pull_request.user.login == 'dependabot[bot]'
+    steps:
+      - name: Comment to request Dependabot squash-and-merge
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const pr = context.payload.pull_request;
+            if (!pr) {
+              core.info('No pull request payload available. Skipping.');
+              return;
+            }
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: pr.number,
+              body: '@dependabot squash and merge'
+            });
