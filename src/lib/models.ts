@@ -149,6 +149,8 @@ export enum Vehicles {
   RR3StolonTanker = 'RR-3 "Stolon" Tanker',
   // Logistics Vehicles - Cranes
   BMSClass2MobileAutoCrane = 'BMS - Class 2 Mobile Auto-Crane',
+  // Motorcycles
+  O3MMCaster = '03MM "Caster"',
 }
 
 export enum RawResources {
@@ -269,6 +271,8 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.RR3StolonTanker },
   // Logistics Vehicles - Cranes
   { name: Vehicles.BMSClass2MobileAutoCrane },
+  // Motorcycles
+  { name: Vehicles.O3MMCaster },
 ];
 
 export const stuffList: Stuff[] = availableMaterials;
