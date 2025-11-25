@@ -25,6 +25,8 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
+            const fs = require('fs');
+            
             const pulls = await github.rest.pulls.list({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -46,7 +48,6 @@ jobs:
             }
             
             // Use GITHUB_OUTPUT instead of deprecated setOutput
-            const fs = require('fs');
             fs.appendFileSync(process.env.GITHUB_OUTPUT, `pr_number=${dependabotPR.number}\n`);
 
       - name: Merge PR
@@ -59,7 +60,7 @@ jobs:
             const prNumber = parseInt(prNumberStr);
             
             // Validate the PR number
-            if (!prNumber || isNaN(prNumber)) {
+            if (prNumber <= 0 || isNaN(prNumber)) {
               core.setFailed('Invalid PR number');
               return;
             }
