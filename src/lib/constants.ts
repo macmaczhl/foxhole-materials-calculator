@@ -129,6 +129,8 @@ export const ICONS_MAP = new Map<string, string>([
   [Vehicles.RR3StolonTanker, "OilTankerIcon"],
   // Logistics Vehicles - Cranes
   [Vehicles.BMSClass2MobileAutoCrane, "CraneVehicleIcon"],
+  // Logistics Vehicles - Ambulances
+  [Vehicles.R12SalusAmbulance, "Ambulance"],
   // Motorcycles
   [Vehicles.O3MMCaster, "MotorcycleVehicleIcon"],
 ]);

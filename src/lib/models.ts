@@ -149,6 +149,8 @@ export enum Vehicles {
   RR3StolonTanker = 'RR-3 "Stolon" Tanker',
   // Logistics Vehicles - Cranes
   BMSClass2MobileAutoCrane = 'BMS - Class 2 Mobile Auto-Crane',
+  // Logistics Vehicles - Ambulances
+  R12SalusAmbulance = 'R-12 - "Salus" Ambulance',
   // Motorcycles
   O3MMCaster = '03MM "Caster"',
 }
@@ -271,6 +273,8 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.RR3StolonTanker },
   // Logistics Vehicles - Cranes
   { name: Vehicles.BMSClass2MobileAutoCrane },
+  // Logistics Vehicles - Ambulances
+  { name: Vehicles.R12SalusAmbulance },
   // Motorcycles
   { name: Vehicles.O3MMCaster },
 ];

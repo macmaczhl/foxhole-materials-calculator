@@ -77,10 +77,39 @@ const bmsClass2MobileAutoCraneRecipes: IRecipe[] = [
   ),
 ];
 
+// ===== AMBULANCES =====
+
+// R-12 "Salus" Ambulance recipes
+const r12SalusAmbulanceRecipes: IRecipe[] = [
+  // Garage production: 150 x Basic Materials → 1 x R-12 "Salus" Ambulance
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 150 }],
+    [{ stuff: Vehicles.R12SalusAmbulance, count: 1 }]
+  ),
+  // Mass Production Factory: 1080 x Basic Materials → 3 crates of 3 x R-12 "Salus" Ambulance (9 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 1080 }],
+    [{ stuff: Vehicles.R12SalusAmbulance, count: 9 }]
+  ),
+  // Mass Production Factory: 1350 x Basic Materials → 4 crates of 3 x R-12 "Salus" Ambulance (12 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 1350 }],
+    [{ stuff: Vehicles.R12SalusAmbulance, count: 12 }]
+  ),
+  // Mass Production Factory: 1575 x Basic Materials → 5 crates of 3 x R-12 "Salus" Ambulance (15 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 1575 }],
+    [{ stuff: Vehicles.R12SalusAmbulance, count: 15 }]
+  ),
+];
+
 export const logisticsVehicleRecipes = new Map<string, IRecipe[]>([
   // Fuel Tankers
   [Vehicles.DunneFuelrunner2d, dunneFuelrunner2dRecipes],
   [Vehicles.RR3StolonTanker, rr3StolonTankerRecipes],
   // Cranes
   [Vehicles.BMSClass2MobileAutoCrane, bmsClass2MobileAutoCraneRecipes],
+  // Ambulances
+  [Vehicles.R12SalusAmbulance, r12SalusAmbulanceRecipes],
 ]);
+

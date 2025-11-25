@@ -43,7 +43,7 @@ describe("Logistics Vehicles - Fuel Tankers", () => {
         true
       );
       expect(logisticsVehicleRecipes.has(Vehicles.RR3StolonTanker)).toBe(true);
-      expect(logisticsVehicleRecipes.size).toBe(3); // 2 fuel tankers + 1 crane
+      expect(logisticsVehicleRecipes.size).toBe(4); // 2 fuel tankers + 1 crane + 1 ambulance
     });
   });
 
@@ -335,6 +335,118 @@ describe("Logistics Vehicles - Cranes", () => {
       const recipes = RecipiesByStuff.get(Vehicles.BMSClass2MobileAutoCrane)!;
       const recipeTree: RecipeTree = {
         stuff: Vehicles.BMSClass2MobileAutoCrane,
+        selectedRecipe: recipes[0],
+        recipes: recipes,
+        required: [],
+      };
+
+      // Should not throw an error
+      expect(() => {
+        const result = calculateComponents(recipeTree, 1);
+        expect(result.initial.length).toBeGreaterThan(0);
+      }).not.toThrow();
+    });
+  });
+});
+
+describe("Logistics Vehicles - Ambulances", () => {
+  describe("Recipe availability", () => {
+    test("ambulance has recipes defined", () => {
+      expect(RecipiesByStuff.has(Vehicles.R12SalusAmbulance)).toBe(true);
+      const recipes = RecipiesByStuff.get(Vehicles.R12SalusAmbulance);
+      expect(recipes).toBeDefined();
+      expect(recipes!.length).toBeGreaterThan(0);
+    });
+
+    test("ambulance recipes have valid requirements", () => {
+      const recipes = RecipiesByStuff.get(Vehicles.R12SalusAmbulance)!;
+      recipes.forEach((recipe) => {
+        expect(recipe.required.length).toBeGreaterThan(0);
+        expect(recipe.required[0].count).toBeGreaterThan(0);
+        expect(recipe.required[0].stuff).toBeDefined();
+      });
+    });
+
+    test("ambulance is in the logistics vehicle recipes", () => {
+      expect(logisticsVehicleRecipes.has(Vehicles.R12SalusAmbulance)).toBe(true);
+    });
+  });
+
+  describe('R-12 "Salus" Ambulance', () => {
+    let ambulanceRecipes: IRecipe[];
+    let ambulanceRecipeTree: RecipeTree;
+
+    beforeEach(() => {
+      ambulanceRecipes = RecipiesByStuff.get(Vehicles.R12SalusAmbulance)!;
+      ambulanceRecipeTree = {
+        stuff: Vehicles.R12SalusAmbulance,
+        selectedRecipe: ambulanceRecipes[0],
+        recipes: ambulanceRecipes,
+        required: [],
+      };
+    });
+
+    test("has correct garage recipe requirements", () => {
+      const garageRecipe = ambulanceRecipes[0];
+      expect(garageRecipe.required).toEqual([
+        { stuff: Materials.BasicMaterials, count: 150 },
+      ]);
+      expect(garageRecipe.produced).toEqual([
+        { stuff: Vehicles.R12SalusAmbulance, count: 1 },
+      ]);
+    });
+
+    test("has mass production recipes", () => {
+      expect(ambulanceRecipes.length).toBe(4);
+
+      // Check basic recipe (150 → 1)
+      const basicRecipe = ambulanceRecipes.find((r) => r.produced[0].count === 1);
+      expect(basicRecipe).toBeDefined();
+      expect(basicRecipe!.required[0].stuff).toBe(Materials.BasicMaterials);
+      expect(basicRecipe!.required[0].count).toBe(150);
+
+      // Check mass production recipes exist
+      const massProduction = ambulanceRecipes.filter(
+        (r) => r.produced[0].count > 1
+      );
+      expect(massProduction.length).toBe(3);
+
+      // Verify mass production recipe quantities
+      const recipe9 = ambulanceRecipes.find((r) => r.produced[0].count === 9);
+      expect(recipe9).toBeDefined();
+      expect(recipe9!.required[0].count).toBe(1080);
+
+      const recipe12 = ambulanceRecipes.find((r) => r.produced[0].count === 12);
+      expect(recipe12).toBeDefined();
+      expect(recipe12!.required[0].count).toBe(1350);
+
+      const recipe15 = ambulanceRecipes.find((r) => r.produced[0].count === 15);
+      expect(recipe15).toBeDefined();
+      expect(recipe15!.required[0].count).toBe(1575);
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const result = calculateComponents(ambulanceRecipeTree, 1);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.BasicMaterials, count: 150 },
+      ]);
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const result = calculateComponents(ambulanceRecipeTree, 3);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.BasicMaterials, count: 450 },
+      ]);
+    });
+  });
+
+  describe("Recipe calculation integration", () => {
+    test("ambulance can be calculated without errors", () => {
+      const recipes = RecipiesByStuff.get(Vehicles.R12SalusAmbulance)!;
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.R12SalusAmbulance,
         selectedRecipe: recipes[0],
         recipes: recipes,
         required: [],
