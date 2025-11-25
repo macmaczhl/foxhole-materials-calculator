@@ -21,6 +21,7 @@ export interface RecipeTree {
 }
 
 export enum Materials {
+  BasicMaterials = "Basic Materials",
   ConstructionMaterials = "Construction Materials",
   ProcessedConstructionMaterials = "Processed Construction Materials",
   RefinedMaterials = "Refined Materials",
@@ -140,6 +141,9 @@ export enum Vehicles {
   CullenPredatorMkIII = 'Cullen Predator Mk. III',
   Lance25Hasta = 'Lance-25 "Hasta"',
   Lance46Sarissa = 'Lance-46 "Sarissa"',
+  // Logistics Vehicles - Fuel Tankers
+  DunneFuelrunner2d = 'Dunne Fuelrunner 2d',
+  RR3StolonTanker = 'RR-3 "Stolon" Tanker',
 }
 
 export enum RawResources {
@@ -252,6 +256,9 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.CullenPredatorMkIII },
   { name: Vehicles.Lance25Hasta },
   { name: Vehicles.Lance46Sarissa },
+  // Logistics Vehicles - Fuel Tankers
+  { name: Vehicles.DunneFuelrunner2d },
+  { name: Vehicles.RR3StolonTanker },
 ];
 
 export const stuffList: Stuff[] = availableMaterials;
