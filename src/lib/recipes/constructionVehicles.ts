@@ -10,17 +10,17 @@ const bmsUniversalAssemblyRigRecipes: IRecipe[] = [
     [{ stuff: Materials.BasicMaterials, count: 100 }],
     [{ stuff: Vehicles.BMSUniversalAssemblyRig, count: 1 }]
   ),
-  // Mass Production Factory: 720 x Basic Materials → 3 crates of 3 x BMS - Universal Assembly Rig (9 total)
+  // Mass Production Factory: 720 x Basic Materials → 3 crates (9 total vehicles, 3 per crate)
   createRecipe(
     [{ stuff: Materials.BasicMaterials, count: 720 }],
     [{ stuff: Vehicles.BMSUniversalAssemblyRig, count: 9 }]
   ),
-  // Mass Production Factory: 900 x Basic Materials → 4 crates of 3 x BMS - Universal Assembly Rig (12 total)
+  // Mass Production Factory: 900 x Basic Materials → 4 crates (12 total vehicles, 3 per crate)
   createRecipe(
     [{ stuff: Materials.BasicMaterials, count: 900 }],
     [{ stuff: Vehicles.BMSUniversalAssemblyRig, count: 12 }]
   ),
-  // Mass Production Factory: 1050 x Basic Materials → 5 crates of 3 x BMS - Universal Assembly Rig (15 total)
+  // Mass Production Factory: 1050 x Basic Materials → 5 crates (15 total vehicles, 3 per crate)
   createRecipe(
     [{ stuff: Materials.BasicMaterials, count: 1050 }],
     [{ stuff: Vehicles.BMSUniversalAssemblyRig, count: 15 }]
