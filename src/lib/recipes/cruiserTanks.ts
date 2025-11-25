@@ -56,9 +56,24 @@ const gallagherThornfallMkVIRecipes: IRecipe[] = [
   ),
 ];
 
+// Gallagher Outlaw Mk. II Cruiser Tank recipes
+const gallagherOutlawMkIIRecipes: IRecipe[] = [
+  // Small Assembly Station: 1 x Gallagher Brigand Mk. I + 10 x Processed Construction Materials + 10 x Assembly Materials I + 10 x Assembly Materials IV → 1 x Gallagher Outlaw Mk. II
+  createRecipe(
+    [
+      { stuff: Vehicles.GallagherBrigandMkI, count: 1 },
+      { stuff: Materials.ProcessedConstructionMaterials, count: 10 },
+      { stuff: Materials.AssemblyMaterialsI, count: 10 },
+      { stuff: Materials.AssemblyMaterialsIV, count: 10 },
+    ],
+    [{ stuff: Vehicles.GallagherOutlawMkII, count: 1 }]
+  ),
+];
+
 export const cruiserTankRecipes = new Map<string, IRecipe[]>([
   // Cruiser Tanks
   [Vehicles.GallagherBrigandMkI, gallagherBrigandMkIRecipes],
   [Vehicles.GallagherHighwaymanMkIII, gallagherHighwaymanMkIIIRecipes],
   [Vehicles.GallagherThornfallMkVI, gallagherThornfallMkVIRecipes],
+  [Vehicles.GallagherOutlawMkII, gallagherOutlawMkIIRecipes],
 ]);

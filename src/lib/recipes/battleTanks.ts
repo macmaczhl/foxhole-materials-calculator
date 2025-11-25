@@ -31,6 +31,20 @@ const floodJuggernautMkVIIRecipes: IRecipe[] = [
   ),
 ];
 
+// Flood Mk. IX Stain Battle Tank recipes
+const floodMkIXStainRecipes: IRecipe[] = [
+  // Large Assembly Station (Heavy Tank Assembly): 150 x Steel Construction Materials + 65 x Assembly Materials III + 40 x Assembly Materials IV + 85 x Assembly Materials V → 1 x Flood Mk. IX Stain
+  createRecipe(
+    [
+      { stuff: Materials.SteelConstructionMaterials, count: 150 },
+      { stuff: Materials.AssemblyMaterialsIII, count: 65 },
+      { stuff: Materials.AssemblyMaterialsIV, count: 40 },
+      { stuff: Materials.AssemblyMaterialsV, count: 85 },
+    ],
+    [{ stuff: Vehicles.FloodMkIXStain, count: 1 }]
+  ),
+];
+
 // Cullen Predator Mk. III Super Tank recipes
 const cullenPredatorMkIIIRecipes: IRecipe[] = [
   // Large Assembly Station (Heavy Tank Assembly): 275 x Steel Construction Materials + 105 x Assembly Materials III + 95 x Assembly Materials IV + 105 x Assembly Materials V + 3 x Rare Alloys → 1 x Cullen Predator Mk. III
@@ -46,9 +60,40 @@ const cullenPredatorMkIIIRecipes: IRecipe[] = [
   ),
 ];
 
+// Lance-25 "Hasta" Battle Tank Destroyer recipes
+const lance25HastaRecipes: IRecipe[] = [
+  // Large Assembly Station (Heavy Tank Assembly): 60 x Steel Construction Materials + 65 x Assembly Materials III + 45 x Assembly Materials IV + 65 x Assembly Materials V → 1 x Lance-25 "Hasta"
+  createRecipe(
+    [
+      { stuff: Materials.SteelConstructionMaterials, count: 60 },
+      { stuff: Materials.AssemblyMaterialsIII, count: 65 },
+      { stuff: Materials.AssemblyMaterialsIV, count: 45 },
+      { stuff: Materials.AssemblyMaterialsV, count: 65 },
+    ],
+    [{ stuff: Vehicles.Lance25Hasta, count: 1 }]
+  ),
+];
+
+// Lance-46 "Sarissa" Battle Tank SPG recipes
+const lance46SarissaRecipes: IRecipe[] = [
+  // Large Assembly Station (Heavy Tank Assembly): 150 x Steel Construction Materials + 65 x Assembly Materials III + 40 x Assembly Materials IV + 85 x Assembly Materials V → 1 x Lance-46 "Sarissa"
+  createRecipe(
+    [
+      { stuff: Materials.SteelConstructionMaterials, count: 150 },
+      { stuff: Materials.AssemblyMaterialsIII, count: 65 },
+      { stuff: Materials.AssemblyMaterialsIV, count: 40 },
+      { stuff: Materials.AssemblyMaterialsV, count: 85 },
+    ],
+    [{ stuff: Vehicles.Lance46Sarissa, count: 1 }]
+  ),
+];
+
 export const battleTankRecipes = new Map<string, IRecipe[]>([
   // Battle Tanks
   [Vehicles.FloodMkI, floodMkIRecipes],
   [Vehicles.FloodJuggernautMkVII, floodJuggernautMkVIIRecipes],
+  [Vehicles.FloodMkIXStain, floodMkIXStainRecipes],
   [Vehicles.CullenPredatorMkIII, cullenPredatorMkIIIRecipes],
+  [Vehicles.Lance25Hasta, lance25HastaRecipes],
+  [Vehicles.Lance46Sarissa, lance46SarissaRecipes],
 ]);
