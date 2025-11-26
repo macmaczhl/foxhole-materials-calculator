@@ -149,6 +149,7 @@ export const ICONS_MAP = new Map<string, string>([
   [Vehicles.BMSFabricator, "AdvancedConstructionVehicleIcon"],
   // Light Utility Vehicles
   [Vehicles.UV05aArgonaut, "ScoutVehicleMobilityVehicleIcon"],
+  [Vehicles.UV24Icarus, "ScoutVehicleOffensiveVehicleIcon"],
   // Motorcycles
   [Vehicles.O3MMCaster, "MotorcycleVehicleIcon"],
   // Ambulances

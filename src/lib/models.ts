@@ -169,6 +169,7 @@ export enum Vehicles {
   BMSFabricator = 'BMS - Fabricator',
   // Light Utility Vehicles
   UV05aArgonaut = 'UV-05a "Argonaut"',
+  UV24Icarus = 'UV-24 "Icarus"',
   // Motorcycles
   O3MMCaster = '03MM "Caster"',
   // Ambulances
@@ -315,6 +316,7 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.BMSFabricator },
   // Light Utility Vehicles
   { name: Vehicles.UV05aArgonaut },
+  { name: Vehicles.UV24Icarus },
   // Motorcycles
   { name: Vehicles.O3MMCaster },
   // Ambulances

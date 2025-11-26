@@ -79,4 +79,53 @@ describe("Light Utility Vehicle Recipes", () => {
       expect(mpfRecipe?.produced[0].count).toBe(15);
     });
   });
+
+  describe("UV-24 Icarus", () => {
+    const icarusRecipes = RecipiesByStuff.get(Vehicles.UV24Icarus);
+
+    it("should have recipes defined", () => {
+      expect(icarusRecipes).toBeDefined();
+      expect(icarusRecipes).toHaveLength(1);
+    });
+
+    it("should have Small Assembly Station recipe (3 Construction Materials + 10 Assembly Materials II + 1 UV-05a Argonaut → 1 vehicle)", () => {
+      const assemblyRecipe = icarusRecipes?.find(
+        (r) =>
+          r.required.length === 3 &&
+          r.required.some(
+            (req) =>
+              req.stuff === Materials.ConstructionMaterials && req.count === 3
+          ) &&
+          r.required.some(
+            (req) =>
+              req.stuff === Materials.AssemblyMaterialsII && req.count === 10
+          ) &&
+          r.required.some(
+            (req) => req.stuff === Vehicles.UV05aArgonaut && req.count === 1
+          )
+      );
+
+      expect(assemblyRecipe).toBeDefined();
+      expect(assemblyRecipe?.required).toHaveLength(3);
+
+      const constructionMaterialsReq = assemblyRecipe?.required.find(
+        (r) => r.stuff === Materials.ConstructionMaterials
+      );
+      expect(constructionMaterialsReq?.count).toBe(3);
+
+      const assemblyMaterialsReq = assemblyRecipe?.required.find(
+        (r) => r.stuff === Materials.AssemblyMaterialsII
+      );
+      expect(assemblyMaterialsReq?.count).toBe(10);
+
+      const argonautReq = assemblyRecipe?.required.find(
+        (r) => r.stuff === Vehicles.UV05aArgonaut
+      );
+      expect(argonautReq?.count).toBe(1);
+
+      expect(assemblyRecipe?.produced).toHaveLength(1);
+      expect(assemblyRecipe?.produced[0].stuff).toBe(Vehicles.UV24Icarus);
+      expect(assemblyRecipe?.produced[0].count).toBe(1);
+    });
+  });
 });
