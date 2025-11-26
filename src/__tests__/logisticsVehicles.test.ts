@@ -9,7 +9,7 @@ import { logisticsVehicleRecipes } from "../lib/recipes/logisticsVehicles";
 describe("Logistics Vehicles - Trucks", () => {
   describe("Recipe availability", () => {
     test("all trucks have recipes defined", () => {
-      const trucks = [Vehicles.R1Hauler, Vehicles.DunneTransport];
+      const trucks = [Vehicles.R1Hauler, Vehicles.DunneTransport, Vehicles.DunneLeatherback2a];
 
       trucks.forEach((vehicle) => {
         expect(RecipiesByStuff.has(vehicle)).toBe(true);
@@ -20,7 +20,7 @@ describe("Logistics Vehicles - Trucks", () => {
     });
 
     test("all truck recipes have valid requirements", () => {
-      const trucks = [Vehicles.R1Hauler, Vehicles.DunneTransport];
+      const trucks = [Vehicles.R1Hauler, Vehicles.DunneTransport, Vehicles.DunneLeatherback2a];
 
       trucks.forEach((vehicle) => {
         const recipes = RecipiesByStuff.get(vehicle)!;
@@ -35,6 +35,7 @@ describe("Logistics Vehicles - Trucks", () => {
     test("trucks are in the logistics vehicle recipes", () => {
       expect(logisticsVehicleRecipes.has(Vehicles.R1Hauler)).toBe(true);
       expect(logisticsVehicleRecipes.has(Vehicles.DunneTransport)).toBe(true);
+      expect(logisticsVehicleRecipes.has(Vehicles.DunneLeatherback2a)).toBe(true);
     });
   });
 
@@ -186,6 +187,58 @@ describe("Logistics Vehicles - Trucks", () => {
     });
   });
 
+  describe("Dunne Leatherback 2a (Warden reinforced truck variant)", () => {
+    let leatherbackRecipes: IRecipe[];
+    let leatherbackRecipeTree: RecipeTree;
+
+    beforeEach(() => {
+      leatherbackRecipes = RecipiesByStuff.get(Vehicles.DunneLeatherback2a)!;
+      leatherbackRecipeTree = {
+        stuff: Vehicles.DunneLeatherback2a,
+        selectedRecipe: leatherbackRecipes[0],
+        recipes: leatherbackRecipes,
+        required: [],
+      };
+    });
+
+    test("has correct assembly station recipe requirements", () => {
+      const assemblyRecipe = leatherbackRecipes[0];
+      expect(assemblyRecipe.required).toEqual([
+        { stuff: Materials.ConstructionMaterials, count: 10 },
+        { stuff: Vehicles.DunneTransport, count: 1 },
+      ]);
+      expect(assemblyRecipe.produced).toEqual([
+        { stuff: Vehicles.DunneLeatherback2a, count: 1 },
+      ]);
+    });
+
+    test("has exactly one recipe (Small Assembly Station)", () => {
+      expect(leatherbackRecipes.length).toBe(1);
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const result = calculateComponents(leatherbackRecipeTree, 1);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.ConstructionMaterials, count: 10 },
+        { stuff: Vehicles.DunneTransport, count: 1 },
+      ]);
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const result = calculateComponents(leatherbackRecipeTree, 3);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.ConstructionMaterials, count: 30 },
+        { stuff: Vehicles.DunneTransport, count: 3 },
+      ]);
+    });
+
+    test("is in the logistics vehicle recipes", () => {
+      expect(logisticsVehicleRecipes.has(Vehicles.DunneLeatherback2a)).toBe(true);
+    });
+  });
+
   describe("Both factions use same production costs for trucks", () => {
     test("Warden and Colonial trucks have identical costs", () => {
       const wardenRecipes = RecipiesByStuff.get(Vehicles.DunneTransport)!;
@@ -206,7 +259,7 @@ describe("Logistics Vehicles - Trucks", () => {
 
   describe("Recipe calculation integration for trucks", () => {
     test("all trucks can be calculated without errors", () => {
-      const trucks = [Vehicles.R1Hauler, Vehicles.DunneTransport];
+      const trucks = [Vehicles.R1Hauler, Vehicles.DunneTransport, Vehicles.DunneLeatherback2a];
 
       trucks.forEach((vehicle) => {
         const recipes = RecipiesByStuff.get(vehicle)!;
@@ -264,7 +317,7 @@ describe("Logistics Vehicles - Fuel Tankers", () => {
         true
       );
       expect(logisticsVehicleRecipes.has(Vehicles.RR3StolonTanker)).toBe(true);
-      expect(logisticsVehicleRecipes.size).toBe(14); // 2 trucks + 2 fuel tankers + 2 heavy-duty trucks + 1 crane + 1 flatbed truck + 2 fire engines + 2 ambulances + 2 transport buses + 1 harvester
+      expect(logisticsVehicleRecipes.size).toBe(15); // 3 trucks + 2 fuel tankers + 2 heavy-duty trucks + 1 crane + 1 flatbed truck + 2 fire engines + 1 ambulance + 2 transport buses + 1 harvester
     });
   });
 
