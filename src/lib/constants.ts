@@ -130,24 +130,33 @@ export const ICONS_MAP = new Map<string, string>([
   // Logistics Vehicles - Fuel Tankers
   [Vehicles.DunneFuelrunner2d, "OilTankerWarIcon"],
   [Vehicles.RR3StolonTanker, "OilTankerIcon"],
+  // Logistics Vehicles - Heavy-Duty Trucks
+  [Vehicles.CnuteCliffwrest, "HeavyTruckWVehicleIcon"],
+  [Vehicles.AUA150TaurineRigger, "HeavyTruckCVehicleIcon"],
   // Logistics Vehicles - Trailers
   [Vehicles.RoosterJunkwagon, "ResourceTrailerIcon"],
   [Vehicles.RoosterLamploader, "FuelTrailerIcon"],
   [Vehicles.RoosterTumblebox, "MaterialTrailerIcon"],
   // Logistics Vehicles - Cranes
   [Vehicles.BMSClass2MobileAutoCrane, "CraneVehicleIcon"],
+  // Logistics Vehicles - Flatbed Trucks
+  [Vehicles.BMSPackmuleFlatbed, "FlatbedTruckVehicleIcon"],
+  // Logistics Vehicles - Fire Engines
+  [Vehicles.DunneDousingEngine3r, "FireTruckWarIcon"],
+  [Vehicles.R12bSalvaFlameTruck, "FireTruckIcon"],
   // Logistics Vehicles - Ambulances
   [Vehicles.R12SalusAmbulance, "Ambulance"],
+  [Vehicles.DunneResponder3e, "AmbulanceWar"],
   // Logistics Vehicles - Transport Buses
   [Vehicles.DunneCaravaner2f, "BusWarIcon"],
   [Vehicles.R15Chariot, "BusIcon"],
+  // Logistics Vehicles - Harvesters
+  [Vehicles.BMSScrapHauler, "Harvester"],
   // Construction Vehicles
   [Vehicles.BMSUniversalAssemblyRig, "ConstructionVehicleIcon"],
+  [Vehicles.BMSFabricator, "AdvancedConstructionVehicleIcon"],
   // Light Utility Vehicles
   [Vehicles.UV05aArgonaut, "ScoutVehicleMobilityVehicleIcon"],
   // Motorcycles
   [Vehicles.O3MMCaster, "MotorcycleVehicleIcon"],
-  // Fire Engines
-  [Vehicles.DunneDousingEngine3r, "FireTruckWarIcon"],
-  [Vehicles.R12bSalvaFlameTruck, "FireTruckIcon"],
 ]);

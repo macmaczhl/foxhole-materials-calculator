@@ -264,7 +264,7 @@ describe("Logistics Vehicles - Fuel Tankers", () => {
         true
       );
       expect(logisticsVehicleRecipes.has(Vehicles.RR3StolonTanker)).toBe(true);
-      expect(logisticsVehicleRecipes.size).toBe(10); // 2 trucks + 2 fuel tankers + 1 crane + 2 fire engines + 1 ambulance + 2 transport buses
+      expect(logisticsVehicleRecipes.size).toBe(14); // 2 trucks + 2 fuel tankers + 2 heavy-duty trucks + 1 crane + 1 flatbed truck + 2 fire engines + 2 ambulances + 2 transport buses + 1 harvester
     });
   });
 
@@ -556,6 +556,138 @@ describe("Logistics Vehicles - Cranes", () => {
       const recipes = RecipiesByStuff.get(Vehicles.BMSClass2MobileAutoCrane)!;
       const recipeTree: RecipeTree = {
         stuff: Vehicles.BMSClass2MobileAutoCrane,
+        selectedRecipe: recipes[0],
+        recipes: recipes,
+        required: [],
+      };
+
+      // Should not throw an error
+      expect(() => {
+        const result = calculateComponents(recipeTree, 1);
+        expect(result.initial.length).toBeGreaterThan(0);
+      }).not.toThrow();
+    });
+  });
+
+  describe("Both factions use same production costs", () => {
+    test("Warden and Colonial heavy-duty trucks have identical costs", () => {
+      const wardenRecipes = RecipiesByStuff.get(Vehicles.CnuteCliffwrest)!;
+      const colonialRecipes = RecipiesByStuff.get(
+        Vehicles.AUA150TaurineRigger
+      )!;
+
+      expect(wardenRecipes.length).toBe(colonialRecipes.length);
+
+      // Compare each recipe's requirements
+      wardenRecipes.forEach((wardenRecipe, index) => {
+        const colonialRecipe = colonialRecipes[index];
+        expect(wardenRecipe.required).toEqual(colonialRecipe.required);
+        expect(wardenRecipe.produced[0].count).toBe(
+          colonialRecipe.produced[0].count
+        );
+      });
+    });
+  });
+});
+
+describe("Logistics Vehicles - Flatbed Trucks", () => {
+  describe("Recipe availability", () => {
+    test("flatbed truck has recipes defined", () => {
+      expect(RecipiesByStuff.has(Vehicles.BMSPackmuleFlatbed)).toBe(true);
+      const recipes = RecipiesByStuff.get(Vehicles.BMSPackmuleFlatbed);
+      expect(recipes).toBeDefined();
+      expect(recipes!.length).toBeGreaterThan(0);
+    });
+
+    test("flatbed truck recipes have valid requirements", () => {
+      const recipes = RecipiesByStuff.get(Vehicles.BMSPackmuleFlatbed)!;
+      recipes.forEach((recipe) => {
+        expect(recipe.required.length).toBeGreaterThan(0);
+        expect(recipe.required[0].count).toBeGreaterThan(0);
+        expect(recipe.required[0].stuff).toBeDefined();
+      });
+    });
+
+    test("flatbed truck is in the logistics vehicle recipes", () => {
+      expect(logisticsVehicleRecipes.has(Vehicles.BMSPackmuleFlatbed)).toBe(true);
+    });
+  });
+
+  describe("BMS - Packmule Flatbed", () => {
+    let flatbedRecipes: IRecipe[];
+    let flatbedRecipeTree: RecipeTree;
+
+    beforeEach(() => {
+      flatbedRecipes = RecipiesByStuff.get(Vehicles.BMSPackmuleFlatbed)!;
+      flatbedRecipeTree = {
+        stuff: Vehicles.BMSPackmuleFlatbed,
+        selectedRecipe: flatbedRecipes[0],
+        recipes: flatbedRecipes,
+        required: [],
+      };
+    });
+
+    test("has correct garage recipe requirements", () => {
+      const garageRecipe = flatbedRecipes[0];
+      expect(garageRecipe.required).toEqual([
+        { stuff: Materials.RefinedMaterials, count: 30 },
+      ]);
+      expect(garageRecipe.produced).toEqual([
+        { stuff: Vehicles.BMSPackmuleFlatbed, count: 1 },
+      ]);
+    });
+
+    test("has mass production recipes", () => {
+      expect(flatbedRecipes.length).toBe(4);
+
+      // Check basic recipe (30 → 1)
+      const basicRecipe = flatbedRecipes.find((r) => r.produced[0].count === 1);
+      expect(basicRecipe).toBeDefined();
+      expect(basicRecipe!.required[0].stuff).toBe(Materials.RefinedMaterials);
+      expect(basicRecipe!.required[0].count).toBe(30);
+
+      // Check mass production recipes exist
+      const massProduction = flatbedRecipes.filter(
+        (r) => r.produced[0].count > 1
+      );
+      expect(massProduction.length).toBe(3);
+
+      // Verify mass production recipe quantities
+      const recipe9 = flatbedRecipes.find((r) => r.produced[0].count === 9);
+      expect(recipe9).toBeDefined();
+      expect(recipe9!.required[0].count).toBe(216);
+
+      const recipe12 = flatbedRecipes.find((r) => r.produced[0].count === 12);
+      expect(recipe12).toBeDefined();
+      expect(recipe12!.required[0].count).toBe(270);
+
+      const recipe15 = flatbedRecipes.find((r) => r.produced[0].count === 15);
+      expect(recipe15).toBeDefined();
+      expect(recipe15!.required[0].count).toBe(315);
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const result = calculateComponents(flatbedRecipeTree, 1);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.RefinedMaterials, count: 30 },
+      ]);
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const result = calculateComponents(flatbedRecipeTree, 3);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.RefinedMaterials, count: 90 },
+      ]);
+    });
+  });
+
+  describe("Recipe calculation integration", () => {
+    test("flatbed truck can be calculated without errors", () => {
+      const recipes = RecipiesByStuff.get(Vehicles.BMSPackmuleFlatbed)!;
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.BMSPackmuleFlatbed,
         selectedRecipe: recipes[0],
         recipes: recipes,
         required: [],
@@ -1057,6 +1189,96 @@ describe("Logistics Vehicles - Transport Buses", () => {
           colonialRecipe.produced[0].count
         );
       });
+    });
+  });
+});
+
+describe("Logistics Vehicles - Harvesters", () => {
+  describe("Recipe availability", () => {
+    test("harvester has recipes defined", () => {
+      expect(RecipiesByStuff.has(Vehicles.BMSScrapHauler)).toBe(true);
+      const recipes = RecipiesByStuff.get(Vehicles.BMSScrapHauler);
+      expect(recipes).toBeDefined();
+      expect(recipes!.length).toBeGreaterThan(0);
+    });
+
+    test("harvester recipes have valid requirements", () => {
+      const recipes = RecipiesByStuff.get(Vehicles.BMSScrapHauler)!;
+      recipes.forEach((recipe) => {
+        expect(recipe.required.length).toBeGreaterThan(0);
+        expect(recipe.required[0].count).toBeGreaterThan(0);
+        expect(recipe.required[0].stuff).toBeDefined();
+      });
+    });
+
+    test("harvester is in the logistics vehicle recipes", () => {
+      expect(logisticsVehicleRecipes.has(Vehicles.BMSScrapHauler)).toBe(true);
+    });
+  });
+
+  describe("BMS - Scrap Hauler (Harvester)", () => {
+    let harvesterRecipes: IRecipe[];
+    let harvesterRecipeTree: RecipeTree;
+
+    beforeEach(() => {
+      harvesterRecipes = RecipiesByStuff.get(Vehicles.BMSScrapHauler)!;
+      harvesterRecipeTree = {
+        stuff: Vehicles.BMSScrapHauler,
+        selectedRecipe: harvesterRecipes[0],
+        recipes: harvesterRecipes,
+        required: [],
+      };
+    });
+
+    test("has correct assembly station recipe requirements", () => {
+      const assemblyRecipe = harvesterRecipes[0];
+      expect(assemblyRecipe.required).toEqual([
+        { stuff: Materials.ProcessedConstructionMaterials, count: 90 },
+        { stuff: Materials.AssemblyMaterialsIV, count: 25 },
+      ]);
+      expect(assemblyRecipe.produced).toEqual([
+        { stuff: Vehicles.BMSScrapHauler, count: 1 },
+      ]);
+    });
+
+    test("has single recipe (facility production only)", () => {
+      expect(harvesterRecipes.length).toBe(1);
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const result = calculateComponents(harvesterRecipeTree, 1);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.ProcessedConstructionMaterials, count: 90 },
+        { stuff: Materials.AssemblyMaterialsIV, count: 25 },
+      ]);
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const result = calculateComponents(harvesterRecipeTree, 3);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.ProcessedConstructionMaterials, count: 270 },
+        { stuff: Materials.AssemblyMaterialsIV, count: 75 },
+      ]);
+    });
+  });
+
+  describe("Recipe calculation integration", () => {
+    test("harvester can be calculated without errors", () => {
+      const recipes = RecipiesByStuff.get(Vehicles.BMSScrapHauler)!;
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.BMSScrapHauler,
+        selectedRecipe: recipes[0],
+        recipes: recipes,
+        required: [],
+      };
+
+      // Should not throw an error
+      expect(() => {
+        const result = calculateComponents(recipeTree, 1);
+        expect(result.initial.length).toBeGreaterThan(0);
+      }).not.toThrow();
     });
   });
 });

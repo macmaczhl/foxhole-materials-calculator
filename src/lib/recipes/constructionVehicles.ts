@@ -27,6 +27,19 @@ const bmsUniversalAssemblyRigRecipes: IRecipe[] = [
   ),
 ];
 
+// BMS - Fabricator (Advanced Construction Vehicle) recipes
+const bmsFabricatorRecipes: IRecipe[] = [
+  // Small Assembly Station: 10 x Processed Construction Materials + 1 x BMS - Universal Assembly Rig → 1 x BMS - Fabricator
+  createRecipe(
+    [
+      { stuff: Materials.ProcessedConstructionMaterials, count: 10 },
+      { stuff: Vehicles.BMSUniversalAssemblyRig, count: 1 },
+    ],
+    [{ stuff: Vehicles.BMSFabricator, count: 1 }]
+  ),
+];
+
 export const constructionVehicleRecipes = new Map<string, IRecipe[]>([
   [Vehicles.BMSUniversalAssemblyRig, bmsUniversalAssemblyRigRecipes],
+  [Vehicles.BMSFabricator, bmsFabricatorRecipes],
 ]);

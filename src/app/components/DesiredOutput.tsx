@@ -33,9 +33,9 @@ export function DesiredOutput() {
         <table className="w-full ui-table">
           <thead>
             <tr>
-              <th className="w-28 text-left">Count</th>
+              <th className="w-20 md:w-28 text-left">Count</th>
               <th className="text-left">Desired stuff</th>
-              <th className="w-20 text-center">Delete</th>
+              <th className="w-12 md:w-20 text-center">Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -51,7 +51,7 @@ export function DesiredOutput() {
                         changeCount({ rowId: row.id, value: e.target.value })
                       )
                     }
-                    className="ui-input w-24"
+                    className="ui-input w-16 md:w-24"
                   />
                 </td>
                 <td>
@@ -60,7 +60,7 @@ export function DesiredOutput() {
                     onChange={(v) =>
                       dispatch(changeStuff({ rowId: row.id, value: v }))
                     }
-                    placeholder="Search materials/vehicles"
+                    placeholder="Search..."
                   />
                 </td>
                 <td className="text-center">
