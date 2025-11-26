@@ -14,6 +14,7 @@ import { trailerRecipes } from "./trailers";
 import { superTankRecipes } from "./superTanks";
 import { lightUtilityVehicleRecipes } from "./lightUtilityVehicles";
 import { motorcycleRecipes } from "./motorcycles";
+import { ambulanceRecipes } from "./ambulances";
 
 /**
  * Central registry of all vehicle recipes.
@@ -33,6 +34,7 @@ import { motorcycleRecipes } from "./motorcycles";
  * - scoutVehicles.ts: Future scout vehicles
  * - lightUtilityVehicles.ts: Light Utility Vehicles
  * - motorcycles.ts: Motorcycles
+ * - ambulances.ts: Ambulances
  */
 export const vehicleRecipes = new Map<string, IRecipe[]>([
   ...armouredFightingVehicleRecipes,
@@ -50,4 +52,5 @@ export const vehicleRecipes = new Map<string, IRecipe[]>([
   ...superTankRecipes,
   ...lightUtilityVehicleRecipes,
   ...motorcycleRecipes,
+  ...ambulanceRecipes,
 ]);
