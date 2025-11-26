@@ -7,6 +7,7 @@ import { armouredFightingVehicleRecipes } from "../lib/recipes/armouredFightingV
 import { fieldWeaponRecipes } from "../lib/recipes/fieldWeapons";
 import { tankRecipes } from "../lib/recipes/tanks";
 import { logisticsVehicleRecipes } from "../lib/recipes/logisticsVehicles";
+import { trailerRecipes } from "../lib/recipes/trailers";
 import { scoutVehicleRecipes } from "../lib/recipes/scoutVehicles";
 import { lightTankRecipes } from "../lib/recipes/lightTanks";
 import { assaultTankRecipes } from "../lib/recipes/assaultTanks";
@@ -15,6 +16,8 @@ import { destroyerTankRecipes } from "../lib/recipes/destroyerTanks";
 import { battleTankRecipes } from "../lib/recipes/battleTanks";
 import { cruiserTankRecipes } from "../lib/recipes/cruiserTanks";
 import { superTankRecipes } from "../lib/recipes/superTanks";
+import { constructionVehicleRecipes } from "../lib/recipes/constructionVehicles";
+import { lightUtilityVehicleRecipes } from "../lib/recipes/lightUtilityVehicles";
 import { motorcycleRecipes } from "../lib/recipes/motorcycles";
 
 describe("Vehicle Recipe Organization", () => {
@@ -132,6 +135,12 @@ describe("Vehicle Recipe Organization", () => {
       expect(logisticsVehicleRecipes.has(Vehicles.RR3StolonTanker)).toBe(true);
     });
 
+    test("constructionVehicleRecipes contains construction vehicles", () => {
+      expect(
+        constructionVehicleRecipes.has(Vehicles.BMSUniversalAssemblyRig)
+      ).toBe(true);
+    });
+
     test("scoutVehicleRecipes is empty (placeholder)", () => {
       expect(scoutVehicleRecipes.size).toBe(0);
     });
@@ -143,6 +152,10 @@ describe("Vehicle Recipe Organization", () => {
     test("superTankRecipes contains super tanks", () => {
       expect(superTankRecipes.has(Vehicles.CullenPredatorMkIII)).toBe(true);
       expect(superTankRecipes.has(Vehicles.O75bAres)).toBe(true);
+    });
+
+    test("lightUtilityVehicleRecipes contains light utility vehicles", () => {
+      expect(lightUtilityVehicleRecipes.has(Vehicles.UV05aArgonaut)).toBe(true);
     });
 
     test("motorcycleRecipes contains motorcycles", () => {
@@ -157,6 +170,7 @@ describe("Vehicle Recipe Organization", () => {
         fieldWeaponRecipes.size +
         tankRecipes.size +
         logisticsVehicleRecipes.size +
+        trailerRecipes.size +
         scoutVehicleRecipes.size +
         lightTankRecipes.size +
         assaultTankRecipes.size +
@@ -165,6 +179,8 @@ describe("Vehicle Recipe Organization", () => {
         battleTankRecipes.size +
         cruiserTankRecipes.size +
         superTankRecipes.size +
+        constructionVehicleRecipes.size +
+        lightUtilityVehicleRecipes.size +
         motorcycleRecipes.size;
 
       expect(vehicleRecipes.size).toBe(totalExpectedSize);
@@ -195,6 +211,14 @@ describe("Vehicle Recipe Organization", () => {
       expect(vehicleRecipes.has(Vehicles.O75bAres)).toBe(true);
     });
 
+    test("vehicleRecipes contains recipes from lightUtilityVehicles", () => {
+      expect(vehicleRecipes.has(Vehicles.UV05aArgonaut)).toBe(true);
+    });
+
+    test("vehicleRecipes contains recipes from motorcycles", () => {
+      expect(vehicleRecipes.has(Vehicles.O3MMCaster)).toBe(true);
+    });
+
     test("all vehicle recipes return same data whether accessed from category or central registry", () => {
       // Test a sample from each category
       expect(vehicleRecipes.get(Vehicles.Xiphos)).toEqual(
@@ -205,6 +229,12 @@ describe("Vehicle Recipe Organization", () => {
       );
       expect(vehicleRecipes.get(Vehicles.KingSpireMkI)).toEqual(
         tankRecipes.get(Vehicles.KingSpireMkI)
+      );
+      expect(vehicleRecipes.get(Vehicles.UV05aArgonaut)).toEqual(
+        lightUtilityVehicleRecipes.get(Vehicles.UV05aArgonaut)
+      );
+      expect(vehicleRecipes.get(Vehicles.O3MMCaster)).toEqual(
+        motorcycleRecipes.get(Vehicles.O3MMCaster)
       );
     });
   });
@@ -233,6 +263,9 @@ describe("Vehicle Recipe Organization", () => {
         ...battleTankRecipes.keys(),
         ...cruiserTankRecipes.keys(),
         ...superTankRecipes.keys(),
+        ...constructionVehicleRecipes.keys(),
+        ...lightUtilityVehicleRecipes.keys(),
+        ...motorcycleRecipes.keys(),
       ];
 
       // Check no duplicates across categories
