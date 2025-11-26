@@ -156,9 +156,13 @@ export enum Vehicles {
   RoosterTumblebox = 'Rooster - Tumblebox',
   // Logistics Vehicles - Cranes
   BMSClass2MobileAutoCrane = 'BMS - Class 2 Mobile Auto-Crane',
+  // Logistics Vehicles - Ambulances
+  R12SalusAmbulance = 'R-12 - "Salus" Ambulance',
   // Logistics Vehicles - Transport Buses
   DunneCaravaner2f = 'Dunne Caravaner 2f',
   R15Chariot = 'R-15 - "Chariot"',
+  // Construction Vehicles
+  BMSUniversalAssemblyRig = 'BMS - Universal Assembly Rig',
   // Light Utility Vehicles
   UV05aArgonaut = 'UV-05a "Argonaut"',
   // Motorcycles
@@ -293,9 +297,13 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.RoosterTumblebox },
   // Logistics Vehicles - Cranes
   { name: Vehicles.BMSClass2MobileAutoCrane },
+  // Logistics Vehicles - Ambulances
+  { name: Vehicles.R12SalusAmbulance },
   // Logistics Vehicles - Transport Buses
   { name: Vehicles.DunneCaravaner2f },
   { name: Vehicles.R15Chariot },
+  // Construction Vehicles
+  { name: Vehicles.BMSUniversalAssemblyRig },
   // Light Utility Vehicles
   { name: Vehicles.UV05aArgonaut },
   // Motorcycles
