@@ -8,7 +8,7 @@ name: Recipes manager
 description: Agent to add new stuff recipes or edit/delete existing.
 ---
 
-# My Agent
+# Recipes manager
 
 All recipes can be found at https://foxhole.wiki.gg/wiki/Vehicles. Navigate to needed vehiicle by type and find needed vehicle. The vehicle page with recipes looks like [https://foxhole.wiki.gg/wiki/H-10_%E2%80%9CPelekys%E2%80%9D](https://foxhole.wiki.gg/wiki/Gallagher_Highwayman_Mk._III)
 Recipes are in the table under "Production" header.
