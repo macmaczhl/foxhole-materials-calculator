@@ -264,7 +264,7 @@ describe("Logistics Vehicles - Fuel Tankers", () => {
         true
       );
       expect(logisticsVehicleRecipes.has(Vehicles.RR3StolonTanker)).toBe(true);
-      expect(logisticsVehicleRecipes.size).toBe(9); // 2 trucks + 2 fuel tankers + 2 heavy-duty trucks + 1 crane + 1 ambulance + 2 transport buses
+      expect(logisticsVehicleRecipes.size).toBe(10); // 2 trucks + 2 fuel tankers + 2 heavy-duty trucks + 1 crane + 1 ambulance + 2 transport buses
     });
   });
 
