@@ -15,6 +15,7 @@ import { destroyerTankRecipes } from "../lib/recipes/destroyerTanks";
 import { battleTankRecipes } from "../lib/recipes/battleTanks";
 import { cruiserTankRecipes } from "../lib/recipes/cruiserTanks";
 import { superTankRecipes } from "../lib/recipes/superTanks";
+import { motorcycleRecipes } from "../lib/recipes/motorcycles";
 
 describe("Vehicle Recipe Organization", () => {
   describe("Category Files", () => {
@@ -143,6 +144,10 @@ describe("Vehicle Recipe Organization", () => {
       expect(superTankRecipes.has(Vehicles.CullenPredatorMkIII)).toBe(true);
       expect(superTankRecipes.has(Vehicles.O75bAres)).toBe(true);
     });
+
+    test("motorcycleRecipes contains motorcycles", () => {
+      expect(motorcycleRecipes.has(Vehicles.O3MMCaster)).toBe(true);
+    });
   });
 
   describe("Central Registry", () => {
@@ -159,7 +164,8 @@ describe("Vehicle Recipe Organization", () => {
         destroyerTankRecipes.size +
         battleTankRecipes.size +
         cruiserTankRecipes.size +
-        superTankRecipes.size;
+        superTankRecipes.size +
+        motorcycleRecipes.size;
 
       expect(vehicleRecipes.size).toBe(totalExpectedSize);
     });

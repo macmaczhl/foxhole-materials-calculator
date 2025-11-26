@@ -51,8 +51,36 @@ const rr3StolonTankerRecipes: IRecipe[] = [
   ),
 ];
 
+// ===== CRANES =====
+
+// BMS - Class 2 Mobile Auto-Crane recipes
+const bmsClass2MobileAutoCraneRecipes: IRecipe[] = [
+  // Garage production: 125 x Basic Materials → 1 x BMS - Class 2 Mobile Auto-Crane
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 125 }],
+    [{ stuff: Vehicles.BMSClass2MobileAutoCrane, count: 1 }]
+  ),
+  // Mass Production Factory: 899 x Basic Materials → 3 crates of 3 x BMS - Class 2 Mobile Auto-Crane (9 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 899 }],
+    [{ stuff: Vehicles.BMSClass2MobileAutoCrane, count: 9 }]
+  ),
+  // Mass Production Factory: 1124 x Basic Materials → 4 crates of 3 x BMS - Class 2 Mobile Auto-Crane (12 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 1124 }],
+    [{ stuff: Vehicles.BMSClass2MobileAutoCrane, count: 12 }]
+  ),
+  // Mass Production Factory: 1311 x Basic Materials → 5 crates of 3 x BMS - Class 2 Mobile Auto-Crane (15 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 1311 }],
+    [{ stuff: Vehicles.BMSClass2MobileAutoCrane, count: 15 }]
+  ),
+];
+
 export const logisticsVehicleRecipes = new Map<string, IRecipe[]>([
   // Fuel Tankers
   [Vehicles.DunneFuelrunner2d, dunneFuelrunner2dRecipes],
   [Vehicles.RR3StolonTanker, rr3StolonTankerRecipes],
+  // Cranes
+  [Vehicles.BMSClass2MobileAutoCrane, bmsClass2MobileAutoCraneRecipes],
 ]);
