@@ -139,11 +139,19 @@ export const ICONS_MAP = new Map<string, string>([
   [Vehicles.RoosterTumblebox, "MaterialTrailerIcon"],
   // Logistics Vehicles - Cranes
   [Vehicles.BMSClass2MobileAutoCrane, "CraneVehicleIcon"],
+  // Logistics Vehicles - Flatbed Trucks
+  [Vehicles.BMSPackmuleFlatbed, "FlatbedTruckVehicleIcon"],
+  // Logistics Vehicles - Fire Engines
+  [Vehicles.DunneDousingEngine3r, "FireTruckWarIcon"],
+  [Vehicles.R12bSalvaFlameTruck, "FireTruckIcon"],
   // Logistics Vehicles - Ambulances
   [Vehicles.R12SalusAmbulance, "Ambulance"],
+  [Vehicles.DunneResponder3e, "AmbulanceWar"],
   // Logistics Vehicles - Transport Buses
   [Vehicles.DunneCaravaner2f, "BusWarIcon"],
   [Vehicles.R15Chariot, "BusIcon"],
+  // Logistics Vehicles - Harvesters
+  [Vehicles.BMSScrapHauler, "Harvester"],
   // Construction Vehicles
   [Vehicles.BMSUniversalAssemblyRig, "ConstructionVehicleIcon"],
   [Vehicles.BMSFabricator, "AdvancedConstructionVehicleIcon"],
@@ -151,10 +159,4 @@ export const ICONS_MAP = new Map<string, string>([
   [Vehicles.UV05aArgonaut, "ScoutVehicleMobilityVehicleIcon"],
   // Motorcycles
   [Vehicles.O3MMCaster, "MotorcycleVehicleIcon"],
-  // Flatbed Trucks
-  [Vehicles.BMSPackmuleFlatbed, "FlatbedTruckVehicleIcon"],
-  // Ambulances
-  [Vehicles.DunneResponder3e, "AmbulanceWar"],
-  // Harvesters
-  [Vehicles.BMSScrapHauler, "Harvester"],
 ]);

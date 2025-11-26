@@ -159,11 +159,19 @@ export enum Vehicles {
   RoosterTumblebox = 'Rooster - Tumblebox',
   // Logistics Vehicles - Cranes
   BMSClass2MobileAutoCrane = 'BMS - Class 2 Mobile Auto-Crane',
+  // Logistics Vehicles - Flatbed Trucks
+  BMSPackmuleFlatbed = 'BMS - Packmule Flatbed',
+  // Logistics Vehicles - Fire Engines
+  DunneDousingEngine3r = 'Dunne Dousing Engine 3r',
+  R12bSalvaFlameTruck = 'R-12b - "Salva" Flame Truck',
   // Logistics Vehicles - Ambulances
   R12SalusAmbulance = 'R-12 - "Salus" Ambulance',
+  DunneResponder3e = 'Dunne Responder 3e',
   // Logistics Vehicles - Transport Buses
   DunneCaravaner2f = 'Dunne Caravaner 2f',
   R15Chariot = 'R-15 - "Chariot"',
+  // Logistics Vehicles - Harvesters
+  BMSScrapHauler = 'BMS - Scrap Hauler',
   // Construction Vehicles
   BMSUniversalAssemblyRig = 'BMS - Universal Assembly Rig',
   BMSFabricator = 'BMS - Fabricator',
@@ -171,12 +179,6 @@ export enum Vehicles {
   UV05aArgonaut = 'UV-05a "Argonaut"',
   // Motorcycles
   O3MMCaster = '03MM "Caster"',
-  // Flatbed Trucks
-  BMSPackmuleFlatbed = 'BMS - Packmule Flatbed',
-  // Ambulances
-  DunneResponder3e = 'Dunne Responder 3e',
-  // Harvesters
-  BMSScrapHauler = 'BMS - Scrap Hauler',
 }
 
 export enum RawResources {
@@ -307,11 +309,19 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.RoosterTumblebox },
   // Logistics Vehicles - Cranes
   { name: Vehicles.BMSClass2MobileAutoCrane },
+  // Logistics Vehicles - Flatbed Trucks
+  { name: Vehicles.BMSPackmuleFlatbed },
+  // Logistics Vehicles - Fire Engines
+  { name: Vehicles.DunneDousingEngine3r },
+  { name: Vehicles.R12bSalvaFlameTruck },
   // Logistics Vehicles - Ambulances
   { name: Vehicles.R12SalusAmbulance },
+  { name: Vehicles.DunneResponder3e },
   // Logistics Vehicles - Transport Buses
   { name: Vehicles.DunneCaravaner2f },
   { name: Vehicles.R15Chariot },
+  // Logistics Vehicles - Harvesters
+  { name: Vehicles.BMSScrapHauler },
   // Construction Vehicles
   { name: Vehicles.BMSUniversalAssemblyRig },
   { name: Vehicles.BMSFabricator },
@@ -319,12 +329,6 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.UV05aArgonaut },
   // Motorcycles
   { name: Vehicles.O3MMCaster },
-  // Flatbed Trucks
-  { name: Vehicles.BMSPackmuleFlatbed },
-  // Ambulances
-  { name: Vehicles.DunneResponder3e },
-  // Harvesters
-  { name: Vehicles.BMSScrapHauler },
 ];
 
 export const stuffList: Stuff[] = availableMaterials;
