@@ -8,7 +8,7 @@ export function RecipesSelectors() {
   const rows = useAppSelector((state) => state.desired.rows, shallowEqual);
 
   return (
-    <div className="flex flex-col my-6 mr-6 space-y-4">
+    <div className="flex flex-col my-6 mx-6 lg:ml-0 lg:mr-6 space-y-4">
       {rows.map((row) => (
         <div key={row.id} className="panel">
           <div className="mb-2 text-sm font-semibold text-muted-200">
