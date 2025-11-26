@@ -223,6 +223,20 @@ const r15ChariotRecipes: IRecipe[] = [
   ),
 ];
 
+// ===== HARVESTERS =====
+
+// BMS - Scrap Hauler (Harvester) recipes
+const bmsScrapHaulerRecipes: IRecipe[] = [
+  // Small Assembly Station production: 90 x Processed Construction Materials + 25 x Assembly Materials IV → 1 x BMS - Scrap Hauler
+  createRecipe(
+    [
+      { stuff: Materials.ProcessedConstructionMaterials, count: 90 },
+      { stuff: Materials.AssemblyMaterialsIV, count: 25 },
+    ],
+    [{ stuff: Vehicles.BMSScrapHauler, count: 1 }]
+  ),
+];
+
 export const logisticsVehicleRecipes = new Map<string, IRecipe[]>([
   // Trucks
   [Vehicles.R1Hauler, r1HaulerRecipes],
@@ -240,5 +254,7 @@ export const logisticsVehicleRecipes = new Map<string, IRecipe[]>([
   // Transport Buses
   [Vehicles.DunneCaravaner2f, dunneCaravaner2fRecipes],
   [Vehicles.R15Chariot, r15ChariotRecipes],
+  // Harvesters
+  [Vehicles.BMSScrapHauler, bmsScrapHaulerRecipes],
 ]);
 

@@ -153,4 +153,6 @@ export const ICONS_MAP = new Map<string, string>([
   [Vehicles.O3MMCaster, "MotorcycleVehicleIcon"],
   // Ambulances
   [Vehicles.DunneResponder3e, "AmbulanceWar"],
+  // Harvesters
+  [Vehicles.BMSScrapHauler, "Harvester"],
 ]);

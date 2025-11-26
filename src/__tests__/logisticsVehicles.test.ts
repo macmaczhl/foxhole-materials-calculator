@@ -264,7 +264,7 @@ describe("Logistics Vehicles - Fuel Tankers", () => {
         true
       );
       expect(logisticsVehicleRecipes.has(Vehicles.RR3StolonTanker)).toBe(true);
-      expect(logisticsVehicleRecipes.size).toBe(10); // 2 trucks + 2 fuel tankers + 2 heavy-duty trucks + 1 crane + 1 ambulance + 2 transport buses
+      expect(logisticsVehicleRecipes.size).toBe(11); // 2 trucks + 2 fuel tankers + 2 heavy-duty trucks + 1 crane + 2 ambulances + 2 transport buses + 1 harvester
     });
   });
 
@@ -1076,6 +1076,96 @@ describe("Logistics Vehicles - Transport Buses", () => {
           colonialRecipe.produced[0].count
         );
       });
+    });
+  });
+});
+
+describe("Logistics Vehicles - Harvesters", () => {
+  describe("Recipe availability", () => {
+    test("harvester has recipes defined", () => {
+      expect(RecipiesByStuff.has(Vehicles.BMSScrapHauler)).toBe(true);
+      const recipes = RecipiesByStuff.get(Vehicles.BMSScrapHauler);
+      expect(recipes).toBeDefined();
+      expect(recipes!.length).toBeGreaterThan(0);
+    });
+
+    test("harvester recipes have valid requirements", () => {
+      const recipes = RecipiesByStuff.get(Vehicles.BMSScrapHauler)!;
+      recipes.forEach((recipe) => {
+        expect(recipe.required.length).toBeGreaterThan(0);
+        expect(recipe.required[0].count).toBeGreaterThan(0);
+        expect(recipe.required[0].stuff).toBeDefined();
+      });
+    });
+
+    test("harvester is in the logistics vehicle recipes", () => {
+      expect(logisticsVehicleRecipes.has(Vehicles.BMSScrapHauler)).toBe(true);
+    });
+  });
+
+  describe("BMS - Scrap Hauler (Harvester)", () => {
+    let harvesterRecipes: IRecipe[];
+    let harvesterRecipeTree: RecipeTree;
+
+    beforeEach(() => {
+      harvesterRecipes = RecipiesByStuff.get(Vehicles.BMSScrapHauler)!;
+      harvesterRecipeTree = {
+        stuff: Vehicles.BMSScrapHauler,
+        selectedRecipe: harvesterRecipes[0],
+        recipes: harvesterRecipes,
+        required: [],
+      };
+    });
+
+    test("has correct assembly station recipe requirements", () => {
+      const assemblyRecipe = harvesterRecipes[0];
+      expect(assemblyRecipe.required).toEqual([
+        { stuff: Materials.ProcessedConstructionMaterials, count: 90 },
+        { stuff: Materials.AssemblyMaterialsIV, count: 25 },
+      ]);
+      expect(assemblyRecipe.produced).toEqual([
+        { stuff: Vehicles.BMSScrapHauler, count: 1 },
+      ]);
+    });
+
+    test("has single recipe (facility production only)", () => {
+      expect(harvesterRecipes.length).toBe(1);
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const result = calculateComponents(harvesterRecipeTree, 1);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.ProcessedConstructionMaterials, count: 90 },
+        { stuff: Materials.AssemblyMaterialsIV, count: 25 },
+      ]);
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const result = calculateComponents(harvesterRecipeTree, 3);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.ProcessedConstructionMaterials, count: 270 },
+        { stuff: Materials.AssemblyMaterialsIV, count: 75 },
+      ]);
+    });
+  });
+
+  describe("Recipe calculation integration", () => {
+    test("harvester can be calculated without errors", () => {
+      const recipes = RecipiesByStuff.get(Vehicles.BMSScrapHauler)!;
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.BMSScrapHauler,
+        selectedRecipe: recipes[0],
+        recipes: recipes,
+        required: [],
+      };
+
+      // Should not throw an error
+      expect(() => {
+        const result = calculateComponents(recipeTree, 1);
+        expect(result.initial.length).toBeGreaterThan(0);
+      }).not.toThrow();
     });
   });
 });
