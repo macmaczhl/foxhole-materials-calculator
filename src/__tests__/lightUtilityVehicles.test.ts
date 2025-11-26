@@ -128,4 +128,44 @@ describe("Light Utility Vehicle Recipes", () => {
       expect(assemblyRecipe?.produced[0].count).toBe(1);
     });
   });
+
+  describe("UV-5c Odyssey", () => {
+    const odysseyRecipes = RecipiesByStuff.get(Vehicles.UV5cOdyssey);
+
+    it("should have recipes defined", () => {
+      expect(odysseyRecipes).toBeDefined();
+      expect(odysseyRecipes).toHaveLength(1);
+    });
+
+    it("should have Small Assembly Station recipe (3 Construction Materials + 1 UV-05a Argonaut → 1 vehicle)", () => {
+      const assemblyRecipe = odysseyRecipes?.find(
+        (r) =>
+          r.required.length === 2 &&
+          r.required.some(
+            (req) =>
+              req.stuff === Materials.ConstructionMaterials && req.count === 3
+          ) &&
+          r.required.some(
+            (req) => req.stuff === Vehicles.UV05aArgonaut && req.count === 1
+          )
+      );
+
+      expect(assemblyRecipe).toBeDefined();
+      expect(assemblyRecipe?.required).toHaveLength(2);
+
+      const constructionMaterialsReq = assemblyRecipe?.required.find(
+        (r) => r.stuff === Materials.ConstructionMaterials
+      );
+      expect(constructionMaterialsReq?.count).toBe(3);
+
+      const argonautReq = assemblyRecipe?.required.find(
+        (r) => r.stuff === Vehicles.UV05aArgonaut
+      );
+      expect(argonautReq?.count).toBe(1);
+
+      expect(assemblyRecipe?.produced).toHaveLength(1);
+      expect(assemblyRecipe?.produced[0].stuff).toBe(Vehicles.UV5cOdyssey);
+      expect(assemblyRecipe?.produced[0].count).toBe(1);
+    });
+  });
 });
