@@ -27,7 +27,20 @@ const o3mmCasterRecipes: IRecipe[] = [
   ),
 ];
 
+// 00MS "Stinger" (Colonial MG Motorcycle) recipes
+const o0msStingerRecipes: IRecipe[] = [
+  // Small Assembly Station: 5 x Construction Materials + 1 x 03MM "Caster" → 1 x 00MS "Stinger"
+  createRecipe(
+    [
+      { stuff: Materials.ConstructionMaterials, count: 5 },
+      { stuff: Vehicles.O3MMCaster, count: 1 },
+    ],
+    [{ stuff: Vehicles.O0MSStinger, count: 1 }]
+  ),
+];
+
 export const motorcycleRecipes = new Map<string, IRecipe[]>([
   // Motorcycles
   [Vehicles.O3MMCaster, o3mmCasterRecipes],
+  [Vehicles.O0MSStinger, o0msStingerRecipes],
 ]);
