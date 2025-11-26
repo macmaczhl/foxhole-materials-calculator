@@ -130,8 +130,15 @@ export const ICONS_MAP = new Map<string, string>([
   // Logistics Vehicles - Heavy-Duty Trucks
   [Vehicles.CnuteCliffwrest, "HeavyTruckWVehicleIcon"],
   [Vehicles.AUA150TaurineRigger, "HeavyTruckCVehicleIcon"],
+  // Logistics Vehicles - Trailers
+  [Vehicles.RoosterJunkwagon, "ResourceTrailerIcon"],
+  [Vehicles.RoosterLamploader, "FuelTrailerIcon"],
+  [Vehicles.RoosterTumblebox, "MaterialTrailerIcon"],
   // Logistics Vehicles - Cranes
   [Vehicles.BMSClass2MobileAutoCrane, "CraneVehicleIcon"],
+  // Logistics Vehicles - Transport Buses
+  [Vehicles.DunneCaravaner2f, "BusWarIcon"],
+  [Vehicles.R15Chariot, "BusIcon"],
   // Motorcycles
   [Vehicles.O3MMCaster, "MotorcycleVehicleIcon"],
 ]);
