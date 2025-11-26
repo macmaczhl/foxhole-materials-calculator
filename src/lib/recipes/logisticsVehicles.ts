@@ -77,10 +77,38 @@ const bmsClass2MobileAutoCraneRecipes: IRecipe[] = [
   ),
 ];
 
+// ===== FLATBED TRUCKS =====
+
+// BMS - Packmule Flatbed recipes
+const bmsPackmuleFlatbedRecipes: IRecipe[] = [
+  // Garage production: 30 x Refined Materials → 1 x BMS - Packmule Flatbed
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 30 }],
+    [{ stuff: Vehicles.BMSPackmuleFlatbed, count: 1 }]
+  ),
+  // Mass Production Factory: 216 x Refined Materials → 3 crates of 3 x BMS - Packmule Flatbed (9 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 216 }],
+    [{ stuff: Vehicles.BMSPackmuleFlatbed, count: 9 }]
+  ),
+  // Mass Production Factory: 270 x Refined Materials → 4 crates of 3 x BMS - Packmule Flatbed (12 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 270 }],
+    [{ stuff: Vehicles.BMSPackmuleFlatbed, count: 12 }]
+  ),
+  // Mass Production Factory: 315 x Refined Materials → 5 crates of 3 x BMS - Packmule Flatbed (15 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 315 }],
+    [{ stuff: Vehicles.BMSPackmuleFlatbed, count: 15 }]
+  ),
+];
+
 export const logisticsVehicleRecipes = new Map<string, IRecipe[]>([
   // Fuel Tankers
   [Vehicles.DunneFuelrunner2d, dunneFuelrunner2dRecipes],
   [Vehicles.RR3StolonTanker, rr3StolonTankerRecipes],
   // Cranes
   [Vehicles.BMSClass2MobileAutoCrane, bmsClass2MobileAutoCraneRecipes],
+  // Flatbed Trucks
+  [Vehicles.BMSPackmuleFlatbed, bmsPackmuleFlatbedRecipes],
 ]);
