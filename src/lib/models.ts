@@ -131,6 +131,7 @@ export enum Vehicles {
   Nemesis = '90T-v "Nemesis"',
   HC7Ballista = 'HC-7 "Ballista"',
   NobleWidowMkXIV = 'Noble Widow MK. XIV',
+  NobleFirebrandMkXVII = 'Noble Firebrand Mk. XVII',
   FloodMkI = 'Flood Mk. I',
   FloodJuggernautMkVII = 'Flood Juggernaut Mk. VII',
   FloodMkIXStain = 'Flood Mk. IX Stain',
@@ -139,6 +140,7 @@ export enum Vehicles {
   GallagherThornfallMkVI = 'Gallagher Thornfall Mk. VI',
   GallagherOutlawMkII = 'Gallagher Outlaw Mk. II',
   CullenPredatorMkIII = 'Cullen Predator Mk. III',
+  O75bAres = 'O-75b "Ares"',
   Lance25Hasta = 'Lance-25 "Hasta"',
   Lance36 = 'Lance-36',
   Lance46Sarissa = 'Lance-46 "Sarissa"',
@@ -149,6 +151,10 @@ export enum Vehicles {
   RoosterJunkwagon = 'Rooster - Junkwagon',
   RoosterLamploader = 'Rooster - Lamploader',
   RoosterTumblebox = 'Rooster - Tumblebox',
+  // Logistics Vehicles - Cranes
+  BMSClass2MobileAutoCrane = 'BMS - Class 2 Mobile Auto-Crane',
+  // Motorcycles
+  O3MMCaster = '03MM "Caster"',
 }
 
 export enum RawResources {
@@ -251,6 +257,7 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.Nemesis },
   { name: Vehicles.HC7Ballista },
   { name: Vehicles.NobleWidowMkXIV },
+  { name: Vehicles.NobleFirebrandMkXVII },
   { name: Vehicles.FloodMkI },
   { name: Vehicles.FloodJuggernautMkVII },
   { name: Vehicles.FloodMkIXStain },
@@ -259,6 +266,7 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.GallagherThornfallMkVI },
   { name: Vehicles.GallagherOutlawMkII },
   { name: Vehicles.CullenPredatorMkIII },
+  { name: Vehicles.O75bAres },
   { name: Vehicles.Lance25Hasta },
   { name: Vehicles.Lance36 },
   { name: Vehicles.Lance46Sarissa },
@@ -269,6 +277,10 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.RoosterJunkwagon },
   { name: Vehicles.RoosterLamploader },
   { name: Vehicles.RoosterTumblebox },
+  // Logistics Vehicles - Cranes
+  { name: Vehicles.BMSClass2MobileAutoCrane },
+  // Motorcycles
+  { name: Vehicles.O3MMCaster },
 ];
 
 export const stuffList: Stuff[] = availableMaterials;

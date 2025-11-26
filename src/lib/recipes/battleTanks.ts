@@ -45,21 +45,6 @@ const floodMkIXStainRecipes: IRecipe[] = [
   ),
 ];
 
-// Cullen Predator Mk. III Super Tank recipes
-const cullenPredatorMkIIIRecipes: IRecipe[] = [
-  // Large Assembly Station (Heavy Tank Assembly): 275 x Steel Construction Materials + 105 x Assembly Materials III + 95 x Assembly Materials IV + 105 x Assembly Materials V + 3 x Rare Alloys → 1 x Cullen Predator Mk. III
-  createRecipe(
-    [
-      { stuff: Materials.SteelConstructionMaterials, count: 275 },
-      { stuff: Materials.AssemblyMaterialsIII, count: 105 },
-      { stuff: Materials.AssemblyMaterialsIV, count: 95 },
-      { stuff: Materials.AssemblyMaterialsV, count: 105 },
-      { stuff: Materials.RareAlloys, count: 3 },
-    ],
-    [{ stuff: Vehicles.CullenPredatorMkIII, count: 1 }]
-  ),
-];
-
 // Lance-25 "Hasta" Battle Tank Destroyer recipes
 const lance25HastaRecipes: IRecipe[] = [
   // Large Assembly Station (Heavy Tank Assembly): 60 x Steel Construction Materials + 65 x Assembly Materials III + 45 x Assembly Materials IV + 65 x Assembly Materials V → 1 x Lance-25 "Hasta"
@@ -107,7 +92,6 @@ export const battleTankRecipes = new Map<string, IRecipe[]>([
   [Vehicles.FloodMkI, floodMkIRecipes],
   [Vehicles.FloodJuggernautMkVII, floodJuggernautMkVIIRecipes],
   [Vehicles.FloodMkIXStain, floodMkIXStainRecipes],
-  [Vehicles.CullenPredatorMkIII, cullenPredatorMkIIIRecipes],
   [Vehicles.Lance25Hasta, lance25HastaRecipes],
   [Vehicles.Lance36, lance36Recipes],
   [Vehicles.Lance46Sarissa, lance46SarissaRecipes],

@@ -111,6 +111,7 @@ export const ICONS_MAP = new Map<string, string>([
   [Vehicles.Nemesis, "MediumTank3CItemIcon"],
   [Vehicles.HC7Ballista, "MortarTankVehicleIcon"],
   [Vehicles.NobleWidowMkXIV, "DestroyerTankWVehicleIcon"],
+  [Vehicles.NobleFirebrandMkXVII, "DestroyerTankFlameWIcon"],
   [Vehicles.FloodMkI, "BattleTankWar"],
   [Vehicles.FloodJuggernautMkVII, "BattleTankWarDefensiveVehicleIcon"],
   [Vehicles.FloodMkIXStain, "BattleTankHeavyArtilleryWIcon"],
@@ -119,6 +120,7 @@ export const ICONS_MAP = new Map<string, string>([
   [Vehicles.GallagherThornfallMkVI, "MediumTank2IndirectWIcon"],
   [Vehicles.GallagherOutlawMkII, "MediumTank2RangeWIcon"],
   [Vehicles.CullenPredatorMkIII, "SuperTankWVehicleIcon"],
+  [Vehicles.O75bAres, "SuperTankCtemIcon"],
   [Vehicles.Lance25Hasta, "BattleTankATCIcon"],
   [Vehicles.Lance36, "BattleTank"],
   [Vehicles.Lance46Sarissa, "BattleTankHeavyArtilleryCIcon"],
@@ -129,4 +131,8 @@ export const ICONS_MAP = new Map<string, string>([
   [Vehicles.RoosterJunkwagon, "ResourceTrailerIcon"],
   [Vehicles.RoosterLamploader, "FuelTrailerIcon"],
   [Vehicles.RoosterTumblebox, "MaterialTrailerIcon"],
+  // Logistics Vehicles - Cranes
+  [Vehicles.BMSClass2MobileAutoCrane, "CraneVehicleIcon"],
+  // Motorcycles
+  [Vehicles.O3MMCaster, "MotorcycleVehicleIcon"],
 ]);

@@ -15,6 +15,8 @@ import { siegeTankRecipes } from "../lib/recipes/siegeTanks";
 import { destroyerTankRecipes } from "../lib/recipes/destroyerTanks";
 import { battleTankRecipes } from "../lib/recipes/battleTanks";
 import { cruiserTankRecipes } from "../lib/recipes/cruiserTanks";
+import { superTankRecipes } from "../lib/recipes/superTanks";
+import { motorcycleRecipes } from "../lib/recipes/motorcycles";
 
 describe("Vehicle Recipe Organization", () => {
   describe("Category Files", () => {
@@ -138,6 +140,15 @@ describe("Vehicle Recipe Organization", () => {
     test("siegeTankRecipes contains siege tanks", () => {
       expect(siegeTankRecipes.has(Vehicles.HC7Ballista)).toBe(true);
     });
+
+    test("superTankRecipes contains super tanks", () => {
+      expect(superTankRecipes.has(Vehicles.CullenPredatorMkIII)).toBe(true);
+      expect(superTankRecipes.has(Vehicles.O75bAres)).toBe(true);
+    });
+
+    test("motorcycleRecipes contains motorcycles", () => {
+      expect(motorcycleRecipes.has(Vehicles.O3MMCaster)).toBe(true);
+    });
   });
 
   describe("Central Registry", () => {
@@ -154,7 +165,9 @@ describe("Vehicle Recipe Organization", () => {
         siegeTankRecipes.size +
         destroyerTankRecipes.size +
         battleTankRecipes.size +
-        cruiserTankRecipes.size;
+        cruiserTankRecipes.size +
+        superTankRecipes.size +
+        motorcycleRecipes.size;
 
       expect(vehicleRecipes.size).toBe(totalExpectedSize);
     });
@@ -177,6 +190,11 @@ describe("Vehicle Recipe Organization", () => {
 
     test("vehicleRecipes contains recipes from siegeTanks", () => {
       expect(vehicleRecipes.has(Vehicles.HC7Ballista)).toBe(true);
+    });
+
+    test("vehicleRecipes contains recipes from superTanks", () => {
+      expect(vehicleRecipes.has(Vehicles.CullenPredatorMkIII)).toBe(true);
+      expect(vehicleRecipes.has(Vehicles.O75bAres)).toBe(true);
     });
 
     test("all vehicle recipes return same data whether accessed from category or central registry", () => {
@@ -216,6 +234,7 @@ describe("Vehicle Recipe Organization", () => {
         ...destroyerTankRecipes.keys(),
         ...battleTankRecipes.keys(),
         ...cruiserTankRecipes.keys(),
+        ...superTankRecipes.keys(),
       ];
 
       // Check no duplicates across categories

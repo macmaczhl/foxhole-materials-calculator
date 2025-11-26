@@ -27,7 +27,22 @@ const nobleWidowMkXIVRecipes: IRecipe[] = [
   ),
 ];
 
+// Noble Firebrand Mk. XVII Destroyer Tank recipes
+// Small Assembly Station (Tank Factory): 10 PCMats + 10 Assembly II + 15 Assembly III + 1 Noble Widow MK. XIV → 1 Noble Firebrand Mk. XVII
+const nobleFirebrandMkXVIIRecipes: IRecipe[] = [
+  createRecipe(
+    [
+      { stuff: Materials.ProcessedConstructionMaterials, count: 10 },
+      { stuff: Materials.AssemblyMaterialsII, count: 10 },
+      { stuff: Materials.AssemblyMaterialsIII, count: 15 },
+      { stuff: Vehicles.NobleWidowMkXIV, count: 1 },
+    ],
+    [{ stuff: Vehicles.NobleFirebrandMkXVII, count: 1 }]
+  ),
+];
+
 export const destroyerTankRecipes = new Map<string, IRecipe[]>([
   // Destroyer Tanks
   [Vehicles.NobleWidowMkXIV, nobleWidowMkXIVRecipes],
+  [Vehicles.NobleFirebrandMkXVII, nobleFirebrandMkXVIIRecipes],
 ]);
