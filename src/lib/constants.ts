@@ -146,6 +146,7 @@ export const ICONS_MAP = new Map<string, string>([
   [Vehicles.R15Chariot, "BusIcon"],
   // Construction Vehicles
   [Vehicles.BMSUniversalAssemblyRig, "ConstructionVehicleIcon"],
+  [Vehicles.BMSFabricator, "AdvancedConstructionVehicleIcon"],
   // Light Utility Vehicles
   [Vehicles.UV05aArgonaut, "ScoutVehicleMobilityVehicleIcon"],
   // Motorcycles

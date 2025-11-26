@@ -166,6 +166,7 @@ export enum Vehicles {
   R15Chariot = 'R-15 - "Chariot"',
   // Construction Vehicles
   BMSUniversalAssemblyRig = 'BMS - Universal Assembly Rig',
+  BMSFabricator = 'BMS - Fabricator',
   // Light Utility Vehicles
   UV05aArgonaut = 'UV-05a "Argonaut"',
   // Motorcycles
@@ -307,6 +308,7 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.R15Chariot },
   // Construction Vehicles
   { name: Vehicles.BMSUniversalAssemblyRig },
+  { name: Vehicles.BMSFabricator },
   // Light Utility Vehicles
   { name: Vehicles.UV05aArgonaut },
   // Motorcycles
