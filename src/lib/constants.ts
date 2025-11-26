@@ -151,6 +151,8 @@ export const ICONS_MAP = new Map<string, string>([
   [Vehicles.UV05aArgonaut, "ScoutVehicleMobilityVehicleIcon"],
   // Motorcycles
   [Vehicles.O3MMCaster, "MotorcycleVehicleIcon"],
+  // Flatbed Trucks
+  [Vehicles.BMSPackmuleFlatbed, "FlatbedTruckVehicleIcon"],
   // Ambulances
   [Vehicles.DunneResponder3e, "AmbulanceWar"],
   // Harvesters

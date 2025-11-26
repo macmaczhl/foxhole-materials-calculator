@@ -171,6 +171,8 @@ export enum Vehicles {
   UV05aArgonaut = 'UV-05a "Argonaut"',
   // Motorcycles
   O3MMCaster = '03MM "Caster"',
+  // Flatbed Trucks
+  BMSPackmuleFlatbed = 'BMS - Packmule Flatbed',
   // Ambulances
   DunneResponder3e = 'Dunne Responder 3e',
   // Harvesters
@@ -317,6 +319,8 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.UV05aArgonaut },
   // Motorcycles
   { name: Vehicles.O3MMCaster },
+  // Flatbed Trucks
+  { name: Vehicles.BMSPackmuleFlatbed },
   // Ambulances
   { name: Vehicles.DunneResponder3e },
   // Harvesters

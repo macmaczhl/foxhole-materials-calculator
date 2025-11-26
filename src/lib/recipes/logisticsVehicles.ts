@@ -147,6 +147,32 @@ const auA150TaurineRiggerRecipes: IRecipe[] = [
   ),
 ];
 
+// ===== FLATBED TRUCKS =====
+
+// BMS - Packmule Flatbed recipes
+const bmsPackmuleFlatbedRecipes: IRecipe[] = [
+  // Garage production: 30 x Refined Materials → 1 x BMS - Packmule Flatbed
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 30 }],
+    [{ stuff: Vehicles.BMSPackmuleFlatbed, count: 1 }]
+  ),
+  // Mass Production Factory: 216 x Refined Materials → 3 crates of 3 x BMS - Packmule Flatbed (9 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 216 }],
+    [{ stuff: Vehicles.BMSPackmuleFlatbed, count: 9 }]
+  ),
+  // Mass Production Factory: 270 x Refined Materials → 4 crates of 3 x BMS - Packmule Flatbed (12 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 270 }],
+    [{ stuff: Vehicles.BMSPackmuleFlatbed, count: 12 }]
+  ),
+  // Mass Production Factory: 315 x Refined Materials → 5 crates of 3 x BMS - Packmule Flatbed (15 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 315 }],
+    [{ stuff: Vehicles.BMSPackmuleFlatbed, count: 15 }]
+  ),
+];
+
 // ===== AMBULANCES =====
 
 // R-12 "Salus" Ambulance recipes
@@ -249,6 +275,8 @@ export const logisticsVehicleRecipes = new Map<string, IRecipe[]>([
   [Vehicles.AUA150TaurineRigger, auA150TaurineRiggerRecipes],
   // Cranes
   [Vehicles.BMSClass2MobileAutoCrane, bmsClass2MobileAutoCraneRecipes],
+  // Flatbed Trucks
+  [Vehicles.BMSPackmuleFlatbed, bmsPackmuleFlatbedRecipes],
   // Ambulances
   [Vehicles.R12SalusAmbulance, r12SalusAmbulanceRecipes],
   // Transport Buses
