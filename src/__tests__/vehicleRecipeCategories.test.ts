@@ -7,6 +7,7 @@ import { armouredFightingVehicleRecipes } from "../lib/recipes/armouredFightingV
 import { fieldWeaponRecipes } from "../lib/recipes/fieldWeapons";
 import { tankRecipes } from "../lib/recipes/tanks";
 import { logisticsVehicleRecipes } from "../lib/recipes/logisticsVehicles";
+import { trailerRecipes } from "../lib/recipes/trailers";
 import { scoutVehicleRecipes } from "../lib/recipes/scoutVehicles";
 import { lightTankRecipes } from "../lib/recipes/lightTanks";
 import { assaultTankRecipes } from "../lib/recipes/assaultTanks";
@@ -157,6 +158,7 @@ describe("Vehicle Recipe Organization", () => {
         fieldWeaponRecipes.size +
         tankRecipes.size +
         logisticsVehicleRecipes.size +
+        trailerRecipes.size +
         scoutVehicleRecipes.size +
         lightTankRecipes.size +
         assaultTankRecipes.size +

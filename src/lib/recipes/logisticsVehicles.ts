@@ -100,6 +100,56 @@ const r12bSalvaFlameTruckRecipes: IRecipe[] = [
   ),
 ];
 
+// ===== TRANSPORT BUSES =====
+
+// Dunne Caravaner 2f (Warden Transport Bus) recipes
+const dunneCaravaner2fRecipes: IRecipe[] = [
+  // Garage production: 100 x Basic Materials → 1 x Dunne Caravaner 2f
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 100 }],
+    [{ stuff: Vehicles.DunneCaravaner2f, count: 1 }]
+  ),
+  // Mass Production Factory: 720 x Basic Materials → 3 crates of 3 x Dunne Caravaner 2f (9 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 720 }],
+    [{ stuff: Vehicles.DunneCaravaner2f, count: 9 }]
+  ),
+  // Mass Production Factory: 900 x Basic Materials → 4 crates of 3 x Dunne Caravaner 2f (12 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 900 }],
+    [{ stuff: Vehicles.DunneCaravaner2f, count: 12 }]
+  ),
+  // Mass Production Factory: 1050 x Basic Materials → 5 crates of 3 x Dunne Caravaner 2f (15 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 1050 }],
+    [{ stuff: Vehicles.DunneCaravaner2f, count: 15 }]
+  ),
+];
+
+// R-15 - "Chariot" (Colonial Transport Bus) recipes
+const r15ChariotRecipes: IRecipe[] = [
+  // Garage production: 100 x Basic Materials → 1 x R-15 - "Chariot"
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 100 }],
+    [{ stuff: Vehicles.R15Chariot, count: 1 }]
+  ),
+  // Mass Production Factory: 720 x Basic Materials → 3 crates of 3 x R-15 - "Chariot" (9 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 720 }],
+    [{ stuff: Vehicles.R15Chariot, count: 9 }]
+  ),
+  // Mass Production Factory: 900 x Basic Materials → 4 crates of 3 x R-15 - "Chariot" (12 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 900 }],
+    [{ stuff: Vehicles.R15Chariot, count: 12 }]
+  ),
+  // Mass Production Factory: 1050 x Basic Materials → 5 crates of 3 x R-15 - "Chariot" (15 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 1050 }],
+    [{ stuff: Vehicles.R15Chariot, count: 15 }]
+  ),
+];
+
 export const logisticsVehicleRecipes = new Map<string, IRecipe[]>([
   // Fuel Tankers
   [Vehicles.DunneFuelrunner2d, dunneFuelrunner2dRecipes],
@@ -109,4 +159,7 @@ export const logisticsVehicleRecipes = new Map<string, IRecipe[]>([
   // Fire Engines
   [Vehicles.DunneDousingEngine3r, dunneDousingEngine3rRecipes],
   [Vehicles.R12bSalvaFlameTruck, r12bSalvaFlameTruckRecipes],
+  // Transport Buses
+  [Vehicles.DunneCaravaner2f, dunneCaravaner2fRecipes],
+  [Vehicles.R15Chariot, r15ChariotRecipes],
 ]);
