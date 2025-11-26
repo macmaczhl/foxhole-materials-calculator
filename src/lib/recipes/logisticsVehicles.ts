@@ -127,6 +127,26 @@ const bmsClass2MobileAutoCraneRecipes: IRecipe[] = [
   ),
 ];
 
+// ===== HEAVY-DUTY TRUCKS =====
+
+// Cnute Cliffwrest (Warden Heavy-Duty Truck) recipes
+const cnuteCliffwrestRecipes: IRecipe[] = [
+  // Small Assembly Station production: 40 x Processed Construction Materials → 1 x Cnute Cliffwrest
+  createRecipe(
+    [{ stuff: Materials.ProcessedConstructionMaterials, count: 40 }],
+    [{ stuff: Vehicles.CnuteCliffwrest, count: 1 }]
+  ),
+];
+
+// AU-A150 Taurine Rigger (Colonial Heavy-Duty Truck) recipes
+const auA150TaurineRiggerRecipes: IRecipe[] = [
+  // Small Assembly Station production: 40 x Processed Construction Materials → 1 x AU-A150 Taurine Rigger
+  createRecipe(
+    [{ stuff: Materials.ProcessedConstructionMaterials, count: 40 }],
+    [{ stuff: Vehicles.AUA150TaurineRigger, count: 1 }]
+  ),
+];
+
 // ===== FLATBED TRUCKS =====
 
 // BMS - Packmule Flatbed recipes
@@ -229,6 +249,20 @@ const r15ChariotRecipes: IRecipe[] = [
   ),
 ];
 
+// ===== HARVESTERS =====
+
+// BMS - Scrap Hauler (Harvester) recipes
+const bmsScrapHaulerRecipes: IRecipe[] = [
+  // Small Assembly Station production: 90 x Processed Construction Materials + 25 x Assembly Materials IV → 1 x BMS - Scrap Hauler
+  createRecipe(
+    [
+      { stuff: Materials.ProcessedConstructionMaterials, count: 90 },
+      { stuff: Materials.AssemblyMaterialsIV, count: 25 },
+    ],
+    [{ stuff: Vehicles.BMSScrapHauler, count: 1 }]
+  ),
+];
+
 export const logisticsVehicleRecipes = new Map<string, IRecipe[]>([
   // Trucks
   [Vehicles.R1Hauler, r1HaulerRecipes],
@@ -236,6 +270,9 @@ export const logisticsVehicleRecipes = new Map<string, IRecipe[]>([
   // Fuel Tankers
   [Vehicles.DunneFuelrunner2d, dunneFuelrunner2dRecipes],
   [Vehicles.RR3StolonTanker, rr3StolonTankerRecipes],
+  // Heavy-Duty Trucks
+  [Vehicles.CnuteCliffwrest, cnuteCliffwrestRecipes],
+  [Vehicles.AUA150TaurineRigger, auA150TaurineRiggerRecipes],
   // Cranes
   [Vehicles.BMSClass2MobileAutoCrane, bmsClass2MobileAutoCraneRecipes],
   // Flatbed Trucks
@@ -245,5 +282,7 @@ export const logisticsVehicleRecipes = new Map<string, IRecipe[]>([
   // Transport Buses
   [Vehicles.DunneCaravaner2f, dunneCaravaner2fRecipes],
   [Vehicles.R15Chariot, r15ChariotRecipes],
+  // Harvesters
+  [Vehicles.BMSScrapHauler, bmsScrapHaulerRecipes],
 ]);
 

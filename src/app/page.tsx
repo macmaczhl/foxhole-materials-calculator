@@ -9,14 +9,14 @@ import { Report } from "./components/Report";
 export default function Home() {
   return (
     <Provider store={store}>
-      <div className="flex flex-row">
-        <div className="basis-1/2">
+      <div className="flex flex-col lg:flex-row">
+        <div className="w-full lg:basis-1/2">
           <div className="flex flex-col">
             <ItemsManager />
             <Report />
           </div>
         </div>
-        <div className="basis-1/2">
+        <div className="w-full lg:basis-1/2">
           <RecipesSelectors />
         </div>
       </div>

@@ -130,6 +130,9 @@ export const ICONS_MAP = new Map<string, string>([
   // Logistics Vehicles - Fuel Tankers
   [Vehicles.DunneFuelrunner2d, "OilTankerWarIcon"],
   [Vehicles.RR3StolonTanker, "OilTankerIcon"],
+  // Logistics Vehicles - Heavy-Duty Trucks
+  [Vehicles.CnuteCliffwrest, "HeavyTruckWVehicleIcon"],
+  [Vehicles.AUA150TaurineRigger, "HeavyTruckCVehicleIcon"],
   // Logistics Vehicles - Trailers
   [Vehicles.RoosterJunkwagon, "ResourceTrailerIcon"],
   [Vehicles.RoosterLamploader, "FuelTrailerIcon"],
@@ -143,10 +146,15 @@ export const ICONS_MAP = new Map<string, string>([
   [Vehicles.R15Chariot, "BusIcon"],
   // Construction Vehicles
   [Vehicles.BMSUniversalAssemblyRig, "ConstructionVehicleIcon"],
+  [Vehicles.BMSFabricator, "AdvancedConstructionVehicleIcon"],
   // Light Utility Vehicles
   [Vehicles.UV05aArgonaut, "ScoutVehicleMobilityVehicleIcon"],
   // Motorcycles
   [Vehicles.O3MMCaster, "MotorcycleVehicleIcon"],
   // Flatbed Trucks
   [Vehicles.BMSPackmuleFlatbed, "FlatbedTruckVehicleIcon"],
+  // Ambulances
+  [Vehicles.DunneResponder3e, "AmbulanceWar"],
+  // Harvesters
+  [Vehicles.BMSScrapHauler, "Harvester"],
 ]);
