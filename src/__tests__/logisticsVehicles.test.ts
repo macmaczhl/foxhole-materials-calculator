@@ -1,5 +1,5 @@
 /**
- * Tests for Logistics Vehicles - Trucks and Fuel Tankers
+ * Tests for Logistics Vehicles - Trucks, Fuel Tankers, and Cranes
  */
 import { Materials, RecipeTree, IRecipe, Vehicles } from "../lib/models";
 import { calculateComponents } from "../lib/services/calculateComponents";
@@ -264,7 +264,7 @@ describe("Logistics Vehicles - Fuel Tankers", () => {
         true
       );
       expect(logisticsVehicleRecipes.has(Vehicles.RR3StolonTanker)).toBe(true);
-      expect(logisticsVehicleRecipes.size).toBe(4); // 2 trucks + 2 fuel tankers
+      expect(logisticsVehicleRecipes.size).toBe(5); // 2 trucks + 2 fuel tankers + 1 crane
     });
   });
 
@@ -454,6 +454,118 @@ describe("Logistics Vehicles - Fuel Tankers", () => {
           colonialRecipe.produced[0].count
         );
       });
+    });
+  });
+});
+
+describe("Logistics Vehicles - Cranes", () => {
+  describe("Recipe availability", () => {
+    test("crane has recipes defined", () => {
+      expect(RecipiesByStuff.has(Vehicles.BMSClass2MobileAutoCrane)).toBe(true);
+      const recipes = RecipiesByStuff.get(Vehicles.BMSClass2MobileAutoCrane);
+      expect(recipes).toBeDefined();
+      expect(recipes!.length).toBeGreaterThan(0);
+    });
+
+    test("crane recipes have valid requirements", () => {
+      const recipes = RecipiesByStuff.get(Vehicles.BMSClass2MobileAutoCrane)!;
+      recipes.forEach((recipe) => {
+        expect(recipe.required.length).toBeGreaterThan(0);
+        expect(recipe.required[0].count).toBeGreaterThan(0);
+        expect(recipe.required[0].stuff).toBeDefined();
+      });
+    });
+
+    test("crane is in the logistics vehicle recipes", () => {
+      expect(logisticsVehicleRecipes.has(Vehicles.BMSClass2MobileAutoCrane)).toBe(true);
+    });
+  });
+
+  describe("BMS - Class 2 Mobile Auto-Crane", () => {
+    let craneRecipes: IRecipe[];
+    let craneRecipeTree: RecipeTree;
+
+    beforeEach(() => {
+      craneRecipes = RecipiesByStuff.get(Vehicles.BMSClass2MobileAutoCrane)!;
+      craneRecipeTree = {
+        stuff: Vehicles.BMSClass2MobileAutoCrane,
+        selectedRecipe: craneRecipes[0],
+        recipes: craneRecipes,
+        required: [],
+      };
+    });
+
+    test("has correct garage recipe requirements", () => {
+      const garageRecipe = craneRecipes[0];
+      expect(garageRecipe.required).toEqual([
+        { stuff: Materials.BasicMaterials, count: 125 },
+      ]);
+      expect(garageRecipe.produced).toEqual([
+        { stuff: Vehicles.BMSClass2MobileAutoCrane, count: 1 },
+      ]);
+    });
+
+    test("has mass production recipes", () => {
+      expect(craneRecipes.length).toBe(4);
+
+      // Check basic recipe (125 → 1)
+      const basicRecipe = craneRecipes.find((r) => r.produced[0].count === 1);
+      expect(basicRecipe).toBeDefined();
+      expect(basicRecipe!.required[0].stuff).toBe(Materials.BasicMaterials);
+      expect(basicRecipe!.required[0].count).toBe(125);
+
+      // Check mass production recipes exist
+      const massProduction = craneRecipes.filter(
+        (r) => r.produced[0].count > 1
+      );
+      expect(massProduction.length).toBe(3);
+
+      // Verify mass production recipe quantities
+      const recipe9 = craneRecipes.find((r) => r.produced[0].count === 9);
+      expect(recipe9).toBeDefined();
+      expect(recipe9!.required[0].count).toBe(899);
+
+      const recipe12 = craneRecipes.find((r) => r.produced[0].count === 12);
+      expect(recipe12).toBeDefined();
+      expect(recipe12!.required[0].count).toBe(1124);
+
+      const recipe15 = craneRecipes.find((r) => r.produced[0].count === 15);
+      expect(recipe15).toBeDefined();
+      expect(recipe15!.required[0].count).toBe(1311);
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const result = calculateComponents(craneRecipeTree, 1);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.BasicMaterials, count: 125 },
+      ]);
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const result = calculateComponents(craneRecipeTree, 3);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.BasicMaterials, count: 375 },
+      ]);
+    });
+  });
+
+  describe("Recipe calculation integration", () => {
+    test("crane can be calculated without errors", () => {
+      const recipes = RecipiesByStuff.get(Vehicles.BMSClass2MobileAutoCrane)!;
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.BMSClass2MobileAutoCrane,
+        selectedRecipe: recipes[0],
+        recipes: recipes,
+        required: [],
+      };
+
+      // Should not throw an error
+      expect(() => {
+        const result = calculateComponents(recipeTree, 1);
+        expect(result.initial.length).toBeGreaterThan(0);
+      }).not.toThrow();
     });
   });
 });
