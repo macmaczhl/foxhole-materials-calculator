@@ -12,6 +12,7 @@ import { battleTankRecipes } from "./battleTanks";
 import { cruiserTankRecipes } from "./cruiserTanks";
 import { trailerRecipes } from "./trailers";
 import { superTankRecipes } from "./superTanks";
+import { constructionVehicleRecipes } from "./constructionVehicles";
 import { lightUtilityVehicleRecipes } from "./lightUtilityVehicles";
 import { motorcycleRecipes } from "./motorcycles";
 import { constructionVehicleRecipes } from "./constructionVehicles";
@@ -32,6 +33,7 @@ import { constructionVehicleRecipes } from "./constructionVehicles";
  * - logisticsVehicles.ts: Fuel Tankers
  * - trailers.ts: Trailers
  * - scoutVehicles.ts: Future scout vehicles
+ * - constructionVehicles.ts: Construction vehicles
  * - lightUtilityVehicles.ts: Light Utility Vehicles
  * - motorcycles.ts: Motorcycles
  * - constructionVehicles.ts: Construction Vehicles (CV, ACV)
@@ -50,6 +52,7 @@ export const vehicleRecipes = new Map<string, IRecipe[]>([
   ...battleTankRecipes,
   ...cruiserTankRecipes,
   ...superTankRecipes,
+  ...constructionVehicleRecipes,
   ...lightUtilityVehicleRecipes,
   ...motorcycleRecipes,
   ...constructionVehicleRecipes,

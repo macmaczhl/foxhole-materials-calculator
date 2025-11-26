@@ -61,7 +61,7 @@ describe("Construction Vehicles", () => {
       };
     });
 
-    test("has correct garage recipe requirements", () => {
+    test("has correct Home Base/Garage recipe requirements", () => {
       const garageRecipe = cvRecipes[0];
       expect(garageRecipe.required).toEqual([
         { stuff: Materials.BasicMaterials, count: 100 },
