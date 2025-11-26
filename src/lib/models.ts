@@ -150,8 +150,15 @@ export enum Vehicles {
   // Logistics Vehicles - Fuel Tankers
   DunneFuelrunner2d = 'Dunne Fuelrunner 2d',
   RR3StolonTanker = 'RR-3 "Stolon" Tanker',
+  // Logistics Vehicles - Trailers
+  RoosterJunkwagon = 'Rooster - Junkwagon',
+  RoosterLamploader = 'Rooster - Lamploader',
+  RoosterTumblebox = 'Rooster - Tumblebox',
   // Logistics Vehicles - Cranes
   BMSClass2MobileAutoCrane = 'BMS - Class 2 Mobile Auto-Crane',
+  // Logistics Vehicles - Transport Buses
+  DunneCaravaner2f = 'Dunne Caravaner 2f',
+  R15Chariot = 'R-15 - "Chariot"',
   // Motorcycles
   O3MMCaster = '03MM "Caster"',
 }
@@ -275,8 +282,15 @@ export const availableMaterials: Stuff[] = [
   // Logistics Vehicles - Fuel Tankers
   { name: Vehicles.DunneFuelrunner2d },
   { name: Vehicles.RR3StolonTanker },
+  // Logistics Vehicles - Trailers
+  { name: Vehicles.RoosterJunkwagon },
+  { name: Vehicles.RoosterLamploader },
+  { name: Vehicles.RoosterTumblebox },
   // Logistics Vehicles - Cranes
   { name: Vehicles.BMSClass2MobileAutoCrane },
+  // Logistics Vehicles - Transport Buses
+  { name: Vehicles.DunneCaravaner2f },
+  { name: Vehicles.R15Chariot },
   // Motorcycles
   { name: Vehicles.O3MMCaster },
 ];
