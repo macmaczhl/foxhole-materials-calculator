@@ -7,6 +7,7 @@ import { armouredFightingVehicleRecipes } from "../lib/recipes/armouredFightingV
 import { fieldWeaponRecipes } from "../lib/recipes/fieldWeapons";
 import { tankRecipes } from "../lib/recipes/tanks";
 import { logisticsVehicleRecipes } from "../lib/recipes/logisticsVehicles";
+import { trailerRecipes } from "../lib/recipes/trailers";
 import { scoutVehicleRecipes } from "../lib/recipes/scoutVehicles";
 import { lightTankRecipes } from "../lib/recipes/lightTanks";
 import { assaultTankRecipes } from "../lib/recipes/assaultTanks";
@@ -16,6 +17,7 @@ import { battleTankRecipes } from "../lib/recipes/battleTanks";
 import { cruiserTankRecipes } from "../lib/recipes/cruiserTanks";
 import { superTankRecipes } from "../lib/recipes/superTanks";
 import { constructionVehicleRecipes } from "../lib/recipes/constructionVehicles";
+import { motorcycleRecipes } from "../lib/recipes/motorcycles";
 
 describe("Vehicle Recipe Organization", () => {
   describe("Category Files", () => {
@@ -150,6 +152,10 @@ describe("Vehicle Recipe Organization", () => {
       expect(superTankRecipes.has(Vehicles.CullenPredatorMkIII)).toBe(true);
       expect(superTankRecipes.has(Vehicles.O75bAres)).toBe(true);
     });
+
+    test("motorcycleRecipes contains motorcycles", () => {
+      expect(motorcycleRecipes.has(Vehicles.O3MMCaster)).toBe(true);
+    });
   });
 
   describe("Central Registry", () => {
@@ -159,6 +165,7 @@ describe("Vehicle Recipe Organization", () => {
         fieldWeaponRecipes.size +
         tankRecipes.size +
         logisticsVehicleRecipes.size +
+        trailerRecipes.size +
         scoutVehicleRecipes.size +
         lightTankRecipes.size +
         assaultTankRecipes.size +
@@ -167,7 +174,8 @@ describe("Vehicle Recipe Organization", () => {
         battleTankRecipes.size +
         cruiserTankRecipes.size +
         superTankRecipes.size +
-        constructionVehicleRecipes.size;
+        constructionVehicleRecipes.size +
+        motorcycleRecipes.size;
 
       expect(vehicleRecipes.size).toBe(totalExpectedSize);
     });
@@ -236,6 +244,7 @@ describe("Vehicle Recipe Organization", () => {
         ...cruiserTankRecipes.keys(),
         ...superTankRecipes.keys(),
         ...constructionVehicleRecipes.keys(),
+        ...motorcycleRecipes.keys(),
       ];
 
       // Check no duplicates across categories
