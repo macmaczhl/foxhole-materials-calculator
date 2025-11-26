@@ -1,6 +1,56 @@
 import { IRecipe, Materials, Vehicles } from "../models";
 import { createRecipe } from "./base";
 
+// ===== TRUCKS =====
+
+// R-1 Hauler (Colonial Truck) recipes
+const r1HaulerRecipes: IRecipe[] = [
+  // Garage production: 100 x Basic Materials → 1 x R-1 Hauler
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 100 }],
+    [{ stuff: Vehicles.R1Hauler, count: 1 }]
+  ),
+  // Mass Production Factory: 720 x Basic Materials → 3 crates of 3 x R-1 Hauler (9 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 720 }],
+    [{ stuff: Vehicles.R1Hauler, count: 9 }]
+  ),
+  // Mass Production Factory: 900 x Basic Materials → 4 crates of 3 x R-1 Hauler (12 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 900 }],
+    [{ stuff: Vehicles.R1Hauler, count: 12 }]
+  ),
+  // Mass Production Factory: 1050 x Basic Materials → 5 crates of 3 x R-1 Hauler (15 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 1050 }],
+    [{ stuff: Vehicles.R1Hauler, count: 15 }]
+  ),
+];
+
+// Dunne Transport (Warden Truck) recipes
+const dunneTransportRecipes: IRecipe[] = [
+  // Garage production: 100 x Basic Materials → 1 x Dunne Transport
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 100 }],
+    [{ stuff: Vehicles.DunneTransport, count: 1 }]
+  ),
+  // Mass Production Factory: 720 x Basic Materials → 3 crates of 3 x Dunne Transport (9 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 720 }],
+    [{ stuff: Vehicles.DunneTransport, count: 9 }]
+  ),
+  // Mass Production Factory: 900 x Basic Materials → 4 crates of 3 x Dunne Transport (12 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 900 }],
+    [{ stuff: Vehicles.DunneTransport, count: 12 }]
+  ),
+  // Mass Production Factory: 1050 x Basic Materials → 5 crates of 3 x Dunne Transport (15 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 1050 }],
+    [{ stuff: Vehicles.DunneTransport, count: 15 }]
+  ),
+];
+
 // ===== FUEL TANKERS =====
 
 // Dunne Fuelrunner 2d (Warden Fuel Tanker) recipes
@@ -97,6 +147,32 @@ const auA150TaurineRiggerRecipes: IRecipe[] = [
   ),
 ];
 
+// ===== AMBULANCES =====
+
+// R-12 "Salus" Ambulance recipes
+const r12SalusAmbulanceRecipes: IRecipe[] = [
+  // Garage production: 150 x Basic Materials → 1 x R-12 "Salus" Ambulance
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 150 }],
+    [{ stuff: Vehicles.R12SalusAmbulance, count: 1 }]
+  ),
+  // Mass Production Factory: 1080 x Basic Materials → 3 crates of 3 x R-12 "Salus" Ambulance (9 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 1080 }],
+    [{ stuff: Vehicles.R12SalusAmbulance, count: 9 }]
+  ),
+  // Mass Production Factory: 1350 x Basic Materials → 4 crates of 3 x R-12 "Salus" Ambulance (12 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 1350 }],
+    [{ stuff: Vehicles.R12SalusAmbulance, count: 12 }]
+  ),
+  // Mass Production Factory: 1575 x Basic Materials → 5 crates of 3 x R-12 "Salus" Ambulance (15 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 1575 }],
+    [{ stuff: Vehicles.R12SalusAmbulance, count: 15 }]
+  ),
+];
+
 // ===== TRANSPORT BUSES =====
 
 // Dunne Caravaner 2f (Warden Transport Bus) recipes
@@ -148,6 +224,9 @@ const r15ChariotRecipes: IRecipe[] = [
 ];
 
 export const logisticsVehicleRecipes = new Map<string, IRecipe[]>([
+  // Trucks
+  [Vehicles.R1Hauler, r1HaulerRecipes],
+  [Vehicles.DunneTransport, dunneTransportRecipes],
   // Fuel Tankers
   [Vehicles.DunneFuelrunner2d, dunneFuelrunner2dRecipes],
   [Vehicles.RR3StolonTanker, rr3StolonTankerRecipes],
@@ -156,7 +235,10 @@ export const logisticsVehicleRecipes = new Map<string, IRecipe[]>([
   [Vehicles.AUA150TaurineRigger, auA150TaurineRiggerRecipes],
   // Cranes
   [Vehicles.BMSClass2MobileAutoCrane, bmsClass2MobileAutoCraneRecipes],
+  // Ambulances
+  [Vehicles.R12SalusAmbulance, r12SalusAmbulanceRecipes],
   // Transport Buses
   [Vehicles.DunneCaravaner2f, dunneCaravaner2fRecipes],
   [Vehicles.R15Chariot, r15ChariotRecipes],
 ]);
+
