@@ -17,6 +17,7 @@ import { battleTankRecipes } from "../lib/recipes/battleTanks";
 import { cruiserTankRecipes } from "../lib/recipes/cruiserTanks";
 import { superTankRecipes } from "../lib/recipes/superTanks";
 import { constructionVehicleRecipes } from "../lib/recipes/constructionVehicles";
+import { lightUtilityVehicleRecipes } from "../lib/recipes/lightUtilityVehicles";
 import { motorcycleRecipes } from "../lib/recipes/motorcycles";
 
 describe("Vehicle Recipe Organization", () => {
@@ -153,6 +154,10 @@ describe("Vehicle Recipe Organization", () => {
       expect(superTankRecipes.has(Vehicles.O75bAres)).toBe(true);
     });
 
+    test("lightUtilityVehicleRecipes contains light utility vehicles", () => {
+      expect(lightUtilityVehicleRecipes.has(Vehicles.UV05aArgonaut)).toBe(true);
+    });
+
     test("motorcycleRecipes contains motorcycles", () => {
       expect(motorcycleRecipes.has(Vehicles.O3MMCaster)).toBe(true);
     });
@@ -175,6 +180,7 @@ describe("Vehicle Recipe Organization", () => {
         cruiserTankRecipes.size +
         superTankRecipes.size +
         constructionVehicleRecipes.size +
+        lightUtilityVehicleRecipes.size +
         motorcycleRecipes.size;
 
       expect(vehicleRecipes.size).toBe(totalExpectedSize);
@@ -205,6 +211,14 @@ describe("Vehicle Recipe Organization", () => {
       expect(vehicleRecipes.has(Vehicles.O75bAres)).toBe(true);
     });
 
+    test("vehicleRecipes contains recipes from lightUtilityVehicles", () => {
+      expect(vehicleRecipes.has(Vehicles.UV05aArgonaut)).toBe(true);
+    });
+
+    test("vehicleRecipes contains recipes from motorcycles", () => {
+      expect(vehicleRecipes.has(Vehicles.O3MMCaster)).toBe(true);
+    });
+
     test("all vehicle recipes return same data whether accessed from category or central registry", () => {
       // Test a sample from each category
       expect(vehicleRecipes.get(Vehicles.Xiphos)).toEqual(
@@ -215,6 +229,12 @@ describe("Vehicle Recipe Organization", () => {
       );
       expect(vehicleRecipes.get(Vehicles.KingSpireMkI)).toEqual(
         tankRecipes.get(Vehicles.KingSpireMkI)
+      );
+      expect(vehicleRecipes.get(Vehicles.UV05aArgonaut)).toEqual(
+        lightUtilityVehicleRecipes.get(Vehicles.UV05aArgonaut)
+      );
+      expect(vehicleRecipes.get(Vehicles.O3MMCaster)).toEqual(
+        motorcycleRecipes.get(Vehicles.O3MMCaster)
       );
     });
   });
@@ -244,6 +264,7 @@ describe("Vehicle Recipe Organization", () => {
         ...cruiserTankRecipes.keys(),
         ...superTankRecipes.keys(),
         ...constructionVehicleRecipes.keys(),
+        ...lightUtilityVehicleRecipes.keys(),
         ...motorcycleRecipes.keys(),
       ];
 

@@ -13,6 +13,7 @@ import { cruiserTankRecipes } from "./cruiserTanks";
 import { trailerRecipes } from "./trailers";
 import { superTankRecipes } from "./superTanks";
 import { constructionVehicleRecipes } from "./constructionVehicles";
+import { lightUtilityVehicleRecipes } from "./lightUtilityVehicles";
 import { motorcycleRecipes } from "./motorcycles";
 
 /**
@@ -32,6 +33,7 @@ import { motorcycleRecipes } from "./motorcycles";
  * - trailers.ts: Trailers
  * - scoutVehicles.ts: Future scout vehicles
  * - constructionVehicles.ts: Construction vehicles
+ * - lightUtilityVehicles.ts: Light Utility Vehicles
  * - motorcycles.ts: Motorcycles
  */
 export const vehicleRecipes = new Map<string, IRecipe[]>([
@@ -49,5 +51,6 @@ export const vehicleRecipes = new Map<string, IRecipe[]>([
   ...cruiserTankRecipes,
   ...superTankRecipes,
   ...constructionVehicleRecipes,
+  ...lightUtilityVehicleRecipes,
   ...motorcycleRecipes,
 ]);
