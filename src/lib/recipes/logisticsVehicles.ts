@@ -127,6 +127,26 @@ const bmsClass2MobileAutoCraneRecipes: IRecipe[] = [
   ),
 ];
 
+// ===== HEAVY-DUTY TRUCKS =====
+
+// Cnute Cliffwrest (Warden Heavy-Duty Truck) recipes
+const cnuteCliffwrestRecipes: IRecipe[] = [
+  // Small Assembly Station production: 40 x Processed Construction Materials → 1 x Cnute Cliffwrest
+  createRecipe(
+    [{ stuff: Materials.ProcessedConstructionMaterials, count: 40 }],
+    [{ stuff: Vehicles.CnuteCliffwrest, count: 1 }]
+  ),
+];
+
+// AU-A150 Taurine Rigger (Colonial Heavy-Duty Truck) recipes
+const auA150TaurineRiggerRecipes: IRecipe[] = [
+  // Small Assembly Station production: 40 x Processed Construction Materials → 1 x AU-A150 Taurine Rigger
+  createRecipe(
+    [{ stuff: Materials.ProcessedConstructionMaterials, count: 40 }],
+    [{ stuff: Vehicles.AUA150TaurineRigger, count: 1 }]
+  ),
+];
+
 // ===== AMBULANCES =====
 
 // R-12 "Salus" Ambulance recipes
@@ -210,6 +230,9 @@ export const logisticsVehicleRecipes = new Map<string, IRecipe[]>([
   // Fuel Tankers
   [Vehicles.DunneFuelrunner2d, dunneFuelrunner2dRecipes],
   [Vehicles.RR3StolonTanker, rr3StolonTankerRecipes],
+  // Heavy-Duty Trucks
+  [Vehicles.CnuteCliffwrest, cnuteCliffwrestRecipes],
+  [Vehicles.AUA150TaurineRigger, auA150TaurineRiggerRecipes],
   // Cranes
   [Vehicles.BMSClass2MobileAutoCrane, bmsClass2MobileAutoCraneRecipes],
   // Ambulances
