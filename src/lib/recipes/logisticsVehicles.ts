@@ -196,29 +196,6 @@ const r12bSalvaFlameTruckRecipes: IRecipe[] = [
   ),
 ];
 
-// ===== FIRE ENGINES =====
-
-// Dunne Dousing Engine 3r (Warden Fire Engine) recipes
-const dunneDousingEngine3rRecipes: IRecipe[] = [
-  // Small Assembly Station production: 15 x Construction Materials + 5 x Assembly Materials II → 1 x Dunne Dousing Engine 3r
-  createRecipe(
-    [
-      { stuff: Materials.ConstructionMaterials, count: 15 },
-      { stuff: Materials.AssemblyMaterialsII, count: 5 },
-    ],
-    [{ stuff: Vehicles.DunneDousingEngine3r, count: 1 }]
-  ),
-];
-
-// R-12b "Salva" Flame Truck (Colonial Fire Engine) recipes
-const r12bSalvaFlameTruckRecipes: IRecipe[] = [
-  // Garage production: 150 x Basic Materials → 1 x R-12b "Salva" Flame Truck
-  createRecipe(
-    [{ stuff: Materials.BasicMaterials, count: 150 }],
-    [{ stuff: Vehicles.R12bSalvaFlameTruck, count: 1 }]
-  ),
-];
-
 // ===== AMBULANCES =====
 
 // R-12 "Salus" Ambulance recipes
