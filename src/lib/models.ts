@@ -144,22 +144,35 @@ export enum Vehicles {
   Lance25Hasta = 'Lance-25 "Hasta"',
   Lance36 = 'Lance-36',
   Lance46Sarissa = 'Lance-46 "Sarissa"',
+  // Logistics Vehicles - Trucks
+  R1Hauler = 'R-1 Hauler',
+  DunneTransport = 'Dunne Transport',
   // Logistics Vehicles - Fuel Tankers
   DunneFuelrunner2d = 'Dunne Fuelrunner 2d',
   RR3StolonTanker = 'RR-3 "Stolon" Tanker',
+  // Logistics Vehicles - Heavy-Duty Trucks
+  CnuteCliffwrest = 'Cnute Cliffwrest',
+  AUA150TaurineRigger = 'AU-A150 Taurine Rigger',
   // Logistics Vehicles - Trailers
   RoosterJunkwagon = 'Rooster - Junkwagon',
   RoosterLamploader = 'Rooster - Lamploader',
   RoosterTumblebox = 'Rooster - Tumblebox',
   // Logistics Vehicles - Cranes
   BMSClass2MobileAutoCrane = 'BMS - Class 2 Mobile Auto-Crane',
+  // Logistics Vehicles - Ambulances
+  R12SalusAmbulance = 'R-12 - "Salus" Ambulance',
   // Logistics Vehicles - Transport Buses
   DunneCaravaner2f = 'Dunne Caravaner 2f',
   R15Chariot = 'R-15 - "Chariot"',
+  // Construction Vehicles
+  BMSUniversalAssemblyRig = 'BMS - Universal Assembly Rig',
+  BMSFabricator = 'BMS - Fabricator',
   // Light Utility Vehicles
   UV05aArgonaut = 'UV-05a "Argonaut"',
   // Motorcycles
   O3MMCaster = '03MM "Caster"',
+  // Ambulances
+  DunneResponder3e = 'Dunne Responder 3e',
   // Harvesters
   BMSScrapHauler = 'BMS - Scrap Hauler',
 }
@@ -277,22 +290,35 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.Lance25Hasta },
   { name: Vehicles.Lance36 },
   { name: Vehicles.Lance46Sarissa },
+  // Logistics Vehicles - Trucks
+  { name: Vehicles.R1Hauler },
+  { name: Vehicles.DunneTransport },
   // Logistics Vehicles - Fuel Tankers
   { name: Vehicles.DunneFuelrunner2d },
   { name: Vehicles.RR3StolonTanker },
+  // Logistics Vehicles - Heavy-Duty Trucks
+  { name: Vehicles.CnuteCliffwrest },
+  { name: Vehicles.AUA150TaurineRigger },
   // Logistics Vehicles - Trailers
   { name: Vehicles.RoosterJunkwagon },
   { name: Vehicles.RoosterLamploader },
   { name: Vehicles.RoosterTumblebox },
   // Logistics Vehicles - Cranes
   { name: Vehicles.BMSClass2MobileAutoCrane },
+  // Logistics Vehicles - Ambulances
+  { name: Vehicles.R12SalusAmbulance },
   // Logistics Vehicles - Transport Buses
   { name: Vehicles.DunneCaravaner2f },
   { name: Vehicles.R15Chariot },
+  // Construction Vehicles
+  { name: Vehicles.BMSUniversalAssemblyRig },
+  { name: Vehicles.BMSFabricator },
   // Light Utility Vehicles
   { name: Vehicles.UV05aArgonaut },
   // Motorcycles
   { name: Vehicles.O3MMCaster },
+  // Ambulances
+  { name: Vehicles.DunneResponder3e },
   // Harvesters
   { name: Vehicles.BMSScrapHauler },
 ];
