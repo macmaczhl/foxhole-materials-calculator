@@ -154,5 +154,5 @@ export const ICONS_MAP = new Map<string, string>([
   // Ambulances
   [Vehicles.DunneResponder3e, "AmbulanceWar"],
   // Harvesters
-  [Vehicles.BMSScrapHauler, "HarvesterVehicleIcon"],
+  [Vehicles.BMSScrapHauler, "Harvester"],
 ]);
