@@ -160,6 +160,8 @@ export enum Vehicles {
   UV05aArgonaut = 'UV-05a "Argonaut"',
   // Motorcycles
   O3MMCaster = '03MM "Caster"',
+  // Harvesters
+  BMSScrapHauler = 'BMS - Scrap Hauler',
 }
 
 export enum RawResources {
@@ -291,6 +293,8 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.UV05aArgonaut },
   // Motorcycles
   { name: Vehicles.O3MMCaster },
+  // Harvesters
+  { name: Vehicles.BMSScrapHauler },
 ];
 
 export const stuffList: Stuff[] = availableMaterials;
