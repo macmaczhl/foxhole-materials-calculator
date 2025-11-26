@@ -133,6 +133,9 @@ export const ICONS_MAP = new Map<string, string>([
   [Vehicles.RoosterTumblebox, "MaterialTrailerIcon"],
   // Logistics Vehicles - Cranes
   [Vehicles.BMSClass2MobileAutoCrane, "CraneVehicleIcon"],
+  // Logistics Vehicles - Construction Vehicles
+  [Vehicles.BMSUniversalAssemblyRig, "ConstructionVehicleIcon"],
+  [Vehicles.BMSFabricator, "AdvancedConstructionVehicleIcon"],
   // Logistics Vehicles - Transport Buses
   [Vehicles.DunneCaravaner2f, "BusWarIcon"],
   [Vehicles.R15Chariot, "BusIcon"],
