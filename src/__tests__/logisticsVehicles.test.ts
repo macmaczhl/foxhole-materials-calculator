@@ -570,7 +570,6 @@ describe("Logistics Vehicles - Cranes", () => {
   });
 });
 
-<<<<<<< HEAD
 describe("Logistics Vehicles - Fire Engines", () => {
   describe("Recipe availability", () => {
     test("all fire engines have recipes defined", () => {
