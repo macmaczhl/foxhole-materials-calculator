@@ -161,6 +161,8 @@ export enum Vehicles {
   // Logistics Vehicles - Transport Buses
   DunneCaravaner2f = 'Dunne Caravaner 2f',
   R15Chariot = 'R-15 - "Chariot"',
+  // Construction Vehicles
+  BMSUniversalAssemblyRig = 'BMS - Universal Assembly Rig',
   // Light Utility Vehicles
   UV05aArgonaut = 'UV-05a "Argonaut"',
   // Motorcycles
@@ -297,6 +299,8 @@ export const availableMaterials: Stuff[] = [
   // Logistics Vehicles - Transport Buses
   { name: Vehicles.DunneCaravaner2f },
   { name: Vehicles.R15Chariot },
+  // Construction Vehicles
+  { name: Vehicles.BMSUniversalAssemblyRig },
   // Light Utility Vehicles
   { name: Vehicles.UV05aArgonaut },
   // Motorcycles

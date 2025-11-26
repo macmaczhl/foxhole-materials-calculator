@@ -16,6 +16,7 @@ import { destroyerTankRecipes } from "../lib/recipes/destroyerTanks";
 import { battleTankRecipes } from "../lib/recipes/battleTanks";
 import { cruiserTankRecipes } from "../lib/recipes/cruiserTanks";
 import { superTankRecipes } from "../lib/recipes/superTanks";
+import { constructionVehicleRecipes } from "../lib/recipes/constructionVehicles";
 import { lightUtilityVehicleRecipes } from "../lib/recipes/lightUtilityVehicles";
 import { motorcycleRecipes } from "../lib/recipes/motorcycles";
 
@@ -134,6 +135,12 @@ describe("Vehicle Recipe Organization", () => {
       expect(logisticsVehicleRecipes.has(Vehicles.RR3StolonTanker)).toBe(true);
     });
 
+    test("constructionVehicleRecipes contains construction vehicles", () => {
+      expect(
+        constructionVehicleRecipes.has(Vehicles.BMSUniversalAssemblyRig)
+      ).toBe(true);
+    });
+
     test("scoutVehicleRecipes is empty (placeholder)", () => {
       expect(scoutVehicleRecipes.size).toBe(0);
     });
@@ -172,6 +179,7 @@ describe("Vehicle Recipe Organization", () => {
         battleTankRecipes.size +
         cruiserTankRecipes.size +
         superTankRecipes.size +
+        constructionVehicleRecipes.size +
         lightUtilityVehicleRecipes.size +
         motorcycleRecipes.size;
 
@@ -255,6 +263,7 @@ describe("Vehicle Recipe Organization", () => {
         ...battleTankRecipes.keys(),
         ...cruiserTankRecipes.keys(),
         ...superTankRecipes.keys(),
+        ...constructionVehicleRecipes.keys(),
         ...lightUtilityVehicleRecipes.keys(),
         ...motorcycleRecipes.keys(),
       ];
