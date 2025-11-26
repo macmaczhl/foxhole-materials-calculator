@@ -27,6 +27,20 @@ const uv05aArgonautRecipes: IRecipe[] = [
   ),
 ];
 
+// UV-24 "Icarus" (Colonial Light Utility Vehicle - RPG variant) recipes
+const uv24IcarusRecipes: IRecipe[] = [
+  // Small Assembly Station (Motor Pool): 3 x Construction Materials + 10 x Assembly Materials II + UV-05a "Argonaut" → 1 x UV-24 "Icarus"
+  createRecipe(
+    [
+      { stuff: Materials.ConstructionMaterials, count: 3 },
+      { stuff: Materials.AssemblyMaterialsII, count: 10 },
+      { stuff: Vehicles.UV05aArgonaut, count: 1 },
+    ],
+    [{ stuff: Vehicles.UV24Icarus, count: 1 }]
+  ),
+];
+
 export const lightUtilityVehicleRecipes = new Map<string, IRecipe[]>([
   [Vehicles.UV05aArgonaut, uv05aArgonautRecipes],
+  [Vehicles.UV24Icarus, uv24IcarusRecipes],
 ]);
