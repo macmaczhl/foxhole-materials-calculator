@@ -39,8 +39,33 @@ const o0msStingerRecipes: IRecipe[] = [
   ),
 ];
 
+// Kivela Power Wheel 80-1 (Warden Motorcycle) recipes
+const kivelaPowerWheel801Recipes: IRecipe[] = [
+  // Garage production: 85 x Basic Materials → 1 x Kivela Power Wheel 80-1
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 85 }],
+    [{ stuff: Vehicles.KivelaPowerWheel801, count: 1 }]
+  ),
+  // Mass Production Factory: 611 x Basic Materials → 3 crates of 3 x Kivela Power Wheel 80-1 (9 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 611 }],
+    [{ stuff: Vehicles.KivelaPowerWheel801, count: 9 }]
+  ),
+  // Mass Production Factory: 764 x Basic Materials → 4 crates of 3 x Kivela Power Wheel 80-1 (12 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 764 }],
+    [{ stuff: Vehicles.KivelaPowerWheel801, count: 12 }]
+  ),
+  // Mass Production Factory: 891 x Basic Materials → 5 crates of 3 x Kivela Power Wheel 80-1 (15 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 891 }],
+    [{ stuff: Vehicles.KivelaPowerWheel801, count: 15 }]
+  ),
+];
+
 export const motorcycleRecipes = new Map<string, IRecipe[]>([
   // Motorcycles
   [Vehicles.O3MMCaster, o3mmCasterRecipes],
   [Vehicles.O0MSStinger, o0msStingerRecipes],
+  [Vehicles.KivelaPowerWheel801, kivelaPowerWheel801Recipes],
 ]);

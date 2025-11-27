@@ -181,6 +181,7 @@ export enum Vehicles {
   // Motorcycles
   O3MMCaster = '03MM "Caster"',
   O0MSStinger = '00MS "Stinger"',
+  KivelaPowerWheel801 = 'Kivela Power Wheel 80-1',
 }
 
 export enum RawResources {
@@ -333,6 +334,7 @@ export const availableMaterials: Stuff[] = [
   // Motorcycles
   { name: Vehicles.O3MMCaster },
   { name: Vehicles.O0MSStinger },
+  { name: Vehicles.KivelaPowerWheel801 },
 ];
 
 export const stuffList: Stuff[] = availableMaterials;

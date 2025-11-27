@@ -9,7 +9,7 @@ import { motorcycleRecipes } from "../lib/recipes/motorcycles";
 describe("Motorcycles", () => {
   describe("Recipe availability", () => {
     test("all motorcycles have recipes defined", () => {
-      const motorcycles = [Vehicles.O3MMCaster, Vehicles.O0MSStinger];
+      const motorcycles = [Vehicles.O3MMCaster, Vehicles.O0MSStinger, Vehicles.KivelaPowerWheel801];
 
       motorcycles.forEach((vehicle) => {
         expect(RecipiesByStuff.has(vehicle)).toBe(true);
@@ -20,7 +20,7 @@ describe("Motorcycles", () => {
     });
 
     test("all motorcycle recipes have valid requirements", () => {
-      const motorcycles = [Vehicles.O3MMCaster, Vehicles.O0MSStinger];
+      const motorcycles = [Vehicles.O3MMCaster, Vehicles.O0MSStinger, Vehicles.KivelaPowerWheel801];
 
       motorcycles.forEach((vehicle) => {
         const recipes = RecipiesByStuff.get(vehicle)!;
@@ -35,7 +35,8 @@ describe("Motorcycles", () => {
     test("motorcycles are in the motorcycle recipes", () => {
       expect(motorcycleRecipes.has(Vehicles.O3MMCaster)).toBe(true);
       expect(motorcycleRecipes.has(Vehicles.O0MSStinger)).toBe(true);
-      expect(motorcycleRecipes.size).toBe(2);
+      expect(motorcycleRecipes.has(Vehicles.KivelaPowerWheel801)).toBe(true);
+      expect(motorcycleRecipes.size).toBe(3);
     });
   });
 
@@ -111,7 +112,7 @@ describe("Motorcycles", () => {
 
   describe("Recipe calculation integration", () => {
     test("all motorcycles can be calculated without errors", () => {
-      const motorcycles = [Vehicles.O3MMCaster, Vehicles.O0MSStinger];
+      const motorcycles = [Vehicles.O3MMCaster, Vehicles.O0MSStinger, Vehicles.KivelaPowerWheel801];
 
       motorcycles.forEach((vehicle) => {
         const recipes = RecipiesByStuff.get(vehicle)!;
@@ -175,6 +176,76 @@ describe("Motorcycles", () => {
       expect(result.initial).toEqual([
         { stuff: Materials.ConstructionMaterials, count: 15 },
         { stuff: Vehicles.O3MMCaster, count: 3 },
+      ]);
+    });
+  });
+
+  describe('Kivela Power Wheel 80-1 (Warden Motorcycle)', () => {
+    let kivelaPowerWheel801Recipes: IRecipe[];
+    let kivelaPowerWheel801RecipeTree: RecipeTree;
+
+    beforeEach(() => {
+      kivelaPowerWheel801Recipes = RecipiesByStuff.get(Vehicles.KivelaPowerWheel801)!;
+      kivelaPowerWheel801RecipeTree = {
+        stuff: Vehicles.KivelaPowerWheel801,
+        selectedRecipe: kivelaPowerWheel801Recipes[0],
+        recipes: kivelaPowerWheel801Recipes,
+        required: [],
+      };
+    });
+
+    test("has correct garage recipe requirements", () => {
+      const garageRecipe = kivelaPowerWheel801Recipes[0];
+      expect(garageRecipe.required).toEqual([
+        { stuff: Materials.BasicMaterials, count: 85 },
+      ]);
+      expect(garageRecipe.produced).toEqual([
+        { stuff: Vehicles.KivelaPowerWheel801, count: 1 },
+      ]);
+    });
+
+    test("has mass production recipes", () => {
+      expect(kivelaPowerWheel801Recipes.length).toBe(4);
+
+      // Check basic recipe (85 → 1)
+      const basicRecipe = kivelaPowerWheel801Recipes.find((r) => r.produced[0].count === 1);
+      expect(basicRecipe).toBeDefined();
+      expect(basicRecipe!.required[0].stuff).toBe(Materials.BasicMaterials);
+      expect(basicRecipe!.required[0].count).toBe(85);
+
+      // Check mass production recipes exist
+      const massProduction = kivelaPowerWheel801Recipes.filter(
+        (r) => r.produced[0].count > 1
+      );
+      expect(massProduction.length).toBe(3);
+
+      // Verify mass production recipe quantities
+      const recipe9 = kivelaPowerWheel801Recipes.find((r) => r.produced[0].count === 9);
+      expect(recipe9).toBeDefined();
+      expect(recipe9!.required[0].count).toBe(611);
+
+      const recipe12 = kivelaPowerWheel801Recipes.find((r) => r.produced[0].count === 12);
+      expect(recipe12).toBeDefined();
+      expect(recipe12!.required[0].count).toBe(764);
+
+      const recipe15 = kivelaPowerWheel801Recipes.find((r) => r.produced[0].count === 15);
+      expect(recipe15).toBeDefined();
+      expect(recipe15!.required[0].count).toBe(891);
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const result = calculateComponents(kivelaPowerWheel801RecipeTree, 1);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.BasicMaterials, count: 85 },
+      ]);
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const result = calculateComponents(kivelaPowerWheel801RecipeTree, 3);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.BasicMaterials, count: 255 },
       ]);
     });
   });
