@@ -178,6 +178,7 @@ export enum Vehicles {
   // Light Utility Vehicles
   UV05aArgonaut = 'UV-05a "Argonaut"',
   UV24Icarus = 'UV-24 "Icarus"',
+  UV5cOdyssey = 'UV-5c "Odyssey"',
   // Motorcycles
   O3MMCaster = '03MM "Caster"',
   O0MSStinger = '00MS "Stinger"',
@@ -331,6 +332,7 @@ export const availableMaterials: Stuff[] = [
   // Light Utility Vehicles
   { name: Vehicles.UV05aArgonaut },
   { name: Vehicles.UV24Icarus },
+  { name: Vehicles.UV5cOdyssey },
   // Motorcycles
   { name: Vehicles.O3MMCaster },
   { name: Vehicles.O0MSStinger },

@@ -40,7 +40,20 @@ const uv24IcarusRecipes: IRecipe[] = [
   ),
 ];
 
+// UV-5c "Odyssey" (Colonial Light Utility Vehicle - Utility variant) recipes
+const uv5cOdysseyRecipes: IRecipe[] = [
+  // Small Assembly Station (Motor Pool): 3 x Construction Materials + UV-05a "Argonaut" → 1 x UV-5c "Odyssey"
+  createRecipe(
+    [
+      { stuff: Materials.ConstructionMaterials, count: 3 },
+      { stuff: Vehicles.UV05aArgonaut, count: 1 },
+    ],
+    [{ stuff: Vehicles.UV5cOdyssey, count: 1 }]
+  ),
+];
+
 export const lightUtilityVehicleRecipes = new Map<string, IRecipe[]>([
   [Vehicles.UV05aArgonaut, uv05aArgonautRecipes],
   [Vehicles.UV24Icarus, uv24IcarusRecipes],
+  [Vehicles.UV5cOdyssey, uv5cOdysseyRecipes],
 ]);
