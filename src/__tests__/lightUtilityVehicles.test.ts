@@ -168,4 +168,82 @@ describe("Light Utility Vehicle Recipes", () => {
       expect(assemblyRecipe?.produced[0].count).toBe(1);
     });
   });
+
+  describe("Drummond 100a", () => {
+    const drummond100aRecipes = RecipiesByStuff.get(Vehicles.Drummond100a);
+
+    it("should have recipes defined", () => {
+      expect(drummond100aRecipes).toBeDefined();
+      expect(drummond100aRecipes).toHaveLength(4);
+    });
+
+    it("should have garage recipe (10 Refined Materials → 1 vehicle)", () => {
+      const garageRecipe = drummond100aRecipes?.find(
+        (r) =>
+          r.required.length === 1 &&
+          r.required[0].stuff === Materials.RefinedMaterials &&
+          r.required[0].count === 10 &&
+          r.produced[0].count === 1
+      );
+
+      expect(garageRecipe).toBeDefined();
+      expect(garageRecipe?.required).toHaveLength(1);
+      expect(garageRecipe?.required[0].stuff).toBe(Materials.RefinedMaterials);
+      expect(garageRecipe?.required[0].count).toBe(10);
+      expect(garageRecipe?.produced).toHaveLength(1);
+      expect(garageRecipe?.produced[0].stuff).toBe(Vehicles.Drummond100a);
+      expect(garageRecipe?.produced[0].count).toBe(1);
+    });
+
+    it("should have mass production recipe (72 Refined Materials → 9 vehicles)", () => {
+      const mpfRecipe = drummond100aRecipes?.find(
+        (r) =>
+          r.required.length === 1 &&
+          r.required[0].stuff === Materials.RefinedMaterials &&
+          r.required[0].count === 72
+      );
+
+      expect(mpfRecipe).toBeDefined();
+      expect(mpfRecipe?.required).toHaveLength(1);
+      expect(mpfRecipe?.required[0].stuff).toBe(Materials.RefinedMaterials);
+      expect(mpfRecipe?.required[0].count).toBe(72);
+      expect(mpfRecipe?.produced).toHaveLength(1);
+      expect(mpfRecipe?.produced[0].stuff).toBe(Vehicles.Drummond100a);
+      expect(mpfRecipe?.produced[0].count).toBe(9);
+    });
+
+    it("should have mass production recipe (90 Refined Materials → 12 vehicles)", () => {
+      const mpfRecipe = drummond100aRecipes?.find(
+        (r) =>
+          r.required.length === 1 &&
+          r.required[0].stuff === Materials.RefinedMaterials &&
+          r.required[0].count === 90
+      );
+
+      expect(mpfRecipe).toBeDefined();
+      expect(mpfRecipe?.required).toHaveLength(1);
+      expect(mpfRecipe?.required[0].stuff).toBe(Materials.RefinedMaterials);
+      expect(mpfRecipe?.required[0].count).toBe(90);
+      expect(mpfRecipe?.produced).toHaveLength(1);
+      expect(mpfRecipe?.produced[0].stuff).toBe(Vehicles.Drummond100a);
+      expect(mpfRecipe?.produced[0].count).toBe(12);
+    });
+
+    it("should have mass production recipe (105 Refined Materials → 15 vehicles)", () => {
+      const mpfRecipe = drummond100aRecipes?.find(
+        (r) =>
+          r.required.length === 1 &&
+          r.required[0].stuff === Materials.RefinedMaterials &&
+          r.required[0].count === 105
+      );
+
+      expect(mpfRecipe).toBeDefined();
+      expect(mpfRecipe?.required).toHaveLength(1);
+      expect(mpfRecipe?.required[0].stuff).toBe(Materials.RefinedMaterials);
+      expect(mpfRecipe?.required[0].count).toBe(105);
+      expect(mpfRecipe?.produced).toHaveLength(1);
+      expect(mpfRecipe?.produced[0].stuff).toBe(Vehicles.Drummond100a);
+      expect(mpfRecipe?.produced[0].count).toBe(15);
+    });
+  });
 });

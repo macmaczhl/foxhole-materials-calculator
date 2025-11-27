@@ -52,8 +52,33 @@ const uv5cOdysseyRecipes: IRecipe[] = [
   ),
 ];
 
+// Drummond 100a (Warden Light Utility Vehicle) recipes
+const drummond100aRecipes: IRecipe[] = [
+  // Garage production: 10 x Refined Materials → 1 x Drummond 100a
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 10 }],
+    [{ stuff: Vehicles.Drummond100a, count: 1 }]
+  ),
+  // Mass Production Factory: 72 x Refined Materials → 3 crates of 3 x Drummond 100a (9 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 72 }],
+    [{ stuff: Vehicles.Drummond100a, count: 9 }]
+  ),
+  // Mass Production Factory: 90 x Refined Materials → 4 crates of 3 x Drummond 100a (12 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 90 }],
+    [{ stuff: Vehicles.Drummond100a, count: 12 }]
+  ),
+  // Mass Production Factory: 105 x Refined Materials → 5 crates of 3 x Drummond 100a (15 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 105 }],
+    [{ stuff: Vehicles.Drummond100a, count: 15 }]
+  ),
+];
+
 export const lightUtilityVehicleRecipes = new Map<string, IRecipe[]>([
   [Vehicles.UV05aArgonaut, uv05aArgonautRecipes],
   [Vehicles.UV24Icarus, uv24IcarusRecipes],
   [Vehicles.UV5cOdyssey, uv5cOdysseyRecipes],
+  [Vehicles.Drummond100a, drummond100aRecipes],
 ]);
