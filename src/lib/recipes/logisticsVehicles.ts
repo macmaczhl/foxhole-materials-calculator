@@ -51,6 +51,18 @@ const dunneTransportRecipes: IRecipe[] = [
   ),
 ];
 
+// Dunne Leatherback 2a (Warden reinforced truck variant) recipes
+const dunneLeatherback2aRecipes: IRecipe[] = [
+  // Small Assembly Station production: 10 x Construction Materials + 1 x Dunne Transport → 1 x Dunne Leatherback 2a
+  createRecipe(
+    [
+      { stuff: Materials.ConstructionMaterials, count: 10 },
+      { stuff: Vehicles.DunneTransport, count: 1 },
+    ],
+    [{ stuff: Vehicles.DunneLeatherback2a, count: 1 }]
+  ),
+];
+
 // ===== FUEL TANKERS =====
 
 // Dunne Fuelrunner 2d (Warden Fuel Tanker) recipes
@@ -290,6 +302,7 @@ export const logisticsVehicleRecipes = new Map<string, IRecipe[]>([
   // Trucks
   [Vehicles.R1Hauler, r1HaulerRecipes],
   [Vehicles.DunneTransport, dunneTransportRecipes],
+  [Vehicles.DunneLeatherback2a, dunneLeatherback2aRecipes],
   // Fuel Tankers
   [Vehicles.DunneFuelrunner2d, dunneFuelrunner2dRecipes],
   [Vehicles.RR3StolonTanker, rr3StolonTankerRecipes],
