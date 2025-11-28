@@ -27,6 +27,30 @@ const r1HaulerRecipes: IRecipe[] = [
   ),
 ];
 
+// R-5 "Atlas" Hauler (Colonial Truck) recipes
+const r5AtlasHaulerRecipes: IRecipe[] = [
+  // Garage production: 120 x Basic Materials → 1 x R-5 "Atlas" Hauler
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 120 }],
+    [{ stuff: Vehicles.R5AtlasHauler, count: 1 }]
+  ),
+  // Mass Production Factory: 864 x Basic Materials → 3 crates of 3 x R-5 "Atlas" Hauler (9 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 864 }],
+    [{ stuff: Vehicles.R5AtlasHauler, count: 9 }]
+  ),
+  // Mass Production Factory: 1080 x Basic Materials → 4 crates of 3 x R-5 "Atlas" Hauler (12 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 1080 }],
+    [{ stuff: Vehicles.R5AtlasHauler, count: 12 }]
+  ),
+  // Mass Production Factory: 1260 x Basic Materials → 5 crates of 3 x R-5 "Atlas" Hauler (15 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 1260 }],
+    [{ stuff: Vehicles.R5AtlasHauler, count: 15 }]
+  ),
+];
+
 // Dunne Transport (Warden Truck) recipes
 const dunneTransportRecipes: IRecipe[] = [
   // Garage production: 100 x Basic Materials → 1 x Dunne Transport
@@ -301,6 +325,7 @@ const bmsScrapHaulerRecipes: IRecipe[] = [
 export const logisticsVehicleRecipes = new Map<string, IRecipe[]>([
   // Trucks
   [Vehicles.R1Hauler, r1HaulerRecipes],
+  [Vehicles.R5AtlasHauler, r5AtlasHaulerRecipes],
   [Vehicles.DunneTransport, dunneTransportRecipes],
   [Vehicles.DunneLeatherback2a, dunneLeatherback2aRecipes],
   // Fuel Tankers
