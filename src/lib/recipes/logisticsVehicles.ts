@@ -322,6 +322,22 @@ const bmsScrapHaulerRecipes: IRecipe[] = [
   ),
 ];
 
+// ===== ROCKET ARTILLERY TRUCKS =====
+
+// R-17 "Retiarius" Skirmisher (Colonial Rocket Artillery Truck) recipes
+const r17RetiariusSkirmisherRecipes: IRecipe[] = [
+  // Small Assembly Station (Battery Line) production: 70 x Processed Construction Materials + 10 x Assembly Materials I + 8 x Assembly Materials III + 1 x R-1 Hauler → 1 x R-17 "Retiarius" Skirmisher
+  createRecipe(
+    [
+      { stuff: Materials.ProcessedConstructionMaterials, count: 70 },
+      { stuff: Materials.AssemblyMaterialsI, count: 10 },
+      { stuff: Materials.AssemblyMaterialsIII, count: 8 },
+      { stuff: Vehicles.R1Hauler, count: 1 },
+    ],
+    [{ stuff: Vehicles.R17RetiariusSkirmisher, count: 1 }]
+  ),
+];
+
 export const logisticsVehicleRecipes = new Map<string, IRecipe[]>([
   // Trucks
   [Vehicles.R1Hauler, r1HaulerRecipes],
@@ -348,5 +364,7 @@ export const logisticsVehicleRecipes = new Map<string, IRecipe[]>([
   [Vehicles.R15Chariot, r15ChariotRecipes],
   // Harvesters
   [Vehicles.BMSScrapHauler, bmsScrapHaulerRecipes],
+  // Rocket Artillery Trucks
+  [Vehicles.R17RetiariusSkirmisher, r17RetiariusSkirmisherRecipes],
 ]);
 

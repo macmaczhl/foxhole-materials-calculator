@@ -388,7 +388,7 @@ describe("Logistics Vehicles - Fuel Tankers", () => {
         true
       );
       expect(logisticsVehicleRecipes.has(Vehicles.RR3StolonTanker)).toBe(true);
-      expect(logisticsVehicleRecipes.size).toBe(16); // 4 trucks + 2 fuel tankers + 2 heavy-duty trucks + 1 crane + 1 flatbed truck + 2 fire engines + 1 ambulance + 2 transport buses + 1 harvester
+      expect(logisticsVehicleRecipes.size).toBe(17); // 4 trucks + 2 fuel tankers + 2 heavy-duty trucks + 1 crane + 1 flatbed truck + 2 fire engines + 1 ambulance + 2 transport buses + 1 harvester + 1 rocket artillery truck
     });
   });
 
@@ -1393,6 +1393,102 @@ describe("Logistics Vehicles - Harvesters", () => {
       const recipes = RecipiesByStuff.get(Vehicles.BMSScrapHauler)!;
       const recipeTree: RecipeTree = {
         stuff: Vehicles.BMSScrapHauler,
+        selectedRecipe: recipes[0],
+        recipes: recipes,
+        required: [],
+      };
+
+      // Should not throw an error
+      expect(() => {
+        const result = calculateComponents(recipeTree, 1);
+        expect(result.initial.length).toBeGreaterThan(0);
+      }).not.toThrow();
+    });
+  });
+});
+
+describe("Logistics Vehicles - Rocket Artillery Trucks", () => {
+  describe("Recipe availability", () => {
+    test("R-17 Retiarius Skirmisher has recipes defined", () => {
+      expect(RecipiesByStuff.has(Vehicles.R17RetiariusSkirmisher)).toBe(true);
+      const recipes = RecipiesByStuff.get(Vehicles.R17RetiariusSkirmisher);
+      expect(recipes).toBeDefined();
+      expect(recipes!.length).toBeGreaterThan(0);
+    });
+
+    test("R-17 Retiarius Skirmisher recipes have valid requirements", () => {
+      const recipes = RecipiesByStuff.get(Vehicles.R17RetiariusSkirmisher)!;
+      recipes.forEach((recipe) => {
+        expect(recipe.required.length).toBeGreaterThan(0);
+        expect(recipe.required[0].count).toBeGreaterThan(0);
+        expect(recipe.required[0].stuff).toBeDefined();
+      });
+    });
+
+    test("R-17 Retiarius Skirmisher is in the logistics vehicle recipes", () => {
+      expect(logisticsVehicleRecipes.has(Vehicles.R17RetiariusSkirmisher)).toBe(true);
+    });
+  });
+
+  describe('R-17 "Retiarius" Skirmisher (Colonial Rocket Artillery Truck)', () => {
+    let retiariusRecipes: IRecipe[];
+    let retiariusRecipeTree: RecipeTree;
+
+    beforeEach(() => {
+      retiariusRecipes = RecipiesByStuff.get(Vehicles.R17RetiariusSkirmisher)!;
+      retiariusRecipeTree = {
+        stuff: Vehicles.R17RetiariusSkirmisher,
+        selectedRecipe: retiariusRecipes[0],
+        recipes: retiariusRecipes,
+        required: [],
+      };
+    });
+
+    test("has correct assembly station recipe requirements", () => {
+      const assemblyRecipe = retiariusRecipes[0];
+      expect(assemblyRecipe.required).toEqual([
+        { stuff: Materials.ProcessedConstructionMaterials, count: 70 },
+        { stuff: Materials.AssemblyMaterialsI, count: 10 },
+        { stuff: Materials.AssemblyMaterialsIII, count: 8 },
+        { stuff: Vehicles.R1Hauler, count: 1 },
+      ]);
+      expect(assemblyRecipe.produced).toEqual([
+        { stuff: Vehicles.R17RetiariusSkirmisher, count: 1 },
+      ]);
+    });
+
+    test("has single recipe (Small Assembly Station Battery Line)", () => {
+      expect(retiariusRecipes.length).toBe(1);
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const result = calculateComponents(retiariusRecipeTree, 1);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.ProcessedConstructionMaterials, count: 70 },
+        { stuff: Materials.AssemblyMaterialsI, count: 10 },
+        { stuff: Materials.AssemblyMaterialsIII, count: 8 },
+        { stuff: Vehicles.R1Hauler, count: 1 },
+      ]);
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const result = calculateComponents(retiariusRecipeTree, 3);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.ProcessedConstructionMaterials, count: 210 },
+        { stuff: Materials.AssemblyMaterialsI, count: 30 },
+        { stuff: Materials.AssemblyMaterialsIII, count: 24 },
+        { stuff: Vehicles.R1Hauler, count: 3 },
+      ]);
+    });
+  });
+
+  describe("Recipe calculation integration", () => {
+    test("R-17 Retiarius Skirmisher can be calculated without errors", () => {
+      const recipes = RecipiesByStuff.get(Vehicles.R17RetiariusSkirmisher)!;
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.R17RetiariusSkirmisher,
         selectedRecipe: recipes[0],
         recipes: recipes,
         required: [],

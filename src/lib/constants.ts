@@ -166,4 +166,6 @@ export const ICONS_MAP = new Map<string, string>([
   [Vehicles.O3MMCaster, "MotorcycleVehicleIcon"],
   [Vehicles.O0MSStinger, "MotorcycleOffensiveVehicleIcon"],
   [Vehicles.KivelaPowerWheel801, "MotorcycleWIcon"],
+  // Rocket Artillery Trucks
+  [Vehicles.R17RetiariusSkirmisher, "TruckMultiCIcon"],
 ]);
