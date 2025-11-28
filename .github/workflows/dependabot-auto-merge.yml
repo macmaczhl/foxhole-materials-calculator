@@ -35,10 +35,10 @@ jobs:
             function semverDiff(a, b) {
               const pa = a.split('.').map(Number);
               const pb = b.split('.').map(Number);
-              if (pb[0] !== pa[0]) return pb[0] > pa[0] ? 'major' : 'unknown';
-              if (pb[1] !== pa[1]) return pb[1] > pa[1] ? 'minor' : 'unknown';
-              if (pb[2] !== pa[2]) return pb[2] > pa[2] ? 'patch' : 'unknown';
-              return 'unknown';
+              if (pb[0] !== pa[0]) return pb[0] > pa[0] ? 'major' : 'downgrade';
+              if (pb[1] !== pa[1]) return pb[1] > pa[1] ? 'minor' : 'downgrade';
+              if (pb[2] !== pa[2]) return pb[2] > pa[2] ? 'patch' : 'downgrade';
+              return 'none';
             }
 
             const diff = semverDiff(fromV, toV);
@@ -47,19 +47,23 @@ jobs:
               core.info('Major bump: not auto-merging');
               return;
             }
-            if (diff === 'unknown') {
-              await github.rest.issues.createComment({ owner: context.repo.owner, repo: context.repo.repo, issue_number: pr.data.number, body: 'Could not determine semver bump type — keeping this PR for manual review.' });
-              core.info('Unknown semver change: not auto-merging');
+            if (diff === 'downgrade' || diff === 'none') {
+              await github.rest.issues.createComment({ owner: context.repo.owner, repo: context.repo.repo, issue_number: pr.data.number, body: `Version change detected as '${diff}' — keeping this PR for manual review.` });
+              core.info(`Version change '${diff}': not auto-merging`);
               return;
             }
 
             // Check combined status (for legacy status checks)
             const status = await github.rest.repos.getCombinedStatusForRef({ owner: context.repo.owner, repo: context.repo.repo, ref: pr.data.head.sha });
-            const statusOk = status.data.state === 'success' || status.data.statuses.length === 0;
+            // Only check status state if there are actual status checks configured
+            const statusOk = status.data.statuses.length === 0 || status.data.state === 'success';
 
             // Check GitHub Actions check runs
             const checkRuns = await github.rest.checks.listForRef({ owner: context.repo.owner, repo: context.repo.repo, ref: pr.data.head.sha });
-            const checkRunsOk = checkRuns.data.check_runs.every(run => run.conclusion === 'success' || run.conclusion === 'skipped');
+            // Ensure all check runs have completed successfully (not in progress, pending, or failed)
+            const checkRunsOk = checkRuns.data.check_runs.length > 0 && checkRuns.data.check_runs.every(run =>
+              run.status === 'completed' && (run.conclusion === 'success' || run.conclusion === 'skipped')
+            );
 
             if (!statusOk || !checkRunsOk) {
               core.info('CI checks not all successful; skipping auto-merge');
