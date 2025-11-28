@@ -19,7 +19,7 @@ jobs:
               core.info('Skipping: no automerge label');
               return;
             }
-            if (!(github.actor === 'dependabot[bot]' || github.actor.startsWith('dependabot-preview'))){
+            if (context.actor !== 'dependabot[bot]') {
               core.info('Skipping: not a dependabot PR');
               return;
             }
@@ -31,19 +31,41 @@ jobs:
               return;
             }
             const [_, fromV, toV] = match;
-            function semverDiff(a,b){const pa=a.split('.').map(Number);const pb=b.split('.').map(Number);if(pb[0]>pa[0]) return 'major'; if(pb[1]>pa[1]) return 'minor'; if(pb[2]>pa[2]) return 'patch'; return 'unknown'}
-            const diff = semverDiff(fromV,toV);
-            if (diff === 'major'){
+
+            function semverDiff(a, b) {
+              const pa = a.split('.').map(Number);
+              const pb = b.split('.').map(Number);
+              if (pb[0] !== pa[0]) return pb[0] > pa[0] ? 'major' : 'unknown';
+              if (pb[1] !== pa[1]) return pb[1] > pa[1] ? 'minor' : 'unknown';
+              if (pb[2] !== pa[2]) return pb[2] > pa[2] ? 'patch' : 'unknown';
+              return 'unknown';
+            }
+
+            const diff = semverDiff(fromV, toV);
+            if (diff === 'major') {
               await github.rest.issues.createComment({ owner: context.repo.owner, repo: context.repo.repo, issue_number: pr.data.number, body: 'This is a major version bump; not auto-merging. Please review manually.' });
               core.info('Major bump: not auto-merging');
               return;
             }
-            // check combined status
+            if (diff === 'unknown') {
+              await github.rest.issues.createComment({ owner: context.repo.owner, repo: context.repo.repo, issue_number: pr.data.number, body: 'Could not determine semver bump type — keeping this PR for manual review.' });
+              core.info('Unknown semver change: not auto-merging');
+              return;
+            }
+
+            // Check combined status (for legacy status checks)
             const status = await github.rest.repos.getCombinedStatusForRef({ owner: context.repo.owner, repo: context.repo.repo, ref: pr.data.head.sha });
-            if (status.data.state !== 'success'){
+            const statusOk = status.data.state === 'success' || status.data.statuses.length === 0;
+
+            // Check GitHub Actions check runs
+            const checkRuns = await github.rest.checks.listForRef({ owner: context.repo.owner, repo: context.repo.repo, ref: pr.data.head.sha });
+            const checkRunsOk = checkRuns.data.check_runs.every(run => run.conclusion === 'success' || run.conclusion === 'skipped');
+
+            if (!statusOk || !checkRunsOk) {
               core.info('CI checks not all successful; skipping auto-merge');
               return;
             }
-            // merge
+
+            // Merge the PR
             await github.rest.pulls.merge({ owner: context.repo.owner, repo: context.repo.repo, pull_number: pr.data.number, merge_method: 'merge' });
             await github.rest.issues.createComment({ owner: context.repo.owner, repo: context.repo.repo, issue_number: pr.data.number, body: 'Auto-merged by workflow (patch/minor update, CI passed).' });
