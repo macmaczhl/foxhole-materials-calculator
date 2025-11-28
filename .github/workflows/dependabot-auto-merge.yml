@@ -8,6 +8,11 @@ on:
 jobs:
   automerge:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      checks: read
+      statuses: read
     steps:
       - name: Auto-merge Dependabot PRs when safe
         uses: actions/github-script@v7
