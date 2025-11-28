@@ -55,15 +55,22 @@ jobs:
 
             // Check combined status (for legacy status checks)
             const status = await github.rest.repos.getCombinedStatusForRef({ owner: context.repo.owner, repo: context.repo.repo, ref: pr.data.head.sha });
-            // Only check status state if there are actual status checks configured
-            const statusOk = status.data.statuses.length === 0 || status.data.state === 'success';
+            const hasStatuses = status.data.statuses.length > 0;
+            const statusOk = !hasStatuses || status.data.state === 'success';
 
             // Check GitHub Actions check runs
             const checkRuns = await github.rest.checks.listForRef({ owner: context.repo.owner, repo: context.repo.repo, ref: pr.data.head.sha });
+            const hasCheckRuns = checkRuns.data.check_runs.length > 0;
             // Ensure all check runs have completed successfully (not in progress, pending, or failed)
-            const checkRunsOk = checkRuns.data.check_runs.length > 0 && checkRuns.data.check_runs.every(run =>
+            const checkRunsOk = !hasCheckRuns || checkRuns.data.check_runs.every(run =>
               run.status === 'completed' && (run.conclusion === 'success' || run.conclusion === 'skipped')
             );
+
+            // Require at least one form of CI check to exist
+            if (!hasStatuses && !hasCheckRuns) {
+              core.info('No CI checks found; skipping auto-merge for safety');
+              return;
+            }
 
             if (!statusOk || !checkRunsOk) {
               core.info('CI checks not all successful; skipping auto-merge');
