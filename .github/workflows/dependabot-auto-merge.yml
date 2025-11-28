@@ -1,0 +1,49 @@
+name: "Automerge Dependabot updates"
+on:
+  pull_request:
+    types: [labeled, synchronize, opened, reopened]
+    branches:
+      - main
+
+jobs:
+  automerge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Auto-merge Dependabot PRs when safe
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = await github.rest.pulls.get({ owner: context.repo.owner, repo: context.repo.repo, pull_number: context.payload.pull_request.number });
+            const labels = pr.data.labels.map(l => l.name);
+            if (!labels.includes('automerge')) {
+              core.info('Skipping: no automerge label');
+              return;
+            }
+            if (!(github.actor === 'dependabot[bot]' || github.actor.startsWith('dependabot-preview'))){
+              core.info('Skipping: not a dependabot PR');
+              return;
+            }
+            const body = pr.data.body || pr.data.title || '';
+            const match = body.match(/from\s+(\d+\.\d+\.\d+)\s+to\s+(\d+\.\d+\.\d+)/i);
+            if (!match) {
+              core.info('Could not parse versions; leaving for manual review');
+              await github.rest.issues.createComment({ owner: context.repo.owner, repo: context.repo.repo, issue_number: pr.data.number, body: 'Could not determine semver bump automatically — keeping this PR for manual review.' });
+              return;
+            }
+            const [_, fromV, toV] = match;
+            function semverDiff(a,b){const pa=a.split('.').map(Number);const pb=b.split('.').map(Number);if(pb[0]>pa[0]) return 'major'; if(pb[1]>pa[1]) return 'minor'; if(pb[2]>pa[2]) return 'patch'; return 'unknown'}
+            const diff = semverDiff(fromV,toV);
+            if (diff === 'major'){
+              await github.rest.issues.createComment({ owner: context.repo.owner, repo: context.repo.repo, issue_number: pr.data.number, body: 'This is a major version bump; not auto-merging. Please review manually.' });
+              core.info('Major bump: not auto-merging');
+              return;
+            }
+            // check combined status
+            const status = await github.rest.repos.getCombinedStatusForRef({ owner: context.repo.owner, repo: context.repo.repo, ref: pr.data.head.sha });
+            if (status.data.state !== 'success'){
+              core.info('CI checks not all successful; skipping auto-merge');
+              return;
+            }
+            // merge
+            await github.rest.pulls.merge({ owner: context.repo.owner, repo: context.repo.repo, pull_number: pr.data.number, merge_method: 'merge' });
+            await github.rest.issues.createComment({ owner: context.repo.owner, repo: context.repo.repo, issue_number: pr.data.number, body: 'Auto-merged by workflow (patch/minor update, CI passed).' });
