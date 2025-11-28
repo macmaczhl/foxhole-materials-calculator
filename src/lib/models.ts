@@ -184,6 +184,8 @@ export enum Vehicles {
   O3MMCaster = '03MM "Caster"',
   O0MSStinger = '00MS "Stinger"',
   KivelaPowerWheel801 = 'Kivela Power Wheel 80-1',
+  // Warden Light Utility Vehicles
+  Drummond100a = 'Drummond 100a',
 }
 
 export enum RawResources {
@@ -335,6 +337,7 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.UV05aArgonaut },
   { name: Vehicles.UV24Icarus },
   { name: Vehicles.UV5cOdyssey },
+  { name: Vehicles.Drummond100a },
   // Motorcycles
   { name: Vehicles.O3MMCaster },
   { name: Vehicles.O0MSStinger },
