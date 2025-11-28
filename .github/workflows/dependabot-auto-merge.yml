@@ -78,5 +78,10 @@ jobs:
             }
 
             // Merge the PR
-            await github.rest.pulls.merge({ owner: context.repo.owner, repo: context.repo.repo, pull_number: pr.data.number, merge_method: 'merge' });
-            await github.rest.issues.createComment({ owner: context.repo.owner, repo: context.repo.repo, issue_number: pr.data.number, body: 'Auto-merged by workflow (patch/minor update, CI passed).' });
+            try {
+              await github.rest.pulls.merge({ owner: context.repo.owner, repo: context.repo.repo, pull_number: pr.data.number, merge_method: 'merge' });
+              await github.rest.issues.createComment({ owner: context.repo.owner, repo: context.repo.repo, issue_number: pr.data.number, body: 'Auto-merged by workflow (patch/minor update, CI passed).' });
+            } catch (error) {
+              core.warning(`Failed to auto-merge PR: ${error.message}`);
+              await github.rest.issues.createComment({ owner: context.repo.owner, repo: context.repo.repo, issue_number: pr.data.number, body: `Auto-merge failed: ${error.message}. Please review and merge manually.` });
+            }
