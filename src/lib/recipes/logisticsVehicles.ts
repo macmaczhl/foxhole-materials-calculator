@@ -99,6 +99,18 @@ const r5bSisyphusHaulerRecipes: IRecipe[] = [
   ),
 ];
 
+// R-9 "Speartip" Escort (Colonial armed Truck) recipes
+const r9SpeartipEscortRecipes: IRecipe[] = [
+  // Small Assembly Station production: 10 x Construction Materials + 1 x R-1 Hauler → 1 x R-9 "Speartip" Escort
+  createRecipe(
+    [
+      { stuff: Materials.ConstructionMaterials, count: 10 },
+      { stuff: Vehicles.R1Hauler, count: 1 },
+    ],
+    [{ stuff: Vehicles.R9SpeartipEscort, count: 1 }]
+  ),
+];
+
 // ===== FUEL TANKERS =====
 
 // Dunne Fuelrunner 2d (Warden Fuel Tanker) recipes
@@ -357,6 +369,7 @@ export const logisticsVehicleRecipes = new Map<string, IRecipe[]>([
   [Vehicles.DunneTransport, dunneTransportRecipes],
   [Vehicles.DunneLeatherback2a, dunneLeatherback2aRecipes],
   [Vehicles.R5bSisyphusHauler, r5bSisyphusHaulerRecipes],
+  [Vehicles.R9SpeartipEscort, r9SpeartipEscortRecipes],
   // Fuel Tankers
   [Vehicles.DunneFuelrunner2d, dunneFuelrunner2dRecipes],
   [Vehicles.RR3StolonTanker, rr3StolonTankerRecipes],
