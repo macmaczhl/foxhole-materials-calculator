@@ -1,0 +1,15 @@
+# Require @macmaczhl for any workflow/config changes
+# Replace with a team like @org/maintainers if desired
+
+# Workflow files
+.github/workflows/ @macmaczhl
+
+# Dependabot config
+.github/dependabot.yml @macmaczhl
+
+# CODEOWNERS itself
+.github/CODEOWNERS @macmaczhl
+
+# Anything that affects CI at repo root
+Dockerfile @macmaczhl
+.circleci/ @macmaczhl
