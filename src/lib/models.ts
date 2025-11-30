@@ -189,6 +189,7 @@ export enum Vehicles {
   // Warden Light Utility Vehicles
   Drummond100a = 'Drummond 100a',
   DrummondLoscann55c = 'Drummond Loscann 55c',
+  DrummondSpitfire100d = 'Drummond Spitfire 100d',
   // Rocket Artillery Trucks
   R17RetiariusSkirmisher = 'R-17 "Retiarius" Skirmisher',
 }
@@ -346,6 +347,7 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.UV5cOdyssey },
   { name: Vehicles.Drummond100a },
   { name: Vehicles.DrummondLoscann55c },
+  { name: Vehicles.DrummondSpitfire100d },
   // Motorcycles
   { name: Vehicles.O3MMCaster },
   { name: Vehicles.O0MSStinger },

@@ -299,4 +299,57 @@ describe("Light Utility Vehicle Recipes", () => {
       expect(assemblyRecipe?.produced[0].count).toBe(1);
     });
   });
+
+  describe("Drummond Spitfire 100d", () => {
+    const drummondSpitfire100dRecipes = RecipiesByStuff.get(
+      Vehicles.DrummondSpitfire100d
+    );
+
+    it("should have recipes defined", () => {
+      expect(drummondSpitfire100dRecipes).toBeDefined();
+      expect(drummondSpitfire100dRecipes).toHaveLength(1);
+    });
+
+    it("should have Small Assembly Station recipe (3 Construction Materials + 10 Assembly Materials II + 1 Drummond 100a → 1 vehicle)", () => {
+      const assemblyRecipe = drummondSpitfire100dRecipes?.find(
+        (r) =>
+          r.required.length === 3 &&
+          r.required.some(
+            (req) =>
+              req.stuff === Materials.ConstructionMaterials && req.count === 3
+          ) &&
+          r.required.some(
+            (req) =>
+              req.stuff === Materials.AssemblyMaterialsII && req.count === 10
+          ) &&
+          r.required.some(
+            (req) => req.stuff === Vehicles.Drummond100a && req.count === 1
+          )
+      );
+
+      expect(assemblyRecipe).toBeDefined();
+      expect(assemblyRecipe?.required).toHaveLength(3);
+
+      const constructionMaterialsReq = assemblyRecipe?.required.find(
+        (r) => r.stuff === Materials.ConstructionMaterials
+      );
+      expect(constructionMaterialsReq?.count).toBe(3);
+
+      const assemblyMaterialsReq = assemblyRecipe?.required.find(
+        (r) => r.stuff === Materials.AssemblyMaterialsII
+      );
+      expect(assemblyMaterialsReq?.count).toBe(10);
+
+      const drummond100aReq = assemblyRecipe?.required.find(
+        (r) => r.stuff === Vehicles.Drummond100a
+      );
+      expect(drummond100aReq?.count).toBe(1);
+
+      expect(assemblyRecipe?.produced).toHaveLength(1);
+      expect(assemblyRecipe?.produced[0].stuff).toBe(
+        Vehicles.DrummondSpitfire100d
+      );
+      expect(assemblyRecipe?.produced[0].count).toBe(1);
+    });
+  });
 });
