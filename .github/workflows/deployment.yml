@@ -83,7 +83,7 @@ jobs:
         env:
           NEXT_PUBLIC_BASE_PATH: /foxhole-materials-calculator
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: ./out
 
