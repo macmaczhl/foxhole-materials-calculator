@@ -9,7 +9,7 @@ import { logisticsVehicleRecipes } from "../lib/recipes/logisticsVehicles";
 describe("Logistics Vehicles - Trucks", () => {
   describe("Recipe availability", () => {
     test("all trucks have recipes defined", () => {
-      const trucks = [Vehicles.R1Hauler, Vehicles.R5AtlasHauler, Vehicles.DunneTransport, Vehicles.DunneLeatherback2a];
+      const trucks = [Vehicles.R1Hauler, Vehicles.R5AtlasHauler, Vehicles.DunneTransport, Vehicles.DunneLeatherback2a, Vehicles.R5bSisyphusHauler];
 
       trucks.forEach((vehicle) => {
         expect(RecipiesByStuff.has(vehicle)).toBe(true);
@@ -20,7 +20,7 @@ describe("Logistics Vehicles - Trucks", () => {
     });
 
     test("all truck recipes have valid requirements", () => {
-      const trucks = [Vehicles.R1Hauler, Vehicles.R5AtlasHauler, Vehicles.DunneTransport, Vehicles.DunneLeatherback2a];
+      const trucks = [Vehicles.R1Hauler, Vehicles.R5AtlasHauler, Vehicles.DunneTransport, Vehicles.DunneLeatherback2a, Vehicles.R5bSisyphusHauler];
 
       trucks.forEach((vehicle) => {
         const recipes = RecipiesByStuff.get(vehicle)!;
@@ -37,6 +37,7 @@ describe("Logistics Vehicles - Trucks", () => {
       expect(logisticsVehicleRecipes.has(Vehicles.R5AtlasHauler)).toBe(true);
       expect(logisticsVehicleRecipes.has(Vehicles.DunneTransport)).toBe(true);
       expect(logisticsVehicleRecipes.has(Vehicles.DunneLeatherback2a)).toBe(true);
+      expect(logisticsVehicleRecipes.has(Vehicles.R5bSisyphusHauler)).toBe(true);
     });
   });
 
@@ -310,6 +311,58 @@ describe("Logistics Vehicles - Trucks", () => {
     });
   });
 
+  describe('R-5b "Sisyphus" Hauler (Colonial Truck variant)', () => {
+    let sisyphusRecipes: IRecipe[];
+    let sisyphusRecipeTree: RecipeTree;
+
+    beforeEach(() => {
+      sisyphusRecipes = RecipiesByStuff.get(Vehicles.R5bSisyphusHauler)!;
+      sisyphusRecipeTree = {
+        stuff: Vehicles.R5bSisyphusHauler,
+        selectedRecipe: sisyphusRecipes[0],
+        recipes: sisyphusRecipes,
+        required: [],
+      };
+    });
+
+    test("has correct assembly station recipe requirements", () => {
+      const assemblyRecipe = sisyphusRecipes[0];
+      expect(assemblyRecipe.required).toEqual([
+        { stuff: Materials.ConstructionMaterials, count: 10 },
+        { stuff: Vehicles.R1Hauler, count: 1 },
+      ]);
+      expect(assemblyRecipe.produced).toEqual([
+        { stuff: Vehicles.R5bSisyphusHauler, count: 1 },
+      ]);
+    });
+
+    test("has exactly one recipe (Small Assembly Station)", () => {
+      expect(sisyphusRecipes.length).toBe(1);
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const result = calculateComponents(sisyphusRecipeTree, 1);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.ConstructionMaterials, count: 10 },
+        { stuff: Vehicles.R1Hauler, count: 1 },
+      ]);
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const result = calculateComponents(sisyphusRecipeTree, 3);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.ConstructionMaterials, count: 30 },
+        { stuff: Vehicles.R1Hauler, count: 3 },
+      ]);
+    });
+
+    test("is in the logistics vehicle recipes", () => {
+      expect(logisticsVehicleRecipes.has(Vehicles.R5bSisyphusHauler)).toBe(true);
+    });
+  });
+
   describe("Both factions use same production costs for trucks", () => {
     test("Warden and Colonial trucks have identical costs", () => {
       const wardenRecipes = RecipiesByStuff.get(Vehicles.DunneTransport)!;
@@ -330,7 +383,7 @@ describe("Logistics Vehicles - Trucks", () => {
 
   describe("Recipe calculation integration for trucks", () => {
     test("all trucks can be calculated without errors", () => {
-      const trucks = [Vehicles.R1Hauler, Vehicles.R5AtlasHauler, Vehicles.DunneTransport, Vehicles.DunneLeatherback2a];
+      const trucks = [Vehicles.R1Hauler, Vehicles.R5AtlasHauler, Vehicles.DunneTransport, Vehicles.DunneLeatherback2a, Vehicles.R5bSisyphusHauler];
 
       trucks.forEach((vehicle) => {
         const recipes = RecipiesByStuff.get(vehicle)!;
@@ -388,7 +441,7 @@ describe("Logistics Vehicles - Fuel Tankers", () => {
         true
       );
       expect(logisticsVehicleRecipes.has(Vehicles.RR3StolonTanker)).toBe(true);
-      expect(logisticsVehicleRecipes.size).toBe(17); // 4 trucks + 2 fuel tankers + 2 heavy-duty trucks + 1 crane + 1 flatbed truck + 2 fire engines + 1 ambulance + 2 transport buses + 1 harvester + 1 rocket artillery truck
+      expect(logisticsVehicleRecipes.size).toBe(18); // 5 trucks + 2 fuel tankers + 2 heavy-duty trucks + 1 crane + 1 flatbed truck + 2 fire engines + 1 ambulance + 2 transport buses + 1 harvester + 1 rocket artillery truck
     });
   });
 

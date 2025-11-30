@@ -87,6 +87,18 @@ const dunneLeatherback2aRecipes: IRecipe[] = [
   ),
 ];
 
+// R-5b "Sisyphus" Hauler (Colonial Truck variant) recipes
+const r5bSisyphusHaulerRecipes: IRecipe[] = [
+  // Small Assembly Station production: 10 x Construction Materials + 1 x R-1 Hauler → 1 x R-5b "Sisyphus" Hauler
+  createRecipe(
+    [
+      { stuff: Materials.ConstructionMaterials, count: 10 },
+      { stuff: Vehicles.R1Hauler, count: 1 },
+    ],
+    [{ stuff: Vehicles.R5bSisyphusHauler, count: 1 }]
+  ),
+];
+
 // ===== FUEL TANKERS =====
 
 // Dunne Fuelrunner 2d (Warden Fuel Tanker) recipes
@@ -344,6 +356,7 @@ export const logisticsVehicleRecipes = new Map<string, IRecipe[]>([
   [Vehicles.R5AtlasHauler, r5AtlasHaulerRecipes],
   [Vehicles.DunneTransport, dunneTransportRecipes],
   [Vehicles.DunneLeatherback2a, dunneLeatherback2aRecipes],
+  [Vehicles.R5bSisyphusHauler, r5bSisyphusHaulerRecipes],
   // Fuel Tankers
   [Vehicles.DunneFuelrunner2d, dunneFuelrunner2dRecipes],
   [Vehicles.RR3StolonTanker, rr3StolonTankerRecipes],
