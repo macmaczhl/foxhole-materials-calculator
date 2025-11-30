@@ -187,6 +187,8 @@ export enum Vehicles {
   KivelaPowerWheel801 = 'Kivela Power Wheel 80-1',
   // Warden Light Utility Vehicles
   Drummond100a = 'Drummond 100a',
+  // Rocket Artillery Trucks
+  R17RetiariusSkirmisher = 'R-17 "Retiarius" Skirmisher',
 }
 
 export enum RawResources {
@@ -344,6 +346,8 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.O3MMCaster },
   { name: Vehicles.O0MSStinger },
   { name: Vehicles.KivelaPowerWheel801 },
+  // Rocket Artillery Trucks
+  { name: Vehicles.R17RetiariusSkirmisher },
 ];
 
 export const stuffList: Stuff[] = availableMaterials;
