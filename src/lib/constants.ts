@@ -129,6 +129,7 @@ export const ICONS_MAP = new Map<string, string>([
   [Vehicles.R5AtlasHauler, "TruckUtilityVehicleIcon"],
   [Vehicles.DunneTransport, "TruckWarVehicleIcon"],
   [Vehicles.DunneLeatherback2a, "TruckDefensiveWIcon"],
+  [Vehicles.DunneLoadlugger3c, "TruckUtilityWarVehicleIcon"],
   [Vehicles.R5bSisyphusHauler, "TruckMobilityCVehicleIcon"],
   [Vehicles.R9SpeartipEscort, "TruckOffensiveVehicleIcon"],
   // Logistics Vehicles - Fuel Tankers
