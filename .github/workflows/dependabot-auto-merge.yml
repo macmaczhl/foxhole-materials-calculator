@@ -26,11 +26,35 @@ jobs:
             // fetch PR metadata
             const pr = await github.rest.pulls.get({ owner, repo, pull_number: prNumber });
 
+            // Security check: verify PR comes from same repository (not a fork)
+            if (pr.data.head.repo.full_name !== pr.data.base.repo.full_name) {
+              core.info('PR is from a fork; skipping auto-merge for security');
+              return;
+            }
 
             const labels = pr.data.labels.map(l => l.name);
             if (!labels.includes('automerge')) {
               core.info('No automerge label; skipping');
               return;
+            }
+
+            // Check for major version update in PR title
+            // Dependabot titles follow pattern: "Bump <package> from <old_version> to <new_version>"
+            const title = pr.data.title;
+            const versionMatch = title.match(/from\s+(\d+)\.\d+\.\d+.*\s+to\s+(\d+)\.\d+\.\d+/i);
+            if (versionMatch) {
+              const oldMajor = parseInt(versionMatch[1], 10);
+              const newMajor = parseInt(versionMatch[2], 10);
+              if (newMajor > oldMajor) {
+                await github.rest.issues.createComment({ 
+                  owner, 
+                  repo, 
+                  issue_number: prNumber, 
+                  body: `⚠️ This is a **major version update** (${oldMajor}.x.x → ${newMajor}.x.x). Auto-merge is disabled for major updates. Please review the changelog and merge manually.` 
+                });
+                core.info('Major version update detected; skipping auto-merge');
+                return;
+              }
             }
 
             // list changed files (no checkout) and detect CI/workflow changes
