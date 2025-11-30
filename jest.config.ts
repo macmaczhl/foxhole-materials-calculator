@@ -12,6 +12,8 @@ const config: Config = {
   testEnvironment: "jsdom",
   // Add more setup options before each test is run
   setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
+  // Ignore e2e tests (handled by Playwright)
+  testPathIgnorePatterns: ["<rootDir>/node_modules/", "<rootDir>/e2e/"],
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
