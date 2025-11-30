@@ -6,7 +6,7 @@ on:
     branches: [main]
 
 permissions:
-  contents: read
+  contents: write
   pull-requests: write
 
 jobs:
@@ -25,11 +25,7 @@ jobs:
 
             // fetch PR metadata
             const pr = await github.rest.pulls.get({ owner, repo, pull_number: prNumber });
-            const actor = context.actor;
-            if (!(actor === 'dependabot[bot]' || actor.startsWith('dependabot-preview'))) {
-              core.info('Not a dependabot PR; skipping');
-              return;
-            }
+
 
             const labels = pr.data.labels.map(l => l.name);
             if (!labels.includes('automerge')) {
@@ -48,7 +44,10 @@ jobs:
               '^\\.github\\/CODEOWNERS$',
               '^\\.circleci\\/',
               '^Dockerfile$',
-              '^\\.github\\/actions\\/'
+              '^\\.github\\/actions\\/',
+              '^package\\.json$',
+              '^jest\\.config\\.(js|ts|mjs|cjs)$',
+              '^eslint\\.config\\.(js|ts|mjs|cjs)$'
             ];
             const ciRegexes = ciPatterns.map(p => new RegExp(p));
             if (files.some(f => ciRegexes.some(r => r.test(f)))) {
