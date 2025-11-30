@@ -146,8 +146,10 @@ export enum Vehicles {
   Lance46Sarissa = 'Lance-46 "Sarissa"',
   // Logistics Vehicles - Trucks
   R1Hauler = 'R-1 Hauler',
+  R5AtlasHauler = 'R-5 "Atlas" Hauler',
   DunneTransport = 'Dunne Transport',
   DunneLeatherback2a = 'Dunne Leatherback 2a',
+  R5bSisyphusHauler = 'R-5b "Sisyphus" Hauler',
   // Logistics Vehicles - Fuel Tankers
   DunneFuelrunner2d = 'Dunne Fuelrunner 2d',
   RR3StolonTanker = 'RR-3 "Stolon" Tanker',
@@ -187,6 +189,8 @@ export enum Vehicles {
   // Warden Light Utility Vehicles
   Drummond100a = 'Drummond 100a',
   DrummondLoscann55c = 'Drummond Loscann 55c',
+  // Rocket Artillery Trucks
+  R17RetiariusSkirmisher = 'R-17 "Retiarius" Skirmisher',
 }
 
 export enum RawResources {
@@ -304,8 +308,10 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.Lance46Sarissa },
   // Logistics Vehicles - Trucks
   { name: Vehicles.R1Hauler },
+  { name: Vehicles.R5AtlasHauler },
   { name: Vehicles.DunneTransport },
   { name: Vehicles.DunneLeatherback2a },
+  { name: Vehicles.R5bSisyphusHauler },
   // Logistics Vehicles - Fuel Tankers
   { name: Vehicles.DunneFuelrunner2d },
   { name: Vehicles.RR3StolonTanker },
@@ -344,6 +350,8 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.O3MMCaster },
   { name: Vehicles.O0MSStinger },
   { name: Vehicles.KivelaPowerWheel801 },
+  // Rocket Artillery Trucks
+  { name: Vehicles.R17RetiariusSkirmisher },
 ];
 
 export const stuffList: Stuff[] = availableMaterials;

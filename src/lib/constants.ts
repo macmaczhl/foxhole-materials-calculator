@@ -126,8 +126,10 @@ export const ICONS_MAP = new Map<string, string>([
   [Vehicles.Lance46Sarissa, "BattleTankHeavyArtilleryCIcon"],
   // Logistics Vehicles - Trucks
   [Vehicles.R1Hauler, "TruckVehicleIcon"],
+  [Vehicles.R5AtlasHauler, "TruckUtilityVehicleIcon"],
   [Vehicles.DunneTransport, "TruckWarVehicleIcon"],
   [Vehicles.DunneLeatherback2a, "TruckDefensiveWIcon"],
+  [Vehicles.R5bSisyphusHauler, "TruckMobilityCVehicleIcon"],
   // Logistics Vehicles - Fuel Tankers
   [Vehicles.DunneFuelrunner2d, "OilTankerWarIcon"],
   [Vehicles.RR3StolonTanker, "OilTankerIcon"],
@@ -166,4 +168,6 @@ export const ICONS_MAP = new Map<string, string>([
   [Vehicles.O3MMCaster, "MotorcycleVehicleIcon"],
   [Vehicles.O0MSStinger, "MotorcycleOffensiveVehicleIcon"],
   [Vehicles.KivelaPowerWheel801, "MotorcycleWIcon"],
+  // Rocket Artillery Trucks
+  [Vehicles.R17RetiariusSkirmisher, "TruckMultiCIcon"],
 ]);

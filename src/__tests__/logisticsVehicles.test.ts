@@ -9,7 +9,7 @@ import { logisticsVehicleRecipes } from "../lib/recipes/logisticsVehicles";
 describe("Logistics Vehicles - Trucks", () => {
   describe("Recipe availability", () => {
     test("all trucks have recipes defined", () => {
-      const trucks = [Vehicles.R1Hauler, Vehicles.DunneTransport, Vehicles.DunneLeatherback2a];
+      const trucks = [Vehicles.R1Hauler, Vehicles.R5AtlasHauler, Vehicles.DunneTransport, Vehicles.DunneLeatherback2a, Vehicles.R5bSisyphusHauler];
 
       trucks.forEach((vehicle) => {
         expect(RecipiesByStuff.has(vehicle)).toBe(true);
@@ -20,7 +20,7 @@ describe("Logistics Vehicles - Trucks", () => {
     });
 
     test("all truck recipes have valid requirements", () => {
-      const trucks = [Vehicles.R1Hauler, Vehicles.DunneTransport, Vehicles.DunneLeatherback2a];
+      const trucks = [Vehicles.R1Hauler, Vehicles.R5AtlasHauler, Vehicles.DunneTransport, Vehicles.DunneLeatherback2a, Vehicles.R5bSisyphusHauler];
 
       trucks.forEach((vehicle) => {
         const recipes = RecipiesByStuff.get(vehicle)!;
@@ -34,8 +34,10 @@ describe("Logistics Vehicles - Trucks", () => {
 
     test("trucks are in the logistics vehicle recipes", () => {
       expect(logisticsVehicleRecipes.has(Vehicles.R1Hauler)).toBe(true);
+      expect(logisticsVehicleRecipes.has(Vehicles.R5AtlasHauler)).toBe(true);
       expect(logisticsVehicleRecipes.has(Vehicles.DunneTransport)).toBe(true);
       expect(logisticsVehicleRecipes.has(Vehicles.DunneLeatherback2a)).toBe(true);
+      expect(logisticsVehicleRecipes.has(Vehicles.R5bSisyphusHauler)).toBe(true);
     });
   });
 
@@ -105,6 +107,76 @@ describe("Logistics Vehicles - Trucks", () => {
 
       expect(result.initial).toEqual([
         { stuff: Materials.BasicMaterials, count: 300 },
+      ]);
+    });
+  });
+
+  describe('R-5 "Atlas" Hauler (Colonial Truck)', () => {
+    let r5AtlasHaulerRecipes: IRecipe[];
+    let r5AtlasHaulerRecipeTree: RecipeTree;
+
+    beforeEach(() => {
+      r5AtlasHaulerRecipes = RecipiesByStuff.get(Vehicles.R5AtlasHauler)!;
+      r5AtlasHaulerRecipeTree = {
+        stuff: Vehicles.R5AtlasHauler,
+        selectedRecipe: r5AtlasHaulerRecipes[0],
+        recipes: r5AtlasHaulerRecipes,
+        required: [],
+      };
+    });
+
+    test("has correct garage recipe requirements", () => {
+      const garageRecipe = r5AtlasHaulerRecipes[0];
+      expect(garageRecipe.required).toEqual([
+        { stuff: Materials.BasicMaterials, count: 120 },
+      ]);
+      expect(garageRecipe.produced).toEqual([
+        { stuff: Vehicles.R5AtlasHauler, count: 1 },
+      ]);
+    });
+
+    test("has mass production recipes", () => {
+      expect(r5AtlasHaulerRecipes.length).toBe(4);
+
+      // Check basic recipe (120 → 1)
+      const basicRecipe = r5AtlasHaulerRecipes.find((r) => r.produced[0].count === 1);
+      expect(basicRecipe).toBeDefined();
+      expect(basicRecipe!.required[0].stuff).toBe(Materials.BasicMaterials);
+      expect(basicRecipe!.required[0].count).toBe(120);
+
+      // Check mass production recipes exist
+      const massProduction = r5AtlasHaulerRecipes.filter(
+        (r) => r.produced[0].count > 1
+      );
+      expect(massProduction.length).toBe(3);
+
+      // Verify mass production recipe quantities
+      const recipe9 = r5AtlasHaulerRecipes.find((r) => r.produced[0].count === 9);
+      expect(recipe9).toBeDefined();
+      expect(recipe9!.required[0].count).toBe(864);
+
+      const recipe12 = r5AtlasHaulerRecipes.find((r) => r.produced[0].count === 12);
+      expect(recipe12).toBeDefined();
+      expect(recipe12!.required[0].count).toBe(1080);
+
+      const recipe15 = r5AtlasHaulerRecipes.find((r) => r.produced[0].count === 15);
+      expect(recipe15).toBeDefined();
+      expect(recipe15!.required[0].count).toBe(1260);
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const result = calculateComponents(r5AtlasHaulerRecipeTree, 1);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.BasicMaterials, count: 120 },
+      ]);
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const result = calculateComponents(r5AtlasHaulerRecipeTree, 3);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.BasicMaterials, count: 360 },
       ]);
     });
   });
@@ -239,6 +311,58 @@ describe("Logistics Vehicles - Trucks", () => {
     });
   });
 
+  describe('R-5b "Sisyphus" Hauler (Colonial Truck variant)', () => {
+    let sisyphusRecipes: IRecipe[];
+    let sisyphusRecipeTree: RecipeTree;
+
+    beforeEach(() => {
+      sisyphusRecipes = RecipiesByStuff.get(Vehicles.R5bSisyphusHauler)!;
+      sisyphusRecipeTree = {
+        stuff: Vehicles.R5bSisyphusHauler,
+        selectedRecipe: sisyphusRecipes[0],
+        recipes: sisyphusRecipes,
+        required: [],
+      };
+    });
+
+    test("has correct assembly station recipe requirements", () => {
+      const assemblyRecipe = sisyphusRecipes[0];
+      expect(assemblyRecipe.required).toEqual([
+        { stuff: Materials.ConstructionMaterials, count: 10 },
+        { stuff: Vehicles.R1Hauler, count: 1 },
+      ]);
+      expect(assemblyRecipe.produced).toEqual([
+        { stuff: Vehicles.R5bSisyphusHauler, count: 1 },
+      ]);
+    });
+
+    test("has exactly one recipe (Small Assembly Station)", () => {
+      expect(sisyphusRecipes.length).toBe(1);
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const result = calculateComponents(sisyphusRecipeTree, 1);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.ConstructionMaterials, count: 10 },
+        { stuff: Vehicles.R1Hauler, count: 1 },
+      ]);
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const result = calculateComponents(sisyphusRecipeTree, 3);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.ConstructionMaterials, count: 30 },
+        { stuff: Vehicles.R1Hauler, count: 3 },
+      ]);
+    });
+
+    test("is in the logistics vehicle recipes", () => {
+      expect(logisticsVehicleRecipes.has(Vehicles.R5bSisyphusHauler)).toBe(true);
+    });
+  });
+
   describe("Both factions use same production costs for trucks", () => {
     test("Warden and Colonial trucks have identical costs", () => {
       const wardenRecipes = RecipiesByStuff.get(Vehicles.DunneTransport)!;
@@ -259,7 +383,7 @@ describe("Logistics Vehicles - Trucks", () => {
 
   describe("Recipe calculation integration for trucks", () => {
     test("all trucks can be calculated without errors", () => {
-      const trucks = [Vehicles.R1Hauler, Vehicles.DunneTransport, Vehicles.DunneLeatherback2a];
+      const trucks = [Vehicles.R1Hauler, Vehicles.R5AtlasHauler, Vehicles.DunneTransport, Vehicles.DunneLeatherback2a, Vehicles.R5bSisyphusHauler];
 
       trucks.forEach((vehicle) => {
         const recipes = RecipiesByStuff.get(vehicle)!;
@@ -317,7 +441,7 @@ describe("Logistics Vehicles - Fuel Tankers", () => {
         true
       );
       expect(logisticsVehicleRecipes.has(Vehicles.RR3StolonTanker)).toBe(true);
-      expect(logisticsVehicleRecipes.size).toBe(15); // 3 trucks + 2 fuel tankers + 2 heavy-duty trucks + 1 crane + 1 flatbed truck + 2 fire engines + 1 ambulance + 2 transport buses + 1 harvester
+      expect(logisticsVehicleRecipes.size).toBe(18); // 5 trucks + 2 fuel tankers + 2 heavy-duty trucks + 1 crane + 1 flatbed truck + 2 fire engines + 1 ambulance + 2 transport buses + 1 harvester + 1 rocket artillery truck
     });
   });
 
@@ -1322,6 +1446,102 @@ describe("Logistics Vehicles - Harvesters", () => {
       const recipes = RecipiesByStuff.get(Vehicles.BMSScrapHauler)!;
       const recipeTree: RecipeTree = {
         stuff: Vehicles.BMSScrapHauler,
+        selectedRecipe: recipes[0],
+        recipes: recipes,
+        required: [],
+      };
+
+      // Should not throw an error
+      expect(() => {
+        const result = calculateComponents(recipeTree, 1);
+        expect(result.initial.length).toBeGreaterThan(0);
+      }).not.toThrow();
+    });
+  });
+});
+
+describe("Logistics Vehicles - Rocket Artillery Trucks", () => {
+  describe("Recipe availability", () => {
+    test("R-17 Retiarius Skirmisher has recipes defined", () => {
+      expect(RecipiesByStuff.has(Vehicles.R17RetiariusSkirmisher)).toBe(true);
+      const recipes = RecipiesByStuff.get(Vehicles.R17RetiariusSkirmisher);
+      expect(recipes).toBeDefined();
+      expect(recipes!.length).toBeGreaterThan(0);
+    });
+
+    test("R-17 Retiarius Skirmisher recipes have valid requirements", () => {
+      const recipes = RecipiesByStuff.get(Vehicles.R17RetiariusSkirmisher)!;
+      recipes.forEach((recipe) => {
+        expect(recipe.required.length).toBeGreaterThan(0);
+        expect(recipe.required[0].count).toBeGreaterThan(0);
+        expect(recipe.required[0].stuff).toBeDefined();
+      });
+    });
+
+    test("R-17 Retiarius Skirmisher is in the logistics vehicle recipes", () => {
+      expect(logisticsVehicleRecipes.has(Vehicles.R17RetiariusSkirmisher)).toBe(true);
+    });
+  });
+
+  describe('R-17 "Retiarius" Skirmisher (Colonial Rocket Artillery Truck)', () => {
+    let retiariusRecipes: IRecipe[];
+    let retiariusRecipeTree: RecipeTree;
+
+    beforeEach(() => {
+      retiariusRecipes = RecipiesByStuff.get(Vehicles.R17RetiariusSkirmisher)!;
+      retiariusRecipeTree = {
+        stuff: Vehicles.R17RetiariusSkirmisher,
+        selectedRecipe: retiariusRecipes[0],
+        recipes: retiariusRecipes,
+        required: [],
+      };
+    });
+
+    test("has correct assembly station recipe requirements", () => {
+      const assemblyRecipe = retiariusRecipes[0];
+      expect(assemblyRecipe.required).toEqual([
+        { stuff: Materials.ProcessedConstructionMaterials, count: 70 },
+        { stuff: Materials.AssemblyMaterialsI, count: 10 },
+        { stuff: Materials.AssemblyMaterialsIII, count: 8 },
+        { stuff: Vehicles.R1Hauler, count: 1 },
+      ]);
+      expect(assemblyRecipe.produced).toEqual([
+        { stuff: Vehicles.R17RetiariusSkirmisher, count: 1 },
+      ]);
+    });
+
+    test("has single recipe (Small Assembly Station Battery Line)", () => {
+      expect(retiariusRecipes.length).toBe(1);
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const result = calculateComponents(retiariusRecipeTree, 1);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.ProcessedConstructionMaterials, count: 70 },
+        { stuff: Materials.AssemblyMaterialsI, count: 10 },
+        { stuff: Materials.AssemblyMaterialsIII, count: 8 },
+        { stuff: Vehicles.R1Hauler, count: 1 },
+      ]);
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const result = calculateComponents(retiariusRecipeTree, 3);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.ProcessedConstructionMaterials, count: 210 },
+        { stuff: Materials.AssemblyMaterialsI, count: 30 },
+        { stuff: Materials.AssemblyMaterialsIII, count: 24 },
+        { stuff: Vehicles.R1Hauler, count: 3 },
+      ]);
+    });
+  });
+
+  describe("Recipe calculation integration", () => {
+    test("R-17 Retiarius Skirmisher can be calculated without errors", () => {
+      const recipes = RecipiesByStuff.get(Vehicles.R17RetiariusSkirmisher)!;
+      const recipeTree: RecipeTree = {
+        stuff: Vehicles.R17RetiariusSkirmisher,
         selectedRecipe: recipes[0],
         recipes: recipes,
         required: [],

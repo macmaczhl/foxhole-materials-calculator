@@ -27,6 +27,30 @@ const r1HaulerRecipes: IRecipe[] = [
   ),
 ];
 
+// R-5 "Atlas" Hauler (Colonial Truck) recipes
+const r5AtlasHaulerRecipes: IRecipe[] = [
+  // Garage production: 120 x Basic Materials → 1 x R-5 "Atlas" Hauler
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 120 }],
+    [{ stuff: Vehicles.R5AtlasHauler, count: 1 }]
+  ),
+  // Mass Production Factory: 864 x Basic Materials → 3 crates of 3 x R-5 "Atlas" Hauler (9 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 864 }],
+    [{ stuff: Vehicles.R5AtlasHauler, count: 9 }]
+  ),
+  // Mass Production Factory: 1080 x Basic Materials → 4 crates of 3 x R-5 "Atlas" Hauler (12 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 1080 }],
+    [{ stuff: Vehicles.R5AtlasHauler, count: 12 }]
+  ),
+  // Mass Production Factory: 1260 x Basic Materials → 5 crates of 3 x R-5 "Atlas" Hauler (15 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 1260 }],
+    [{ stuff: Vehicles.R5AtlasHauler, count: 15 }]
+  ),
+];
+
 // Dunne Transport (Warden Truck) recipes
 const dunneTransportRecipes: IRecipe[] = [
   // Garage production: 100 x Basic Materials → 1 x Dunne Transport
@@ -60,6 +84,18 @@ const dunneLeatherback2aRecipes: IRecipe[] = [
       { stuff: Vehicles.DunneTransport, count: 1 },
     ],
     [{ stuff: Vehicles.DunneLeatherback2a, count: 1 }]
+  ),
+];
+
+// R-5b "Sisyphus" Hauler (Colonial Truck variant) recipes
+const r5bSisyphusHaulerRecipes: IRecipe[] = [
+  // Small Assembly Station production: 10 x Construction Materials + 1 x R-1 Hauler → 1 x R-5b "Sisyphus" Hauler
+  createRecipe(
+    [
+      { stuff: Materials.ConstructionMaterials, count: 10 },
+      { stuff: Vehicles.R1Hauler, count: 1 },
+    ],
+    [{ stuff: Vehicles.R5bSisyphusHauler, count: 1 }]
   ),
 ];
 
@@ -298,11 +334,29 @@ const bmsScrapHaulerRecipes: IRecipe[] = [
   ),
 ];
 
+// ===== ROCKET ARTILLERY TRUCKS =====
+
+// R-17 "Retiarius" Skirmisher (Colonial Rocket Artillery Truck) recipes
+const r17RetiariusSkirmisherRecipes: IRecipe[] = [
+  // Small Assembly Station (Battery Line) production: 70 x Processed Construction Materials + 10 x Assembly Materials I + 8 x Assembly Materials III + 1 x R-1 Hauler → 1 x R-17 "Retiarius" Skirmisher
+  createRecipe(
+    [
+      { stuff: Materials.ProcessedConstructionMaterials, count: 70 },
+      { stuff: Materials.AssemblyMaterialsI, count: 10 },
+      { stuff: Materials.AssemblyMaterialsIII, count: 8 },
+      { stuff: Vehicles.R1Hauler, count: 1 },
+    ],
+    [{ stuff: Vehicles.R17RetiariusSkirmisher, count: 1 }]
+  ),
+];
+
 export const logisticsVehicleRecipes = new Map<string, IRecipe[]>([
   // Trucks
   [Vehicles.R1Hauler, r1HaulerRecipes],
+  [Vehicles.R5AtlasHauler, r5AtlasHaulerRecipes],
   [Vehicles.DunneTransport, dunneTransportRecipes],
   [Vehicles.DunneLeatherback2a, dunneLeatherback2aRecipes],
+  [Vehicles.R5bSisyphusHauler, r5bSisyphusHaulerRecipes],
   // Fuel Tankers
   [Vehicles.DunneFuelrunner2d, dunneFuelrunner2dRecipes],
   [Vehicles.RR3StolonTanker, rr3StolonTankerRecipes],
@@ -323,5 +377,7 @@ export const logisticsVehicleRecipes = new Map<string, IRecipe[]>([
   [Vehicles.R15Chariot, r15ChariotRecipes],
   // Harvesters
   [Vehicles.BMSScrapHauler, bmsScrapHaulerRecipes],
+  // Rocket Artillery Trucks
+  [Vehicles.R17RetiariusSkirmisher, r17RetiariusSkirmisherRecipes],
 ]);
 
