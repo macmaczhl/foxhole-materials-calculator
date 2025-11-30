@@ -56,6 +56,9 @@ jobs:
         with:
           node-version: 24.x
 
+      - name: Restore executable permissions
+        run: chmod -R +x node_modules/.bin
+
       - name: Run linter
         run: npm run lint
 
@@ -77,6 +80,9 @@ jobs:
         with:
           node-version: 24.x
 
+      - name: Restore executable permissions
+        run: chmod -R +x node_modules/.bin
+
       - name: Run tests with coverage
         run: npm run test:coverage
 
@@ -94,6 +100,9 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: 24.x
+
+      - name: Restore executable permissions
+        run: chmod -R +x node_modules/.bin
 
       - name: Cache Playwright browsers
         uses: actions/cache@v4
