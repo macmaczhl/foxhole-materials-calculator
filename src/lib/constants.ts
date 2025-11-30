@@ -163,6 +163,7 @@ export const ICONS_MAP = new Map<string, string>([
   [Vehicles.UV24Icarus, "ScoutVehicleOffensiveVehicleIcon"],
   [Vehicles.UV5cOdyssey, "ScoutVehicleUtilityCVehicleIcon"],
   [Vehicles.Drummond100a, "ScoutVehicleWarVehicleIcon"],
+  [Vehicles.DrummondLoscann55c, "ScoutVehicleAmphibiousWarVehicleIcon"],
   // Motorcycles
   [Vehicles.O3MMCaster, "MotorcycleVehicleIcon"],
   [Vehicles.O0MSStinger, "MotorcycleOffensiveVehicleIcon"],

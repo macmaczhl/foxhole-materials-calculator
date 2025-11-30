@@ -246,4 +246,57 @@ describe("Light Utility Vehicle Recipes", () => {
       expect(mpfRecipe?.produced[0].count).toBe(15);
     });
   });
+
+  describe("Drummond Loscann 55c", () => {
+    const drummondLoscann55cRecipes = RecipiesByStuff.get(
+      Vehicles.DrummondLoscann55c
+    );
+
+    it("should have recipes defined", () => {
+      expect(drummondLoscann55cRecipes).toBeDefined();
+      expect(drummondLoscann55cRecipes).toHaveLength(1);
+    });
+
+    it("should have Small Assembly Station recipe (3 Construction Materials + 5 Assembly Materials II + 1 Drummond 100a → 1 vehicle)", () => {
+      const assemblyRecipe = drummondLoscann55cRecipes?.find(
+        (r) =>
+          r.required.length === 3 &&
+          r.required.some(
+            (req) =>
+              req.stuff === Materials.ConstructionMaterials && req.count === 3
+          ) &&
+          r.required.some(
+            (req) =>
+              req.stuff === Materials.AssemblyMaterialsII && req.count === 5
+          ) &&
+          r.required.some(
+            (req) => req.stuff === Vehicles.Drummond100a && req.count === 1
+          )
+      );
+
+      expect(assemblyRecipe).toBeDefined();
+      expect(assemblyRecipe?.required).toHaveLength(3);
+
+      const constructionMaterialsReq = assemblyRecipe?.required.find(
+        (r) => r.stuff === Materials.ConstructionMaterials
+      );
+      expect(constructionMaterialsReq?.count).toBe(3);
+
+      const assemblyMaterialsReq = assemblyRecipe?.required.find(
+        (r) => r.stuff === Materials.AssemblyMaterialsII
+      );
+      expect(assemblyMaterialsReq?.count).toBe(5);
+
+      const drummond100aReq = assemblyRecipe?.required.find(
+        (r) => r.stuff === Vehicles.Drummond100a
+      );
+      expect(drummond100aReq?.count).toBe(1);
+
+      expect(assemblyRecipe?.produced).toHaveLength(1);
+      expect(assemblyRecipe?.produced[0].stuff).toBe(
+        Vehicles.DrummondLoscann55c
+      );
+      expect(assemblyRecipe?.produced[0].count).toBe(1);
+    });
+  });
 });

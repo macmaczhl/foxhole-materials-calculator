@@ -76,9 +76,23 @@ const drummond100aRecipes: IRecipe[] = [
   ),
 ];
 
+// Drummond Loscann 55c (Warden Amphibious Light Utility Vehicle) recipes
+const drummondLoscann55cRecipes: IRecipe[] = [
+  // Small Assembly Station (Motor Pool): 3 x Construction Materials + 5 x Assembly Materials II + Drummond 100a → 1 x Drummond Loscann 55c
+  createRecipe(
+    [
+      { stuff: Materials.ConstructionMaterials, count: 3 },
+      { stuff: Materials.AssemblyMaterialsII, count: 5 },
+      { stuff: Vehicles.Drummond100a, count: 1 },
+    ],
+    [{ stuff: Vehicles.DrummondLoscann55c, count: 1 }]
+  ),
+];
+
 export const lightUtilityVehicleRecipes = new Map<string, IRecipe[]>([
   [Vehicles.UV05aArgonaut, uv05aArgonautRecipes],
   [Vehicles.UV24Icarus, uv24IcarusRecipes],
   [Vehicles.UV5cOdyssey, uv5cOdysseyRecipes],
   [Vehicles.Drummond100a, drummond100aRecipes],
+  [Vehicles.DrummondLoscann55c, drummondLoscann55cRecipes],
 ]);
