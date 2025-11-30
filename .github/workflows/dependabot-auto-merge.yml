@@ -27,8 +27,9 @@ jobs:
             const pr = await github.rest.pulls.get({ owner, repo, pull_number: prNumber });
 
             // Security check: verify PR comes from same repository (not a fork)
-            if (pr.data.head.repo.full_name !== pr.data.base.repo.full_name) {
-              core.info('PR is from a fork; skipping auto-merge for security');
+            // Also handles case where head repo has been deleted (pr.data.head.repo is null)
+            if (!pr.data.head.repo || pr.data.head.repo.full_name !== pr.data.base.repo.full_name) {
+              core.info('PR is from a fork or head repo deleted; skipping auto-merge for security');
               return;
             }
 
