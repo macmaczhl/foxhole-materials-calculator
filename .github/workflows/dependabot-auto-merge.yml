@@ -41,11 +41,11 @@ jobs:
             // Check for major version update in PR title
             // Dependabot titles follow pattern: "Bump <package> from <old_version> to <new_version>"
             const title = pr.data.title;
-            const versionMatch = title.match(/from\s+(\d+)\.\d+\.\d+.*\s+to\s+(\d+)\.\d+\.\d+/i);
+            const versionMatch = title.match(/from\s+(\d+)(?:\.\d+)*(?:-[\w.]+)?(?:\+[\w.]+)?\s+to\s+(\d+)(?:\.\d+)*(?:-[\w.]+)?(?:\+[\w.]+)?/i);
             if (versionMatch) {
               const oldMajor = parseInt(versionMatch[1], 10);
               const newMajor = parseInt(versionMatch[2], 10);
-              if (newMajor > oldMajor) {
+              if (!isNaN(oldMajor) && !isNaN(newMajor) && newMajor > oldMajor) {
                 await github.rest.issues.createComment({ 
                   owner, 
                   repo, 
