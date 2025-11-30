@@ -1,4 +1,6 @@
 /* StuffIcon component styles */
+@reference "tailwindcss";
+
 .iconTile {
   @apply min-w-16 rounded-md border relative;
   background-color: var(--panel-300);
