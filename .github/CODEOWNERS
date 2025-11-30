@@ -1,0 +1,16 @@
+# Require @macmaczhl for any workflow/config changes
+# Replace with a team like @org/maintainers if desired
+
+# Workflow files
+# Critical: dependabot-auto-merge.yml is a sensitive workflow using `pull_request_target`.
+# It is covered by the pattern below, but we explicitly list it for clarity and security review.
+.github/workflows/dependabot-auto-merge.yml @macmaczhl
+.github/workflows/ @macmaczhl
+
+# Dependabot config
+.github/dependabot.yml @macmaczhl
+
+# CODEOWNERS itself
+.github/CODEOWNERS @macmaczhl
+
+# Anything that affects CI at repo root
