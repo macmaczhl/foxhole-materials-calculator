@@ -149,6 +149,7 @@ export enum Vehicles {
   R5AtlasHauler = 'R-5 "Atlas" Hauler',
   DunneTransport = 'Dunne Transport',
   DunneLeatherback2a = 'Dunne Leatherback 2a',
+  DunneLoadlugger3c = 'Dunne Loadlugger 3c',
   R5bSisyphusHauler = 'R-5b "Sisyphus" Hauler',
   R9SpeartipEscort = 'R-9 "Speartip" Escort',
   // Logistics Vehicles - Fuel Tankers
@@ -313,6 +314,7 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.R5AtlasHauler },
   { name: Vehicles.DunneTransport },
   { name: Vehicles.DunneLeatherback2a },
+  { name: Vehicles.DunneLoadlugger3c },
   { name: Vehicles.R5bSisyphusHauler },
   { name: Vehicles.R9SpeartipEscort },
   // Logistics Vehicles - Fuel Tankers
