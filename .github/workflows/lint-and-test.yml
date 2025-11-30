@@ -4,12 +4,6 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main]
-
-# Prevent duplicate runs: use PR number for PRs, branch ref for pushes
-concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: true
 
 jobs:
   lint:
