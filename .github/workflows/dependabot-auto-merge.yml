@@ -15,7 +15,7 @@ jobs:
     if: github.actor == 'dependabot[bot]' || startsWith(github.actor, 'dependabot-preview')
     steps:
       - name: Check and enable auto-merge for Dependabot PRs
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |

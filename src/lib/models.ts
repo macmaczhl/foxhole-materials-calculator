@@ -149,7 +149,9 @@ export enum Vehicles {
   R5AtlasHauler = 'R-5 "Atlas" Hauler',
   DunneTransport = 'Dunne Transport',
   DunneLeatherback2a = 'Dunne Leatherback 2a',
+  DunneLoadlugger3c = 'Dunne Loadlugger 3c',
   R5bSisyphusHauler = 'R-5b "Sisyphus" Hauler',
+  R9SpeartipEscort = 'R-9 "Speartip" Escort',
   // Logistics Vehicles - Fuel Tankers
   DunneFuelrunner2d = 'Dunne Fuelrunner 2d',
   RR3StolonTanker = 'RR-3 "Stolon" Tanker',
@@ -189,6 +191,7 @@ export enum Vehicles {
   // Warden Light Utility Vehicles
   Drummond100a = 'Drummond 100a',
   DrummondLoscann55c = 'Drummond Loscann 55c',
+  DrummondSpitfire100d = 'Drummond Spitfire 100d',
   // Rocket Artillery Trucks
   R17RetiariusSkirmisher = 'R-17 "Retiarius" Skirmisher',
 }
@@ -311,7 +314,9 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.R5AtlasHauler },
   { name: Vehicles.DunneTransport },
   { name: Vehicles.DunneLeatherback2a },
+  { name: Vehicles.DunneLoadlugger3c },
   { name: Vehicles.R5bSisyphusHauler },
+  { name: Vehicles.R9SpeartipEscort },
   // Logistics Vehicles - Fuel Tankers
   { name: Vehicles.DunneFuelrunner2d },
   { name: Vehicles.RR3StolonTanker },
@@ -346,6 +351,7 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.UV5cOdyssey },
   { name: Vehicles.Drummond100a },
   { name: Vehicles.DrummondLoscann55c },
+  { name: Vehicles.DrummondSpitfire100d },
   // Motorcycles
   { name: Vehicles.O3MMCaster },
   { name: Vehicles.O0MSStinger },

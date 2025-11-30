@@ -9,7 +9,7 @@ import { logisticsVehicleRecipes } from "../lib/recipes/logisticsVehicles";
 describe("Logistics Vehicles - Trucks", () => {
   describe("Recipe availability", () => {
     test("all trucks have recipes defined", () => {
-      const trucks = [Vehicles.R1Hauler, Vehicles.R5AtlasHauler, Vehicles.DunneTransport, Vehicles.DunneLeatherback2a, Vehicles.R5bSisyphusHauler];
+      const trucks = [Vehicles.R1Hauler, Vehicles.R5AtlasHauler, Vehicles.DunneTransport, Vehicles.DunneLeatherback2a, Vehicles.DunneLoadlugger3c, Vehicles.R5bSisyphusHauler, Vehicles.R9SpeartipEscort];
 
       trucks.forEach((vehicle) => {
         expect(RecipiesByStuff.has(vehicle)).toBe(true);
@@ -20,7 +20,7 @@ describe("Logistics Vehicles - Trucks", () => {
     });
 
     test("all truck recipes have valid requirements", () => {
-      const trucks = [Vehicles.R1Hauler, Vehicles.R5AtlasHauler, Vehicles.DunneTransport, Vehicles.DunneLeatherback2a, Vehicles.R5bSisyphusHauler];
+      const trucks = [Vehicles.R1Hauler, Vehicles.R5AtlasHauler, Vehicles.DunneTransport, Vehicles.DunneLeatherback2a, Vehicles.DunneLoadlugger3c, Vehicles.R5bSisyphusHauler, Vehicles.R9SpeartipEscort];
 
       trucks.forEach((vehicle) => {
         const recipes = RecipiesByStuff.get(vehicle)!;
@@ -37,7 +37,9 @@ describe("Logistics Vehicles - Trucks", () => {
       expect(logisticsVehicleRecipes.has(Vehicles.R5AtlasHauler)).toBe(true);
       expect(logisticsVehicleRecipes.has(Vehicles.DunneTransport)).toBe(true);
       expect(logisticsVehicleRecipes.has(Vehicles.DunneLeatherback2a)).toBe(true);
+      expect(logisticsVehicleRecipes.has(Vehicles.DunneLoadlugger3c)).toBe(true);
       expect(logisticsVehicleRecipes.has(Vehicles.R5bSisyphusHauler)).toBe(true);
+      expect(logisticsVehicleRecipes.has(Vehicles.R9SpeartipEscort)).toBe(true);
     });
   });
 
@@ -178,6 +180,80 @@ describe("Logistics Vehicles - Trucks", () => {
       expect(result.initial).toEqual([
         { stuff: Materials.BasicMaterials, count: 360 },
       ]);
+    });
+  });
+
+  describe("Dunne Loadlugger 3c (Warden resource hauler truck)", () => {
+    let loadluggerRecipes: IRecipe[];
+    let loadluggerRecipeTree: RecipeTree;
+
+    beforeEach(() => {
+      loadluggerRecipes = RecipiesByStuff.get(Vehicles.DunneLoadlugger3c)!;
+      loadluggerRecipeTree = {
+        stuff: Vehicles.DunneLoadlugger3c,
+        selectedRecipe: loadluggerRecipes[0],
+        recipes: loadluggerRecipes,
+        required: [],
+      };
+    });
+
+    test("has correct garage recipe requirements", () => {
+      const garageRecipe = loadluggerRecipes[0];
+      expect(garageRecipe.required).toEqual([
+        { stuff: Materials.BasicMaterials, count: 120 },
+      ]);
+      expect(garageRecipe.produced).toEqual([
+        { stuff: Vehicles.DunneLoadlugger3c, count: 1 },
+      ]);
+    });
+
+    test("has mass production recipes", () => {
+      expect(loadluggerRecipes.length).toBe(4);
+
+      // Check basic recipe (120 → 1)
+      const basicRecipe = loadluggerRecipes.find((r) => r.produced[0].count === 1);
+      expect(basicRecipe).toBeDefined();
+      expect(basicRecipe!.required[0].stuff).toBe(Materials.BasicMaterials);
+      expect(basicRecipe!.required[0].count).toBe(120);
+
+      // Check mass production recipes exist
+      const massProduction = loadluggerRecipes.filter(
+        (r) => r.produced[0].count > 1
+      );
+      expect(massProduction.length).toBe(3);
+
+      // Verify mass production recipe quantities
+      const recipe9 = loadluggerRecipes.find((r) => r.produced[0].count === 9);
+      expect(recipe9).toBeDefined();
+      expect(recipe9!.required[0].count).toBe(864);
+
+      const recipe12 = loadluggerRecipes.find((r) => r.produced[0].count === 12);
+      expect(recipe12).toBeDefined();
+      expect(recipe12!.required[0].count).toBe(1080);
+
+      const recipe15 = loadluggerRecipes.find((r) => r.produced[0].count === 15);
+      expect(recipe15).toBeDefined();
+      expect(recipe15!.required[0].count).toBe(1260);
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const result = calculateComponents(loadluggerRecipeTree, 1);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.BasicMaterials, count: 120 },
+      ]);
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const result = calculateComponents(loadluggerRecipeTree, 3);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.BasicMaterials, count: 360 },
+      ]);
+    });
+
+    test("is in the logistics vehicle recipes", () => {
+      expect(logisticsVehicleRecipes.has(Vehicles.DunneLoadlugger3c)).toBe(true);
     });
   });
 
@@ -363,6 +439,58 @@ describe("Logistics Vehicles - Trucks", () => {
     });
   });
 
+  describe('R-9 "Speartip" Escort (Colonial armed Truck)', () => {
+    let speartipRecipes: IRecipe[];
+    let speartipRecipeTree: RecipeTree;
+
+    beforeEach(() => {
+      speartipRecipes = RecipiesByStuff.get(Vehicles.R9SpeartipEscort)!;
+      speartipRecipeTree = {
+        stuff: Vehicles.R9SpeartipEscort,
+        selectedRecipe: speartipRecipes[0],
+        recipes: speartipRecipes,
+        required: [],
+      };
+    });
+
+    test("has correct assembly station recipe requirements", () => {
+      const assemblyRecipe = speartipRecipes[0];
+      expect(assemblyRecipe.required).toEqual([
+        { stuff: Materials.ConstructionMaterials, count: 10 },
+        { stuff: Vehicles.R1Hauler, count: 1 },
+      ]);
+      expect(assemblyRecipe.produced).toEqual([
+        { stuff: Vehicles.R9SpeartipEscort, count: 1 },
+      ]);
+    });
+
+    test("has exactly one recipe (Small Assembly Station)", () => {
+      expect(speartipRecipes.length).toBe(1);
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const result = calculateComponents(speartipRecipeTree, 1);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.ConstructionMaterials, count: 10 },
+        { stuff: Vehicles.R1Hauler, count: 1 },
+      ]);
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const result = calculateComponents(speartipRecipeTree, 3);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.ConstructionMaterials, count: 30 },
+        { stuff: Vehicles.R1Hauler, count: 3 },
+      ]);
+    });
+
+    test("is in the logistics vehicle recipes", () => {
+      expect(logisticsVehicleRecipes.has(Vehicles.R9SpeartipEscort)).toBe(true);
+    });
+  });
+
   describe("Both factions use same production costs for trucks", () => {
     test("Warden and Colonial trucks have identical costs", () => {
       const wardenRecipes = RecipiesByStuff.get(Vehicles.DunneTransport)!;
@@ -383,7 +511,7 @@ describe("Logistics Vehicles - Trucks", () => {
 
   describe("Recipe calculation integration for trucks", () => {
     test("all trucks can be calculated without errors", () => {
-      const trucks = [Vehicles.R1Hauler, Vehicles.R5AtlasHauler, Vehicles.DunneTransport, Vehicles.DunneLeatherback2a, Vehicles.R5bSisyphusHauler];
+      const trucks = [Vehicles.R1Hauler, Vehicles.R5AtlasHauler, Vehicles.DunneTransport, Vehicles.DunneLeatherback2a, Vehicles.DunneLoadlugger3c, Vehicles.R5bSisyphusHauler, Vehicles.R9SpeartipEscort];
 
       trucks.forEach((vehicle) => {
         const recipes = RecipiesByStuff.get(vehicle)!;
@@ -441,7 +569,7 @@ describe("Logistics Vehicles - Fuel Tankers", () => {
         true
       );
       expect(logisticsVehicleRecipes.has(Vehicles.RR3StolonTanker)).toBe(true);
-      expect(logisticsVehicleRecipes.size).toBe(18); // 5 trucks + 2 fuel tankers + 2 heavy-duty trucks + 1 crane + 1 flatbed truck + 2 fire engines + 1 ambulance + 2 transport buses + 1 harvester + 1 rocket artillery truck
+      expect(logisticsVehicleRecipes.size).toBe(20); // 7 trucks + 2 fuel tankers + 2 heavy-duty trucks + 1 crane + 1 flatbed truck + 2 fire engines + 1 ambulance + 2 transport buses + 1 harvester + 1 rocket artillery truck
     });
   });
 

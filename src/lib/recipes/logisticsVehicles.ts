@@ -87,6 +87,30 @@ const dunneLeatherback2aRecipes: IRecipe[] = [
   ),
 ];
 
+// Dunne Loadlugger 3c (Warden resource hauler truck) recipes
+const dunneLoadlugger3cRecipes: IRecipe[] = [
+  // Garage production: 120 x Basic Materials → 1 x Dunne Loadlugger 3c
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 120 }],
+    [{ stuff: Vehicles.DunneLoadlugger3c, count: 1 }]
+  ),
+  // Mass Production Factory: 864 x Basic Materials → 3 crates of 3 x Dunne Loadlugger 3c (9 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 864 }],
+    [{ stuff: Vehicles.DunneLoadlugger3c, count: 9 }]
+  ),
+  // Mass Production Factory: 1080 x Basic Materials → 4 crates of 3 x Dunne Loadlugger 3c (12 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 1080 }],
+    [{ stuff: Vehicles.DunneLoadlugger3c, count: 12 }]
+  ),
+  // Mass Production Factory: 1260 x Basic Materials → 5 crates of 3 x Dunne Loadlugger 3c (15 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 1260 }],
+    [{ stuff: Vehicles.DunneLoadlugger3c, count: 15 }]
+  ),
+];
+
 // R-5b "Sisyphus" Hauler (Colonial Truck variant) recipes
 const r5bSisyphusHaulerRecipes: IRecipe[] = [
   // Small Assembly Station production: 10 x Construction Materials + 1 x R-1 Hauler → 1 x R-5b "Sisyphus" Hauler
@@ -96,6 +120,18 @@ const r5bSisyphusHaulerRecipes: IRecipe[] = [
       { stuff: Vehicles.R1Hauler, count: 1 },
     ],
     [{ stuff: Vehicles.R5bSisyphusHauler, count: 1 }]
+  ),
+];
+
+// R-9 "Speartip" Escort (Colonial armed Truck) recipes
+const r9SpeartipEscortRecipes: IRecipe[] = [
+  // Small Assembly Station production: 10 x Construction Materials + 1 x R-1 Hauler → 1 x R-9 "Speartip" Escort
+  createRecipe(
+    [
+      { stuff: Materials.ConstructionMaterials, count: 10 },
+      { stuff: Vehicles.R1Hauler, count: 1 },
+    ],
+    [{ stuff: Vehicles.R9SpeartipEscort, count: 1 }]
   ),
 ];
 
@@ -356,7 +392,9 @@ export const logisticsVehicleRecipes = new Map<string, IRecipe[]>([
   [Vehicles.R5AtlasHauler, r5AtlasHaulerRecipes],
   [Vehicles.DunneTransport, dunneTransportRecipes],
   [Vehicles.DunneLeatherback2a, dunneLeatherback2aRecipes],
+  [Vehicles.DunneLoadlugger3c, dunneLoadlugger3cRecipes],
   [Vehicles.R5bSisyphusHauler, r5bSisyphusHaulerRecipes],
+  [Vehicles.R9SpeartipEscort, r9SpeartipEscortRecipes],
   // Fuel Tankers
   [Vehicles.DunneFuelrunner2d, dunneFuelrunner2dRecipes],
   [Vehicles.RR3StolonTanker, rr3StolonTankerRecipes],
