@@ -70,7 +70,6 @@ jobs:
               '^\\.circleci\\/',
               '^Dockerfile$',
               '^\\.github\\/actions\\/',
-              '^package\\.json$',
               '^jest\\.config\\.(js|ts|mjs|cjs)$',
               '^eslint\\.config\\.(js|ts|mjs|cjs)$'
             ];
@@ -96,4 +95,5 @@ jobs:
             } catch (err) {
               core.warning('Failed to enable auto-merge: ' + err.message);
               await github.rest.issues.createComment({ owner, repo, issue_number: prNumber, body: 'Auto-merge enable failed; you can merge manually when checks pass.' });
+
             }
