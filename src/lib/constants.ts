@@ -176,4 +176,5 @@ export const ICONS_MAP = new Map<string, string>([
   [Vehicles.R17RetiariusSkirmisher, "TruckMultiCIcon"],
   // Naval Vehicles
   [Vehicles.BMSAquatipper, "BargeVehicleIcon"],
+  [Vehicles.BMSIronship, "Freighter02ItemIcon"],
 ]);
