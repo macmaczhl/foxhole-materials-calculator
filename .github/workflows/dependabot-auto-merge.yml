@@ -84,7 +84,7 @@ jobs:
             try {
               await github.graphql(
                 `mutation ($pullRequestId: ID!) {
-                  enablePullRequestAutoMerge(input: { pullRequestId: $pullRequestId, mergeMethod: MERGE }) {
+                  enablePullRequestAutoMerge(input: { pullRequestId: $pullRequestId, mergeMethod:  SQUASH }) {
                     pullRequest { number }
                   }
                 }`,
@@ -97,3 +97,4 @@ jobs:
               await github.rest.issues.createComment({ owner, repo, issue_number: prNumber, body: 'Auto-merge enable failed; you can merge manually when checks pass.' });
 
             }
+
