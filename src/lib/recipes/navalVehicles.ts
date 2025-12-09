@@ -27,6 +27,31 @@ const bmsAquatipperRecipes: IRecipe[] = [
   ),
 ];
 
+// BMS - Ironship (Freighter) recipes
+const bmsIronshipRecipes: IRecipe[] = [
+  // Shipyard production: 500 x Basic Materials → 1 x BMS - Ironship
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 500 }],
+    [{ stuff: Vehicles.BMSIronship, count: 1 }]
+  ),
+  // Mass Production Factory: 3600 x Basic Materials → 3 crates of 3 x BMS - Ironship (9 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 3600 }],
+    [{ stuff: Vehicles.BMSIronship, count: 9 }]
+  ),
+  // Mass Production Factory: 4500 x Basic Materials → 4 crates of 3 x BMS - Ironship (12 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 4500 }],
+    [{ stuff: Vehicles.BMSIronship, count: 12 }]
+  ),
+  // Mass Production Factory: 5250 x Basic Materials → 5 crates of 3 x BMS - Ironship (15 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 5250 }],
+    [{ stuff: Vehicles.BMSIronship, count: 15 }]
+  ),
+];
+
 export const navalVehicleRecipes = new Map<string, IRecipe[]>([
   [Vehicles.BMSAquatipper, bmsAquatipperRecipes],
+  [Vehicles.BMSIronship, bmsIronshipRecipes],
 ]);
