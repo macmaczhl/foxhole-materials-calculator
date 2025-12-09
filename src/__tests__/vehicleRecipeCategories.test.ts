@@ -20,6 +20,7 @@ import { constructionVehicleRecipes } from "../lib/recipes/constructionVehicles"
 import { lightUtilityVehicleRecipes } from "../lib/recipes/lightUtilityVehicles";
 import { motorcycleRecipes } from "../lib/recipes/motorcycles";
 import { ambulanceRecipes } from "../lib/recipes/ambulances";
+import { navalVehicleRecipes } from "../lib/recipes/navalVehicles";
 
 describe("Vehicle Recipe Organization", () => {
   describe("Category Files", () => {
@@ -183,7 +184,8 @@ describe("Vehicle Recipe Organization", () => {
         constructionVehicleRecipes.size +
         lightUtilityVehicleRecipes.size +
         motorcycleRecipes.size +
-        ambulanceRecipes.size;
+        ambulanceRecipes.size +
+        navalVehicleRecipes.size;
 
       expect(vehicleRecipes.size).toBe(totalExpectedSize);
     });

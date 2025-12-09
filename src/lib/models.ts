@@ -195,6 +195,8 @@ export enum Vehicles {
   DrummondSpitfire100d = 'Drummond Spitfire 100d',
   // Rocket Artillery Trucks
   R17RetiariusSkirmisher = 'R-17 "Retiarius" Skirmisher',
+  // Naval Vehicles
+  BMSAquatipper = 'BMS - Aquatipper',
 }
 
 export enum RawResources {
@@ -360,6 +362,8 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.KivelaPowerWheel801 },
   // Rocket Artillery Trucks
   { name: Vehicles.R17RetiariusSkirmisher },
+  // Naval Vehicles
+  { name: Vehicles.BMSAquatipper },
 ];
 
 export const stuffList: Stuff[] = availableMaterials;
