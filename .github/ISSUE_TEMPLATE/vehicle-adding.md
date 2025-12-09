@@ -1,7 +1,7 @@
 ---
 name: Vehicle adding
 about: Add new vehicle(s)
-title: ''
+title: 'Add '
 labels: ''
 assignees: ''
 
