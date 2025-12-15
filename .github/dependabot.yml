@@ -11,6 +11,11 @@ updates:
     labels:
       - "dependencies"
       - "automerge"
+    ignore:
+      # Ignore patch version updates (e.g., 1.0.0 -> 1.0.1)
+      # Security updates will still be created regardless of this setting
+      - dependency-name: "*"
+        update-types: ["version-update:semver-patch"]
 
   - package-ecosystem: "github-actions"
     directory: "/"
@@ -22,4 +27,8 @@ updates:
     labels:
       - "dependencies"
       - "automerge"
-# No ignore rules: Dependabot will create PRs for all upgrades it can detect.
+    ignore:
+      # Ignore patch version updates (e.g., v1.0.0 -> v1.0.1)
+      # Security updates will still be created regardless of this setting
+      - dependency-name: "*"
+        update-types: ["version-update:semver-patch"]
