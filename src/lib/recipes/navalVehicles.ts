@@ -51,7 +51,17 @@ const bmsIronshipRecipes: IRecipe[] = [
   ),
 ];
 
+// MacConmara Shorerunner (Landing Ship) recipes
+const macConmaraShorerunnerRecipes: IRecipe[] = [
+  // Base Ship production: 10 x Basic Materials → 1 x MacConmara Shorerunner
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 10 }],
+    [{ stuff: Vehicles.MacConmaraShorerunner, count: 1 }]
+  ),
+];
+
 export const navalVehicleRecipes = new Map<string, IRecipe[]>([
   [Vehicles.BMSAquatipper, bmsAquatipperRecipes],
   [Vehicles.BMSIronship, bmsIronshipRecipes],
+  [Vehicles.MacConmaraShorerunner, macConmaraShorerunnerRecipes],
 ]);
