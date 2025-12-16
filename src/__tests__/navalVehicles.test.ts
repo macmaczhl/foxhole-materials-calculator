@@ -12,6 +12,7 @@ describe("Naval Vehicles", () => {
       const navalVehicles = [
         Vehicles.BMSAquatipper,
         Vehicles.BMSIronship,
+        Vehicles.InterceptorPA12,
         Vehicles.MacConmaraShorerunner,
       ];
 
@@ -27,6 +28,7 @@ describe("Naval Vehicles", () => {
       const navalVehicles = [
         Vehicles.BMSAquatipper,
         Vehicles.BMSIronship,
+        Vehicles.InterceptorPA12,
         Vehicles.MacConmaraShorerunner,
       ];
 
@@ -43,10 +45,11 @@ describe("Naval Vehicles", () => {
     test("naval vehicles are in the naval vehicle recipes map", () => {
       expect(navalVehicleRecipes.has(Vehicles.BMSAquatipper)).toBe(true);
       expect(navalVehicleRecipes.has(Vehicles.BMSIronship)).toBe(true);
+      expect(navalVehicleRecipes.has(Vehicles.InterceptorPA12)).toBe(true);
       expect(navalVehicleRecipes.has(Vehicles.MacConmaraShorerunner)).toBe(
         true
       );
-      expect(navalVehicleRecipes.size).toBe(3);
+      expect(navalVehicleRecipes.size).toBe(4);
     });
   });
 
@@ -133,6 +136,7 @@ describe("Naval Vehicles", () => {
       const navalVehicles = [
         Vehicles.BMSAquatipper,
         Vehicles.BMSIronship,
+        Vehicles.InterceptorPA12,
         Vehicles.MacConmaraShorerunner,
       ];
 
@@ -228,6 +232,52 @@ describe("Naval Vehicles", () => {
 
       expect(result.initial).toEqual([
         { stuff: Materials.BasicMaterials, count: 1500 },
+      ]);
+    });
+  });
+
+  describe("Interceptor PA-12 (Landing Ship)", () => {
+    let interceptorPA12Recipes: IRecipe[];
+    let interceptorPA12RecipeTree: RecipeTree;
+
+    beforeEach(() => {
+      interceptorPA12Recipes = RecipiesByStuff.get(Vehicles.InterceptorPA12)!;
+      interceptorPA12RecipeTree = {
+        stuff: Vehicles.InterceptorPA12,
+        selectedRecipe: interceptorPA12Recipes[0],
+        recipes: interceptorPA12Recipes,
+        required: [],
+      };
+    });
+
+    test("has correct BMS - Longhook recipe requirements", () => {
+      const longhookRecipe = interceptorPA12Recipes[0];
+      expect(longhookRecipe.required).toEqual([
+        { stuff: Materials.BasicMaterials, count: 10 },
+      ]);
+      expect(longhookRecipe.produced).toEqual([
+        { stuff: Vehicles.InterceptorPA12, count: 1 },
+      ]);
+    });
+
+    test("has only base ship recipe (no mass production)", () => {
+      // Landing Ships are only produced at BMS - Longhook, not in Mass Production Factory
+      expect(interceptorPA12Recipes.length).toBe(1);
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const result = calculateComponents(interceptorPA12RecipeTree, 1);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.BasicMaterials, count: 10 },
+      ]);
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const result = calculateComponents(interceptorPA12RecipeTree, 5);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.BasicMaterials, count: 50 },
       ]);
     });
   });
