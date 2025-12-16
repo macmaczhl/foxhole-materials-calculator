@@ -80,6 +80,12 @@ jobs:
               return;
             }
 
+            // Check if auto-merge is already enabled
+            if (pr.data.auto_merge) {
+              core.info('Auto-merge is already enabled; skipping');
+              return;
+            }
+
             // enable GitHub auto-merge (merge method: MERGE)
             try {
               await github.graphql(
