@@ -51,7 +51,17 @@ const bmsIronshipRecipes: IRecipe[] = [
   ),
 ];
 
+// Interceptor PA-12 (Landing Ship) recipes
+const interceptorPA12Recipes: IRecipe[] = [
+  // BMS - Longhook production: 10 x Basic Materials → 1 x Interceptor PA-12
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 10 }],
+    [{ stuff: Vehicles.InterceptorPA12, count: 1 }]
+  ),
+];
+
 export const navalVehicleRecipes = new Map<string, IRecipe[]>([
   [Vehicles.BMSAquatipper, bmsAquatipperRecipes],
   [Vehicles.BMSIronship, bmsIronshipRecipes],
+  [Vehicles.InterceptorPA12, interceptorPA12Recipes],
 ]);
