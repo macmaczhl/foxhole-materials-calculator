@@ -1,10 +1,161 @@
 /**
- * Tests for Naval Vehicles
+ * Tests for Naval Vehicles and Naval Materials
  */
 import { Materials, RecipeTree, IRecipe, Vehicles } from "../lib/models";
 import { calculateComponents } from "../lib/services/calculateComponents";
 import { RecipiesByStuff } from "../lib/recipes";
 import { navalVehicleRecipes } from "../lib/recipes/navalVehicles";
+
+describe("Naval Materials", () => {
+  describe("Recipe availability", () => {
+    test("naval materials have recipes defined", () => {
+      const navalMaterials = [
+        Materials.NavalHullSegments,
+        Materials.NavalShellPlating,
+      ];
+
+      navalMaterials.forEach((material) => {
+        expect(RecipiesByStuff.has(material)).toBe(true);
+        const recipes = RecipiesByStuff.get(material);
+        expect(recipes).toBeDefined();
+        expect(recipes!.length).toBeGreaterThan(0);
+      });
+    });
+
+    test("naval materials are in the naval vehicle recipes map", () => {
+      expect(navalVehicleRecipes.has(Materials.NavalHullSegments)).toBe(true);
+      expect(navalVehicleRecipes.has(Materials.NavalShellPlating)).toBe(true);
+    });
+
+    test("all naval material recipes have valid requirements", () => {
+      const navalMaterials = [
+        Materials.NavalHullSegments,
+        Materials.NavalShellPlating,
+      ];
+
+      navalMaterials.forEach((material) => {
+        const recipes = RecipiesByStuff.get(material)!;
+        recipes.forEach((recipe) => {
+          expect(recipe.required.length).toBeGreaterThan(0);
+          expect(recipe.required[0].count).toBeGreaterThan(0);
+          expect(recipe.required[0].stuff).toBeDefined();
+        });
+      });
+    });
+  });
+
+  describe("Naval Hull Segments", () => {
+    let navalHullSegmentsRecipes: IRecipe[];
+    let navalHullSegmentsRecipeTree: RecipeTree;
+
+    beforeEach(() => {
+      navalHullSegmentsRecipes = RecipiesByStuff.get(
+        Materials.NavalHullSegments
+      )!;
+      navalHullSegmentsRecipeTree = {
+        stuff: Materials.NavalHullSegments,
+        selectedRecipe: navalHullSegmentsRecipes[0],
+        recipes: navalHullSegmentsRecipes,
+        required: [],
+      };
+    });
+
+    test("has correct recipe requirements", () => {
+      const recipe = navalHullSegmentsRecipes[0];
+      expect(recipe.required).toEqual([
+        { stuff: Materials.ProcessedConstructionMaterials, count: 60 },
+        { stuff: Materials.AssemblyMaterialsI, count: 2 },
+        { stuff: Materials.AssemblyMaterialsII, count: 2 },
+        { stuff: Materials.AssemblyMaterialsIV, count: 10 },
+        { stuff: Materials.RareAlloys, count: 4 },
+        { stuff: Materials.ThermalShielding, count: 4 },
+      ]);
+      expect(recipe.produced).toEqual([
+        { stuff: Materials.NavalHullSegments, count: 1 },
+      ]);
+    });
+
+    test("has only one recipe", () => {
+      expect(navalHullSegmentsRecipes.length).toBe(1);
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const result = calculateComponents(navalHullSegmentsRecipeTree, 1);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.ProcessedConstructionMaterials, count: 60 },
+        { stuff: Materials.AssemblyMaterialsI, count: 2 },
+        { stuff: Materials.AssemblyMaterialsII, count: 2 },
+        { stuff: Materials.AssemblyMaterialsIV, count: 10 },
+        { stuff: Materials.RareAlloys, count: 4 },
+        { stuff: Materials.ThermalShielding, count: 4 },
+      ]);
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const result = calculateComponents(navalHullSegmentsRecipeTree, 5);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.ProcessedConstructionMaterials, count: 300 },
+        { stuff: Materials.AssemblyMaterialsI, count: 10 },
+        { stuff: Materials.AssemblyMaterialsII, count: 10 },
+        { stuff: Materials.AssemblyMaterialsIV, count: 50 },
+        { stuff: Materials.RareAlloys, count: 20 },
+        { stuff: Materials.ThermalShielding, count: 20 },
+      ]);
+    });
+  });
+
+  describe("Naval Shell Plating", () => {
+    let navalShellPlatingRecipes: IRecipe[];
+    let navalShellPlatingRecipeTree: RecipeTree;
+
+    beforeEach(() => {
+      navalShellPlatingRecipes = RecipiesByStuff.get(
+        Materials.NavalShellPlating
+      )!;
+      navalShellPlatingRecipeTree = {
+        stuff: Materials.NavalShellPlating,
+        selectedRecipe: navalShellPlatingRecipes[0],
+        recipes: navalShellPlatingRecipes,
+        required: [],
+      };
+    });
+
+    test("has correct recipe requirements", () => {
+      const recipe = navalShellPlatingRecipes[0];
+      expect(recipe.required).toEqual([
+        { stuff: Materials.ConstructionMaterials, count: 2 },
+        { stuff: Materials.ThermalShielding, count: 1 },
+      ]);
+      expect(recipe.produced).toEqual([
+        { stuff: Materials.NavalShellPlating, count: 1 },
+      ]);
+    });
+
+    test("has only one recipe", () => {
+      expect(navalShellPlatingRecipes.length).toBe(1);
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const result = calculateComponents(navalShellPlatingRecipeTree, 1);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.ConstructionMaterials, count: 2 },
+        { stuff: Materials.ThermalShielding, count: 1 },
+      ]);
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const result = calculateComponents(navalShellPlatingRecipeTree, 10);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.ConstructionMaterials, count: 20 },
+        { stuff: Materials.ThermalShielding, count: 10 },
+      ]);
+    });
+  });
+});
 
 describe("Naval Vehicles", () => {
   describe("Recipe availability", () => {
@@ -49,7 +200,7 @@ describe("Naval Vehicles", () => {
       expect(navalVehicleRecipes.has(Vehicles.MacConmaraShorerunner)).toBe(
         true
       );
-      expect(navalVehicleRecipes.size).toBe(4);
+      expect(navalVehicleRecipes.size).toBe(6); // 4 vehicles + 2 naval materials
     });
   });
 

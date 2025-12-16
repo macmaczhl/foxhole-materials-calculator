@@ -40,6 +40,8 @@ export enum Materials {
   AssemblyMaterialsIII = "Assembly Materials III",
   AssemblyMaterialsIV = "Assembly Materials IV",
   AssemblyMaterialsV = "Assembly Materials V",
+  NavalHullSegments = "Naval Hull Segments",
+  NavalShellPlating = "Naval Shell Plating",
 }
 
 export enum Liquids {
@@ -235,6 +237,8 @@ export const availableMaterials: Stuff[] = [
   { name: Materials.ThermalShielding },
   { name: Materials.UnstableSubstances },
   { name: Materials.FlameAmmo },
+  { name: Materials.NavalHullSegments },
+  { name: Materials.NavalShellPlating },
   { name: Liquids.Petrol },
   { name: Liquids.HeavyOil },
   { name: Liquids.Water },
