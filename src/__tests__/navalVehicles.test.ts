@@ -13,6 +13,7 @@ describe("Naval Vehicles", () => {
         Vehicles.BMSAquatipper,
         Vehicles.BMSIronship,
         Vehicles.InterceptorPA12,
+        Vehicles.MacConmaraShorerunner,
       ];
 
       navalVehicles.forEach((vehicle) => {
@@ -28,6 +29,7 @@ describe("Naval Vehicles", () => {
         Vehicles.BMSAquatipper,
         Vehicles.BMSIronship,
         Vehicles.InterceptorPA12,
+        Vehicles.MacConmaraShorerunner,
       ];
 
       navalVehicles.forEach((vehicle) => {
@@ -44,7 +46,10 @@ describe("Naval Vehicles", () => {
       expect(navalVehicleRecipes.has(Vehicles.BMSAquatipper)).toBe(true);
       expect(navalVehicleRecipes.has(Vehicles.BMSIronship)).toBe(true);
       expect(navalVehicleRecipes.has(Vehicles.InterceptorPA12)).toBe(true);
-      expect(navalVehicleRecipes.size).toBe(3);
+      expect(navalVehicleRecipes.has(Vehicles.MacConmaraShorerunner)).toBe(
+        true
+      );
+      expect(navalVehicleRecipes.size).toBe(4);
     });
   });
 
@@ -132,6 +137,7 @@ describe("Naval Vehicles", () => {
         Vehicles.BMSAquatipper,
         Vehicles.BMSIronship,
         Vehicles.InterceptorPA12,
+        Vehicles.MacConmaraShorerunner,
       ];
 
       navalVehicles.forEach((vehicle) => {
@@ -269,6 +275,53 @@ describe("Naval Vehicles", () => {
 
     test("calculates components correctly for multiple units", () => {
       const result = calculateComponents(interceptorPA12RecipeTree, 5);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.BasicMaterials, count: 50 },
+      ]);
+    });
+  });
+
+  describe("MacConmara Shorerunner (Landing Ship)", () => {
+    let macConmaraShorerunnerRecipes: IRecipe[];
+    let macConmaraShorerunnerRecipeTree: RecipeTree;
+
+    beforeEach(() => {
+      macConmaraShorerunnerRecipes = RecipiesByStuff.get(
+        Vehicles.MacConmaraShorerunner
+      )!;
+      macConmaraShorerunnerRecipeTree = {
+        stuff: Vehicles.MacConmaraShorerunner,
+        selectedRecipe: macConmaraShorerunnerRecipes[0],
+        recipes: macConmaraShorerunnerRecipes,
+        required: [],
+      };
+    });
+
+    test("has correct base ship recipe requirements", () => {
+      const baseShipRecipe = macConmaraShorerunnerRecipes[0];
+      expect(baseShipRecipe.required).toEqual([
+        { stuff: Materials.BasicMaterials, count: 10 },
+      ]);
+      expect(baseShipRecipe.produced).toEqual([
+        { stuff: Vehicles.MacConmaraShorerunner, count: 1 },
+      ]);
+    });
+
+    test("has single recipe (no mass production)", () => {
+      expect(macConmaraShorerunnerRecipes.length).toBe(1);
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const result = calculateComponents(macConmaraShorerunnerRecipeTree, 1);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.BasicMaterials, count: 10 },
+      ]);
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const result = calculateComponents(macConmaraShorerunnerRecipeTree, 5);
 
       expect(result.initial).toEqual([
         { stuff: Materials.BasicMaterials, count: 50 },
