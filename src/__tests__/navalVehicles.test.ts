@@ -14,6 +14,7 @@ describe("Naval Vehicles", () => {
         Vehicles.BMSIronship,
         Vehicles.InterceptorPA12,
         Vehicles.MacConmaraShorerunner,
+        Vehicles.RonanGunship74b1,
       ];
 
       navalVehicles.forEach((vehicle) => {
@@ -30,6 +31,7 @@ describe("Naval Vehicles", () => {
         Vehicles.BMSIronship,
         Vehicles.InterceptorPA12,
         Vehicles.MacConmaraShorerunner,
+        Vehicles.RonanGunship74b1,
       ];
 
       navalVehicles.forEach((vehicle) => {
@@ -49,7 +51,8 @@ describe("Naval Vehicles", () => {
       expect(navalVehicleRecipes.has(Vehicles.MacConmaraShorerunner)).toBe(
         true
       );
-      expect(navalVehicleRecipes.size).toBe(4);
+      expect(navalVehicleRecipes.has(Vehicles.RonanGunship74b1)).toBe(true);
+      expect(navalVehicleRecipes.size).toBe(5);
     });
   });
 
