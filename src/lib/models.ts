@@ -200,6 +200,7 @@ export enum Vehicles {
   BMSIronship = 'BMS - Ironship',
   InterceptorPA12 = 'Interceptor PA-12',
   MacConmaraShorerunner = 'MacConmara Shorerunner',
+  RonanGunship74b1 = '74b-1 Ronan Gunship',
 }
 
 export enum RawResources {
@@ -370,6 +371,7 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.BMSIronship },
   { name: Vehicles.InterceptorPA12 },
   { name: Vehicles.MacConmaraShorerunner },
+  { name: Vehicles.RonanGunship74b1 },
 ];
 
 export const stuffList: Stuff[] = availableMaterials;
