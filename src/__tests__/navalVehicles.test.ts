@@ -15,6 +15,17 @@ describe("Naval Vehicles", () => {
         Vehicles.InterceptorPA12,
         Vehicles.MacConmaraShorerunner,
         Vehicles.RonanGunship74b1,
+        Vehicles.BMSGrouper,
+        Vehicles.TypeCCharon,
+        Vehicles.BMSLonghook,
+        Vehicles.Callahan,
+        Vehicles.Titan,
+        Vehicles.Blacksteele,
+        Vehicles.Conqueror,
+        Vehicles.BMSBowhead,
+        Vehicles.BMSBluefin,
+        Vehicles.Nakki,
+        Vehicles.ACbTrident,
       ];
 
       navalVehicles.forEach((vehicle) => {
@@ -32,6 +43,17 @@ describe("Naval Vehicles", () => {
         Vehicles.InterceptorPA12,
         Vehicles.MacConmaraShorerunner,
         Vehicles.RonanGunship74b1,
+        Vehicles.BMSGrouper,
+        Vehicles.TypeCCharon,
+        Vehicles.BMSLonghook,
+        Vehicles.Callahan,
+        Vehicles.Titan,
+        Vehicles.Blacksteele,
+        Vehicles.Conqueror,
+        Vehicles.BMSBowhead,
+        Vehicles.BMSBluefin,
+        Vehicles.Nakki,
+        Vehicles.ACbTrident,
       ];
 
       navalVehicles.forEach((vehicle) => {
@@ -52,7 +74,18 @@ describe("Naval Vehicles", () => {
         true
       );
       expect(navalVehicleRecipes.has(Vehicles.RonanGunship74b1)).toBe(true);
-      expect(navalVehicleRecipes.size).toBe(5);
+      expect(navalVehicleRecipes.has(Vehicles.BMSGrouper)).toBe(true);
+      expect(navalVehicleRecipes.has(Vehicles.TypeCCharon)).toBe(true);
+      expect(navalVehicleRecipes.has(Vehicles.BMSLonghook)).toBe(true);
+      expect(navalVehicleRecipes.has(Vehicles.Callahan)).toBe(true);
+      expect(navalVehicleRecipes.has(Vehicles.Titan)).toBe(true);
+      expect(navalVehicleRecipes.has(Vehicles.Blacksteele)).toBe(true);
+      expect(navalVehicleRecipes.has(Vehicles.Conqueror)).toBe(true);
+      expect(navalVehicleRecipes.has(Vehicles.BMSBowhead)).toBe(true);
+      expect(navalVehicleRecipes.has(Vehicles.BMSBluefin)).toBe(true);
+      expect(navalVehicleRecipes.has(Vehicles.Nakki)).toBe(true);
+      expect(navalVehicleRecipes.has(Vehicles.ACbTrident)).toBe(true);
+      expect(navalVehicleRecipes.size).toBe(16);
     });
   });
 
@@ -141,6 +174,17 @@ describe("Naval Vehicles", () => {
         Vehicles.BMSIronship,
         Vehicles.InterceptorPA12,
         Vehicles.MacConmaraShorerunner,
+        Vehicles.BMSGrouper,
+        Vehicles.TypeCCharon,
+        Vehicles.BMSLonghook,
+        Vehicles.Callahan,
+        Vehicles.Titan,
+        Vehicles.Blacksteele,
+        Vehicles.Conqueror,
+        Vehicles.BMSBowhead,
+        Vehicles.BMSBluefin,
+        Vehicles.Nakki,
+        Vehicles.ACbTrident,
       ];
 
       navalVehicles.forEach((vehicle) => {

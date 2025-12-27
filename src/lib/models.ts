@@ -40,6 +40,10 @@ export enum Materials {
   AssemblyMaterialsIII = "Assembly Materials III",
   AssemblyMaterialsIV = "Assembly Materials IV",
   AssemblyMaterialsV = "Assembly Materials V",
+  // Ship Parts
+  NavalHullSegments = "Naval Hull Segments",
+  NavalShellPlating = "Naval Shell Plating",
+  NavalTurbineComponents = "Naval Turbine Components",
 }
 
 export enum Liquids {
@@ -201,6 +205,17 @@ export enum Vehicles {
   InterceptorPA12 = 'Interceptor PA-12',
   MacConmaraShorerunner = 'MacConmara Shorerunner',
   RonanGunship74b1 = '74b-1 Ronan Gunship',
+  BMSGrouper = 'BMS - Grouper',
+  TypeCCharon = 'Type C - "Charon"',
+  BMSLonghook = 'BMS - Longhook',
+  Callahan = 'Callahan',
+  Titan = 'Titan',
+  Blacksteele = 'Blacksteele',
+  Conqueror = 'Conqueror',
+  BMSBowhead = 'BMS - Bowhead',
+  BMSBluefin = 'BMS - Bluefin',
+  Nakki = 'Nakki',
+  ACbTrident = 'AC-b "Trident"',
 }
 
 export enum RawResources {
@@ -236,6 +251,9 @@ export const availableMaterials: Stuff[] = [
   { name: Materials.ThermalShielding },
   { name: Materials.UnstableSubstances },
   { name: Materials.FlameAmmo },
+  { name: Materials.NavalHullSegments },
+  { name: Materials.NavalShellPlating },
+  { name: Materials.NavalTurbineComponents },
   { name: Liquids.Petrol },
   { name: Liquids.HeavyOil },
   { name: Liquids.Water },
@@ -372,6 +390,17 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.InterceptorPA12 },
   { name: Vehicles.MacConmaraShorerunner },
   { name: Vehicles.RonanGunship74b1 },
+  { name: Vehicles.BMSGrouper },
+  { name: Vehicles.TypeCCharon },
+  { name: Vehicles.BMSLonghook },
+  { name: Vehicles.Callahan },
+  { name: Vehicles.Titan },
+  { name: Vehicles.Blacksteele },
+  { name: Vehicles.Conqueror },
+  { name: Vehicles.BMSBowhead },
+  { name: Vehicles.BMSBluefin },
+  { name: Vehicles.Nakki },
+  { name: Vehicles.ACbTrident },
 ];
 
 export const stuffList: Stuff[] = availableMaterials;
