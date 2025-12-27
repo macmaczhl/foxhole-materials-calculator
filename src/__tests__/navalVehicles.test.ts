@@ -85,7 +85,7 @@ describe("Naval Vehicles", () => {
       expect(navalVehicleRecipes.has(Vehicles.BMSBluefin)).toBe(true);
       expect(navalVehicleRecipes.has(Vehicles.Nakki)).toBe(true);
       expect(navalVehicleRecipes.has(Vehicles.ACbTrident)).toBe(true);
-      expect(navalVehicleRecipes.size).toBe(16);
+      expect(navalVehicleRecipes.size).toBe(18); // 16 vehicles + 2 naval material recipes
     });
   });
 

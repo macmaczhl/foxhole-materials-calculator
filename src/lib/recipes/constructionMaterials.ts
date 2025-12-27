@@ -215,14 +215,7 @@ const flameAmmoRecipes: IRecipe[] = [
 ];
 
 // Ship Parts - Terminal materials (crafted at other facilities)
-const navalHullSegmentsRecipes: IRecipe[] = [
-  createEmptyRecipe(Materials.NavalHullSegments),
-];
-
-const navalShellPlatingRecipes: IRecipe[] = [
-  createEmptyRecipe(Materials.NavalShellPlating),
-];
-
+// Naval Hull Segments and Naval Shell Plating have recipes in navalVehicles.ts
 const navalTurbineComponentsRecipes: IRecipe[] = [
   createEmptyRecipe(Materials.NavalTurbineComponents),
 ];
@@ -245,7 +238,5 @@ export const constructionMaterialRecipes = new Map<string, IRecipe[]>([
   [Materials.ThermalShielding, thermalShieldingRecipes],
   [Materials.UnstableSubstances, unstableSubstancesRecipes],
   [Materials.FlameAmmo, flameAmmoRecipes],
-  [Materials.NavalHullSegments, navalHullSegmentsRecipes],
-  [Materials.NavalShellPlating, navalShellPlatingRecipes],
   [Materials.NavalTurbineComponents, navalTurbineComponentsRecipes],
 ]);
