@@ -1,5 +1,5 @@
 import { Materials, RawResources, IRecipe } from "../models";
-import { createRecipe } from "./base";
+import { createRecipe, createEmptyRecipe } from "./base";
 
 const basicMaterialsRecipes: IRecipe[] = [
   createRecipe(
@@ -214,6 +214,19 @@ const flameAmmoRecipes: IRecipe[] = [
   ),
 ];
 
+// Ship Parts - Terminal materials (crafted at other facilities)
+const navalHullSegmentsRecipes: IRecipe[] = [
+  createEmptyRecipe(Materials.NavalHullSegments),
+];
+
+const navalShellPlatingRecipes: IRecipe[] = [
+  createEmptyRecipe(Materials.NavalShellPlating),
+];
+
+const navalTurbineComponentsRecipes: IRecipe[] = [
+  createEmptyRecipe(Materials.NavalTurbineComponents),
+];
+
 export const constructionMaterialRecipes = new Map<string, IRecipe[]>([
   [Materials.BasicMaterials, basicMaterialsRecipes],
   [Materials.ConstructionMaterials, constructionMaterialsRecipes],
@@ -232,4 +245,7 @@ export const constructionMaterialRecipes = new Map<string, IRecipe[]>([
   [Materials.ThermalShielding, thermalShieldingRecipes],
   [Materials.UnstableSubstances, unstableSubstancesRecipes],
   [Materials.FlameAmmo, flameAmmoRecipes],
+  [Materials.NavalHullSegments, navalHullSegmentsRecipes],
+  [Materials.NavalShellPlating, navalShellPlatingRecipes],
+  [Materials.NavalTurbineComponents, navalTurbineComponentsRecipes],
 ]);
