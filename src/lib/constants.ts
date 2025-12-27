@@ -28,6 +28,8 @@ export const ICONS_MAP = new Map<string, string>([
   [Materials.ThermalShielding, "FacilityMaterials11Icon"],
   [Materials.UnstableSubstances, "FacilityMaterials10Icon"],
   [Materials.FlameAmmo, "FlameAmmoIcon"],
+  [Materials.NavalHullSegments, "ShipPart1"],
+  [Materials.NavalShellPlating, "ShipPart2"],
 
   // Liquids
   [Liquids.Petrol, "RefinedFuelIcon"],

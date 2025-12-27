@@ -1,6 +1,36 @@
 import { Materials, Vehicles, IRecipe } from "../models";
 import { createRecipe } from "./base";
 
+// ===== NAVAL MATERIALS =====
+
+// Naval Hull Segments recipes
+const navalHullSegmentsRecipes: IRecipe[] = [
+  // Small Assembly Station (Naval Works): 60 x Processed Construction Materials + 2 x Assembly Materials I + 2 x Assembly Materials II + 10 x Assembly Materials IV + 4 x Rare Alloys + 4 x Thermal Shielding → 1 x Naval Hull Segments
+  createRecipe(
+    [
+      { stuff: Materials.ProcessedConstructionMaterials, count: 60 },
+      { stuff: Materials.AssemblyMaterialsI, count: 2 },
+      { stuff: Materials.AssemblyMaterialsII, count: 2 },
+      { stuff: Materials.AssemblyMaterialsIV, count: 10 },
+      { stuff: Materials.RareAlloys, count: 4 },
+      { stuff: Materials.ThermalShielding, count: 4 },
+    ],
+    [{ stuff: Materials.NavalHullSegments, count: 1 }]
+  ),
+];
+
+// Naval Shell Plating recipes
+const navalShellPlatingRecipes: IRecipe[] = [
+  // Small Assembly Station (Naval Works): 2 x Construction Materials + 1 x Thermal Shielding → 1 x Naval Shell Plating
+  createRecipe(
+    [
+      { stuff: Materials.ConstructionMaterials, count: 2 },
+      { stuff: Materials.ThermalShielding, count: 1 },
+    ],
+    [{ stuff: Materials.NavalShellPlating, count: 1 }]
+  ),
+];
+
 // ===== NAVAL VEHICLES =====
 
 // BMS - Aquatipper (Barge) recipes
@@ -94,6 +124,8 @@ const ronanGunship74b1Recipes: IRecipe[] = [
 ];
 
 export const navalVehicleRecipes = new Map<string, IRecipe[]>([
+  [Materials.NavalHullSegments, navalHullSegmentsRecipes],
+  [Materials.NavalShellPlating, navalShellPlatingRecipes],
   [Vehicles.BMSAquatipper, bmsAquatipperRecipes],
   [Vehicles.BMSIronship, bmsIronshipRecipes],
   [Vehicles.InterceptorPA12, interceptorPA12Recipes],
