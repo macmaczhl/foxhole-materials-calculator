@@ -28,6 +28,10 @@ export const ICONS_MAP = new Map<string, string>([
   [Materials.ThermalShielding, "FacilityMaterials11Icon"],
   [Materials.UnstableSubstances, "FacilityMaterials10Icon"],
   [Materials.FlameAmmo, "FlameAmmoIcon"],
+  // Ship Parts
+  [Materials.NavalHullSegments, "ShipPart1"],
+  [Materials.NavalShellPlating, "ShipPart2"],
+  [Materials.NavalTurbineComponents, "ShipPart3"],
 
   // Liquids
   [Liquids.Petrol, "RefinedFuelIcon"],
@@ -180,4 +184,15 @@ export const ICONS_MAP = new Map<string, string>([
   [Vehicles.InterceptorPA12, "LandingShipCIcon"],
   [Vehicles.MacConmaraShorerunner, "LandingShipWIcon"],
   [Vehicles.RonanGunship74b1, "GunboatWIcon"],
+  [Vehicles.BMSGrouper, "Motorboat"],
+  [Vehicles.TypeCCharon, "GunBoatVehicleIcon"],
+  [Vehicles.BMSLonghook, "LargeShipBaseShipIcon"],
+  [Vehicles.Callahan, "LargeShipBattleshipWIcon"],
+  [Vehicles.Titan, "LargeShipBattleshipCIcon"],
+  [Vehicles.Blacksteele, "LargeShipDestroyerWIcon"],
+  [Vehicles.Conqueror, "LargeShipDestroyerCIcon"],
+  [Vehicles.BMSBowhead, "LargeShipResourceIcon"],
+  [Vehicles.BMSBluefin, "LargeShipStorageShipIcon"],
+  [Vehicles.Nakki, "LargeShipSubmarineWIcon"],
+  [Vehicles.ACbTrident, "LargeShipSubmarineCIcon"],
 ]);
