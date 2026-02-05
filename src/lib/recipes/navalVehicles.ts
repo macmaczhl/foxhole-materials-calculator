@@ -123,6 +123,30 @@ const ronanGunship74b1Recipes: IRecipe[] = [
   ),
 ];
 
+// Type C - "Charon" (Gunboat) recipes
+const typeCCharonRecipes: IRecipe[] = [
+  // Shipyard production: 125 x Refined Materials → 1 x Type C - "Charon"
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 125 }],
+    [{ stuff: Vehicles.TypeCCharon, count: 1 }]
+  ),
+  // Mass Production Factory: 899 x Refined Materials → 3 crates of 3 x Type C - "Charon" (9 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 899 }],
+    [{ stuff: Vehicles.TypeCCharon, count: 9 }]
+  ),
+  // Mass Production Factory: 1124 x Refined Materials → 4 crates of 3 x Type C - "Charon" (12 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 1124 }],
+    [{ stuff: Vehicles.TypeCCharon, count: 12 }]
+  ),
+  // Mass Production Factory: 1311 x Refined Materials → 5 crates of 3 x Type C - "Charon" (15 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 1311 }],
+    [{ stuff: Vehicles.TypeCCharon, count: 15 }]
+  ),
+];
+
 export const navalVehicleRecipes = new Map<string, IRecipe[]>([
   [Materials.NavalHullSegments, navalHullSegmentsRecipes],
   [Materials.NavalShellPlating, navalShellPlatingRecipes],
@@ -131,4 +155,5 @@ export const navalVehicleRecipes = new Map<string, IRecipe[]>([
   [Vehicles.InterceptorPA12, interceptorPA12Recipes],
   [Vehicles.MacConmaraShorerunner, macConmaraShorerunnerRecipes],
   [Vehicles.RonanGunship74b1, ronanGunship74b1Recipes],
+  [Vehicles.TypeCCharon, typeCCharonRecipes],
 ]);
