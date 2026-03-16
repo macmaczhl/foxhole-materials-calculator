@@ -33,6 +33,18 @@ const navalShellPlatingRecipes: IRecipe[] = [
 
 // ===== NAVAL VEHICLES =====
 
+// BMS - Longhook (Base Ship) recipes
+const bmsLonghookRecipes: IRecipe[] = [
+  // Dry Dock production: 8 x Naval Hull Segments + 15 x Naval Shell Plating → 1 x BMS - Longhook
+  createRecipe(
+    [
+      { stuff: Materials.NavalHullSegments, count: 8 },
+      { stuff: Materials.NavalShellPlating, count: 15 },
+    ],
+    [{ stuff: Vehicles.BMSLonghook, count: 1 }]
+  ),
+];
+
 // BMS - Aquatipper (Barge) recipes
 const bmsAquatipperRecipes: IRecipe[] = [
   // Shipyard production: 150 x Basic Materials → 1 x BMS - Aquatipper
@@ -150,6 +162,7 @@ const typeCCharonRecipes: IRecipe[] = [
 export const navalVehicleRecipes = new Map<string, IRecipe[]>([
   [Materials.NavalHullSegments, navalHullSegmentsRecipes],
   [Materials.NavalShellPlating, navalShellPlatingRecipes],
+  [Vehicles.BMSLonghook, bmsLonghookRecipes],
   [Vehicles.BMSAquatipper, bmsAquatipperRecipes],
   [Vehicles.BMSIronship, bmsIronshipRecipes],
   [Vehicles.InterceptorPA12, interceptorPA12Recipes],

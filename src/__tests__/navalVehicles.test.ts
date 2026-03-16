@@ -10,6 +10,7 @@ describe("Naval Vehicles", () => {
   describe("Recipe availability", () => {
     test("all naval vehicles have recipes defined", () => {
       const navalVehicles = [
+        Vehicles.BMSLonghook,
         Vehicles.BMSAquatipper,
         Vehicles.BMSIronship,
         Vehicles.InterceptorPA12,
@@ -28,6 +29,7 @@ describe("Naval Vehicles", () => {
 
     test("all naval vehicle recipes have valid requirements", () => {
       const navalVehicles = [
+        Vehicles.BMSLonghook,
         Vehicles.BMSAquatipper,
         Vehicles.BMSIronship,
         Vehicles.InterceptorPA12,
@@ -47,6 +49,7 @@ describe("Naval Vehicles", () => {
     });
 
     test("naval vehicles are in the naval vehicle recipes map", () => {
+      expect(navalVehicleRecipes.has(Vehicles.BMSLonghook)).toBe(true);
       expect(navalVehicleRecipes.has(Vehicles.BMSAquatipper)).toBe(true);
       expect(navalVehicleRecipes.has(Vehicles.BMSIronship)).toBe(true);
       expect(navalVehicleRecipes.has(Vehicles.InterceptorPA12)).toBe(true);
@@ -55,7 +58,55 @@ describe("Naval Vehicles", () => {
       );
       expect(navalVehicleRecipes.has(Vehicles.RonanGunship74b1)).toBe(true);
       expect(navalVehicleRecipes.has(Vehicles.TypeCCharon)).toBe(true);
-      expect(navalVehicleRecipes.size).toBe(8); // 6 vehicles + 2 naval materials
+      expect(navalVehicleRecipes.size).toBe(9); // 7 vehicles + 2 naval materials
+    });
+  });
+
+  describe("BMS - Longhook (Base Ship)", () => {
+    let bmsLonghookRecipes: IRecipe[];
+    let bmsLonghookRecipeTree: RecipeTree;
+
+    beforeEach(() => {
+      bmsLonghookRecipes = RecipiesByStuff.get(Vehicles.BMSLonghook)!;
+      bmsLonghookRecipeTree = {
+        stuff: Vehicles.BMSLonghook,
+        selectedRecipe: bmsLonghookRecipes[0],
+        recipes: bmsLonghookRecipes,
+        required: [],
+      };
+    });
+
+    test("has correct dry dock recipe requirements", () => {
+      const recipe = bmsLonghookRecipes[0];
+      expect(recipe.required).toEqual([
+        { stuff: Materials.NavalHullSegments, count: 8 },
+        { stuff: Materials.NavalShellPlating, count: 15 },
+      ]);
+      expect(recipe.produced).toEqual([
+        { stuff: Vehicles.BMSLonghook, count: 1 },
+      ]);
+    });
+
+    test("has only dry dock recipe (no mass production)", () => {
+      expect(bmsLonghookRecipes.length).toBe(1);
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const result = calculateComponents(bmsLonghookRecipeTree, 1);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.NavalHullSegments, count: 8 },
+        { stuff: Materials.NavalShellPlating, count: 15 },
+      ]);
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const result = calculateComponents(bmsLonghookRecipeTree, 2);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.NavalHullSegments, count: 16 },
+        { stuff: Materials.NavalShellPlating, count: 30 },
+      ]);
     });
   });
 
@@ -112,6 +163,7 @@ describe("Naval Vehicles", () => {
   describe("Recipe calculation integration", () => {
     test("all naval vehicles can be calculated without errors", () => {
       const navalVehicles = [
+        Vehicles.BMSLonghook,
         Vehicles.BMSAquatipper,
         Vehicles.BMSIronship,
         Vehicles.InterceptorPA12,
