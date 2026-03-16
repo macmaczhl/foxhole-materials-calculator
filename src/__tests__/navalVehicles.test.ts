@@ -296,7 +296,7 @@ describe("Naval Vehicles", () => {
     test("has correct shipyard recipe requirements", () => {
       const recipe = typeCCharonRecipes[0];
       expect(recipe.required).toEqual([
-        { stuff: Materials.RefinedMaterials, count: 125 },
+        { stuff: Materials.RefinedMaterials, count: 140 },
       ]);
       expect(recipe.produced).toEqual([
         { stuff: Vehicles.TypeCCharon, count: 1 },
@@ -311,7 +311,7 @@ describe("Naval Vehicles", () => {
       );
       expect(massProductionRecipe).toBeDefined();
       expect(massProductionRecipe!.required).toEqual([
-        { stuff: Materials.RefinedMaterials, count: 899 },
+        { stuff: Materials.RefinedMaterials, count: 1008 },
       ]);
     });
 
@@ -319,7 +319,7 @@ describe("Naval Vehicles", () => {
       const result = calculateComponents(typeCCharonRecipeTree, 1);
 
       expect(result.initial).toEqual([
-        { stuff: Materials.RefinedMaterials, count: 125 },
+        { stuff: Materials.RefinedMaterials, count: 140 },
       ]);
     });
 
@@ -327,7 +327,7 @@ describe("Naval Vehicles", () => {
       const result = calculateComponents(typeCCharonRecipeTree, 2);
 
       expect(result.initial).toEqual([
-        { stuff: Materials.RefinedMaterials, count: 250 },
+        { stuff: Materials.RefinedMaterials, count: 280 },
       ]);
     });
 
@@ -338,7 +338,7 @@ describe("Naval Vehicles", () => {
         typeCCharonRecipes.some(
           (r) =>
             r.produced[0].count === 9 &&
-            r.required[0].count === 899 &&
+            r.required[0].count === 1008 &&
             r.required[0].stuff === Materials.RefinedMaterials
         )
       ).toBe(true);
@@ -347,7 +347,7 @@ describe("Naval Vehicles", () => {
         typeCCharonRecipes.some(
           (r) =>
             r.produced[0].count === 12 &&
-            r.required[0].count === 1124 &&
+            r.required[0].count === 1260 &&
             r.required[0].stuff === Materials.RefinedMaterials
         )
       ).toBe(true);
@@ -356,7 +356,7 @@ describe("Naval Vehicles", () => {
         typeCCharonRecipes.some(
           (r) =>
             r.produced[0].count === 15 &&
-            r.required[0].count === 1311 &&
+            r.required[0].count === 1470 &&
             r.required[0].stuff === Materials.RefinedMaterials
         )
       ).toBe(true);

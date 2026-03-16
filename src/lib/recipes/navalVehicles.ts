@@ -125,24 +125,24 @@ const ronanGunship74b1Recipes: IRecipe[] = [
 
 // Type C - "Charon" (Gunboat) recipes
 const typeCCharonRecipes: IRecipe[] = [
-  // Shipyard production: 125 x Refined Materials → 1 x Type C - "Charon"
+  // Shipyard production: 140 x Refined Materials → 1 x Type C - "Charon"
   createRecipe(
-    [{ stuff: Materials.RefinedMaterials, count: 125 }],
+    [{ stuff: Materials.RefinedMaterials, count: 140 }],
     [{ stuff: Vehicles.TypeCCharon, count: 1 }]
   ),
-  // Mass Production Factory: 899 x Refined Materials → 3 crates of 3 x Type C - "Charon" (9 total)
+  // Mass Production Factory: 1008 x Refined Materials → 3 crates of 3 x Type C - "Charon" (9 total)
   createRecipe(
-    [{ stuff: Materials.RefinedMaterials, count: 899 }],
+    [{ stuff: Materials.RefinedMaterials, count: 1008 }],
     [{ stuff: Vehicles.TypeCCharon, count: 9 }]
   ),
-  // Mass Production Factory: 1124 x Refined Materials → 4 crates of 3 x Type C - "Charon" (12 total)
+  // Mass Production Factory: 1260 x Refined Materials → 4 crates of 3 x Type C - "Charon" (12 total)
   createRecipe(
-    [{ stuff: Materials.RefinedMaterials, count: 1124 }],
+    [{ stuff: Materials.RefinedMaterials, count: 1260 }],
     [{ stuff: Vehicles.TypeCCharon, count: 12 }]
   ),
-  // Mass Production Factory: 1311 x Refined Materials → 5 crates of 3 x Type C - "Charon" (15 total)
+  // Mass Production Factory: 1470 x Refined Materials → 5 crates of 3 x Type C - "Charon" (15 total)
   createRecipe(
-    [{ stuff: Materials.RefinedMaterials, count: 1311 }],
+    [{ stuff: Materials.RefinedMaterials, count: 1470 }],
     [{ stuff: Vehicles.TypeCCharon, count: 15 }]
   ),
 ];
