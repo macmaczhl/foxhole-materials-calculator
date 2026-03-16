@@ -147,6 +147,15 @@ const typeCCharonRecipes: IRecipe[] = [
   ),
 ];
 
+// BMS - White Whale (Landing Ship) recipes
+const bmsWhiteWhaleRecipes: IRecipe[] = [
+  // Shipyard production: 100 x Refined Materials → 1 x BMS - White Whale
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 100 }],
+    [{ stuff: Vehicles.BMSWhiteWhale, count: 1 }]
+  ),
+];
+
 export const navalVehicleRecipes = new Map<string, IRecipe[]>([
   [Materials.NavalHullSegments, navalHullSegmentsRecipes],
   [Materials.NavalShellPlating, navalShellPlatingRecipes],
@@ -156,4 +165,5 @@ export const navalVehicleRecipes = new Map<string, IRecipe[]>([
   [Vehicles.MacConmaraShorerunner, macConmaraShorerunnerRecipes],
   [Vehicles.RonanGunship74b1, ronanGunship74b1Recipes],
   [Vehicles.TypeCCharon, typeCCharonRecipes],
+  [Vehicles.BMSWhiteWhale, bmsWhiteWhaleRecipes],
 ]);
