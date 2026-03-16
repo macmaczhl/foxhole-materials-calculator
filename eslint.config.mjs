@@ -1,6 +1,10 @@
+import { createRequire } from "module";
 import nextConfig from "eslint-config-next/core-web-vitals";
 import nextTypescript from "eslint-config-next/typescript";
 import eslintConfigPrettier from "eslint-config-prettier/flat";
+
+const require = createRequire(import.meta.url);
+const reactVersion = require("react/package.json").version;
 
 const eslintConfig = [
   {
@@ -15,6 +19,15 @@ const eslintConfig = [
   ...nextConfig,
   ...nextTypescript,
   eslintConfigPrettier,
+  {
+    // eslint-plugin-react uses context.getFilename() which was removed in ESLint 10.
+    // Providing the explicit version bypasses the 'detect' path that triggers the removed API.
+    settings: {
+      react: {
+        version: reactVersion,
+      },
+    },
+  },
   {
     rules: {
       // Enforce consistent linebreak style
