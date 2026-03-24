@@ -177,6 +177,7 @@ export const ICONS_MAP = new Map<string, string>([
   // Rocket Artillery Trucks
   [Vehicles.R17RetiariusSkirmisher, "TruckMultiCIcon"],
   // Naval Vehicles
+  [Vehicles.BMSLonghook, "LargeShipBaseShipIcon"],
   [Vehicles.BMSAquatipper, "BargeVehicleIcon"],
   [Vehicles.BMSIronship, "Freighter02ItemIcon"],
   [Vehicles.InterceptorPA12, "LandingShipCIcon"],

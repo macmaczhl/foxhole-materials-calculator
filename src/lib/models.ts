@@ -198,6 +198,7 @@ export enum Vehicles {
   // Rocket Artillery Trucks
   R17RetiariusSkirmisher = 'R-17 "Retiarius" Skirmisher',
   // Naval Vehicles
+  BMSLonghook = 'BMS - Longhook',
   BMSAquatipper = 'BMS - Aquatipper',
   BMSIronship = 'BMS - Ironship',
   InterceptorPA12 = 'Interceptor PA-12',
@@ -373,6 +374,7 @@ export const availableMaterials: Stuff[] = [
   // Rocket Artillery Trucks
   { name: Vehicles.R17RetiariusSkirmisher },
   // Naval Vehicles
+  { name: Vehicles.BMSLonghook },
   { name: Vehicles.BMSAquatipper },
   { name: Vehicles.BMSIronship },
   { name: Vehicles.InterceptorPA12 },
