@@ -184,4 +184,5 @@ export const ICONS_MAP = new Map<string, string>([
   [Vehicles.MacConmaraShorerunner, "LandingShipWIcon"],
   [Vehicles.RonanGunship74b1, "GunboatWIcon"],
   [Vehicles.TypeCCharon, "GunBoatVehicleIcon"],
+  [Vehicles.BMSWhiteWhale, "Cargoship"],
 ]);

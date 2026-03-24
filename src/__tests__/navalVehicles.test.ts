@@ -17,6 +17,7 @@ describe("Naval Vehicles", () => {
         Vehicles.MacConmaraShorerunner,
         Vehicles.RonanGunship74b1,
         Vehicles.TypeCCharon,
+        Vehicles.BMSWhiteWhale,
       ];
 
       navalVehicles.forEach((vehicle) => {
@@ -36,6 +37,7 @@ describe("Naval Vehicles", () => {
         Vehicles.MacConmaraShorerunner,
         Vehicles.RonanGunship74b1,
         Vehicles.TypeCCharon,
+        Vehicles.BMSWhiteWhale,
       ];
 
       navalVehicles.forEach((vehicle) => {
@@ -58,7 +60,9 @@ describe("Naval Vehicles", () => {
       );
       expect(navalVehicleRecipes.has(Vehicles.RonanGunship74b1)).toBe(true);
       expect(navalVehicleRecipes.has(Vehicles.TypeCCharon)).toBe(true);
-      expect(navalVehicleRecipes.size).toBe(9); // 7 vehicles + 2 naval materials
+      expect(navalVehicleRecipes.has(Vehicles.BMSLonghook)).toBe(true);
+      expect(navalVehicleRecipes.has(Vehicles.BMSWhiteWhale)).toBe(true);
+      expect(navalVehicleRecipes.size).toBe(10); // 8 vehicles + 2 naval materials
     });
   });
 
@@ -170,6 +174,7 @@ describe("Naval Vehicles", () => {
         Vehicles.MacConmaraShorerunner,
         Vehicles.RonanGunship74b1,
         Vehicles.TypeCCharon,
+        Vehicles.BMSWhiteWhale,
       ];
 
       navalVehicles.forEach((vehicle) => {
@@ -412,6 +417,51 @@ describe("Naval Vehicles", () => {
             r.required[0].stuff === Materials.RefinedMaterials
         )
       ).toBe(true);
+    });
+  });
+
+  describe("BMS - White Whale (Landing Ship)", () => {
+    let bmsWhiteWhaleRecipes: IRecipe[];
+    let bmsWhiteWhaleRecipeTree: RecipeTree;
+
+    beforeEach(() => {
+      bmsWhiteWhaleRecipes = RecipiesByStuff.get(Vehicles.BMSWhiteWhale)!;
+      bmsWhiteWhaleRecipeTree = {
+        stuff: Vehicles.BMSWhiteWhale,
+        selectedRecipe: bmsWhiteWhaleRecipes[0],
+        recipes: bmsWhiteWhaleRecipes,
+        required: [],
+      };
+    });
+
+    test("has correct shipyard recipe requirements", () => {
+      const recipe = bmsWhiteWhaleRecipes[0];
+      expect(recipe.required).toEqual([
+        { stuff: Materials.RefinedMaterials, count: 100 },
+      ]);
+      expect(recipe.produced).toEqual([
+        { stuff: Vehicles.BMSWhiteWhale, count: 1 },
+      ]);
+    });
+
+    test("has only shipyard recipe (no mass production)", () => {
+      expect(bmsWhiteWhaleRecipes.length).toBe(1);
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const result = calculateComponents(bmsWhiteWhaleRecipeTree, 1);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.RefinedMaterials, count: 100 },
+      ]);
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const result = calculateComponents(bmsWhiteWhaleRecipeTree, 3);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.RefinedMaterials, count: 300 },
+      ]);
     });
   });
 });
