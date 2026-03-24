@@ -30,6 +30,7 @@ export const ICONS_MAP = new Map<string, string>([
   [Materials.FlameAmmo, "FlameAmmoIcon"],
   [Materials.NavalHullSegments, "ShipPart1"],
   [Materials.NavalShellPlating, "ShipPart2"],
+  [Materials.NavalTurbineComponents, "ShipPart3"],
 
   // Liquids
   [Liquids.Petrol, "RefinedFuelIcon"],
@@ -185,4 +186,5 @@ export const ICONS_MAP = new Map<string, string>([
   [Vehicles.RonanGunship74b1, "GunboatWIcon"],
   [Vehicles.TypeCCharon, "GunBoatVehicleIcon"],
   [Vehicles.BMSWhiteWhale, "Cargoship"],
+  [Vehicles.Titan, "LargeShipBattleshipCIcon"],
 ]);

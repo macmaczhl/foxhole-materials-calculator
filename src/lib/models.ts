@@ -42,6 +42,7 @@ export enum Materials {
   AssemblyMaterialsV = "Assembly Materials V",
   NavalHullSegments = "Naval Hull Segments",
   NavalShellPlating = "Naval Shell Plating",
+  NavalTurbineComponents = "Naval Turbine Components",
 }
 
 export enum Liquids {
@@ -206,6 +207,7 @@ export enum Vehicles {
   RonanGunship74b1 = '74b-1 Ronan Gunship',
   TypeCCharon = 'Type C - "Charon"',
   BMSWhiteWhale = 'BMS - White Whale',
+  Titan = 'Titan',
 }
 
 export enum RawResources {
@@ -243,6 +245,7 @@ export const availableMaterials: Stuff[] = [
   { name: Materials.FlameAmmo },
   { name: Materials.NavalHullSegments },
   { name: Materials.NavalShellPlating },
+  { name: Materials.NavalTurbineComponents },
   { name: Liquids.Petrol },
   { name: Liquids.HeavyOil },
   { name: Liquids.Water },
@@ -382,6 +385,7 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.RonanGunship74b1 },
   { name: Vehicles.TypeCCharon },
   { name: Vehicles.BMSWhiteWhale },
+  { name: Vehicles.Titan },
 ];
 
 export const stuffList: Stuff[] = availableMaterials;
