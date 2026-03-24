@@ -18,6 +18,7 @@ describe("Naval Vehicles", () => {
         Vehicles.RonanGunship74b1,
         Vehicles.TypeCCharon,
         Vehicles.BMSWhiteWhale,
+        Vehicles.DasKrokodilByVAC,
         Vehicles.Titan,
       ];
 
@@ -39,6 +40,7 @@ describe("Naval Vehicles", () => {
         Vehicles.RonanGunship74b1,
         Vehicles.TypeCCharon,
         Vehicles.BMSWhiteWhale,
+        Vehicles.DasKrokodilByVAC,
         Vehicles.Titan,
       ];
 
@@ -64,8 +66,9 @@ describe("Naval Vehicles", () => {
       expect(navalVehicleRecipes.has(Vehicles.TypeCCharon)).toBe(true);
       expect(navalVehicleRecipes.has(Vehicles.BMSLonghook)).toBe(true);
       expect(navalVehicleRecipes.has(Vehicles.BMSWhiteWhale)).toBe(true);
+      expect(navalVehicleRecipes.has(Vehicles.DasKrokodilByVAC)).toBe(true);
       expect(navalVehicleRecipes.has(Vehicles.Titan)).toBe(true);
-      expect(navalVehicleRecipes.size).toBe(12); // 9 vehicles + 3 naval materials
+      expect(navalVehicleRecipes.size).toBe(13); // 10 vehicles + 3 naval materials
     });
   });
 
@@ -178,6 +181,7 @@ describe("Naval Vehicles", () => {
         Vehicles.RonanGunship74b1,
         Vehicles.TypeCCharon,
         Vehicles.BMSWhiteWhale,
+        Vehicles.DasKrokodilByVAC,
         Vehicles.Titan,
       ];
 
@@ -465,6 +469,80 @@ describe("Naval Vehicles", () => {
 
       expect(result.initial).toEqual([
         { stuff: Materials.RefinedMaterials, count: 300 },
+      ]);
+    });
+  });
+
+  describe("Das Krokodil by VAC (Light Freighter)", () => {
+    let dasKrokodilRecipes: IRecipe[];
+    let dasKrokodilRecipeTree: RecipeTree;
+
+    beforeEach(() => {
+      dasKrokodilRecipes = RecipiesByStuff.get(Vehicles.DasKrokodilByVAC)!;
+      dasKrokodilRecipeTree = {
+        stuff: Vehicles.DasKrokodilByVAC,
+        selectedRecipe: dasKrokodilRecipes[0],
+        recipes: dasKrokodilRecipes,
+        required: [],
+      };
+    });
+
+    test("has correct shipyard recipe requirements", () => {
+      const recipe = dasKrokodilRecipes[0];
+      expect(recipe.required).toEqual([
+        { stuff: Materials.BasicMaterials, count: 100 },
+      ]);
+      expect(recipe.produced).toEqual([
+        { stuff: Vehicles.DasKrokodilByVAC, count: 1 },
+      ]);
+    });
+
+    test("has mass production recipes", () => {
+      expect(dasKrokodilRecipes.length).toBe(4);
+      // Check for 9-vehicle batch
+      const batch9 = dasKrokodilRecipes.find(
+        (r) => r.produced[0].count === 9
+      );
+      expect(batch9).toBeDefined();
+      expect(batch9!.required).toEqual([
+        { stuff: Materials.BasicMaterials, count: 720 },
+      ]);
+    });
+
+    test("has all mass production batch recipes", () => {
+      // Check 12-vehicle batch
+      expect(
+        dasKrokodilRecipes.some(
+          (r) =>
+            r.produced[0].count === 12 &&
+            r.required[0].count === 900 &&
+            r.required[0].stuff === Materials.BasicMaterials
+        )
+      ).toBe(true);
+      // Check 15-vehicle batch
+      expect(
+        dasKrokodilRecipes.some(
+          (r) =>
+            r.produced[0].count === 15 &&
+            r.required[0].count === 1050 &&
+            r.required[0].stuff === Materials.BasicMaterials
+        )
+      ).toBe(true);
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const result = calculateComponents(dasKrokodilRecipeTree, 1);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.BasicMaterials, count: 100 },
+      ]);
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const result = calculateComponents(dasKrokodilRecipeTree, 3);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.BasicMaterials, count: 300 },
       ]);
     });
   });

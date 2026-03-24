@@ -186,5 +186,6 @@ export const ICONS_MAP = new Map<string, string>([
   [Vehicles.RonanGunship74b1, "GunboatWIcon"],
   [Vehicles.TypeCCharon, "GunBoatVehicleIcon"],
   [Vehicles.BMSWhiteWhale, "Cargoship"],
+  [Vehicles.DasKrokodilByVAC, "LightFreighterVehicleIcon"],
   [Vehicles.Titan, "LargeShipBattleshipCIcon"],
 ]);

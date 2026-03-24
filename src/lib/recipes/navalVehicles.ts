@@ -180,6 +180,30 @@ const bmsWhiteWhaleRecipes: IRecipe[] = [
   ),
 ];
 
+// Das Krokodil by VAC (Light Freighter) recipes
+const dasKrokodilByVACRecipes: IRecipe[] = [
+  // Shipyard production: 100 x Basic Materials → 1 x Das Krokodil by VAC
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 100 }],
+    [{ stuff: Vehicles.DasKrokodilByVAC, count: 1 }]
+  ),
+  // Mass Production Factory: 720 x Basic Materials → 3 crates of 3 x Das Krokodil by VAC (9 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 720 }],
+    [{ stuff: Vehicles.DasKrokodilByVAC, count: 9 }]
+  ),
+  // Mass Production Factory: 900 x Basic Materials → 4 crates of 3 x Das Krokodil by VAC (12 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 900 }],
+    [{ stuff: Vehicles.DasKrokodilByVAC, count: 12 }]
+  ),
+  // Mass Production Factory: 1050 x Basic Materials → 5 crates of 3 x Das Krokodil by VAC (15 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 1050 }],
+    [{ stuff: Vehicles.DasKrokodilByVAC, count: 15 }]
+  ),
+];
+
 // Titan (Battleship) recipes
 const titanRecipes: IRecipe[] = [
   // Dry Dock production: 20 x Naval Hull Segments + 20 x Naval Shell Plating + 4 x Naval Turbine Components → 1 x Titan
@@ -205,5 +229,6 @@ export const navalVehicleRecipes = new Map<string, IRecipe[]>([
   [Vehicles.RonanGunship74b1, ronanGunship74b1Recipes],
   [Vehicles.TypeCCharon, typeCCharonRecipes],
   [Vehicles.BMSWhiteWhale, bmsWhiteWhaleRecipes],
+  [Vehicles.DasKrokodilByVAC, dasKrokodilByVACRecipes],
   [Vehicles.Titan, titanRecipes],
 ]);
