@@ -19,6 +19,7 @@ describe("Naval Vehicles", () => {
         Vehicles.TypeCCharon,
         Vehicles.BMSWhiteWhale,
         Vehicles.DasKrokodilByVAC,
+        Vehicles.Titan,
       ];
 
       navalVehicles.forEach((vehicle) => {
@@ -40,6 +41,7 @@ describe("Naval Vehicles", () => {
         Vehicles.TypeCCharon,
         Vehicles.BMSWhiteWhale,
         Vehicles.DasKrokodilByVAC,
+        Vehicles.Titan,
       ];
 
       navalVehicles.forEach((vehicle) => {
@@ -65,7 +67,8 @@ describe("Naval Vehicles", () => {
       expect(navalVehicleRecipes.has(Vehicles.BMSLonghook)).toBe(true);
       expect(navalVehicleRecipes.has(Vehicles.BMSWhiteWhale)).toBe(true);
       expect(navalVehicleRecipes.has(Vehicles.DasKrokodilByVAC)).toBe(true);
-      expect(navalVehicleRecipes.size).toBe(11); // 9 vehicles + 2 naval materials
+      expect(navalVehicleRecipes.has(Vehicles.Titan)).toBe(true);
+      expect(navalVehicleRecipes.size).toBe(13); // 10 vehicles + 3 naval materials
     });
   });
 
@@ -179,6 +182,7 @@ describe("Naval Vehicles", () => {
         Vehicles.TypeCCharon,
         Vehicles.BMSWhiteWhale,
         Vehicles.DasKrokodilByVAC,
+        Vehicles.Titan,
       ];
 
       navalVehicles.forEach((vehicle) => {
@@ -539,6 +543,55 @@ describe("Naval Vehicles", () => {
 
       expect(result.initial).toEqual([
         { stuff: Materials.BasicMaterials, count: 300 },
+      ]);
+    });
+  });
+
+  describe("Titan (Battleship)", () => {
+    let titanRecipes: IRecipe[];
+    let titanRecipeTree: RecipeTree;
+
+    beforeEach(() => {
+      titanRecipes = RecipiesByStuff.get(Vehicles.Titan)!;
+      titanRecipeTree = {
+        stuff: Vehicles.Titan,
+        selectedRecipe: titanRecipes[0],
+        recipes: titanRecipes,
+        required: [],
+      };
+    });
+
+    test("has correct dry dock recipe requirements", () => {
+      const recipe = titanRecipes[0];
+      expect(recipe.required).toEqual([
+        { stuff: Materials.NavalHullSegments, count: 20 },
+        { stuff: Materials.NavalShellPlating, count: 20 },
+        { stuff: Materials.NavalTurbineComponents, count: 4 },
+      ]);
+      expect(recipe.produced).toEqual([{ stuff: Vehicles.Titan, count: 1 }]);
+    });
+
+    test("has only dry dock recipe (no mass production)", () => {
+      expect(titanRecipes.length).toBe(1);
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const result = calculateComponents(titanRecipeTree, 1);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.NavalHullSegments, count: 20 },
+        { stuff: Materials.NavalShellPlating, count: 20 },
+        { stuff: Materials.NavalTurbineComponents, count: 4 },
+      ]);
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const result = calculateComponents(titanRecipeTree, 2);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.NavalHullSegments, count: 40 },
+        { stuff: Materials.NavalShellPlating, count: 40 },
+        { stuff: Materials.NavalTurbineComponents, count: 8 },
       ]);
     });
   });
