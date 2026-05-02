@@ -31,6 +31,18 @@ const navalShellPlatingRecipes: IRecipe[] = [
   ),
 ];
 
+// Naval Turbine Components recipes
+const navalTurbineComponentsRecipes: IRecipe[] = [
+  // Small Assembly Station (Naval Works): 20 x Assembly Materials V + 20 x Rare Alloys → 1 x Naval Turbine Components
+  createRecipe(
+    [
+      { stuff: Materials.AssemblyMaterialsV, count: 20 },
+      { stuff: Materials.RareAlloys, count: 20 },
+    ],
+    [{ stuff: Materials.NavalTurbineComponents, count: 1 }]
+  ),
+];
+
 // ===== NAVAL VEHICLES =====
 
 // BMS - Longhook (Base Ship) recipes
@@ -192,9 +204,23 @@ const dasKrokodilByVACRecipes: IRecipe[] = [
   ),
 ];
 
+// Titan (Battleship) recipes
+const titanRecipes: IRecipe[] = [
+  // Dry Dock production: 20 x Naval Hull Segments + 20 x Naval Shell Plating + 4 x Naval Turbine Components → 1 x Titan
+  createRecipe(
+    [
+      { stuff: Materials.NavalHullSegments, count: 20 },
+      { stuff: Materials.NavalShellPlating, count: 20 },
+      { stuff: Materials.NavalTurbineComponents, count: 4 },
+    ],
+    [{ stuff: Vehicles.Titan, count: 1 }]
+  ),
+];
+
 export const navalVehicleRecipes = new Map<string, IRecipe[]>([
   [Materials.NavalHullSegments, navalHullSegmentsRecipes],
   [Materials.NavalShellPlating, navalShellPlatingRecipes],
+  [Materials.NavalTurbineComponents, navalTurbineComponentsRecipes],
   [Vehicles.BMSLonghook, bmsLonghookRecipes],
   [Vehicles.BMSAquatipper, bmsAquatipperRecipes],
   [Vehicles.BMSIronship, bmsIronshipRecipes],
@@ -204,4 +230,5 @@ export const navalVehicleRecipes = new Map<string, IRecipe[]>([
   [Vehicles.TypeCCharon, typeCCharonRecipes],
   [Vehicles.BMSWhiteWhale, bmsWhiteWhaleRecipes],
   [Vehicles.DasKrokodilByVAC, dasKrokodilByVACRecipes],
+  [Vehicles.Titan, titanRecipes],
 ]);
