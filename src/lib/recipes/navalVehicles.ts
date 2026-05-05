@@ -241,6 +241,30 @@ const titanRecipes: IRecipe[] = [
   ),
 ];
 
+// Type B - "Lucian" (Siege Boat) recipes
+const typeBLucianRecipes: IRecipe[] = [
+  // Shipyard production: 100 x Refined Materials → 1 x Type B - "Lucian"
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 100 }],
+    [{ stuff: Vehicles.TypeBLucian, count: 1 }]
+  ),
+  // Mass Production Factory: 720 x Refined Materials → 3 crates of 3 x Type B - "Lucian" (9 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 720 }],
+    [{ stuff: Vehicles.TypeBLucian, count: 9 }]
+  ),
+  // Mass Production Factory: 900 x Refined Materials → 4 crates of 3 x Type B - "Lucian" (12 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 900 }],
+    [{ stuff: Vehicles.TypeBLucian, count: 12 }]
+  ),
+  // Mass Production Factory: 1050 x Refined Materials → 5 crates of 3 x Type B - "Lucian" (15 total)
+  createRecipe(
+    [{ stuff: Materials.RefinedMaterials, count: 1050 }],
+    [{ stuff: Vehicles.TypeBLucian, count: 15 }]
+  ),
+];
+
 export const navalVehicleRecipes = new Map<string, IRecipe[]>([
   [Materials.NavalHullSegments, navalHullSegmentsRecipes],
   [Materials.NavalShellPlating, navalShellPlatingRecipes],
@@ -256,4 +280,5 @@ export const navalVehicleRecipes = new Map<string, IRecipe[]>([
   [Vehicles.DasKrokodilByVAC, dasKrokodilByVACRecipes],
   [Vehicles.BellweatherByVAC, bellweatherByVACRecipes],
   [Vehicles.Titan, titanRecipes],
+  [Vehicles.TypeBLucian, typeBLucianRecipes],
 ]);
