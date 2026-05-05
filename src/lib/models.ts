@@ -212,6 +212,7 @@ export enum Vehicles {
   Titan = 'Titan',
   // Train Vehicles
   BMSLinerunner = 'BMS Linerunner',
+  BMSMineseeker = 'BMS Mineseeker',
 }
 
 export enum RawResources {
@@ -394,6 +395,7 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.Titan },
   // Train Vehicles
   { name: Vehicles.BMSLinerunner },
+  { name: Vehicles.BMSMineseeker },
 ];
 
 export const stuffList: Stuff[] = availableMaterials;
