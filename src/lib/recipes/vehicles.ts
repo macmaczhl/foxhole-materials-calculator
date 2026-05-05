@@ -19,6 +19,7 @@ import { ambulanceRecipes } from "./ambulances";
 import { navalVehicleRecipes } from "./navalVehicles";
 import { smallTrainRecipes } from "./trains/smallTrains";
 import { largeCraneRecipes } from "./trains/largeCranes";
+import { infantryCarRecipes } from "./trains/infantryCars";
 
 /**
  * Central registry of all vehicle recipes.
@@ -43,6 +44,7 @@ import { largeCraneRecipes } from "./trains/largeCranes";
  * - navalVehicles.ts: Naval Vehicles (Barges)
  * - trains/smallTrains.ts: Small Train Vehicles
  * - trains/largeCranes.ts: Large Crane Vehicles
+ * - trains/infantryCars.ts: Infantry Cars
  */
 export const vehicleRecipes = new Map<string, IRecipe[]>([
   ...armouredFightingVehicleRecipes,
@@ -65,4 +67,5 @@ export const vehicleRecipes = new Map<string, IRecipe[]>([
   ...navalVehicleRecipes,
   ...smallTrainRecipes,
   ...largeCraneRecipes,
+  ...infantryCarRecipes,
 ]);
