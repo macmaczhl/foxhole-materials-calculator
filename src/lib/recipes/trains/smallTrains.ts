@@ -14,6 +14,20 @@ const bmsLinerunnerRecipes: IRecipe[] = [
   ),
 ];
 
+// BMS Mineseeker (Small Train Locomotive) recipes
+const bmsMineseeker: IRecipe[] = [
+  // Small Assembly Station: 125 x Construction Materials + 10 x Assembly Materials I + 20 x Assembly Materials II → 1 x BMS Mineseeker
+  createRecipe(
+    [
+      { stuff: Materials.ConstructionMaterials, count: 125 },
+      { stuff: Materials.AssemblyMaterialsI, count: 10 },
+      { stuff: Materials.AssemblyMaterialsII, count: 20 },
+    ],
+    [{ stuff: Vehicles.BMSMineseeker, count: 1 }]
+  ),
+];
+
 export const smallTrainRecipes = new Map<string, IRecipe[]>([
   [Vehicles.BMSLinerunner, bmsLinerunnerRecipes],
+  [Vehicles.BMSMineseeker, bmsMineseeker],
 ]);

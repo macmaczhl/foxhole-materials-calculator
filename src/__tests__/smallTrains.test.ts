@@ -17,7 +17,6 @@ describe("Small Train Vehicles", () => {
 
     test("BMS Linerunner is in the small train recipes map", () => {
       expect(smallTrainRecipes.has(Vehicles.BMSLinerunner)).toBe(true);
-      expect(smallTrainRecipes.size).toBe(1);
     });
 
     test("BMS Linerunner recipe has valid requirements", () => {
@@ -27,6 +26,21 @@ describe("Small Train Vehicles", () => {
         expect(recipe.required[0].count).toBeGreaterThan(0);
         expect(recipe.required[0].stuff).toBeDefined();
       });
+    });
+
+    test("BMS Mineseeker has recipes defined", () => {
+      expect(RecipiesByStuff.has(Vehicles.BMSMineseeker)).toBe(true);
+      const recipes = RecipiesByStuff.get(Vehicles.BMSMineseeker);
+      expect(recipes).toBeDefined();
+      expect(recipes!.length).toBeGreaterThan(0);
+    });
+
+    test("BMS Mineseeker is in the small train recipes map", () => {
+      expect(smallTrainRecipes.has(Vehicles.BMSMineseeker)).toBe(true);
+    });
+
+    test("small train recipes map has correct size", () => {
+      expect(smallTrainRecipes.size).toBe(2);
     });
   });
 
@@ -85,6 +99,65 @@ describe("Small Train Vehicles", () => {
         calculateComponents(bmsLinerunnerRecipeTree, 1)
       ).not.toThrow();
       const result = calculateComponents(bmsLinerunnerRecipeTree, 1);
+      expect(result.initial.length).toBeGreaterThan(0);
+    });
+  });
+
+  describe("BMS Mineseeker (Small Train Locomotive)", () => {
+    let bmsMineseeker: IRecipe[];
+    let bmsMineseeker_RecipeTree: RecipeTree;
+
+    beforeEach(() => {
+      bmsMineseeker = RecipiesByStuff.get(Vehicles.BMSMineseeker)!;
+      bmsMineseeker_RecipeTree = {
+        stuff: Vehicles.BMSMineseeker,
+        selectedRecipe: bmsMineseeker[0],
+        recipes: bmsMineseeker,
+        required: [],
+      };
+    });
+
+    test("has correct Small Assembly Station recipe requirements", () => {
+      const recipe = bmsMineseeker[0];
+      expect(recipe.required).toEqual([
+        { stuff: Materials.ConstructionMaterials, count: 125 },
+        { stuff: Materials.AssemblyMaterialsI, count: 10 },
+        { stuff: Materials.AssemblyMaterialsII, count: 20 },
+      ]);
+      expect(recipe.produced).toEqual([
+        { stuff: Vehicles.BMSMineseeker, count: 1 },
+      ]);
+    });
+
+    test("has only one recipe (no mass production)", () => {
+      expect(bmsMineseeker.length).toBe(1);
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const result = calculateComponents(bmsMineseeker_RecipeTree, 1);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.ConstructionMaterials, count: 125 },
+        { stuff: Materials.AssemblyMaterialsI, count: 10 },
+        { stuff: Materials.AssemblyMaterialsII, count: 20 },
+      ]);
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const result = calculateComponents(bmsMineseeker_RecipeTree, 3);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.ConstructionMaterials, count: 375 },
+        { stuff: Materials.AssemblyMaterialsI, count: 30 },
+        { stuff: Materials.AssemblyMaterialsII, count: 60 },
+      ]);
+    });
+
+    test("can be calculated without errors", () => {
+      expect(() =>
+        calculateComponents(bmsMineseeker_RecipeTree, 1)
+      ).not.toThrow();
+      const result = calculateComponents(bmsMineseeker_RecipeTree, 1);
       expect(result.initial.length).toBeGreaterThan(0);
     });
   });
