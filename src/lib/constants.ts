@@ -192,4 +192,5 @@ export const ICONS_MAP = new Map<string, string>([
   // Train Vehicles
   [Vehicles.BMSLinerunner, "SmallGaugeFlatbedCarVehicleIcon"],
   [Vehicles.BMSMineseeker, "SmallGaugeEngineVehicleIcon"],
+  [Vehicles.BMSOverseerSkyHauler, "LargeCraneItemIcon"],
 ]);
