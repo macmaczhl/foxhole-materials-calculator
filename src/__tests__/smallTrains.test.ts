@@ -51,7 +51,7 @@ describe("Small Train Vehicles", () => {
     });
 
     test("small train recipes map has correct size", () => {
-      expect(smallTrainRecipes.size).toBe(4);
+      expect(smallTrainRecipes.size).toBe(5);
     });
   });
 
@@ -298,6 +298,76 @@ describe("Small Train Vehicles", () => {
         calculateComponents(bmsTinderboxRecipeTree, 1)
       ).not.toThrow();
       const result = calculateComponents(bmsTinderboxRecipeTree, 1);
+      expect(result.initial.length).toBeGreaterThan(0);
+    });
+  });
+
+  describe("BMS Stowheel (Small Box Car)", () => {
+    let bmsStowheel: IRecipe[];
+    let bmsStowheel_RecipeTree: RecipeTree;
+
+    beforeEach(() => {
+      bmsStowheel = RecipiesByStuff.get(Vehicles.BMSStowheel)!;
+      bmsStowheel_RecipeTree = {
+        stuff: Vehicles.BMSStowheel,
+        selectedRecipe: bmsStowheel[0],
+        recipes: bmsStowheel,
+        required: [],
+      };
+    });
+
+    test("BMS Stowheel has recipes defined", () => {
+      expect(RecipiesByStuff.has(Vehicles.BMSStowheel)).toBe(true);
+      const recipes = RecipiesByStuff.get(Vehicles.BMSStowheel);
+      expect(recipes).toBeDefined();
+      expect(recipes!.length).toBeGreaterThan(0);
+    });
+
+    test("BMS Stowheel is in the small train recipes map", () => {
+      expect(smallTrainRecipes.has(Vehicles.BMSStowheel)).toBe(true);
+    });
+
+    test("has correct Small Assembly Station recipe requirements", () => {
+      const recipe = bmsStowheel[0];
+      expect(recipe.required).toEqual([
+        { stuff: Materials.ConstructionMaterials, count: 35 },
+        { stuff: Materials.AssemblyMaterialsI, count: 5 },
+        { stuff: Materials.AssemblyMaterialsII, count: 15 },
+      ]);
+      expect(recipe.produced).toEqual([
+        { stuff: Vehicles.BMSStowheel, count: 1 },
+      ]);
+    });
+
+    test("has only one recipe (no mass production)", () => {
+      expect(bmsStowheel.length).toBe(1);
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const result = calculateComponents(bmsStowheel_RecipeTree, 1);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.ConstructionMaterials, count: 35 },
+        { stuff: Materials.AssemblyMaterialsI, count: 5 },
+        { stuff: Materials.AssemblyMaterialsII, count: 15 },
+      ]);
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const result = calculateComponents(bmsStowheel_RecipeTree, 2);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.ConstructionMaterials, count: 70 },
+        { stuff: Materials.AssemblyMaterialsI, count: 10 },
+        { stuff: Materials.AssemblyMaterialsII, count: 30 },
+      ]);
+    });
+
+    test("can be calculated without errors", () => {
+      expect(() =>
+        calculateComponents(bmsStowheel_RecipeTree, 1)
+      ).not.toThrow();
+      const result = calculateComponents(bmsStowheel_RecipeTree, 1);
       expect(result.initial.length).toBeGreaterThan(0);
     });
   });
