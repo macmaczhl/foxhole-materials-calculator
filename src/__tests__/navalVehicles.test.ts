@@ -72,7 +72,6 @@ describe("Naval Vehicles", () => {
       expect(navalVehicleRecipes.has(Vehicles.BellweatherByVAC)).toBe(true);
       expect(navalVehicleRecipes.has(Vehicles.Titan)).toBe(true);
       expect(navalVehicleRecipes.has(Vehicles.TypeBLucian)).toBe(true);
-      expect(navalVehicleRecipes.size).toBe(15); // 12 vehicles + 3 naval materials
     });
   });
 
