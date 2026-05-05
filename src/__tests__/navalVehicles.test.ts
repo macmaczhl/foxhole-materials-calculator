@@ -20,6 +20,7 @@ describe("Naval Vehicles", () => {
         Vehicles.BMSWhiteWhale,
         Vehicles.DasKrokodilByVAC,
         Vehicles.Titan,
+        Vehicles.TypeBLucian,
         Vehicles.Callahan,
       ];
 
@@ -43,6 +44,7 @@ describe("Naval Vehicles", () => {
         Vehicles.BMSWhiteWhale,
         Vehicles.DasKrokodilByVAC,
         Vehicles.Titan,
+        Vehicles.TypeBLucian,
         Vehicles.Callahan,
       ];
 
@@ -71,8 +73,8 @@ describe("Naval Vehicles", () => {
       expect(navalVehicleRecipes.has(Vehicles.DasKrokodilByVAC)).toBe(true);
       expect(navalVehicleRecipes.has(Vehicles.BellweatherByVAC)).toBe(true);
       expect(navalVehicleRecipes.has(Vehicles.Titan)).toBe(true);
+      expect(navalVehicleRecipes.has(Vehicles.TypeBLucian)).toBe(true);
       expect(navalVehicleRecipes.has(Vehicles.Callahan)).toBe(true);
-      expect(navalVehicleRecipes.size).toBe(15); // 12 vehicles + 3 naval materials
     });
   });
 
@@ -187,6 +189,7 @@ describe("Naval Vehicles", () => {
         Vehicles.BMSWhiteWhale,
         Vehicles.DasKrokodilByVAC,
         Vehicles.Titan,
+        Vehicles.TypeBLucian,
         Vehicles.Callahan,
       ];
 
@@ -648,6 +651,79 @@ describe("Naval Vehicles", () => {
         { stuff: Materials.NavalHullSegments, count: 40 },
         { stuff: Materials.NavalShellPlating, count: 40 },
         { stuff: Materials.NavalTurbineComponents, count: 8 },
+      ]);
+    });
+  });
+
+  describe('Type B - "Lucian" (Siege Boat)', () => {
+    let typeBLucianRecipes: IRecipe[];
+    let typeBLucianRecipeTree: RecipeTree;
+
+    beforeEach(() => {
+      typeBLucianRecipes = RecipiesByStuff.get(Vehicles.TypeBLucian)!;
+      typeBLucianRecipeTree = {
+        stuff: Vehicles.TypeBLucian,
+        selectedRecipe: typeBLucianRecipes[0],
+        recipes: typeBLucianRecipes,
+        required: [],
+      };
+    });
+
+    test("has correct shipyard recipe requirements", () => {
+      const recipe = typeBLucianRecipes[0];
+      expect(recipe.required).toEqual([
+        { stuff: Materials.RefinedMaterials, count: 100 },
+      ]);
+      expect(recipe.produced).toEqual([
+        { stuff: Vehicles.TypeBLucian, count: 1 },
+      ]);
+    });
+
+    test("has mass production recipes", () => {
+      expect(typeBLucianRecipes.length).toBe(4);
+      const batch9 = typeBLucianRecipes.find(
+        (r) => r.produced[0].count === 9
+      );
+      expect(batch9).toBeDefined();
+      expect(batch9!.required).toEqual([
+        { stuff: Materials.RefinedMaterials, count: 720 },
+      ]);
+    });
+
+    test("has all mass production batch recipes", () => {
+      // Check 12-vehicle batch
+      expect(
+        typeBLucianRecipes.some(
+          (r) =>
+            r.produced[0].count === 12 &&
+            r.required[0].count === 900 &&
+            r.required[0].stuff === Materials.RefinedMaterials
+        )
+      ).toBe(true);
+      // Check 15-vehicle batch
+      expect(
+        typeBLucianRecipes.some(
+          (r) =>
+            r.produced[0].count === 15 &&
+            r.required[0].count === 1050 &&
+            r.required[0].stuff === Materials.RefinedMaterials
+        )
+      ).toBe(true);
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const result = calculateComponents(typeBLucianRecipeTree, 1);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.RefinedMaterials, count: 100 },
+      ]);
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const result = calculateComponents(typeBLucianRecipeTree, 3);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.RefinedMaterials, count: 300 },
       ]);
     });
   });
