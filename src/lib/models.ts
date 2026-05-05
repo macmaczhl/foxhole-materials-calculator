@@ -213,6 +213,7 @@ export enum Vehicles {
   // Train Vehicles
   BMSLinerunner = 'BMS Linerunner',
   BMSMineseeker = 'BMS Mineseeker',
+  BMSOverseerSkyHauler = 'BMS - Overseer Sky-Hauler',
   BMSHoldout = 'BMS Holdout',
 }
 
@@ -397,6 +398,7 @@ export const availableMaterials: Stuff[] = [
   // Train Vehicles
   { name: Vehicles.BMSLinerunner },
   { name: Vehicles.BMSMineseeker },
+  { name: Vehicles.BMSOverseerSkyHauler },
   { name: Vehicles.BMSHoldout },
 ];
 
