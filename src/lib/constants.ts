@@ -197,4 +197,7 @@ export const ICONS_MAP = new Map<string, string>([
   [Vehicles.BMSRailtruck, "SmallGaugeResourceCarVehicleIcon"],
   [Vehicles.BMSOverseerSkyHauler, "LargeCraneItemIcon"],
   [Vehicles.BMSHoldout, "InfantryCarVehicleIcon"],
+  // Amphibious Scout Aircraft
+  [Vehicles.LuminaryMkIVHerald, "AircraftScoutWIcon"],
+  [Vehicles.A51VentiDaedalus, "AircraftScoutCIcon"],
 ]);

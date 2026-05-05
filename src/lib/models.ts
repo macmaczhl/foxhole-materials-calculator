@@ -218,6 +218,9 @@ export enum Vehicles {
   BMSRailtruck = 'BMS Railtruck',
   BMSOverseerSkyHauler = 'BMS - Overseer Sky-Hauler',
   BMSHoldout = 'BMS Holdout',
+  // Amphibious Scout Aircraft
+  LuminaryMkIVHerald = 'Luminary Mk. IV Herald',
+  A51VentiDaedalus = 'A51 Venti "Daedalus"',
 }
 
 export enum RawResources {
@@ -406,6 +409,9 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.BMSRailtruck },
   { name: Vehicles.BMSOverseerSkyHauler },
   { name: Vehicles.BMSHoldout },
+  // Amphibious Scout Aircraft
+  { name: Vehicles.LuminaryMkIVHerald },
+  { name: Vehicles.A51VentiDaedalus },
 ];
 
 export const stuffList: Stuff[] = availableMaterials;
