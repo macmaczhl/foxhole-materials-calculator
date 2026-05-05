@@ -208,7 +208,10 @@ export enum Vehicles {
   TypeCCharon = 'Type C - "Charon"',
   BMSWhiteWhale = 'BMS - White Whale',
   DasKrokodilByVAC = 'Das Krokodil by VAC',
+  BellweatherByVAC = 'Bellweather by VAC',
   Titan = 'Titan',
+  // Train Vehicles
+  BMSLinerunner = 'BMS Linerunner',
 }
 
 export enum RawResources {
@@ -387,7 +390,10 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.TypeCCharon },
   { name: Vehicles.BMSWhiteWhale },
   { name: Vehicles.DasKrokodilByVAC },
+  { name: Vehicles.BellweatherByVAC },
   { name: Vehicles.Titan },
+  // Train Vehicles
+  { name: Vehicles.BMSLinerunner },
 ];
 
 export const stuffList: Stuff[] = availableMaterials;
