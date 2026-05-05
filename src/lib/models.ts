@@ -209,6 +209,8 @@ export enum Vehicles {
   BMSWhiteWhale = 'BMS - White Whale',
   DasKrokodilByVAC = 'Das Krokodil by VAC',
   Titan = 'Titan',
+  // Train Vehicles
+  BMSHoldout = 'BMS Holdout',
 }
 
 export enum RawResources {
@@ -388,6 +390,8 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.BMSWhiteWhale },
   { name: Vehicles.DasKrokodilByVAC },
   { name: Vehicles.Titan },
+  // Train Vehicles
+  { name: Vehicles.BMSHoldout },
 ];
 
 export const stuffList: Stuff[] = availableMaterials;
