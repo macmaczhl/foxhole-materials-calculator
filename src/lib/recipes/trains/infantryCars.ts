@@ -1,7 +1,5 @@
-import { Materials, Vehicles, IRecipe } from "../models";
-import { createRecipe } from "./base";
-
-// ===== TRAIN VEHICLES =====
+import { Materials, Vehicles, IRecipe } from "../../models";
+import { createRecipe } from "../base";
 
 // BMS Holdout (Infantry Car) recipes
 const bmsHoldoutRecipes: IRecipe[] = [
@@ -16,6 +14,6 @@ const bmsHoldoutRecipes: IRecipe[] = [
   ),
 ];
 
-export const trainVehicleRecipes = new Map<string, IRecipe[]>([
+export const infantryCarRecipes = new Map<string, IRecipe[]>([
   [Vehicles.BMSHoldout, bmsHoldoutRecipes],
 ]);

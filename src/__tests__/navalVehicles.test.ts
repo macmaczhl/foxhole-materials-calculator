@@ -67,8 +67,9 @@ describe("Naval Vehicles", () => {
       expect(navalVehicleRecipes.has(Vehicles.BMSLonghook)).toBe(true);
       expect(navalVehicleRecipes.has(Vehicles.BMSWhiteWhale)).toBe(true);
       expect(navalVehicleRecipes.has(Vehicles.DasKrokodilByVAC)).toBe(true);
+      expect(navalVehicleRecipes.has(Vehicles.BellweatherByVAC)).toBe(true);
       expect(navalVehicleRecipes.has(Vehicles.Titan)).toBe(true);
-      expect(navalVehicleRecipes.size).toBe(13); // 10 vehicles + 3 naval materials
+      expect(navalVehicleRecipes.size).toBe(14); // 11 vehicles + 3 naval materials
     });
   });
 

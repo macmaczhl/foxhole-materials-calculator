@@ -4,7 +4,7 @@
 import { Materials, RecipeTree, IRecipe, Vehicles } from "../lib/models";
 import { calculateComponents } from "../lib/services/calculateComponents";
 import { RecipiesByStuff } from "../lib/recipes";
-import { trainVehicleRecipes } from "../lib/recipes/trainVehicles";
+import { infantryCarRecipes } from "../lib/recipes/trains/infantryCars";
 
 describe("Train Vehicles", () => {
   describe("Recipe availability", () => {
@@ -33,8 +33,8 @@ describe("Train Vehicles", () => {
     });
 
     test("train vehicles are in the train vehicle recipes map", () => {
-      expect(trainVehicleRecipes.has(Vehicles.BMSHoldout)).toBe(true);
-      expect(trainVehicleRecipes.size).toBe(1);
+      expect(infantryCarRecipes.has(Vehicles.BMSHoldout)).toBe(true);
+      expect(infantryCarRecipes.size).toBe(1);
     });
   });
 
