@@ -211,8 +211,12 @@ export enum Vehicles {
   BellweatherByVAC = 'Bellweather by VAC',
   Titan = 'Titan',
   TypeBLucian = 'Type B - "Lucian"',
+  Callahan = 'Callahan',
   // Train Vehicles
   BMSLinerunner = 'BMS Linerunner',
+  BMSMineseeker = 'BMS Mineseeker',
+  BMSOverseerSkyHauler = 'BMS - Overseer Sky-Hauler',
+  BMSHoldout = 'BMS Holdout',
 }
 
 export enum RawResources {
@@ -394,8 +398,12 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.BellweatherByVAC },
   { name: Vehicles.Titan },
   { name: Vehicles.TypeBLucian },
+  { name: Vehicles.Callahan },
   // Train Vehicles
   { name: Vehicles.BMSLinerunner },
+  { name: Vehicles.BMSMineseeker },
+  { name: Vehicles.BMSOverseerSkyHauler },
+  { name: Vehicles.BMSHoldout },
 ];
 
 export const stuffList: Stuff[] = availableMaterials;

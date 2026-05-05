@@ -21,6 +21,7 @@ describe("Naval Vehicles", () => {
         Vehicles.DasKrokodilByVAC,
         Vehicles.Titan,
         Vehicles.TypeBLucian,
+        Vehicles.Callahan,
       ];
 
       navalVehicles.forEach((vehicle) => {
@@ -44,6 +45,7 @@ describe("Naval Vehicles", () => {
         Vehicles.DasKrokodilByVAC,
         Vehicles.Titan,
         Vehicles.TypeBLucian,
+        Vehicles.Callahan,
       ];
 
       navalVehicles.forEach((vehicle) => {
@@ -72,6 +74,7 @@ describe("Naval Vehicles", () => {
       expect(navalVehicleRecipes.has(Vehicles.BellweatherByVAC)).toBe(true);
       expect(navalVehicleRecipes.has(Vehicles.Titan)).toBe(true);
       expect(navalVehicleRecipes.has(Vehicles.TypeBLucian)).toBe(true);
+      expect(navalVehicleRecipes.has(Vehicles.Callahan)).toBe(true);
     });
   });
 
@@ -187,6 +190,7 @@ describe("Naval Vehicles", () => {
         Vehicles.DasKrokodilByVAC,
         Vehicles.Titan,
         Vehicles.TypeBLucian,
+        Vehicles.Callahan,
       ];
 
       navalVehicles.forEach((vehicle) => {
@@ -547,6 +551,57 @@ describe("Naval Vehicles", () => {
 
       expect(result.initial).toEqual([
         { stuff: Materials.BasicMaterials, count: 300 },
+      ]);
+    });
+  });
+
+  describe("Callahan (Battleship)", () => {
+    let callahanRecipes: IRecipe[];
+    let callahanRecipeTree: RecipeTree;
+
+    beforeEach(() => {
+      callahanRecipes = RecipiesByStuff.get(Vehicles.Callahan)!;
+      callahanRecipeTree = {
+        stuff: Vehicles.Callahan,
+        selectedRecipe: callahanRecipes[0],
+        recipes: callahanRecipes,
+        required: [],
+      };
+    });
+
+    test("has correct dry dock recipe requirements", () => {
+      const recipe = callahanRecipes[0];
+      expect(recipe.required).toEqual([
+        { stuff: Materials.NavalHullSegments, count: 20 },
+        { stuff: Materials.NavalShellPlating, count: 20 },
+        { stuff: Materials.NavalTurbineComponents, count: 4 },
+      ]);
+      expect(recipe.produced).toEqual([
+        { stuff: Vehicles.Callahan, count: 1 },
+      ]);
+    });
+
+    test("has only dry dock recipe (no mass production)", () => {
+      expect(callahanRecipes.length).toBe(1);
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const result = calculateComponents(callahanRecipeTree, 1);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.NavalHullSegments, count: 20 },
+        { stuff: Materials.NavalShellPlating, count: 20 },
+        { stuff: Materials.NavalTurbineComponents, count: 4 },
+      ]);
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const result = calculateComponents(callahanRecipeTree, 2);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.NavalHullSegments, count: 40 },
+        { stuff: Materials.NavalShellPlating, count: 40 },
+        { stuff: Materials.NavalTurbineComponents, count: 8 },
       ]);
     });
   });

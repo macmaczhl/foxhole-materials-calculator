@@ -265,6 +265,19 @@ const typeBLucianRecipes: IRecipe[] = [
   ),
 ];
 
+// Callahan (Battleship) recipes
+const callahanRecipes: IRecipe[] = [
+  // Dry Dock production: 20 x Naval Hull Segments + 20 x Naval Shell Plating + 4 x Naval Turbine Components → 1 x Callahan
+  createRecipe(
+    [
+      { stuff: Materials.NavalHullSegments, count: 20 },
+      { stuff: Materials.NavalShellPlating, count: 20 },
+      { stuff: Materials.NavalTurbineComponents, count: 4 },
+    ],
+    [{ stuff: Vehicles.Callahan, count: 1 }]
+  ),
+];
+
 export const navalVehicleRecipes = new Map<string, IRecipe[]>([
   [Materials.NavalHullSegments, navalHullSegmentsRecipes],
   [Materials.NavalShellPlating, navalShellPlatingRecipes],
@@ -281,4 +294,5 @@ export const navalVehicleRecipes = new Map<string, IRecipe[]>([
   [Vehicles.BellweatherByVAC, bellweatherByVACRecipes],
   [Vehicles.Titan, titanRecipes],
   [Vehicles.TypeBLucian, typeBLucianRecipes],
+  [Vehicles.Callahan, callahanRecipes],
 ]);
