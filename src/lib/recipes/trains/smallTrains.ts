@@ -40,8 +40,22 @@ const bmsRailtruckRecipes: IRecipe[] = [
   ),
 ];
 
+// BMS Tinderbox (Small Liquid Container Car) recipes
+const bmsTinderboxRecipes: IRecipe[] = [
+  // Small Assembly Station: 35 x Construction Materials + 5 x Assembly Materials I + 15 x Assembly Materials II → 1 x BMS Tinderbox
+  createRecipe(
+    [
+      { stuff: Materials.ConstructionMaterials, count: 35 },
+      { stuff: Materials.AssemblyMaterialsI, count: 5 },
+      { stuff: Materials.AssemblyMaterialsII, count: 15 },
+    ],
+    [{ stuff: Vehicles.BMSTinderbox, count: 1 }]
+  ),
+];
+
 export const smallTrainRecipes = new Map<string, IRecipe[]>([
   [Vehicles.BMSLinerunner, bmsLinerunnerRecipes],
   [Vehicles.BMSMineseeker, bmsMineseeker],
   [Vehicles.BMSRailtruck, bmsRailtruckRecipes],
+  [Vehicles.BMSTinderbox, bmsTinderboxRecipes],
 ]);

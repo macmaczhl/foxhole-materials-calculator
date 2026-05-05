@@ -217,6 +217,7 @@ export enum Vehicles {
   BMSRailtruck = 'BMS Railtruck',
   BMSOverseerSkyHauler = 'BMS - Overseer Sky-Hauler',
   BMSHoldout = 'BMS Holdout',
+  BMSTinderbox = 'BMS Tinderbox',
 }
 
 export enum RawResources {
@@ -404,6 +405,7 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.BMSRailtruck },
   { name: Vehicles.BMSOverseerSkyHauler },
   { name: Vehicles.BMSHoldout },
+  { name: Vehicles.BMSTinderbox },
 ];
 
 export const stuffList: Stuff[] = availableMaterials;
