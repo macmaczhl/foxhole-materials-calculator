@@ -1,13 +1,12 @@
 /**
  * Tests for vehicle recipe organization by category
  */
-import { Vehicles } from "../lib/models";
+import { Vehicles, availableMaterials } from "../lib/models";
 import { vehicleRecipes } from "../lib/recipes/vehicles";
 import { armouredFightingVehicleRecipes } from "../lib/recipes/armouredFightingVehicles";
 import { fieldWeaponRecipes } from "../lib/recipes/fieldWeapons";
 import { tankRecipes } from "../lib/recipes/tanks";
 import { logisticsVehicleRecipes } from "../lib/recipes/logisticsVehicles";
-import { trailerRecipes } from "../lib/recipes/trailers";
 import { scoutVehicleRecipes } from "../lib/recipes/scoutVehicles";
 import { lightTankRecipes } from "../lib/recipes/lightTanks";
 import { assaultTankRecipes } from "../lib/recipes/assaultTanks";
@@ -19,8 +18,6 @@ import { superTankRecipes } from "../lib/recipes/superTanks";
 import { constructionVehicleRecipes } from "../lib/recipes/constructionVehicles";
 import { lightUtilityVehicleRecipes } from "../lib/recipes/lightUtilityVehicles";
 import { motorcycleRecipes } from "../lib/recipes/motorcycles";
-import { ambulanceRecipes } from "../lib/recipes/ambulances";
-import { navalVehicleRecipes } from "../lib/recipes/navalVehicles";
 
 describe("Vehicle Recipe Organization", () => {
   describe("Category Files", () => {
@@ -166,28 +163,16 @@ describe("Vehicle Recipe Organization", () => {
   });
 
   describe("Central Registry", () => {
-    test("vehicleRecipes contains all vehicles from all categories", () => {
-      const totalExpectedSize =
-        armouredFightingVehicleRecipes.size +
-        fieldWeaponRecipes.size +
-        tankRecipes.size +
-        logisticsVehicleRecipes.size +
-        trailerRecipes.size +
-        scoutVehicleRecipes.size +
-        lightTankRecipes.size +
-        assaultTankRecipes.size +
-        siegeTankRecipes.size +
-        destroyerTankRecipes.size +
-        battleTankRecipes.size +
-        cruiserTankRecipes.size +
-        superTankRecipes.size +
-        constructionVehicleRecipes.size +
-        lightUtilityVehicleRecipes.size +
-        motorcycleRecipes.size +
-        ambulanceRecipes.size +
-        navalVehicleRecipes.size;
+    test("vehicleRecipes contains a recipe for every vehicle listed in availableMaterials", () => {
+      const vehicleValues = new Set(Object.values(Vehicles));
+      const vehiclesInMaterials = availableMaterials
+        .map((s) => s.name)
+        .filter((name) => vehicleValues.has(name as Vehicles));
 
-      expect(vehicleRecipes.size).toBe(totalExpectedSize);
+      expect(vehiclesInMaterials.length).toBeGreaterThan(0);
+      for (const vehicleName of vehiclesInMaterials) {
+        expect(vehicleRecipes.has(vehicleName)).toBe(true);
+      }
     });
 
     test("vehicleRecipes contains recipes from armouredFightingVehicles", () => {
