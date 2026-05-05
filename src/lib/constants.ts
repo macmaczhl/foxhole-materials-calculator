@@ -189,4 +189,6 @@ export const ICONS_MAP = new Map<string, string>([
   [Vehicles.DasKrokodilByVAC, "LightFreighterVehicleIcon"],
   [Vehicles.BellweatherByVAC, "MineboatIcon"],
   [Vehicles.Titan, "LargeShipBattleshipCIcon"],
+  // Train Vehicles
+  [Vehicles.BMSLinerunner, "SmallGaugeFlatbedCarVehicleIcon"],
 ]);
