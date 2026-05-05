@@ -278,6 +278,32 @@ const callahanRecipes: IRecipe[] = [
   ),
 ];
 
+// ===== STRIDER =====
+
+// Strider (Colonial Gunship) recipes
+const striderRecipes: IRecipe[] = [
+  // Shipyard production: 500 x Basic Materials → 1 x Strider
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 500 }],
+    [{ stuff: Vehicles.Strider, count: 1 }]
+  ),
+  // Mass Production Factory: 3600 x Basic Materials → 3 crates of 3 x Strider (9 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 3600 }],
+    [{ stuff: Vehicles.Strider, count: 9 }]
+  ),
+  // Mass Production Factory: 4500 x Basic Materials → 4 crates of 3 x Strider (12 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 4500 }],
+    [{ stuff: Vehicles.Strider, count: 12 }]
+  ),
+  // Mass Production Factory: 5250 x Basic Materials → 5 crates of 3 x Strider (15 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 5250 }],
+    [{ stuff: Vehicles.Strider, count: 15 }]
+  ),
+];
+
 export const navalVehicleRecipes = new Map<string, IRecipe[]>([
   [Materials.NavalHullSegments, navalHullSegmentsRecipes],
   [Materials.NavalShellPlating, navalShellPlatingRecipes],
@@ -295,4 +321,5 @@ export const navalVehicleRecipes = new Map<string, IRecipe[]>([
   [Vehicles.Titan, titanRecipes],
   [Vehicles.TypeBLucian, typeBLucianRecipes],
   [Vehicles.Callahan, callahanRecipes],
+  [Vehicles.Strider, striderRecipes],
 ]);

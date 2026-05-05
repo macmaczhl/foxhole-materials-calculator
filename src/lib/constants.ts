@@ -191,6 +191,7 @@ export const ICONS_MAP = new Map<string, string>([
   [Vehicles.Titan, "LargeShipBattleshipCIcon"],
   [Vehicles.TypeBLucian, "GunBoat2CVehicleIcon"],
   [Vehicles.Callahan, "LargeShipBattleshipWIcon"],
+  [Vehicles.Strider, "MediumBoatCIcon"],
   // Train Vehicles
   [Vehicles.BMSLinerunner, "SmallGaugeFlatbedCarVehicleIcon"],
   [Vehicles.BMSMineseeker, "SmallGaugeEngineVehicleIcon"],
