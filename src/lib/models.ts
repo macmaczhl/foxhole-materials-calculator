@@ -212,12 +212,15 @@ export enum Vehicles {
   Titan = 'Titan',
   TypeBLucian = 'Type B - "Lucian"',
   Callahan = 'Callahan',
+  Strider = 'Strider',
   // Train Vehicles
   BMSLinerunner = 'BMS Linerunner',
   BMSMineseeker = 'BMS Mineseeker',
   BMSRailtruck = 'BMS Railtruck',
   BMSOverseerSkyHauler = 'BMS - Overseer Sky-Hauler',
   BMSHoldout = 'BMS Holdout',
+  BMSTinderbox = 'BMS Tinderbox',
+  BMSStowheel = 'BMS Stowheel',
   // Amphibious Scout Aircraft
   LuminaryMkIVHerald = 'Luminary Mk. IV Herald',
   A51VentiDaedalus = 'A51 Venti "Daedalus"',
@@ -403,12 +406,15 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.Titan },
   { name: Vehicles.TypeBLucian },
   { name: Vehicles.Callahan },
+  { name: Vehicles.Strider },
   // Train Vehicles
   { name: Vehicles.BMSLinerunner },
   { name: Vehicles.BMSMineseeker },
   { name: Vehicles.BMSRailtruck },
   { name: Vehicles.BMSOverseerSkyHauler },
   { name: Vehicles.BMSHoldout },
+  { name: Vehicles.BMSTinderbox },
+  { name: Vehicles.BMSStowheel },
   // Amphibious Scout Aircraft
   { name: Vehicles.LuminaryMkIVHerald },
   { name: Vehicles.A51VentiDaedalus },

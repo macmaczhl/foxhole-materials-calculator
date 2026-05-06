@@ -22,6 +22,7 @@ describe("Naval Vehicles", () => {
         Vehicles.Titan,
         Vehicles.TypeBLucian,
         Vehicles.Callahan,
+        Vehicles.Strider,
       ];
 
       navalVehicles.forEach((vehicle) => {
@@ -46,6 +47,7 @@ describe("Naval Vehicles", () => {
         Vehicles.Titan,
         Vehicles.TypeBLucian,
         Vehicles.Callahan,
+        Vehicles.Strider,
       ];
 
       navalVehicles.forEach((vehicle) => {
@@ -75,6 +77,7 @@ describe("Naval Vehicles", () => {
       expect(navalVehicleRecipes.has(Vehicles.Titan)).toBe(true);
       expect(navalVehicleRecipes.has(Vehicles.TypeBLucian)).toBe(true);
       expect(navalVehicleRecipes.has(Vehicles.Callahan)).toBe(true);
+      expect(navalVehicleRecipes.has(Vehicles.Strider)).toBe(true);
     });
   });
 
@@ -191,6 +194,7 @@ describe("Naval Vehicles", () => {
         Vehicles.Titan,
         Vehicles.TypeBLucian,
         Vehicles.Callahan,
+        Vehicles.Strider,
       ];
 
       navalVehicles.forEach((vehicle) => {
@@ -724,6 +728,77 @@ describe("Naval Vehicles", () => {
 
       expect(result.initial).toEqual([
         { stuff: Materials.RefinedMaterials, count: 300 },
+      ]);
+    });
+  });
+
+  describe("Strider (Colonial Gunship)", () => {
+    let striderRecipes: IRecipe[];
+    let striderRecipeTree: RecipeTree;
+
+    beforeEach(() => {
+      striderRecipes = RecipiesByStuff.get(Vehicles.Strider)!;
+      striderRecipeTree = {
+        stuff: Vehicles.Strider,
+        selectedRecipe: striderRecipes[0],
+        recipes: striderRecipes,
+        required: [],
+      };
+    });
+
+    test("has correct shipyard recipe requirements", () => {
+      const recipe = striderRecipes[0];
+      expect(recipe.required).toEqual([
+        { stuff: Materials.BasicMaterials, count: 500 },
+      ]);
+      expect(recipe.produced).toEqual([
+        { stuff: Vehicles.Strider, count: 1 },
+      ]);
+    });
+
+    test("has mass production recipes", () => {
+      expect(striderRecipes.length).toBe(4);
+      const batch9 = striderRecipes.find((r) => r.produced[0].count === 9);
+      expect(batch9).toBeDefined();
+      expect(batch9!.required).toEqual([
+        { stuff: Materials.BasicMaterials, count: 3600 },
+      ]);
+    });
+
+    test("has all mass production batch recipes", () => {
+      // Check 12-vehicle batch
+      expect(
+        striderRecipes.some(
+          (r) =>
+            r.produced[0].count === 12 &&
+            r.required[0].count === 4500 &&
+            r.required[0].stuff === Materials.BasicMaterials
+        )
+      ).toBe(true);
+      // Check 15-vehicle batch
+      expect(
+        striderRecipes.some(
+          (r) =>
+            r.produced[0].count === 15 &&
+            r.required[0].count === 5250 &&
+            r.required[0].stuff === Materials.BasicMaterials
+        )
+      ).toBe(true);
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const result = calculateComponents(striderRecipeTree, 1);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.BasicMaterials, count: 500 },
+      ]);
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const result = calculateComponents(striderRecipeTree, 3);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.BasicMaterials, count: 1500 },
       ]);
     });
   });

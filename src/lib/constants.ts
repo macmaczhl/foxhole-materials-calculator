@@ -191,12 +191,15 @@ export const ICONS_MAP = new Map<string, string>([
   [Vehicles.Titan, "LargeShipBattleshipCIcon"],
   [Vehicles.TypeBLucian, "GunBoat2CVehicleIcon"],
   [Vehicles.Callahan, "LargeShipBattleshipWIcon"],
+  [Vehicles.Strider, "MediumBoatCIcon"],
   // Train Vehicles
   [Vehicles.BMSLinerunner, "SmallGaugeFlatbedCarVehicleIcon"],
   [Vehicles.BMSMineseeker, "SmallGaugeEngineVehicleIcon"],
   [Vehicles.BMSRailtruck, "SmallGaugeResourceCarVehicleIcon"],
   [Vehicles.BMSOverseerSkyHauler, "LargeCraneItemIcon"],
   [Vehicles.BMSHoldout, "InfantryCarVehicleIcon"],
+  [Vehicles.BMSTinderbox, "SmallTrainFuelContainerIcon"],
+  [Vehicles.BMSStowheel, "SmallTrainShippingContainerIcon"],
   // Amphibious Scout Aircraft
   [Vehicles.LuminaryMkIVHerald, "AircraftScoutWIcon"],
   [Vehicles.A51VentiDaedalus, "AircraftScoutCIcon"],
