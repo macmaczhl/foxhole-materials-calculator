@@ -214,6 +214,7 @@ export enum Vehicles {
   Callahan = 'Callahan',
   Strider = 'Strider',
   K81eSombre = 'K-81e "Sombre"',
+  RinnspeirOrnitierClassGunship = 'Rinnspeir Ornitier-Class Gunship',
   // Train Vehicles
   BMSLinerunner = 'BMS Linerunner',
   BMSMineseeker = 'BMS Mineseeker',
@@ -409,6 +410,7 @@ export const availableMaterials: Stuff[] = [
   { name: Vehicles.Callahan },
   { name: Vehicles.Strider },
   { name: Vehicles.K81eSombre },
+  { name: Vehicles.RinnspeirOrnitierClassGunship },
   // Train Vehicles
   { name: Vehicles.BMSLinerunner },
   { name: Vehicles.BMSMineseeker },
