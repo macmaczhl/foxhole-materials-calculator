@@ -23,6 +23,7 @@ describe("Naval Vehicles", () => {
         Vehicles.TypeBLucian,
         Vehicles.Callahan,
         Vehicles.Strider,
+        Vehicles.K81eSombre,
       ];
 
       navalVehicles.forEach((vehicle) => {
@@ -48,6 +49,7 @@ describe("Naval Vehicles", () => {
         Vehicles.TypeBLucian,
         Vehicles.Callahan,
         Vehicles.Strider,
+        Vehicles.K81eSombre,
       ];
 
       navalVehicles.forEach((vehicle) => {
@@ -78,6 +80,7 @@ describe("Naval Vehicles", () => {
       expect(navalVehicleRecipes.has(Vehicles.TypeBLucian)).toBe(true);
       expect(navalVehicleRecipes.has(Vehicles.Callahan)).toBe(true);
       expect(navalVehicleRecipes.has(Vehicles.Strider)).toBe(true);
+      expect(navalVehicleRecipes.has(Vehicles.K81eSombre)).toBe(true);
     });
   });
 
@@ -799,6 +802,77 @@ describe("Naval Vehicles", () => {
 
       expect(result.initial).toEqual([
         { stuff: Materials.BasicMaterials, count: 1500 },
+      ]);
+    });
+  });
+
+  describe('K-81e "Sombre" (Colonial Infantry Boat)', () => {
+    let sombreRecipes: IRecipe[];
+    let sombreRecipeTree: RecipeTree;
+
+    beforeEach(() => {
+      sombreRecipes = RecipiesByStuff.get(Vehicles.K81eSombre)!;
+      sombreRecipeTree = {
+        stuff: Vehicles.K81eSombre,
+        selectedRecipe: sombreRecipes[0],
+        recipes: sombreRecipes,
+        required: [],
+      };
+    });
+
+    test("has correct shipyard recipe requirements", () => {
+      const recipe = sombreRecipes[0];
+      expect(recipe.required).toEqual([
+        { stuff: Materials.BasicMaterials, count: 200 },
+      ]);
+      expect(recipe.produced).toEqual([
+        { stuff: Vehicles.K81eSombre, count: 1 },
+      ]);
+    });
+
+    test("has mass production recipes", () => {
+      expect(sombreRecipes.length).toBe(4);
+      const batch9 = sombreRecipes.find((r) => r.produced[0].count === 9);
+      expect(batch9).toBeDefined();
+      expect(batch9!.required).toEqual([
+        { stuff: Materials.BasicMaterials, count: 1440 },
+      ]);
+    });
+
+    test("has all mass production batch recipes", () => {
+      // Check 12-vehicle batch
+      expect(
+        sombreRecipes.some(
+          (r) =>
+            r.produced[0].count === 12 &&
+            r.required[0].count === 1800 &&
+            r.required[0].stuff === Materials.BasicMaterials
+        )
+      ).toBe(true);
+      // Check 15-vehicle batch
+      expect(
+        sombreRecipes.some(
+          (r) =>
+            r.produced[0].count === 15 &&
+            r.required[0].count === 2100 &&
+            r.required[0].stuff === Materials.BasicMaterials
+        )
+      ).toBe(true);
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const result = calculateComponents(sombreRecipeTree, 1);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.BasicMaterials, count: 200 },
+      ]);
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const result = calculateComponents(sombreRecipeTree, 3);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.BasicMaterials, count: 600 },
       ]);
     });
   });

@@ -21,6 +21,7 @@ import { smallTrainRecipes } from "./trains/smallTrains";
 import { largeCraneRecipes } from "./trains/largeCranes";
 import { infantryCarRecipes } from "./trains/infantryCars";
 import { flatbedCarRecipes } from "./trains/flatbedCars";
+import { amphibiousScoutAircraftRecipes } from "./aircrafts";
 
 /**
  * Central registry of all vehicle recipes.
@@ -47,6 +48,7 @@ import { flatbedCarRecipes } from "./trains/flatbedCars";
  * - trains/largeCranes.ts: Large Crane Vehicles
  * - trains/infantryCars.ts: Infantry Cars
  * - trains/flatbedCars.ts: Flatbed Cars
+ * - aircrafts/amphibiousScoutAircrafts.ts: Amphibious Scout Aircraft
  */
 export const vehicleRecipes = new Map<string, IRecipe[]>([
   ...armouredFightingVehicleRecipes,
@@ -71,4 +73,5 @@ export const vehicleRecipes = new Map<string, IRecipe[]>([
   ...largeCraneRecipes,
   ...infantryCarRecipes,
   ...flatbedCarRecipes,
+  ...amphibiousScoutAircraftRecipes,
 ]);
