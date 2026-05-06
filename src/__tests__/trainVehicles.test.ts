@@ -5,11 +5,12 @@ import { Materials, RecipeTree, IRecipe, Vehicles } from "../lib/models";
 import { calculateComponents } from "../lib/services/calculateComponents";
 import { RecipiesByStuff } from "../lib/recipes";
 import { infantryCarRecipes } from "../lib/recipes/trains/infantryCars";
+import { flatbedCarRecipes } from "../lib/recipes/trains/flatbedCars";
 
 describe("Train Vehicles", () => {
   describe("Recipe availability", () => {
     test("all train vehicles have recipes defined", () => {
-      const trainVehicles = [Vehicles.BMSHoldout];
+      const trainVehicles = [Vehicles.BMSHoldout, Vehicles.BMSLongrider];
 
       trainVehicles.forEach((vehicle) => {
         expect(RecipiesByStuff.has(vehicle)).toBe(true);
@@ -20,7 +21,7 @@ describe("Train Vehicles", () => {
     });
 
     test("all train vehicle recipes have valid requirements", () => {
-      const trainVehicles = [Vehicles.BMSHoldout];
+      const trainVehicles = [Vehicles.BMSHoldout, Vehicles.BMSLongrider];
 
       trainVehicles.forEach((vehicle) => {
         const recipes = RecipiesByStuff.get(vehicle)!;
@@ -35,6 +36,8 @@ describe("Train Vehicles", () => {
     test("train vehicles are in the train vehicle recipes map", () => {
       expect(infantryCarRecipes.has(Vehicles.BMSHoldout)).toBe(true);
       expect(infantryCarRecipes.size).toBe(1);
+      expect(flatbedCarRecipes.has(Vehicles.BMSLongrider)).toBe(true);
+      expect(flatbedCarRecipes.size).toBe(1);
     });
   });
 
@@ -89,9 +92,60 @@ describe("Train Vehicles", () => {
     });
   });
 
+  describe("BMS Longrider (Flatbed Car)", () => {
+    let bmsLongriderRecipes: IRecipe[];
+    let bmsLongriderRecipeTree: RecipeTree;
+
+    beforeEach(() => {
+      bmsLongriderRecipes = RecipiesByStuff.get(Vehicles.BMSLongrider)!;
+      bmsLongriderRecipeTree = {
+        stuff: Vehicles.BMSLongrider,
+        selectedRecipe: bmsLongriderRecipes[0],
+        recipes: bmsLongriderRecipes,
+        required: [],
+      };
+    });
+
+    test("has correct large assembly station recipe requirements", () => {
+      const recipe = bmsLongriderRecipes[0];
+      expect(recipe.required).toEqual([
+        { stuff: Materials.ProcessedConstructionMaterials, count: 20 },
+        { stuff: Materials.AssemblyMaterialsII, count: 15 },
+        { stuff: Materials.AssemblyMaterialsIII, count: 10 },
+      ]);
+      expect(recipe.produced).toEqual([
+        { stuff: Vehicles.BMSLongrider, count: 1 },
+      ]);
+    });
+
+    test("has only large assembly station recipe (no mass production)", () => {
+      expect(bmsLongriderRecipes.length).toBe(1);
+    });
+
+    test("calculates components correctly for single unit", () => {
+      const result = calculateComponents(bmsLongriderRecipeTree, 1);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.ProcessedConstructionMaterials, count: 20 },
+        { stuff: Materials.AssemblyMaterialsII, count: 15 },
+        { stuff: Materials.AssemblyMaterialsIII, count: 10 },
+      ]);
+    });
+
+    test("calculates components correctly for multiple units", () => {
+      const result = calculateComponents(bmsLongriderRecipeTree, 3);
+
+      expect(result.initial).toEqual([
+        { stuff: Materials.ProcessedConstructionMaterials, count: 60 },
+        { stuff: Materials.AssemblyMaterialsII, count: 45 },
+        { stuff: Materials.AssemblyMaterialsIII, count: 30 },
+      ]);
+    });
+  });
+
   describe("Recipe calculation integration", () => {
     test("all train vehicles can be calculated without errors", () => {
-      const trainVehicles = [Vehicles.BMSHoldout];
+      const trainVehicles = [Vehicles.BMSHoldout, Vehicles.BMSLongrider];
 
       trainVehicles.forEach((vehicle) => {
         const recipes = RecipiesByStuff.get(vehicle)!;
