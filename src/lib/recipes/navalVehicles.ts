@@ -304,6 +304,30 @@ const striderRecipes: IRecipe[] = [
   ),
 ];
 
+// K-81e "Sombre" (Colonial Infantry Boat) recipes
+const k81eSombreRecipes: IRecipe[] = [
+  // Shipyard production: 200 x Basic Materials → 1 x K-81e "Sombre"
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 200 }],
+    [{ stuff: Vehicles.K81eSombre, count: 1 }]
+  ),
+  // Mass Production Factory: 1440 x Basic Materials → 3 crates of 3 x K-81e "Sombre" (9 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 1440 }],
+    [{ stuff: Vehicles.K81eSombre, count: 9 }]
+  ),
+  // Mass Production Factory: 1800 x Basic Materials → 4 crates of 3 x K-81e "Sombre" (12 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 1800 }],
+    [{ stuff: Vehicles.K81eSombre, count: 12 }]
+  ),
+  // Mass Production Factory: 2100 x Basic Materials → 5 crates of 3 x K-81e "Sombre" (15 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 2100 }],
+    [{ stuff: Vehicles.K81eSombre, count: 15 }]
+  ),
+];
+
 export const navalVehicleRecipes = new Map<string, IRecipe[]>([
   [Materials.NavalHullSegments, navalHullSegmentsRecipes],
   [Materials.NavalShellPlating, navalShellPlatingRecipes],
@@ -322,4 +346,5 @@ export const navalVehicleRecipes = new Map<string, IRecipe[]>([
   [Vehicles.TypeBLucian, typeBLucianRecipes],
   [Vehicles.Callahan, callahanRecipes],
   [Vehicles.Strider, striderRecipes],
+  [Vehicles.K81eSombre, k81eSombreRecipes],
 ]);
