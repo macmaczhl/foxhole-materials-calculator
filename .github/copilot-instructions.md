@@ -5,34 +5,12 @@ Next.js TypeScript app for calculating Foxhole game materials and crafting recip
 ## Essential Commands
 
 ```bash
-npm install     # 30s - install dependencies
-npm run dev     # 1s - start dev server
-npm test        # 4s - run tests
-npm run lint    # 2s - check code style
-npm run build   # 30s - production build (NEVER CANCEL)
+npm install     # install dependencies
+npm run dev     # start dev server
+npm test        # run tests
+npm run lint    # check code style
+npm run build   # production build (NEVER CANCEL)
 ```
-
-## Updating existing branch
-
-Before starting any work on an existing branch:
-
-1. **Always pull latest changes** from the target branch (`main` branch)
-2. **Rebase or merge** your working branch with the target branch to ensure you have the latest code
-   - Rebase our branch onto main. If rebase is unsafe, merge main into our branch.
-3. **Resolve any conflicts** before beginning new development
-4. **Verify tests still pass** after updating to ensure no regressions were introduced
-5. **Check for any breaking changes** in dependencies or configuration that might affect your work
-
-This prevents merge conflicts and ensures your work is based on the most recent codebase state.
-
-### Conflict Resolution Strategy
-
-When resolving merge or rebase conflicts, follow these guidelines:
-
-- **Dependency versions**: Keep dependency versions from main if they are newer; otherwise keep ours.
-- **New files**: Preserve new files we added; reconcile imports/types so TypeScript builds.
-- **Overlapping code**: Prefer our feature logic, then adapt to compile and pass tests.
-- **Ambiguous cases**: If ambiguity remains, add clear TODO comments and proceed; do not drop functionality.
 
 ## Critical Requirements
 
@@ -41,14 +19,21 @@ When resolving merge or rebase conflicts, follow these guidelines:
 - **NEVER CANCEL** long-running commands (builds take 30+ seconds)
 - **Fix git conflicts** before finishing tasks
 
+## Updating an Existing Branch
+
+Before starting work on an existing branch, pull and rebase onto `main`. Resolve all conflicts, then verify tests pass.
+
+**Conflict resolution**: prefer newer dependency versions from main; keep our feature logic for overlapping code; preserve new files we added.
+
 ## Key Files
 
-- `src/lib/models.ts` - Material definitions and types
-- `src/lib/recipes.ts` - All crafting recipes
-- `src/lib/services/calculateComponents.ts` - Core calculation logic
-- `src/lib/features/desiredStuffSlice.ts` - Redux state management
-- `src/app/components/` - React UI components
-- `src/__tests__/` - Unit tests directory
+- `src/lib/models.ts` — Material/vehicle enums, types, grouping helpers
+- `src/lib/recipes.ts` — Aggregates all recipe sub-modules
+- `src/lib/recipes/` — Sub-recipe files: `rawResources`, `constructionMaterials`, `liquids`, `assemblyMaterials`, `vehicles`
+- `src/lib/services/calculateComponents.ts` — Core calculation logic
+- `src/lib/features/desiredStuffSlice.ts` — Redux state management
+- `src/app/components/` — React UI components
+- `src/__tests__/` — Unit tests
 
 ## Project Structure
 
@@ -56,52 +41,46 @@ When resolving merge or rebase conflicts, follow these guidelines:
 src/
 ├── app/
 │   ├── components/     # React UI components
-│   ├── page.tsx        # Main app page
-│   └── layout.tsx      # App layout
+│   ├── page.tsx
+│   └── layout.tsx
 ├── lib/
-│   ├── models.ts       # Material definitions
-│   ├── recipes.ts      # Crafting recipes
+│   ├── models.ts       # Enums: Materials, Liquids, Vehicles, RawResources
+│   ├── recipes.ts      # Aggregates sub-recipe maps
+│   ├── recipes/        # Per-category recipe files
 │   ├── services/       # Business logic
 │   ├── features/       # Redux slices
-│   └── store.ts        # Redux store
-└── __tests__/          # Unit tests
+│   └── store.ts
+└── __tests__/
 ```
 
-## Material Categories
+## Material Categories (see `models.ts` for full list)
 
-- **Raw Resources**: Salvage, Components, Coal, Sulfur, Rare Metal
-- **Materials**: Construction Materials, Metal Beam, Sandbag
-- **Liquids**: Petrol, Heavy Oil, Water, Enriched Oil
-- **Assembly Materials**: Assembly Materials I-V
-
-## Testing Workflow
-
-1. Write unit tests for new/changed code
-2. Run `npm test` (must pass)
-3. Run `npm run lint` (must pass)
-4. Run `npm run build` (must complete successfully)
-5. Manual test: Select "Construction Materials", set quantity to 5, verify 50 Salvage result
+- **Raw Resources**: Salvage, Components, Coke, Coal, Sulfur, Rare Metal, Damaged Components, Heavy Explosive Powder
+- **Materials**: Construction Materials, Processed Construction Materials, Refined Materials, Basic Materials, Barbed Wire, Metal Beam, Sandbag, Steel Construction Materials, Concrete Materials, Pipe, Rare Alloys, Thermal Shielding, Unstable Substances, Flame Ammo, Naval Hull Segments, Naval Shell Plating, Naval Turbine Components, Assembly Materials I–V
+- **Liquids**: Petrol, Heavy Oil, Water, Enriched Oil, Oil
+- **Vehicles**: Many — see `Vehicles` enum in `models.ts`
 
 ## Common Tasks
 
 ### Adding New Materials
-1. Add to enum in `src/lib/models.ts`
-2. Add to `availableMaterials` array
-3. Create recipes in `src/lib/recipes.ts`
-4. Update `RecipiesByStuff` map
-5. **Write unit tests**
+1. Add to the appropriate enum in `src/lib/models.ts`
+2. Add to `availableMaterials` array (and `getItemGroup` if needed)
+3. Add recipes to the relevant file in `src/lib/recipes/`
+4. Write unit tests
 
 ### Modifying Calculations
 - Edit `src/lib/services/calculateComponents.ts`
 - Edit `src/lib/features/desiredStuffSlice.ts` for recipe trees
-- **Write unit tests**
+- Write unit tests
+
+## Testing Workflow
+
+1. Write unit tests for all new/changed code
+2. `npm test` — must pass
+3. `npm run lint` — must pass
+4. `npm run build` — must complete successfully
 
 ## Deployment
-- Auto-deploys to GitHub Pages on main branch
-- Live site: https://macmaczhl.github.io/foxhole-materials-calculator/
-- Uses static site generation with `next build`
 
-## Troubleshooting
-- **Build fails**: Check TypeScript errors, run `npm install`
-- **Icons not loading**: Check foxhole.wiki.gg connectivity
-- **State issues**: Verify Redux actions in components
+- Auto-deploys to GitHub Pages on `main` branch
+- Live site: https://macmaczhl.github.io/foxhole-materials-calculator/
