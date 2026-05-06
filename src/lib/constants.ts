@@ -200,4 +200,5 @@ export const ICONS_MAP = new Map<string, string>([
   [Vehicles.BMSHoldout, "InfantryCarVehicleIcon"],
   [Vehicles.BMSTinderbox, "SmallTrainFuelContainerIcon"],
   [Vehicles.BMSStowheel, "SmallTrainShippingContainerIcon"],
+  [Vehicles.BMSLongrider, "TrainCarVehicleIcon"],
 ]);
