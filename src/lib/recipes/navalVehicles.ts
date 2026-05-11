@@ -328,6 +328,30 @@ const k81eSombreRecipes: IRecipe[] = [
   ),
 ];
 
+// Rinnspeir Ornitier-Class Gunship (Warden Gunship) recipes
+const rinnspeirOrnitierRecipes: IRecipe[] = [
+  // Shipyard production: 450 x Basic Materials → 1 x Rinnspeir Ornitier-Class Gunship
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 450 }],
+    [{ stuff: Vehicles.RinnspeirOrnitierClassGunship, count: 1 }]
+  ),
+  // Mass Production Factory: 3240 x Basic Materials → 3 crates of 3 x Rinnspeir Ornitier-Class Gunship (9 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 3240 }],
+    [{ stuff: Vehicles.RinnspeirOrnitierClassGunship, count: 9 }]
+  ),
+  // Mass Production Factory: 4050 x Basic Materials → 4 crates of 3 x Rinnspeir Ornitier-Class Gunship (12 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 4050 }],
+    [{ stuff: Vehicles.RinnspeirOrnitierClassGunship, count: 12 }]
+  ),
+  // Mass Production Factory: 4725 x Basic Materials → 5 crates of 3 x Rinnspeir Ornitier-Class Gunship (15 total)
+  createRecipe(
+    [{ stuff: Materials.BasicMaterials, count: 4725 }],
+    [{ stuff: Vehicles.RinnspeirOrnitierClassGunship, count: 15 }]
+  ),
+];
+
 export const navalVehicleRecipes = new Map<string, IRecipe[]>([
   [Materials.NavalHullSegments, navalHullSegmentsRecipes],
   [Materials.NavalShellPlating, navalShellPlatingRecipes],
@@ -347,4 +371,5 @@ export const navalVehicleRecipes = new Map<string, IRecipe[]>([
   [Vehicles.Callahan, callahanRecipes],
   [Vehicles.Strider, striderRecipes],
   [Vehicles.K81eSombre, k81eSombreRecipes],
+  [Vehicles.RinnspeirOrnitierClassGunship, rinnspeirOrnitierRecipes],
 ]);
