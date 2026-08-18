@@ -101,13 +101,11 @@ jobs:
           path: ~/.cache/ms-playwright
           key: playwright-${{ runner.os }}-chromium-${{ steps.playwright-version.outputs.version }}
 
+      # Browser binaries only. GitHub Ubuntu runners already include Chromium's
+      # system libraries; install-deps/--with-deps re-run apt on every job.
       - name: Install Playwright Browsers
         if: steps.playwright-cache.outputs.cache-hit != 'true'
-        run: npx playwright install --with-deps chromium
-
-      - name: Install Playwright OS dependencies
-        if: steps.playwright-cache.outputs.cache-hit == 'true'
-        run: npx playwright install-deps chromium
+        run: npx playwright install chromium
 
       - name: Save Playwright browsers
         if: steps.playwright-cache.outputs.cache-hit != 'true'
