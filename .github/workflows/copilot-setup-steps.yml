@@ -34,13 +34,13 @@ jobs:
     
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           # Get full history for better caching
           fetch-depth: 0
 
       - name: Setup Node.js ${{ inputs.node-version || '24.x' }}
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ inputs.node-version || '24.x' }}
           cache: 'npm'
@@ -54,7 +54,7 @@ jobs:
           NODE_ENV: development
 
       - name: Cache node_modules
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         id: cache-node-modules
         with:
           path: |

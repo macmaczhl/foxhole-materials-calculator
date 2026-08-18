@@ -7,12 +7,21 @@ import { RecipiesByStuff } from "../lib/recipes";
 import { infantryCarRecipes } from "../lib/recipes/trains/infantryCars";
 import { flatbedCarRecipes } from "../lib/recipes/trains/flatbedCars";
 
+const allTrainVehicles = [
+  Vehicles.BMSLinerunner,
+  Vehicles.BMSMineseeker,
+  Vehicles.BMSRailtruck,
+  Vehicles.BMSOverseerSkyHauler,
+  Vehicles.BMSHoldout,
+  Vehicles.BMSTinderbox,
+  Vehicles.BMSStowheel,
+  Vehicles.BMSLongrider,
+];
+
 describe("Train Vehicles", () => {
   describe("Recipe availability", () => {
     test("all train vehicles have recipes defined", () => {
-      const trainVehicles = [Vehicles.BMSHoldout, Vehicles.BMSLongrider];
-
-      trainVehicles.forEach((vehicle) => {
+      allTrainVehicles.forEach((vehicle) => {
         expect(RecipiesByStuff.has(vehicle)).toBe(true);
         const recipes = RecipiesByStuff.get(vehicle);
         expect(recipes).toBeDefined();
@@ -21,9 +30,7 @@ describe("Train Vehicles", () => {
     });
 
     test("all train vehicle recipes have valid requirements", () => {
-      const trainVehicles = [Vehicles.BMSHoldout, Vehicles.BMSLongrider];
-
-      trainVehicles.forEach((vehicle) => {
+      allTrainVehicles.forEach((vehicle) => {
         const recipes = RecipiesByStuff.get(vehicle)!;
         recipes.forEach((recipe) => {
           expect(recipe.required.length).toBeGreaterThan(0);
@@ -145,9 +152,7 @@ describe("Train Vehicles", () => {
 
   describe("Recipe calculation integration", () => {
     test("all train vehicles can be calculated without errors", () => {
-      const trainVehicles = [Vehicles.BMSHoldout, Vehicles.BMSLongrider];
-
-      trainVehicles.forEach((vehicle) => {
+      allTrainVehicles.forEach((vehicle) => {
         const recipes = RecipiesByStuff.get(vehicle)!;
         const recipeTree: RecipeTree = {
           stuff: vehicle,
