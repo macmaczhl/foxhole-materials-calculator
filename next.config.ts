@@ -1,4 +1,8 @@
 import type { NextConfig } from "next";
+import {
+  resolveSiteAssetPrefix,
+  resolveSiteBasePath,
+} from "./src/lib/siteBasePath";
 
 const nextConfig: NextConfig = {
   // Use static export for GitHub Pages (main branch)
@@ -7,14 +11,8 @@ const nextConfig: NextConfig = {
   trailingSlash: true,
   // GitHub Pages base path configuration
   // The configure-pages action should inject this, but we'll set it explicitly
-  basePath:
-    process.env.NODE_ENV === "production" && process.env.GITHUB_ACTIONS
-      ? "/foxhole-materials-calculator"
-      : "",
-  assetPrefix:
-    process.env.NODE_ENV === "production" && process.env.GITHUB_ACTIONS
-      ? "/foxhole-materials-calculator/"
-      : "",
+  basePath: resolveSiteBasePath(),
+  assetPrefix: resolveSiteAssetPrefix(),
   images: {
     unoptimized: process.env.VERCEL ? false : true,
     remotePatterns: [
