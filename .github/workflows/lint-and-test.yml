@@ -109,7 +109,7 @@ jobs:
       - *install-if-restore-miss
 
       - name: Download static export
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: static-export
           path: out
